@@ -36,6 +36,7 @@
 		21AA4B732D8180A80086697C /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		21AA4B752D81828D0086697C /* aeonik-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aeonik-medium.otf"; sourceTree = "<group>"; };
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +73,7 @@
 				21AA4B772D8186400086697C /* AppDelegate */,
 				21AA4B7A2D8187800086697C /* Scenes */,
 				21AA4B792D81872E0086697C /* Configuration */,
+				21AA4B7D2D818F380086697C /* README.md */,
 			);
 			path = iaw01;
 			sourceTree = "<group>";
