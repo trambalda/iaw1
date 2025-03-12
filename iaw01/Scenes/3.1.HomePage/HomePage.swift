@@ -6,12 +6,34 @@ class ViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let label = UILabel()
+    private let adressButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = UIFont(name: "TWKEverett-Regular", size: 17)
+        button.setTitle("32, Kingston Ln.", for: .normal)
+        button.setTitleColor(UIColor(named: "peach100"), for: .normal)
+        button.backgroundColor = .peach60
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        
+        if let adressPointIcon = UIImage(named: "adressPointMap") {
+            let resizedAdressPointIcon = CGSize (width: 19, height: 19)
+            UIGraphicsBeginImageContextWithOptions(resizedAdressPointIcon, false, 0.0)
+            adressPointIcon.draw(in: CGRect(origin: .zero, size: resizedAdressPointIcon))
+            let newAdressPointIcon = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            button.setImage(newAdressPointIcon, for: .normal)
+            button.tintColor = UIColor(named: "peach100")
+            button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: -4)
+        }
+        
+        return button
+    }()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        view.backgroundColor = UIColor(named:"backgroundColor")
+        view.backgroundColor = UIColor(named:"light100")
     }
 
 }
@@ -20,6 +42,7 @@ private extension ViewController {
         configureScrollView()
         configureContentView()
         prepairContentView()
+        configureAdressButton()
         configureLabel()
         addContentToScrollView()
     }
@@ -50,13 +73,24 @@ private extension ViewController {
     }
     func configureLabel() {
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Hello, World!"
+        label.text = "Good Evening Luisa"
+        label.font = UIFont(name: "TWKEverett-Regular", size: 36)
+    }
+    func configureAdressButton() {
+        adressButton.translatesAutoresizingMaskIntoConstraints = false
     }
     func addContentToScrollView() {
+        contentView.addSubview(adressButton)
         contentView.addSubview(label)
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50),
-            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            adressButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            adressButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            adressButton.widthAnchor.constraint(equalToConstant: 185),
+            adressButton.heightAnchor.constraint(equalToConstant: 43)
+        ])
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: adressButton.bottomAnchor, constant: 21),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
