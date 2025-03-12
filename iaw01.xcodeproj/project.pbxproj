@@ -53,6 +53,7 @@
 		21AA4B442D8160E30086697C = {
 			isa = PBXGroup;
 			children = (
+				21AA4B7D2D818F380086697C /* README.md */,
 				21AA4B4F2D8160E30086697C /* iaw01 */,
 				21AA4B4E2D8160E30086697C /* Products */,
 			);
@@ -73,7 +74,6 @@
 				21AA4B772D8186400086697C /* AppDelegate */,
 				21AA4B7A2D8187800086697C /* Scenes */,
 				21AA4B792D81872E0086697C /* Configuration */,
-				21AA4B7D2D818F380086697C /* README.md */,
 			);
 			path = iaw01;
 			sourceTree = "<group>";
