@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -39,6 +39,11 @@
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		86C0486E2D81BA58006A59BE /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+		86C04C062D81FDD8006A59BE /* Extentions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extentions; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		21AA4B4A2D8160E30086697C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -70,6 +75,8 @@
 		21AA4B4F2D8160E30086697C /* iaw01 */ = {
 			isa = PBXGroup;
 			children = (
+				86C04C062D81FDD8006A59BE /* Extentions */,
+				86C0486E2D81BA58006A59BE /* Components */,
 				21AA4B6B2D817F990086697C /* Resources */,
 				21AA4B772D8186400086697C /* AppDelegate */,
 				21AA4B7A2D8187800086697C /* Scenes */,
@@ -157,6 +164,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				86C0486E2D81BA58006A59BE /* Components */,
+				86C04C062D81FDD8006A59BE /* Extentions */,
 			);
 			name = iaw01;
 			productName = iaw01;
