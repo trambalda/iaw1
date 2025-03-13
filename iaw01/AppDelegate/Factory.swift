@@ -5,8 +5,7 @@ final class Factory {
         return vc
     }
     
-    // createVerifyScene() создан для теста сцены верификации #IAW-25
-    func createVerifyScene() -> VerifyPhoneNumberViewController {
+    func createVerifyPhoneNumberViewController() -> VerifyPhoneNumberViewController {
         let vc = VerifyPhoneNumberViewController()
         return vc
     }
