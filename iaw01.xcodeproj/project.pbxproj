@@ -124,7 +124,6 @@
 		21AA4B782D81864F0086697C /* DummyScene */ = {
 			isa = PBXGroup;
 			children = (
-				3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */,
 				21AA4B542D8160E30086697C /* DummyViewController.swift */,
 			);
 			path = DummyScene;
@@ -141,6 +140,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 			);
 			path = Scenes;
