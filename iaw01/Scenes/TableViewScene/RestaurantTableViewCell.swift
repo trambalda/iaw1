@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RestaurantTableCell: UITableViewCell {
+final class RestaurantTableViewCell: UITableViewCell {
     
     //MARK: - UI Elements
     private var nameLabel: UILabel = {
@@ -88,13 +88,4 @@ final class RestaurantTableCell: UITableViewCell {
             buttonImageView.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
-    
-    /*
-    // MARK: - Настройка данных
-    func configure(with image: UIImage?, name: String, address: String) {
-        cellImageView.image = image
-        nameLabel.text = name
-        addressLabel.text = address
-    }
-     */
 }
