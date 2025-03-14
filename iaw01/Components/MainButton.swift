@@ -1,17 +1,15 @@
 import UIKit
 
 enum ButtonIcon {
-    case checkmarkCircleFill
     case checkmarkCircle
-    case chevronRight
-    case dotScope
+    case gps
+    case arrowRight
     
     var image: UIImage? {
         switch self {
-        case .checkmarkCircleFill: return UIImage(systemName: "checkmark.circle.fill")
-        case .checkmarkCircle: return UIImage(systemName: "checkmark.circle")
-        case .chevronRight: return UIImage(systemName: "chevron.right")
-        case .dotScope: return UIImage(systemName: "dot.scope")
+        case .checkmarkCircle: return UIImage(resource: .tickCircle)
+        case .gps: return UIImage(resource: .gps)
+        case .arrowRight: return UIImage(resource: .rightChevron)
         }
     }
 }
@@ -124,6 +122,7 @@ class MainButton: UIButton {
     private func setupIcon(icon: ButtonIcon, style: ButtonStyle, position: IconPosition) {
         iconImageView.image = icon.image
         iconImageView.tintColor = style.textColor
+        iconImageView.contentMode = .scaleAspectFit
         
         switch position {
         case .left:
@@ -147,6 +146,7 @@ class MainButton: UIButton {
     
     func setIcon(_ icon: ButtonIcon?, position: IconPosition = .left) {
         iconImageView.image = icon?.image
+        iconImageView.tintColor = currentStyle.textColor
         iconImageView.isHidden = icon == nil
         
         if icon != nil {
