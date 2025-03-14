@@ -1,13 +1,5 @@
-//
-//  MainButton.swift
-//  iaw01
-//
-//  Created by Евгений on 14.03.25.
-//
-
 import UIKit
 
-// Перечисление для доступных SF Symbols иконок
 enum ButtonIcon {
     case checkmarkCircleFill
     case checkmarkCircle
@@ -24,14 +16,12 @@ enum ButtonIcon {
     }
 }
 
-// Перечисление для стилей кнопок
 enum ButtonStyle {
     case blue
     case pink
     case dark
     case light
-    
-    // Цвет фона кнопки
+
     var backgroundColor: UIColor {
         switch self {
         case .blue: return UIColor(resource: .blue100)
@@ -41,7 +31,6 @@ enum ButtonStyle {
         }
     }
     
-    // Цвет фона кнопки в неактивном состоянии
     var disabledBackgroundColor: UIColor {
         switch self {
         case .blue: return UIColor(resource: .blue60)
@@ -51,7 +40,6 @@ enum ButtonStyle {
         }
     }
     
-    // Цвет текста кнопки
     var textColor: UIColor {
         switch self {
         case .light: return UIColor(resource: .dark90)
@@ -60,14 +48,12 @@ enum ButtonStyle {
     }
 }
 
-// Перечисление для позиций иконки в кнопке
 enum IconPosition {
     case left
     case right
 }
 
 class MainButton: UIButton {
-    // Свойство для хранения изображения
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -75,7 +61,6 @@ class MainButton: UIButton {
         return imageView
     }()
     
-    // Свойство для хранения текста кнопки
     private let buttonLabel: UILabel = {
         let label = UILabel()
         label.font = Font.button
@@ -83,7 +68,6 @@ class MainButton: UIButton {
         return label
     }()
     
-    // Свойство вьюхи
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -93,10 +77,8 @@ class MainButton: UIButton {
         return stack
     }()
     
-    // Свойство для хранения текущего стиля кнопки
     private var currentStyle: ButtonStyle = .blue
     
-    // Инициализация кнопки
     init(style: ButtonStyle = .blue,
          title: String,
          icon: ButtonIcon? = nil,
@@ -112,7 +94,6 @@ class MainButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // настройка кнопки
     private func setupButton(style: ButtonStyle,
                            title: String,
                            icon: ButtonIcon?,
@@ -134,14 +115,12 @@ class MainButton: UIButton {
         addSubview(stackView)
     }
     
-    // настройка текста кнопки
     private func setupTitleLabel(title: String, style: ButtonStyle) {
         buttonLabel.text = title
         buttonLabel.textColor = style.textColor
         stackView.addArrangedSubview(buttonLabel)
     }
     
-    // настройка иконки кнопки
     private func setupIcon(icon: ButtonIcon, style: ButtonStyle, position: IconPosition) {
         iconImageView.image = icon.image
         iconImageView.tintColor = style.textColor
@@ -154,7 +133,6 @@ class MainButton: UIButton {
         }
     }
     
-    // настройка констрейнтов
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -163,21 +141,17 @@ class MainButton: UIButton {
         ])
     }
     
-    // настройка текста кнопки
     func setTitle(_ title: String) {
         buttonLabel.text = title
     }
     
-    // настройка иконки кнопки
     func setIcon(_ icon: ButtonIcon?, position: IconPosition = .left) {
         iconImageView.image = icon?.image
         iconImageView.isHidden = icon == nil
         
         if icon != nil {
-            // Удаляем иконку из текущей позиции
             iconImageView.removeFromSuperview()
             
-            // Добавляем в новую позицию
             switch position {
             case .left:
                 stackView.insertArrangedSubview(iconImageView, at: 0)
@@ -187,20 +161,17 @@ class MainButton: UIButton {
         }
     }
     
-    // настройка стиля кнопки
     func setStyle(_ style: ButtonStyle) {
         currentStyle = style
         updateAppearance()
     }
     
-    // активность кнопки
     override var isEnabled: Bool {
         didSet {
             updateAppearance()
         }
     }
     
-    // Эффект нажатия
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         UIView.animate(withDuration: 0.1) {
@@ -224,7 +195,6 @@ class MainButton: UIButton {
     
     private func updateAppearance() {
         backgroundColor = isEnabled ? currentStyle.backgroundColor : currentStyle.disabledBackgroundColor
-        // Цвет текста и иконки не меняется при неактивном состоянии
         alpha = isEnabled ? 1.0 : 0.6
     }
 }
