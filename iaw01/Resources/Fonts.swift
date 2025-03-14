@@ -23,7 +23,7 @@ enum Font {
     static let subtitle1 = UIFont(name: Family.everettMedium.title, size: 24)
     static let subtitle2 = UIFont(name: Family.everettMedium.title, size: 21)
     static let body = UIFont(name: Family.everettRegular.title, size: 17)
-    static let address = UIFont(name: Family.everettRegular.title, size: 13)
+    static let note = UIFont(name: Family.everettRegular.title, size: 13)
     static let caption = UIFont(name: Family.everettMedium.title, size: 12)
     static let button = UIFont(name: Family.aeonikMedium.title, size: 18)
 }
