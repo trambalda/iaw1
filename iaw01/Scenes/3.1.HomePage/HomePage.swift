@@ -5,7 +5,7 @@ class ViewController: UIViewController {
     //MARK: - Views
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    private let label = UILabel()
+    private let helloLabel = UILabel()
     private let adressButton: UIButton = {
         let button = UIButton(type: .system)
         button.titleLabel?.font = UIFont(name: "TWKEverett-Regular", size: 17)
@@ -35,8 +35,9 @@ class ViewController: UIViewController {
         setupLayout()
         view.backgroundColor = UIColor(named:"light100")
     }
-
 }
+
+//MARK: - Setup Layout
 private extension ViewController {
     func setupLayout() {
         configureScrollView()
@@ -46,15 +47,18 @@ private extension ViewController {
         configureLabel()
         addContentToScrollView()
     }
+    
     func configureScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = true
         scrollView.alwaysBounceVertical = true
         view.addSubview(scrollView)
     }
+    
     func configureContentView() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
     }
+    
     func prepairContentView() {
         scrollView.addSubview(contentView)
         
@@ -71,17 +75,20 @@ private extension ViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
     }
+    
     func configureLabel() {
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Good Evening Luisa"
-        label.font = UIFont(name: "TWKEverett-Regular", size: 36)
+        helloLabel.translatesAutoresizingMaskIntoConstraints = false
+        helloLabel.text = "Good Evening Luisa"
+        helloLabel.font = UIFont(name: "TWKEverett-Regular", size: 36)
     }
+    
     func configureAdressButton() {
         adressButton.translatesAutoresizingMaskIntoConstraints = false
     }
+    
     func addContentToScrollView() {
         contentView.addSubview(adressButton)
-        contentView.addSubview(label)
+        contentView.addSubview(helloLabel)
         NSLayoutConstraint.activate([
             adressButton.topAnchor.constraint(equalTo: contentView.topAnchor),
             adressButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
@@ -89,11 +96,9 @@ private extension ViewController {
             adressButton.heightAnchor.constraint(equalToConstant: 43)
         ])
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: adressButton.bottomAnchor, constant: 21),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            helloLabel.topAnchor.constraint(equalTo: adressButton.bottomAnchor, constant: 21),
+            helloLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            helloLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
-
-
