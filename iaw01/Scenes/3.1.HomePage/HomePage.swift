@@ -7,35 +7,75 @@ class ViewController: UIViewController {
     private let contentView = UIView()
     private let helloLabel = UILabel()
     private let adressButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.titleLabel?.font = UIFont(name: "TWKEverett-Regular", size: 17)
-        button.setTitle("32, Kingston Ln.", for: .normal)
-        button.setTitleColor(UIColor(named: "peach100"), for: .normal)
+        let iconSize = CGSize(width: 19, height: 19)
+        let adressPointIcon = UIImage(named: "adressPointMap")!
+        UIGraphicsBeginImageContextWithOptions(iconSize, false, 0.0)
+        adressPointIcon.draw(in: CGRect(origin: .zero, size: iconSize))
+        let resizedIcon = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        var configuration = UIButton.Configuration.plain()
+        configuration.title = "32, Kingston Ln."
+        configuration.titleAlignment = .leading
+        configuration.baseForegroundColor = UIColor(named: "peach100")
+        configuration.image = resizedIcon.withTintColor(UIColor(named: "peach100")!, renderingMode: .alwaysOriginal)
+        configuration.imagePadding = 4
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
+
+        let button = UIButton(configuration: configuration, primaryAction: nil)
         button.backgroundColor = .peach60
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
-        
-        if let adressPointIcon = UIImage(named: "adressPointMap") {
-            let resizedAdressPointIcon = CGSize (width: 19, height: 19)
-            UIGraphicsBeginImageContextWithOptions(resizedAdressPointIcon, false, 0.0)
-            adressPointIcon.draw(in: CGRect(origin: .zero, size: resizedAdressPointIcon))
-            let newAdressPointIcon = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-            button.setImage(newAdressPointIcon, for: .normal)
-            button.tintColor = UIColor(named: "peach100")
-            button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: -4)
-        }
-        
         return button
+    }()
+    private let homeSearchTextField: UITextField = {
+        let textField = UITextField()
+                textField.placeholder = "Search Food, Restaurants etc."
+                textField.font = UIFont(name: "TWKEverett-Regular", size: 17)
+                textField.layer.cornerRadius = 14
+                textField.layer.masksToBounds = true
+                textField.backgroundColor = UIColor(named: "light80")
+                textField.textColor = UIColor(named: "blue80")
+                textField.clearButtonMode = .whileEditing
+                textField.returnKeyType = .search
+        
+        if let searchIcon = UIImage(named: "searchIcon") {
+            let resizedSearchIcon = CGSize(width: 24, height: 24)
+            UIGraphicsBeginImageContextWithOptions(resizedSearchIcon, false, 0.0)
+            searchIcon.draw(in: CGRect(origin: .zero, size: resizedSearchIcon))
+            let newSearchIcon = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+
+            let searchIconContainer = UIView()
+            searchIconContainer.frame = CGRect(x: 0, y: 0, width: 48, height: 24)
+
+            let iconImageView = UIImageView(image: newSearchIcon)
+            iconImageView.contentMode = .center
+            iconImageView.frame = CGRect(x: 13, y: 0, width: 24, height: 24)
+            searchIconContainer.addSubview(iconImageView)
+
+            textField.leftView = searchIconContainer
+            textField.leftViewMode = .always
+        }
+                return textField
     }()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
         view.backgroundColor = UIColor(named:"light100")
+        setupLayout()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+            tapGesture.cancelsTouchesInView = false
+            view.addGestureRecognizer(tapGesture)
+        }
+
+        @objc private func handleTap() {
+            homeSearchTextField.resignFirstResponder()
+        }
     }
-}
+
 
 //MARK: - Setup Layout
 private extension ViewController {
@@ -45,6 +85,7 @@ private extension ViewController {
         prepairContentView()
         configureAdressButton()
         configureLabel()
+        configurateHomeSearchTextField()
         addContentToScrollView()
     }
     
@@ -89,6 +130,7 @@ private extension ViewController {
     func addContentToScrollView() {
         contentView.addSubview(adressButton)
         contentView.addSubview(helloLabel)
+        contentView.addSubview(homeSearchTextField)
         NSLayoutConstraint.activate([
             adressButton.topAnchor.constraint(equalTo: contentView.topAnchor),
             adressButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
@@ -98,7 +140,17 @@ private extension ViewController {
         NSLayoutConstraint.activate([
             helloLabel.topAnchor.constraint(equalTo: adressButton.bottomAnchor, constant: 21),
             helloLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            helloLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+        NSLayoutConstraint.activate([
+            homeSearchTextField.topAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: 12),
+            homeSearchTextField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            homeSearchTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            homeSearchTextField.heightAnchor.constraint(equalToConstant: 52),
+            homeSearchTextField.widthAnchor.constraint(equalToConstant: 348),
+            homeSearchTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ])
+    }
+    func configurateHomeSearchTextField() {
+        homeSearchTextField.translatesAutoresizingMaskIntoConstraints = false
     }
 }
