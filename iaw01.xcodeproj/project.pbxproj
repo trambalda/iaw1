@@ -41,7 +41,6 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		86C0486E2D81BA58006A59BE /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
-		86C04C062D81FDD8006A59BE /* Extentions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extentions; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +74,6 @@
 		21AA4B4F2D8160E30086697C /* iaw01 */ = {
 			isa = PBXGroup;
 			children = (
-				86C04C062D81FDD8006A59BE /* Extentions */,
 				86C0486E2D81BA58006A59BE /* Components */,
 				21AA4B6B2D817F990086697C /* Resources */,
 				21AA4B772D8186400086697C /* AppDelegate */,
@@ -167,7 +165,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				86C0486E2D81BA58006A59BE /* Components */,
-				86C04C062D81FDD8006A59BE /* Extentions */,
 			);
 			name = iaw01;
 			productName = iaw01;
