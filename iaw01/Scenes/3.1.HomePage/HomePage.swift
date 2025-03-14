@@ -135,13 +135,11 @@ private extension ViewController {
             adressButton.topAnchor.constraint(equalTo: contentView.topAnchor),
             adressButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             adressButton.widthAnchor.constraint(equalToConstant: 185),
-            adressButton.heightAnchor.constraint(equalToConstant: 43)
-        ])
-        NSLayoutConstraint.activate([
+            adressButton.heightAnchor.constraint(equalToConstant: 43),
+            
             helloLabel.topAnchor.constraint(equalTo: adressButton.bottomAnchor, constant: 21),
             helloLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-        ])
-        NSLayoutConstraint.activate([
+            
             homeSearchTextField.topAnchor.constraint(equalTo: helloLabel.bottomAnchor, constant: 12),
             homeSearchTextField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             homeSearchTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
