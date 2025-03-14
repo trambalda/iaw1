@@ -200,6 +200,28 @@ class MainButton: UIButton {
         }
     }
     
+    // Эффект нажатия
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        UIView.animate(withDuration: 0.1) {
+            self.alpha = 0.7
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        UIView.animate(withDuration: 0.1) {
+            self.alpha = self.isEnabled ? 1.0 : 0.6
+        }
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        UIView.animate(withDuration: 0.1) {
+            self.alpha = self.isEnabled ? 1.0 : 0.6
+        }
+    }
+    
     private func updateAppearance() {
         backgroundColor = isEnabled ? currentStyle.backgroundColor : currentStyle.disabledBackgroundColor
         // Цвет текста и иконки не меняется при неактивном состоянии
