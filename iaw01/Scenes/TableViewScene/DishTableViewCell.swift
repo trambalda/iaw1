@@ -108,4 +108,11 @@ final class DishTableViewCell: UITableViewCell {
             arrowImage.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
+    
+    func configure(with foodImage: UIImage?, title: String, restImage: UIImage?, restaurant: String) {
+        dishImage.image = foodImage
+        nameLabel.text = title
+        restaurantImage.image = restImage
+        restaurantLabel.text = restaurant
+    }
 }

@@ -85,4 +85,10 @@ final class RestaurantTableViewCell: UITableViewCell {
             buttonImage.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
+    
+    func configure(with image: UIImage?, title: String, address: String) {
+        cellImage.image = image
+        nameLabel.text = title
+        addressLabel.text = address
+    }
 }
