@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
 
         let button = UIButton(configuration: configuration, primaryAction: nil)
-        button.backgroundColor = .peach60
+        button.backgroundColor = UIColor(named:"peach60")
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         return button
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
             UIGraphicsEndImageContext()
 
             let searchIconContainer = UIView()
-            searchIconContainer.frame = CGRect(x: 0, y: 0, width: 48, height: 24)
+            searchIconContainer.frame = CGRect(x: 0, y: 0, width: 46, height: 24)
 
             let iconImageView = UIImageView(image: newSearchIcon)
             iconImageView.contentMode = .center
