@@ -15,11 +15,15 @@ final class AppCoordinator {
     }
     
     func start() {
-        showMainViewController()
+        //showMainViewController()
+        let changeLocationVC = ChangeLocationViewController()
+        UINavigationController().pushViewController(changeLocationVC, animated: true)
     }
     
     func showMainViewController() {
         let rootTabBarController = RootTabBarController(factory: factory)
         window.rootViewController = rootTabBarController
     }
+    
+    
 }

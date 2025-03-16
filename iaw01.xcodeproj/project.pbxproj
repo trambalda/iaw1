@@ -19,6 +19,9 @@
 		21AA4B742D8180A80086697C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B732D8180A80086697C /* Fonts.swift */; };
 		21AA4B762D81828D0086697C /* aeonik-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B752D81828D0086697C /* aeonik-medium.otf */; };
 		21AA4B7C2D81880A0086697C /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B7B2D81880A0086697C /* Factory.swift */; };
+		C92BCA492D843CC800EE6904 /* ChangeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BCA482D843CC000EE6904 /* ChangeLocationViewController.swift */; };
+		C92BCA4B2D8472F500EE6904 /* ChangeLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BCA4A2D84728B00EE6904 /* ChangeLocationView.swift */; };
+		C92BCA4D2D84731200EE6904 /* ChangeLocationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BCA4C2D8472FB00EE6904 /* ChangeLocationModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,9 @@
 		21AA4B752D81828D0086697C /* aeonik-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aeonik-medium.otf"; sourceTree = "<group>"; };
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C92BCA482D843CC000EE6904 /* ChangeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationViewController.swift; sourceTree = "<group>"; };
+		C92BCA4A2D84728B00EE6904 /* ChangeLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationView.swift; sourceTree = "<group>"; };
+		C92BCA4C2D8472FB00EE6904 /* ChangeLocationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +144,20 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C92BCA472D84398B00EE6904 /* ChangeLocationScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		C92BCA472D84398B00EE6904 /* ChangeLocationScene */ = {
+			isa = PBXGroup;
+			children = (
+				C92BCA4C2D8472FB00EE6904 /* ChangeLocationModels.swift */,
+				C92BCA4A2D84728B00EE6904 /* ChangeLocationView.swift */,
+				C92BCA482D843CC000EE6904 /* ChangeLocationViewController.swift */,
+			);
+			path = ChangeLocationScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,13 +233,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
+				C92BCA492D843CC800EE6904 /* ChangeLocationViewController.swift in Sources */,
 				21AA4B742D8180A80086697C /* Fonts.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
+				C92BCA4D2D84731200EE6904 /* ChangeLocationModels.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
+				C92BCA4B2D8472F500EE6904 /* ChangeLocationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
