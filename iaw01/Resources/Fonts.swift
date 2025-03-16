@@ -8,6 +8,7 @@ struct Font {
         case heading2
         case heading3
         case heading4
+        case heading5
         case subtitle1
         case subtitle2
         case body
@@ -33,6 +34,7 @@ struct Font {
     static let heading2 = UIFont(name: Family.everettMedium.title, size: 60)
     static let heading3 = UIFont(name: Family.everettMedium.title, size: 48)
     static let heading4 = UIFont(name: Family.everettMedium.title, size: 36)
+    static let heading5 = UIFont(name: Family.everettRegular.title, size: 36)
     static let subtitle1 = UIFont(name: Family.everettMedium.title, size: 24)
     static let subtitle2 = UIFont(name: Family.everettMedium.title, size: 21)
     static let body = UIFont(name: Family.everettRegular.title, size: 17)
@@ -57,6 +59,9 @@ extension UILabel {
             lettering = -1
         case .heading4:
             self.font = Font.heading4
+            lettering = -2
+        case .heading5:
+            self.font = Font.heading5
             lettering = -2
         case .subtitle1:
             self.font = Font.subtitle1
