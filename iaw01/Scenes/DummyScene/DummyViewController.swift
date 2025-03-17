@@ -4,8 +4,7 @@ final class DummyViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Under construction"
-        label.font = Font.heading3
+        label.setTextAndFont("Under construction", font: .heading3)
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
