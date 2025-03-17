@@ -1,29 +1,31 @@
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     lazy var scrollView: UIScrollView = {
-        $0.backgroundColor = UIColor(named:"light100")
-        $0.addSubview(scrollViewContent)
-        $0.alwaysBounceVertical = true
-        $0.contentInsetAdjustmentBehavior = .never
-        return $0
-    }(UIScrollView(frame: view.frame))
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = UIColor(named:"light100")
+        scrollView.alwaysBounceVertical = true
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.addSubview(scrollViewContent)
+        return scrollView
+    }()
     
     lazy var scrollViewContent: UIView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .clear
-        $0.addSubview(adressButton)
-        $0.addSubview(helloLabel)
-        $0.addSubview(homeSearchBar)
-        return $0
-    }(UIView())
+        let scrollViewContent = UIView()
+        scrollViewContent.translatesAutoresizingMaskIntoConstraints = false
+        scrollViewContent.backgroundColor = .clear
+        scrollViewContent.addSubview(adressButton)
+        scrollViewContent.addSubview(helloLabel)
+        scrollViewContent.addSubview(homeSearchBar)
+        return scrollViewContent
+    }()
     
     let adressButton: UIButton = {
         let homeAdressbutton = UIButton()
         homeAdressbutton.backgroundColor = .peach60
         homeAdressbutton.layer.cornerRadius = 12
-        homeAdressbutton.layer.masksToBounds = true
         homeAdressbutton.translatesAutoresizingMaskIntoConstraints = false
         
         let homeAdressImage = UIImageView(image: .adressPointMap)
@@ -33,6 +35,7 @@ class ViewController: UIViewController {
         let homeAdressTitle = UILabel()
         homeAdressTitle.setTextAndFont("32, Kingston Ln.", font: .body)
         homeAdressTitle.textColor = .peach100
+        homeAdressTitle.translatesAutoresizingMaskIntoConstraints = false
         
         let homeAdressStack = UIStackView(arrangedSubviews: [homeAdressImage, homeAdressTitle])
         homeAdressStack.spacing = 4
@@ -51,11 +54,13 @@ class ViewController: UIViewController {
         return homeAdressbutton
     }()
 
-    let helloLabel: UILabel = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setTextAndFont("Good Evening Luisa", font: .heading5)
-        return $0
-    }(UILabel())
+    var helloLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setTextAndFont("Good Evening Luisa", font: .heading5)
+        label.textColor = .dark100
+        return label
+    }()
     
     let homeSearchBar: UITextField = {
         let textField = UITextField()
@@ -80,7 +85,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named:"light100")
-        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         
         NSLayoutConstraint.activate([

@@ -6,12 +6,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "adressPointMap 1.png",
+      "filename" : "adressPointMap@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "adressPointMap 2.png",
+      "filename" : "adressPointMap@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

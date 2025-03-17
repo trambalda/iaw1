@@ -1,7 +1,13 @@
 final class Factory {
     
-    func createDummyScene() -> ViewController {
-        let vc = ViewController()
+    func createHomeScene() -> HomeViewController {
+        let homeViewController = HomeViewController()
+        return homeViewController
+    }
+    
+    func createDummyScene() -> DummyViewController {
+        let vc = DummyViewController()
         return vc
     }
+    
 }
