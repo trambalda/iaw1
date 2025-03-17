@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "kfc.png",
+      "filename" : "burgerImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "burger2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "burger3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,7 +21,6 @@
     "version" : 1
   },
   "properties" : {
-    "preserves-vector-representation" : true,
     "template-rendering-intent" : "original"
   }
 }

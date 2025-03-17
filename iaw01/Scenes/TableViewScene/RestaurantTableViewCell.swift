@@ -11,10 +11,8 @@ final class RestaurantTableViewCell: UITableViewCell {
     
     private var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "McDonald's"
         label.font = Font.body
-        label.numberOfLines = 0
-        label.textAlignment = .left
+        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -22,11 +20,9 @@ final class RestaurantTableViewCell: UITableViewCell {
     
     private var addressLabel: UILabel = {
         let label = UILabel()
-        label.text = "18915 Queens Road, Brampton, ON"
         label.font = Font.note
-        label.textColor = UIColor(named: "dark60")
-        label.numberOfLines = 0
-        label.textAlignment = .left
+        label.textColor = .dark60
+        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -37,18 +33,47 @@ final class RestaurantTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "mcdonalds")
+
         return imageView
     }()
     
-    private var buttonImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "arrowRight")
-        return imageView
+    private var arrowImage: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = .arrowRight
+
+        return image
     }()
+    
+    private let infoStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 1
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+    
+    private let mainStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+    
+    var model: RestaurantCellModel? {
+        didSet {
+            guard let model = model else { return }
+            nameLabel.text = model.restTitle
+            addressLabel.text = model.restAddress
+            cellImage.image = model.restImage ?? UIImage(systemName: "photo")
+        }
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,35 +85,25 @@ final class RestaurantTableViewCell: UITableViewCell {
     }
 
     private func setupUI() {
-        contentView.addSubview(cellImage)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(addressLabel)
-        contentView.addSubview(buttonImage)
+        infoStack.addArrangedSubview(nameLabel)
+        infoStack.addArrangedSubview(addressLabel)
+        
+        mainStack.addArrangedSubview(cellImage)
+        mainStack.addArrangedSubview(infoStack)
+        mainStack.addArrangedSubview(arrowImage)
+        
+        contentView.addSubview(mainStack)
         
         NSLayoutConstraint.activate([
-            cellImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 21),
-            cellImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 21),
+            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -21),
+            mainStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
             cellImage.widthAnchor.constraint(equalToConstant: 36),
             cellImage.heightAnchor.constraint(equalToConstant: 36),
-            
-            nameLabel.leadingAnchor.constraint(equalTo: cellImage.trailingAnchor, constant: 10),
-            nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: buttonImage.leadingAnchor, constant: -10),
-            
-            addressLabel.leadingAnchor.constraint(equalTo: cellImage.trailingAnchor, constant: 10),
-            addressLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 1),
-            addressLabel.trailingAnchor.constraint(equalTo: buttonImage.leadingAnchor, constant: -10),
-            
-            buttonImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 21),
-            buttonImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            buttonImage.widthAnchor.constraint(equalToConstant: 24),
-            buttonImage.heightAnchor.constraint(equalToConstant: 24)
+     
+            arrowImage.widthAnchor.constraint(equalToConstant: 24),
+            arrowImage.heightAnchor.constraint(equalToConstant: 24)
         ])
-    }
-    
-    func configure(with image: UIImage?, title: String, address: String) {
-        cellImage.image = image
-        nameLabel.text = title
-        addressLabel.text = address
     }
 }
