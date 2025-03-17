@@ -3,7 +3,7 @@ import UIKit
 final class StringTextField: UIStackView {
     
     var textDidChange: ((String) -> Void)?
-    var didPressReturn: (() -> Void)?
+    var textFieldShouldReturn: (() -> Void)?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -27,7 +27,6 @@ final class StringTextField: UIStackView {
         textField.rightView = clearButton
         textField.rightViewMode = .whileEditing
         textField.delegate = self
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
         return textField
     }()
     
@@ -38,13 +37,9 @@ final class StringTextField: UIStackView {
         return button
     }()
     
-//    var text: String? {
-//        get { textField.text }
-//        set { textField.text = newValue }
-//    }
-    
-    var textFieldControl: UITextField {
-        return textField
+    var text: String? {
+        get { textField.text }
+        set { textField.text = newValue }
     }
     
     init(with style: StringTextFieldStyle) {
@@ -99,20 +94,22 @@ final class StringTextField: UIStackView {
         titleLabel.text = style.title
     }
     
-    @objc private func clearButtonTapped() {
-        textField.text = nil
-        textDidChange?("")
+    func becomeFirstResponder() {
+        textField.becomeFirstResponder()
     }
     
-    @objc private func textFieldDidChange() {
-        textDidChange?(textField.text ?? "")
+    func resignnFirstResponder() {
+        textField.resignFirstResponder()
+    }
+
+    @objc private func clearButtonTapped() {
+        textField.text = nil
     }
 }
 
 extension StringTextField: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //textField.resignFirstResponder()
-        didPressReturn?()
+        textFieldShouldReturn?()
         return true
     }
     

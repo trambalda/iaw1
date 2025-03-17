@@ -145,18 +145,18 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				869875442D8860DF00C7BA58 /* TestTextFieldScene */,
+				869875442D8860DF00C7BA58 /* TextFieldsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		869875442D8860DF00C7BA58 /* TestTextFieldScene */ = {
+		869875442D8860DF00C7BA58 /* TextFieldsScene */ = {
 			isa = PBXGroup;
 			children = (
 				869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */,
 			);
-			path = TestTextFieldScene;
+			path = TextFieldsScene;
 			sourceTree = "<group>";
 		};
 		869875482D8860E600C7BA58 /* TextFields */ = {

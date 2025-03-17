@@ -5,7 +5,7 @@ final class Factory {
         return vc
     }
     
-    func createTestTFScene() -> TextFieldsViewController {
+    func createTextFieldsScene() -> TextFieldsViewController {
         let vc = TextFieldsViewController()
         return vc
     }

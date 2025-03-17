@@ -2,33 +2,40 @@ import UIKit
 
 final class TextFieldsViewController: UIViewController {
     
-    private let emailTextField: StringTextField = {
+    private lazy var emailTextField: StringTextField = {
         let textField = StringTextField(with: .emailStyle)
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.textFieldShouldReturn = {
+            self.nameTextField.becomeFirstResponder()
+        }
         return textField
     }()
     
-    private let nameTextField: StringTextField = {
+    private lazy var nameTextField: StringTextField = {
         let textField = StringTextField(with: .nameStyle)
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.textFieldShouldReturn = {
+            print("Final Email:\(self.emailTextField.text ?? "")")
+            print("Final Name:\(textField.text ?? "")")
+            textField.resignnFirstResponder()
+        }
         return textField
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(resource: .light100)
+        view.backgroundColor = .light100
         
-        setupScreenLayout()
-        setupScreenConstraints()
-        setupTextFieldActions()
+        setupLayout()
+        setupConstraints()
     }
     
-    private func setupScreenLayout() {
+    private func setupLayout() {
         view.addSubview(emailTextField)
         view.addSubview(nameTextField)
     }
     
-    private func setupScreenConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             emailTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -40,19 +47,6 @@ final class TextFieldsViewController: UIViewController {
             nameTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
             nameTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor)
         ])
-    }
-    
-    private func setupTextFieldActions() {
-        emailTextField.didPressReturn = { [weak self] in
-            self?.nameTextField.textFieldControl.becomeFirstResponder()
-        }
-        
-        nameTextField.didPressReturn = { [weak self] in
-            guard let self = self else { return }
-            print("Final Email:\(self.emailTextField.textFieldControl.text ?? "")")
-            print("Final Name:\(self.nameTextField.textFieldControl.text ?? "")")
-            self.nameTextField.textFieldControl.resignFirstResponder()
-        }
     }
 }
 
