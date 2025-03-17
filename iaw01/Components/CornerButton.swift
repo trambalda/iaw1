@@ -63,6 +63,7 @@ class CornersButton: UIButton {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -70,15 +71,17 @@ class CornersButton: UIButton {
     private let buttonLabel: UILabel = {
         let label = UILabel()
         label.font = Font.button
+        label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let stackView: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .horizontal
         stack.spacing = 5
         stack.alignment = .center
+        stack.distribution = .fill
+        stack.isUserInteractionEnabled = false
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -95,6 +98,7 @@ class CornersButton: UIButton {
     ) {
         self.style = style
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         setupButton(style: style)
         self.isEnabled = isEnabled
     }
@@ -146,6 +150,8 @@ class CornersButton: UIButton {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20),
             heightAnchor.constraint(equalToConstant: 64)
         ])
     }
@@ -218,4 +224,4 @@ class CornersButton: UIButton {
         backgroundColor = isEnabled ? style.backgroundColor : style.disabledBackgroundColor
         alpha = alphaWhenTouch
     }
-} 
+}
