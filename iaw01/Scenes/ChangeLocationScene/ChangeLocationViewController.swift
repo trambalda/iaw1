@@ -6,66 +6,106 @@
 //
 import UIKit
 
-class ChangeLocationViewController: UIViewController {
-   
+class ChangeLocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-   private let searchbar: UISearchBar = {
-        let searchbar = UISearchBar()
-        searchbar.placeholder = "Look for an Address..."
-       //Visualice frame arround touchbar
-        searchbar.layer.borderColor = UIColor.red.cgColor
-        return searchbar
+    private let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "Look for an Address"
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
     }()
     
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white                
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    
+    // Wichtige Registrierung der Zelle
         return tableView
     }()
     
     private let useCurrentLocationButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Use Current Location", for: .normal)
-        button.backgroundColor = .blue
+        let button = UIButton(type: .system)
+        button.setTitle("📍 Use Current Location", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
+        button.backgroundColor = UIColor.systemBlue
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    private let savedLocations: [String] = [
+        "🏠 34, George Avenue, Brampton, ON L6T 8H6",
+        "🏢 31244, King Street, Toronto, ON"
+    ]
+    
+    private let recentLocations: [String] = [
+        "📍 56, George Avenue, Brampton, ON"
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ChangeLocationViewController loaded")
-        view.backgroundColor = .yellow
+        view.backgroundColor = .white
         
-        // Add searchbar on screen
-        view.addSubview(searchbar)
+        // Setzen der Delegates
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // Hinzufügen der UI-Elemente
+        view.addSubview(searchBar)
         view.addSubview(tableView)
         view.addSubview(useCurrentLocationButton)
         
-        // Dissable auto sizing
-        searchbar.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        useCurrentLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        setupConstraints()
         
-        //Set auto Layout
-        NSLayoutConstraint.activate([
-            searchbar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            searchbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            tableView.topAnchor.constraint(equalTo: searchbar.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            useCurrentLocationButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 16),
-            useCurrentLocationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            useCurrentLocationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            useCurrentLocationButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
+        // Aktualisiere die Tabelle, falls sie nicht lädt
+        tableView.reloadData()
     }
     
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            // Searchbar oben
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            // Tabelle darunter
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableView.bottomAnchor.constraint(equalTo: useCurrentLocationButton.topAnchor, constant: -20),
+            
+            // Button am unteren Rand, aber nicht am Bildschirmrand
+            useCurrentLocationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            useCurrentLocationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            useCurrentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            useCurrentLocationButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "Saved Locations" : "Recents"
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? savedLocations.count : recentLocations.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let location: String
+        
+        if indexPath.section == 0 {
+            location = savedLocations[indexPath.row]
+        } else {
+            location = recentLocations[indexPath.row]
+        }
+        
+        cell.textLabel?.text = location
+        return cell
+    }
 }
