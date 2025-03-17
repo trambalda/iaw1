@@ -11,8 +11,10 @@ class VerifyPhoneNumberView: UIView {
     
     private var keyboardHeight: CGFloat = 0
     private var isKeyboardVisible = false
-    private var buttonBottomConstraint: NSLayoutConstraint!
+    private var verifyButtonBottomConstraint: NSLayoutConstraint!
+    private var phoneNumberTextFieldTrailingConstraint: NSLayoutConstraint!
     private let padding: CGFloat = 21
+    private var isActive = true
 
     private lazy var verifyHeaderLabel: UILabel = {
         let label = UILabel()
@@ -36,6 +38,8 @@ class VerifyPhoneNumberView: UIView {
     
     private lazy var phoneNumberTextField: UITextField = {
         let textField = UITextField()
+        textField.isEnabled = false
+        textField.keyboardType = .numberPad
         textField.text = "+1 169 916 9564"
         textField.textColor = UIColor(resource: .dark90)
         textField.backgroundColor = UIColor.clear
@@ -58,6 +62,7 @@ class VerifyPhoneNumberView: UIView {
         button.backgroundColor = UIColor(resource: .peach60)
         button.layer.cornerRadius = buttonWidth / 2
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(editButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
@@ -118,8 +123,45 @@ class VerifyPhoneNumberView: UIView {
         let button = UIButton()
         button.setImage(UIImage(named: "Frame 37"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(verifyButtonDidTapped), for: .touchUpInside)
         return button
     }()
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text, text.count == 1 else { return }
+
+        if let nextTextField = codeDigits[safe: textField.tag + 1] {
+                nextTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+    }
+    
+    @objc private func verifyButtonDidTapped() {
+        phoneNumberTextField.resignFirstResponder()
+    }
+    
+    @objc private func editButtonDidTapped() {
+        if isActive {
+            verifyButton.isHidden = true
+            phoneEditButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+            phoneNumberTextField.isEnabled = true
+            phoneNumberTextField.becomeFirstResponder()
+            phoneNumberTextFieldTrailingConstraint = containerViewForTextField.trailingAnchor.constraint(equalTo: phoneEditButton.leadingAnchor, constant: -padding)
+            phoneNumberTextFieldTrailingConstraint.isActive = true
+            
+            UIView.animate(withDuration: 0.3) {
+                self.layoutIfNeeded()
+            }
+            isActive = false
+        } else {
+            phoneNumberTextField.resignFirstResponder()
+            phoneEditButton.setImage(UIImage(named: "Frame 124"), for: .normal)
+            phoneNumberTextField.isEnabled = false
+            verifyButton.isHidden = false
+            isActive = true
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -145,16 +187,6 @@ class VerifyPhoneNumberView: UIView {
         textField.textColor = UIColor(resource: .dark100)
         textField.backgroundColor = UIColor(resource: .light80)
         return textField
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text, text.count == 1 else { return }
-
-        if let nextTextField = codeDigits[safe: textField.tag + 1] {
-                nextTextField.becomeFirstResponder()
-        } else {
-            textField.resignFirstResponder()
-        }
     }
     
     
@@ -189,12 +221,12 @@ extension VerifyPhoneNumberView {
             containerViewForTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             containerViewForTextField.heightAnchor.constraint(equalToConstant: 39),
             
+            
             phoneNumberTextField.centerYAnchor.constraint(equalTo: containerViewForTextField.centerYAnchor),
             phoneNumberTextField.leadingAnchor.constraint(equalTo: containerViewForTextField.leadingAnchor, constant: 10),
             phoneNumberTextField.trailingAnchor.constraint(equalTo: containerViewForTextField.trailingAnchor, constant: -10),
             
             phoneEditButton.topAnchor.constraint(equalTo: verifyDescLabel.bottomAnchor, constant: padding),
-            phoneEditButton.leadingAnchor.constraint(equalTo: containerViewForTextField.trailingAnchor, constant: padding),
             phoneEditButton.heightAnchor.constraint(equalToConstant: 39),
             phoneEditButton.widthAnchor.constraint(equalToConstant: 39),
             phoneEditButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
@@ -210,8 +242,8 @@ extension VerifyPhoneNumberView {
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
         ])
-        buttonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding)
-        buttonBottomConstraint.isActive = true
+        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding)
+        verifyButtonBottomConstraint.isActive = true
     }
 }
 
@@ -275,7 +307,7 @@ extension VerifyPhoneNumberView {
         let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.3
         
         UIView.animate(withDuration: animationDuration) {
-            self.buttonBottomConstraint.constant = bottomPadding
+            self.verifyButtonBottomConstraint.constant = bottomPadding
             self.layoutIfNeeded()
         }
     }
