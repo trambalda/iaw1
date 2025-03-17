@@ -143,6 +143,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				3FA1CA3B2D88BB2B00A1FF1F /* VerifyPhoneNumberView */,
 				3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 			);
@@ -160,9 +161,16 @@
 		3F6C2C132D8332A70097587A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3FA1CA3B2D88BB2B00A1FF1F /* VerifyPhoneNumberView */ = {
+			isa = PBXGroup;
+			children = (
+				3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */,
+			);
+			path = VerifyPhoneNumberView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
