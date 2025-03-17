@@ -160,6 +160,10 @@ class VerifyPhoneNumberView: UIView {
             phoneNumberTextField.isEnabled = false
             verifyButton.isHidden = false
             isActive = true
+            phoneNumberTextFieldTrailingConstraint.isActive = false
+            UIView.animate(withDuration: 0.3) {
+                self.layoutIfNeeded()
+            }
         }
     }
     
