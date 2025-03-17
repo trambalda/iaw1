@@ -2,6 +2,9 @@ import UIKit
 
 final class StringTextField: UIStackView {
     
+    var textDidChange: ((String) -> Void)?
+    var didPressReturn: (() -> Void)?
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -14,7 +17,6 @@ final class StringTextField: UIStackView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .light80
-        view.layer.masksToBounds = true
         view.layer.cornerRadius = 14
         return view
     }()
@@ -25,16 +27,25 @@ final class StringTextField: UIStackView {
         textField.rightView = clearButton
         textField.rightViewMode = .whileEditing
         textField.delegate = self
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingDidEnd)
         return textField
     }()
     
     private lazy var clearButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(resource: .closeCircle), for: .normal)
-        button.tintColor = .dark80
+        button.setImage(.closeCircle, for: .normal)
         button.addTarget(self, action: #selector(clearButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+//    var text: String? {
+//        get { textField.text }
+//        set { textField.text = newValue }
+//    }
+    
+    var textFieldControl: UITextField {
+        return textField
+    }
     
     init(with style: StringTextFieldStyle) {
         super.init(frame: .zero)
@@ -51,8 +62,6 @@ final class StringTextField: UIStackView {
     private func setupStackViewProperties() {
         axis = .vertical
         spacing = 6
-        alignment = .fill
-        distribution = .fill
     }
     
     private func setupLayout() {
@@ -65,7 +74,6 @@ final class StringTextField: UIStackView {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13),
             
-            containerView.heightAnchor.constraint(equalToConstant: 51),
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             
             textField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 13),
@@ -76,27 +84,35 @@ final class StringTextField: UIStackView {
     }
     
     private func configureField(with style: StringTextFieldStyle) {
-        let baseStyle = style.baseStyle
+        let baseStyle = TextFieldBaseStyle()
         
         textField.autocapitalizationType = baseStyle.autocapitalizationType
         textField.textColor = baseStyle.textColor
         textField.backgroundColor = baseStyle.backgroundColor
         textField.font = baseStyle.fontFamily
         textField.text = style.text
-        textField.keyboardType = style.keyboardType ?? .default
-        textField.attributedPlaceholder = style.attributedPlaceholder
-        
+        textField.attributedPlaceholder = NSAttributedString(
+            string: style.placeholder,
+            attributes: [.foregroundColor: UIColor.dark80]
+        )
+           
         titleLabel.text = style.title
     }
     
     @objc private func clearButtonTapped() {
         textField.text = nil
+        textDidChange?("")
+    }
+    
+    @objc private func textFieldDidChange() {
+        textDidChange?(textField.text ?? "")
     }
 }
 
 extension StringTextField: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        //textField.resignFirstResponder()
+        didPressReturn?()
         return true
     }
     
