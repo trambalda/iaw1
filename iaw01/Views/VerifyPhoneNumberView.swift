@@ -8,8 +8,12 @@
 import UIKit
 
 class VerifyPhoneNumberView: UIView {
+    
+    private var keyboardHeight: CGFloat = 0
+    private var isKeyboardVisible = false
+    private var buttonBottomConstraint: NSLayoutConstraint!
+    private let padding: CGFloat = 21
 
-    // UI-компоненты
     private lazy var verifyHeaderLabel: UILabel = {
         let label = UILabel()
         label.setTextAndFont("Verify Phone Number", font: .heading4)
@@ -63,10 +67,15 @@ class VerifyPhoneNumberView: UIView {
         stack.distribution = .fillEqually
         stack.translatesAutoresizingMaskIntoConstraints = false
         
-        for _ in 0..<6 {
+        for i in 0..<6 {
             let textField = createTextField()
+            textField.tag = i
             codeDigits.append(textField)
             stack.addArrangedSubview(textField)
+            
+            textField.delegate = self
+            
+            textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
         return stack
     }()
@@ -112,17 +121,19 @@ class VerifyPhoneNumberView: UIView {
         return button
     }()
     
-    
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
+        registerForKeyboardNotifications()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        unregisterFromKeyboardNotifications()
     }
 
     private func createTextField() -> UITextField {
@@ -135,6 +146,18 @@ class VerifyPhoneNumberView: UIView {
         textField.backgroundColor = UIColor(resource: .light80)
         return textField
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text, text.count == 1 else { return }
+
+        if let nextTextField = codeDigits[safe: textField.tag + 1] {
+                nextTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+    }
+    
+    
 }
 
 extension VerifyPhoneNumberView {
@@ -152,7 +175,7 @@ extension VerifyPhoneNumberView {
     }
     
     private func setupConstraints() {
-        let padding: CGFloat = 21
+        
         NSLayoutConstraint.activate([
             verifyHeaderLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             verifyHeaderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
@@ -176,17 +199,84 @@ extension VerifyPhoneNumberView {
             phoneEditButton.widthAnchor.constraint(equalToConstant: 39),
             phoneEditButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             
-            digitsStackView.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 45),
+            digitsStackView.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 40),
             digitsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             digitsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             digitsStackView.heightAnchor.constraint(equalToConstant: 58),
             
-            getNewCodeStackView.topAnchor.constraint(equalTo: digitsStackView.bottomAnchor, constant: 60),
+            getNewCodeStackView.topAnchor.constraint(equalTo: digitsStackView.bottomAnchor, constant: 10),
             getNewCodeStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            verifyButton.topAnchor.constraint(equalTo: getNewCodeStackView.bottomAnchor, constant: padding)
         ])
+        buttonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding)
+        buttonBottomConstraint.isActive = true
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension VerifyPhoneNumberView: UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            return newText.count <= 1
+        }
+}
+
+// Расширение для безопасного доступа к массиву
+extension Array {
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
+// MARK: - Keyboard Handling
+extension VerifyPhoneNumberView {
+    private func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    private func unregisterFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+                let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as?
+                CGRect else { return }
+        
+        keyboardHeight = keyboardFrame.height
+        
+        adjustButtonPositionForKeyboard(isShowing: true, notification: notification)
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        adjustButtonPositionForKeyboard(isShowing: false, notification: notification)
+    }
+    
+    private func adjustButtonPositionForKeyboard(isShowing: Bool, notification: Notification) {
+        let additionalOffset: CGFloat = 35
+        let safeAreaBottomInset = safeAreaInsets.bottom
+        let bottomPadding: CGFloat = isShowing ? -(keyboardHeight - safeAreaBottomInset - additionalOffset) : -padding
+        let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.3
+        
+        UIView.animate(withDuration: animationDuration) {
+            self.buttonBottomConstraint.constant = bottomPadding
+            self.layoutIfNeeded()
+        }
     }
 }
