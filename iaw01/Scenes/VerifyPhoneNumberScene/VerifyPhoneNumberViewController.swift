@@ -14,13 +14,19 @@ class VerifyPhoneNumberViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(resource: .light100)
-        view.addSubview(verifyPhoneNumberView)
         setupView()
+        setupConstraints()
     }
     
+}
+
+extension VerifyPhoneNumberViewController {
     private func setupView() {
         verifyPhoneNumberView.translatesAutoresizingMaskIntoConstraints = false
-        
+        view.addSubview(verifyPhoneNumberView)
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             verifyPhoneNumberView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             verifyPhoneNumberView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
