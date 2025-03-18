@@ -63,27 +63,14 @@ class VerifyPhoneNumberView: UIView {
         return button
     }()
     
-    private lazy var digitsStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 15
-        stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        for i in 0..<6 {
-            let textField = createTextField()
-            textField.tag = i
-            codeDigits.append(textField)
-            stack.addArrangedSubview(textField)
-            
-            textField.delegate = self
-            
-            textField.addTarget(
-                self,
-                action: #selector(textFieldDidChange(_:)),
-                for: .editingChanged
-            )
+    private lazy var codeInputView: CodeInputView = {
+        let view = CodeInputView()
+        view.onCodeEntered = { [weak self] code in
+            print("Code entered: \(code)")
+            // Здесь можно добавить обработку введенного кода
         }
-        return stack
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private lazy var codeDigits: [UITextField] = []
@@ -203,7 +190,7 @@ extension VerifyPhoneNumberView {
         addSubview(containerViewForTextField)
         addSubview(getNewCodeStackView)
         addSubview(phoneEditButton)
-        addSubview(digitsStackView)
+        addSubview(codeInputView)
         addSubview(verifyButton)
         containerViewForTextField.addSubview(phoneNumberTextField)
         getNewCodeStackView.addArrangedSubview(getNewCodeLabel)
@@ -234,12 +221,12 @@ extension VerifyPhoneNumberView {
             phoneEditButton.widthAnchor.constraint(equalToConstant: constraintConstant),
             phoneEditButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21),
             
-            digitsStackView.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor,constant: 40),
-            digitsStackView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
-            digitsStackView.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21),
-            digitsStackView.heightAnchor.constraint(equalToConstant: 58),
+            codeInputView.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor,constant: 40),
+            codeInputView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
+            codeInputView.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21),
+            codeInputView.heightAnchor.constraint(equalToConstant: 58),
             
-            getNewCodeStackView.topAnchor.constraint(equalTo: digitsStackView.bottomAnchor,constant: 10),
+            getNewCodeStackView.topAnchor.constraint(equalTo: codeInputView.bottomAnchor,constant: 10),
             getNewCodeStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
@@ -263,12 +250,6 @@ extension VerifyPhoneNumberView: UITextFieldDelegate{
             )
             return newText.count <= 1
         }
-}
-
-extension Array {
-    subscript(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
 }
 
 extension VerifyPhoneNumberView {

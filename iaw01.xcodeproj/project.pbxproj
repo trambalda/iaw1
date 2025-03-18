@@ -19,6 +19,7 @@
 		21AA4B742D8180A80086697C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B732D8180A80086697C /* Font.swift */; };
 		21AA4B762D81828D0086697C /* aeonik-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B752D81828D0086697C /* aeonik-medium.otf */; };
 		21AA4B7C2D81880A0086697C /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B7B2D81880A0086697C /* Factory.swift */; };
+		3F45F97D2D8A15BF005BD993 /* CodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45F97C2D8A15BF005BD993 /* CodeInputView.swift */; };
 		3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */; };
 		3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 		21AA4B752D81828D0086697C /* aeonik-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aeonik-medium.otf"; sourceTree = "<group>"; };
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3F45F97C2D8A15BF005BD993 /* CodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputView.swift; sourceTree = "<group>"; };
 		3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +156,7 @@
 			children = (
 				3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */,
 				3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */,
+				3F45F97C2D8A15BF005BD993 /* CodeInputView.swift */,
 			);
 			path = VerifyPhoneNumberScene;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
+				3F45F97D2D8A15BF005BD993 /* CodeInputView.swift in Sources */,
 				3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
