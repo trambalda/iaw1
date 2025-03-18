@@ -12,9 +12,7 @@ final class RestaurantTableViewCell: UITableViewCell {
     private var nameLabel: UILabel = {
         let label = UILabel()
         label.font = Font.body
-        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -22,9 +20,7 @@ final class RestaurantTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = Font.note
         label.textColor = .dark60
-        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -33,49 +29,27 @@ final class RestaurantTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-
         return imageView
     }()
     
     private var arrowImage: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = .arrowRight
-
-        return image
+        let imageView = UIImageView(image: .arrowRight)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
-    private let infoStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 1
-        stackView.alignment = .leading
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
-    }()
-    
-    private let mainStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = 10
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
-    }()
-    
-    var model: RestaurantCellModel? {
+    var model: RestaurantCellModel {
         didSet {
-            guard let model = model else { return }
-            nameLabel.text = model.restTitle
-            addressLabel.text = model.restAddress
-            cellImage.image = model.restImage ?? UIImage(systemName: "photo")
+            nameLabel.text = model.title
+            addressLabel.text = model.address
+            cellImage.image = model.image ?? UIImage(systemName: "photo")
         }
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        self.model = RestaurantCellModel(image: nil, title: "", address: "")
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
     }
@@ -83,11 +57,28 @@ final class RestaurantTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+   
+     /*
+      mainStack
+         cellImage
+         infoStack
+             nameLabel
+             addressLabel
+         arrowImage
+      */
+     
     private func setupUI() {
+        let infoStack = UIStackView()
+        infoStack.axis = .vertical
+        infoStack.spacing = 1
+        infoStack.alignment = .leading
         infoStack.addArrangedSubview(nameLabel)
         infoStack.addArrangedSubview(addressLabel)
         
+        let mainStack = UIStackView()
+        mainStack.spacing = 10
+        mainStack.alignment = .center
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
         mainStack.addArrangedSubview(cellImage)
         mainStack.addArrangedSubview(infoStack)
         mainStack.addArrangedSubview(arrowImage)

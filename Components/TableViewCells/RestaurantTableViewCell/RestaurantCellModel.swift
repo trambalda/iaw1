@@ -8,7 +8,7 @@
 import UIKit
 
 struct RestaurantCellModel {
-    let restImage: UIImage?
-    let restTitle: String
-    let restAddress: String
+    let image: UIImage?
+    let title: String
+    let address: String
 }

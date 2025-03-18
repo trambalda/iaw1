@@ -9,91 +9,60 @@ import UIKit
 
 final class DishTableViewCell: UITableViewCell {
     
-    private var nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.body
-        label.numberOfLines = 1
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
-    private var dishImage: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        
-        return image
+    private let cellImageView: UIImageView = {
+         let imageView = UIImageView()
+         imageView.contentMode = .scaleAspectFill
+         imageView.clipsToBounds = true
+         imageView.translatesAutoresizingMaskIntoConstraints = false
+         return imageView
     }()
     
     private let arrowImage: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = .arrowRight
-        
-        return image
+        let imageView = UIImageView(image: .arrowRight)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
-    private var restaurantImage: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-       
+    private let noPhotoImage: UIImage? = {
+        let image = UIImage(systemName: "photo")
         return image
     }()
     
     private let restaurantLabel: UILabel = {
         let label = UILabel()
         label.font = Font.note
-        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
-    private let restaurantStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = 5
-        stackView.alignment = .leading
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
+    private var nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = Font.body
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    private let infoStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 3
-        stackView.alignment = .leading
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
+    private lazy var dishImage: UIImageView = {
+        cellImageView
+    }()
+     
+    private lazy var restaurantImage: UIImageView = {
+        cellImageView
     }()
     
-    private let mainStack: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = 9
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
-    }()
-    
-    var model: DishCellModel? {
+    var model: DishCellModel {
         didSet {
-            guard let model = model else { return }
             nameLabel.text = model.foodTitle
-            dishImage.image = model.foodImage ?? UIImage(systemName: "photo")
-            restaurantImage.image = model.restImage ?? UIImage(systemName: "photo")
-            restaurantLabel.text = model.restTitle
+            dishImage.image = model.foodImage ?? noPhotoImage
+            restaurantImage.image = model.restaurantImage ?? noPhotoImage
+            restaurantLabel.text = model.restaurantTitle
         }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        self.model = DishCellModel(foodImage: nil, foodTitle: "", restaurantImage: nil, restaurantTitle: "")
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
     }
@@ -102,13 +71,35 @@ final class DishTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /*
+     mainStack
+        dishImage
+        infoStack
+            nameLabel
+            restaurantStack
+                restaurantImage
+                restaurantLabel
+        arrowImage
+     */
+    
     private func setupUI() {
+        let restaurantStack = UIStackView()
+        restaurantStack.spacing = 5
+        restaurantStack.alignment = .center
         restaurantStack.addArrangedSubview(restaurantImage)
         restaurantStack.addArrangedSubview(restaurantLabel)
-        
+    
+        let infoStack = UIStackView()
+        infoStack.axis = .vertical
+        infoStack.spacing = 3
+        infoStack.alignment = .leading
         infoStack.addArrangedSubview(nameLabel)
         infoStack.addArrangedSubview(restaurantStack)
         
+        let mainStack = UIStackView()
+        mainStack.spacing = 9
+        mainStack.alignment = .center
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
         mainStack.addArrangedSubview(dishImage)
         mainStack.addArrangedSubview(infoStack)
         mainStack.addArrangedSubview(arrowImage)

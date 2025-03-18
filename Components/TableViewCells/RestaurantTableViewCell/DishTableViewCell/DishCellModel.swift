@@ -10,7 +10,7 @@ import UIKit
 struct DishCellModel {
     let foodImage: UIImage?
     let foodTitle: String
-    let restImage: UIImage?
-    let restTitle: String
+    let restaurantImage: UIImage?
+    let restaurantTitle: String
 }
 
