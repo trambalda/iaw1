@@ -9,37 +9,17 @@ import UIKit
 
 class VerifyPhoneNumberViewController: UIViewController {
     
-    private let verifyPhoneNumberView = VerifyPhoneNumberView()
+    private lazy var verifyPhoneNumberView: VerifyPhoneNumberView = {
+        let view = VerifyPhoneNumberView(frame: UIScreen.main.bounds)
+        return view
+    }()
+    
+    override func loadView() {
+        view = verifyPhoneNumberView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .light100
-        setupView()
-        setupConstraints()
-    }
-    
-}
-
-extension VerifyPhoneNumberViewController {
-    private func setupView() {
-        verifyPhoneNumberView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(verifyPhoneNumberView)
-    }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            verifyPhoneNumberView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor
-            ),
-            verifyPhoneNumberView.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor
-            ),
-            verifyPhoneNumberView.trailingAnchor.constraint(
-                equalTo: view.trailingAnchor
-            ),
-            verifyPhoneNumberView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor
-            )
-        ])
     }
 }

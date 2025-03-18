@@ -10,7 +10,6 @@ import UIKit
 class VerifyPhoneNumberView: UIView {
     
     private let padding: CGFloat = 21
-    private let additionalOffset: CGFloat = 35
     
     private var keyboardHeight: CGFloat = 0
     private var isKeyboardVisible = false
@@ -226,7 +225,7 @@ extension VerifyPhoneNumberView {
         
         NSLayoutConstraint.activate([
             verifyHeaderLabel.topAnchor.constraint(
-                equalTo: topAnchor,
+                equalTo: safeAreaLayoutGuide.topAnchor,
                 constant: padding
             ),
             verifyHeaderLabel.leadingAnchor.constraint(
@@ -395,8 +394,7 @@ extension VerifyPhoneNumberView {
     }
     
     private func adjustButtonPositionForKeyboard(isShowing: Bool, notification: Notification) {
-        let safeAreaBottomInset = safeAreaInsets.bottom
-        let bottomPadding: CGFloat = isShowing ? -(keyboardHeight - safeAreaBottomInset - additionalOffset) : -padding
+        let bottomPadding: CGFloat = isShowing ? -keyboardHeight : -padding
         let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.3
         
         UIView.animate(withDuration: animationDuration) {
