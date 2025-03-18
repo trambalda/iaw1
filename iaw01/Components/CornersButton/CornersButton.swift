@@ -20,6 +20,20 @@ class CornersButton: UIButton {
         case right
     }
     
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.1) {
+                self.alpha = self.isHighlighted ? 0.7 : self.alphaWhenTouch
+            }
+        }
+    }
+    
+    override var isEnabled: Bool {
+        didSet {
+            updateAppearance()
+        }
+    }
+    
     private let style: CornersButtonStyle
     
     private let stackView: UIStackView = {
@@ -33,19 +47,16 @@ class CornersButton: UIButton {
     
     private lazy var buttonLabel: UILabel = {
         let label = UILabel()
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
     
     private lazy var leftIconImageView: UIImageView = {
         let imageView = iconImageView
-        configureIconImageView(imageView)
         return imageView
     }()
     
     private lazy var rightIconImageView: UIImageView = {
         let imageView = iconImageView
-        configureIconImageView(imageView)
         return imageView
     }()
     
@@ -59,20 +70,6 @@ class CornersButton: UIButton {
     
     private var alphaWhenTouch: CGFloat {
         isEnabled ? 1.0 : 0.6
-    }
-    
-    override var isHighlighted: Bool {
-        didSet {
-            UIView.animate(withDuration: 0.1) {
-                self.alpha = self.isHighlighted ? 0.7 : self.alphaWhenTouch
-            }
-        }
-    }
-    
-    override var isEnabled: Bool {
-        didSet {
-            updateAppearance()
-        }
     }
     
     init(style: CornersButtonStyle = .blue) {
@@ -89,38 +86,6 @@ class CornersButton: UIButton {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureIconImageView(_ imageView: UIImageView) {
-        imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
-        imageView.setContentHuggingPriority(.required, for: .horizontal)
-    }
-    
-    private func setupButton() {
-        backgroundColor = style.backgroundColor
-        layer.cornerRadius = 18
-    }
-    
-    private func setupLayout() {
-        addSubview(stackView)
-        stackView.addArrangedSubview(leftIconImageView)
-        stackView.addArrangedSubview(buttonLabel)
-        stackView.addArrangedSubview(rightIconImageView)
-    }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20),
-            heightAnchor.constraint(equalToConstant: 64)
-        ])
-    }
-    
-    private func updateAppearance() {
-        backgroundColor = isEnabled ? style.backgroundColor : style.disabledBackgroundColor
-        alpha = alphaWhenTouch
     }
     
     func setTitle(_ title: String) {
@@ -141,5 +106,38 @@ class CornersButton: UIButton {
             leftIconImageView.isHidden = true
             rightIconImageView.isHidden = true
         }
+    }
+    
+    private func setupButton() {
+        backgroundColor = style.backgroundColor
+        layer.cornerRadius = 18
+    }
+    
+    private func setupLayout() {
+        addSubview(stackView)
+        stackView.addArrangedSubview(leftIconImageView)
+        stackView.addArrangedSubview(buttonLabel)
+        stackView.addArrangedSubview(rightIconImageView)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20),
+            heightAnchor.constraint(equalToConstant: 64),
+            
+            leftIconImageView.widthAnchor.constraint(equalToConstant: 24),
+            leftIconImageView.heightAnchor.constraint(equalToConstant: 24),
+            
+            rightIconImageView.widthAnchor.constraint(equalToConstant: 24),
+            rightIconImageView.heightAnchor.constraint(equalToConstant: 24)
+        ])
+    }
+    
+    private func updateAppearance() {
+        backgroundColor = isEnabled ? style.backgroundColor : style.disabledBackgroundColor
+        alpha = alphaWhenTouch
     }
 } 
