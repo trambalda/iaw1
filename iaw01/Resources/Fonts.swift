@@ -2,19 +2,24 @@
 import UIKit
 
 struct Font {
+    let font: UIFont
+    let lettering: Double
     
-    enum Name {
-        case heading1
-        case heading2
-        case heading3
-        case heading4
-        case subtitle1
-        case subtitle2
-        case body
-        case caption
-        case button
+    func compose(_ text: String, color: UIColor?) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttributes(
+            [
+                NSAttributedString.Key.font : self.font,
+                NSAttributedString.Key.kern : self.lettering,
+                NSAttributedString.Key.foregroundColor: color ?? .black,
+            ],
+            range: NSRange(location: 0, length: attributedString.length)
+        )
+        return attributedString
     }
-    
+}
+
+extension Font {
     enum Family {
         case everettMedium
         case everettRegular
@@ -28,59 +33,43 @@ struct Font {
             }
         }
     }
-    
-    static let heading1 = UIFont(name: Family.everettMedium.title, size: 96)
-    static let heading2 = UIFont(name: Family.everettMedium.title, size: 60)
-    static let heading3 = UIFont(name: Family.everettMedium.title, size: 48)
-    static let heading4 = UIFont(name: Family.everettMedium.title, size: 36)
-    static let subtitle1 = UIFont(name: Family.everettMedium.title, size: 24)
-    static let subtitle2 = UIFont(name: Family.everettMedium.title, size: 21)
-    static let body = UIFont(name: Family.everettRegular.title, size: 17)
-    static let caption = UIFont(name: Family.everettMedium.title, size: 12)
-    static let button = UIFont(name: Family.aeonikMedium.title, size: 18)
 }
 
-extension UILabel {
-    
-    func setTextAndFont(_ text: String, font: Font.Name) {
-        self.text = text
-        let lettering: Double
-        switch font {
-        case .heading1:
-            self.font = Font.heading1
-            lettering = -3
-        case .heading2:
-            self.font = Font.heading2
-            lettering = -1.5
-        case .heading3:
-            self.font = Font.heading3
-            lettering = -1
-        case .heading4:
-            self.font = Font.heading4
-            lettering = -2
-        case .subtitle1:
-            self.font = Font.subtitle1
-            lettering = 0
-        case .subtitle2:
-            self.font = Font.subtitle2
-            lettering = -1
-        case .body:
-            self.font = Font.body
-            lettering = -1
-        case .caption:
-            self.font = Font.caption
-            lettering = 2
-        case .button:
-            self.font = Font.button
-            lettering = 0
-        }
-        
-        let string = NSMutableAttributedString(string: text)
-        string.addAttribute(
-            NSAttributedString.Key.kern,
-            value: lettering,
-            range: NSRange(location: 0, length: string.length - 1)
-        )
-        attributedText = string
-    }
+extension Font {
+    static let heading1 = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 96)!,
+        lettering: -3
+    )
+    static let heading2 = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 60)!,
+        lettering: -1.5
+    )
+    static let heading3 = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 48)!,
+        lettering: -1
+    )
+    static let heading4 = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 36)!,
+        lettering: -2
+    )
+    static let subtitle1 = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 24)!,
+        lettering: -0
+    )
+    static let subtitle2 = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 21)!,
+        lettering: -1
+    )
+    static let body = Font(
+        font: UIFont(name: Family.everettRegular.title, size: 17)!,
+        lettering: -1
+    )
+    static let caption = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 12)!,
+        lettering: 2
+    )
+    static let button = Font(
+        font: UIFont(name: Family.aeonikMedium.title, size: 18)!,
+        lettering: 0
+    )
 }
