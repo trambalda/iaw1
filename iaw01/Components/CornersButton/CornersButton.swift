@@ -19,6 +19,20 @@ class CornersButton: UIButton {
         case left
         case right
     }
+
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.1) {
+                self.alpha = self.isHighlighted ? 0.7 : self.alphaWhenTouch
+            }
+        }
+    }
+    
+    override var isEnabled: Bool {
+        didSet {
+            updateAppearance()
+        }
+    }
     
     private let style: CornersButtonStyle
     
@@ -57,20 +71,6 @@ class CornersButton: UIButton {
     
     private var alphaWhenTouch: CGFloat {
         isEnabled ? 1.0 : 0.6
-    }
-    
-    override var isHighlighted: Bool {
-        didSet {
-            UIView.animate(withDuration: 0.1) {
-                self.alpha = self.isHighlighted ? 0.7 : self.alphaWhenTouch
-            }
-        }
-    }
-    
-    override var isEnabled: Bool {
-        didSet {
-            updateAppearance()
-        }
     }
     
     func setTitle(_ title: String) {
