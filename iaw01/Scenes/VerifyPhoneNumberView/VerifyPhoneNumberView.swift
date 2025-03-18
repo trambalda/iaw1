@@ -20,7 +20,8 @@ class VerifyPhoneNumberView: UIView {
 
     private lazy var verifyHeaderLabel: UILabel = {
         let label = UILabel()
-        label.setTextAndFont("Verify Phone Number", font: .heading4)
+//        label.setTextAndFont("Verify Phone Number", font: .heading4)
+        label.attributedText = Font.heading4.compose("Verify Phone Number", color: nil)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -28,10 +29,11 @@ class VerifyPhoneNumberView: UIView {
     
     private lazy var verifyDescLabel: UILabel = {
         let label = UILabel()
-        label.setTextAndFont(
-            "We have sent you a 6 digit code. Please enter here to Verify your Number.",
-            font: .body
-        )
+//        label.setTextAndFont(
+//            "We have sent you a 6 digit code. Please enter here to Verify your Number.",
+//            font: .body
+//        )
+        label.attributedText = Font.body.compose("We have sent you a 6 digit code. Please enter here to Verify your Number.", color: nil)
         label.textColor = UIColor(resource: .dark80)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +105,8 @@ class VerifyPhoneNumberView: UIView {
     
     private lazy var getNewCodeLabel: UILabel = {
         let label = UILabel()
-        label.setTextAndFont("Didn't Receive Code?", font: .body)
+//        label.setTextAndFont("Didn't Receive Code?", font: .body)
+        label.attributedText = Font.body.compose("Didn't Receive Code?", color: nil)
         label.textColor = UIColor(resource: .dark80)
         return label
     }()
@@ -180,7 +183,7 @@ class VerifyPhoneNumberView: UIView {
 
     private func createTextField() -> UITextField {
         let textField = UITextField()
-        textField.font = Font.subtitle1
+        textField.font = Font.subtitle1.font
         textField.textAlignment = .center
         textField.keyboardType = .numberPad
         textField.layer.cornerRadius = 15
