@@ -4,7 +4,7 @@ struct TextFieldBaseStyle {
     let autocapitalizationType: UITextAutocapitalizationType = .none
     let textColor: UIColor = .dark100
     let backgroundColor: UIColor = .light80
-    let fontFamily = Font.body
+    let fontFamily = Font.body.font
 }
 
 struct StringTextFieldStyle {

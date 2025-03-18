@@ -18,14 +18,12 @@ final class StringTextField: UIStackView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Font.body
         label.textColor = .dark100
         return label
     }()
     
     private let containerView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .light80
         view.layer.cornerRadius = 14
         return view
@@ -82,11 +80,9 @@ final class StringTextField: UIStackView {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor, constant: 13),
-            titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor, constant: -13),
+            titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
             titleLabel.topAnchor.constraint(equalTo: titleContainerView.topAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: titleContainerView.bottomAnchor),
-            
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             
             textField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 13),
             textField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -13),
@@ -105,10 +101,13 @@ final class StringTextField: UIStackView {
         textField.text = style.text
         textField.attributedPlaceholder = NSAttributedString(
             string: style.placeholder,
-            attributes: [.foregroundColor: UIColor.dark80]
+            attributes: [
+                .foregroundColor: UIColor.dark60,
+                .kern: Font.body.lettering
+            ]
         )
            
-        titleLabel.text = style.title
+        titleLabel.attributedText = Font.body.compose(style.title ?? "", color: .dark100)
     }
 
     @objc private func clearButtonTapped() {
