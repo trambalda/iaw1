@@ -19,7 +19,8 @@
 		21AA4B742D8180A80086697C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B732D8180A80086697C /* Fonts.swift */; };
 		21AA4B762D81828D0086697C /* aeonik-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B752D81828D0086697C /* aeonik-medium.otf */; };
 		21AA4B7C2D81880A0086697C /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B7B2D81880A0086697C /* Factory.swift */; };
-		D5A640F42D88829400B99E81 /* CornerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A640F22D88829400B99E81 /* CornerButton.swift */; };
+		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
+		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +39,8 @@
 		21AA4B752D81828D0086697C /* aeonik-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aeonik-medium.otf"; sourceTree = "<group>"; };
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D5A640F22D88829400B99E81 /* CornerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerButton.swift; sourceTree = "<group>"; };
+		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
+		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,10 +148,19 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		D52040512D89B502009D0D1D /* CornersButton */ = {
+			isa = PBXGroup;
+			children = (
+				D520404F2D89B502009D0D1D /* CornersButton.swift */,
+				D52040502D89B502009D0D1D /* CornersButtonStyle.swift */,
+			);
+			path = CornersButton;
+			sourceTree = "<group>";
+		};
 		D5A640F52D8883CF00B99E81 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D5A640F22D88829400B99E81 /* CornerButton.swift */,
+				D52040512D89B502009D0D1D /* CornersButton */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -228,12 +239,13 @@
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				21AA4B742D8180A80086697C /* Fonts.swift in Sources */,
-				D5A640F42D88829400B99E81 /* CornerButton.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
+				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,
+				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
