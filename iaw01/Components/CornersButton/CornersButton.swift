@@ -36,7 +36,7 @@ class CornersButton: UIButton {
     
     private let style: CornersButtonStyle
     
-    private lazy var leftIconImageView: UIImageView = {
+    private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,18 +44,12 @@ class CornersButton: UIButton {
         return imageView
     }()
     
-    private lazy var rightIconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isHidden = true
-        return imageView
-    }()
+    private lazy var leftIconImageView = iconImageView
+    private lazy var rightIconImageView = iconImageView
     
     private lazy var buttonLabel: UILabel = {
         let label = UILabel()
         label.font = Font.button
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = style.textColor
         return label
     }()
@@ -96,7 +90,6 @@ class CornersButton: UIButton {
     private func setupButton() {
         backgroundColor = style.backgroundColor
         layer.cornerRadius = 18
-        translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupLayout() {
@@ -127,7 +120,6 @@ class CornersButton: UIButton {
         
         backgroundColor = style.backgroundColor
         layer.cornerRadius = 18
-        translatesAutoresizingMaskIntoConstraints = false
         
         setupLayout()
         setupConstraints()
