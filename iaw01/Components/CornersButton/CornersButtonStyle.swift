@@ -1,6 +1,12 @@
 import UIKit
 
 struct CornersButtonStyle {
+    let backgroundColor: UIColor
+    let disabledBackgroundColor: UIColor
+    let textColor: UIColor
+}
+
+extension CornersButtonStyle {
     static let blue = CornersButtonStyle(
         backgroundColor: UIColor(resource: .blue100),
         disabledBackgroundColor: UIColor(resource: .blue60),
@@ -24,8 +30,4 @@ struct CornersButtonStyle {
         disabledBackgroundColor: UIColor(resource: .light80),
         textColor: UIColor(resource: .dark90)
     )
-    
-    let backgroundColor: UIColor
-    let disabledBackgroundColor: UIColor
-    let textColor: UIColor
 } 

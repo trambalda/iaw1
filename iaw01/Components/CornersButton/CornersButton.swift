@@ -27,7 +27,6 @@ class CornersButton: UIButton {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
-        imageView.isUserInteractionEnabled = false
         return imageView
     }()
     
@@ -36,7 +35,6 @@ class CornersButton: UIButton {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
-        imageView.isUserInteractionEnabled = false
         return imageView
     }()
     
@@ -44,7 +42,7 @@ class CornersButton: UIButton {
         let label = UILabel()
         label.font = Font.button
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.isUserInteractionEnabled = false
+        label.textColor = style.textColor
         return label
     }()
     
@@ -81,9 +79,8 @@ class CornersButton: UIButton {
     
     func setIcon(_ icon: ButtonIcon?, position: IconPosition = .right) {
         if let icon {
-            let image = icon.image
-            leftIconImageView.image = image
-            rightIconImageView.image = image
+            leftIconImageView.image = icon.image
+            rightIconImageView.image = icon.image
             
             leftIconImageView.tintColor = style.textColor
             rightIconImageView.tintColor = style.textColor
@@ -99,26 +96,17 @@ class CornersButton: UIButton {
     private func setupButton() {
         backgroundColor = style.backgroundColor
         layer.cornerRadius = 18
-        isUserInteractionEnabled = true
-        
-        setupStackView()
-        setupTitleLabel()
-        setupConstraints()
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func setupStackView() {
+    private func setupLayout() {
         addSubview(stackView)
         stackView.addArrangedSubview(leftIconImageView)
         stackView.addArrangedSubview(buttonLabel)
         stackView.addArrangedSubview(rightIconImageView)
     }
     
-    private func setupTitleLabel() {
-        buttonLabel.textColor = style.textColor
-    }
-    
     private func setupConstraints() {
-        translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -136,7 +124,13 @@ class CornersButton: UIButton {
     init(style: CornersButtonStyle = .blue) {
         self.style = style
         super.init(frame: .zero)
-        setupButton()
+        
+        backgroundColor = style.backgroundColor
+        layer.cornerRadius = 18
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        setupLayout()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
