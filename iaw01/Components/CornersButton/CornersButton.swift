@@ -33,9 +33,6 @@ class CornersButton: UIButton {
     
     private lazy var buttonLabel: UILabel = {
         let label = UILabel()
-        label.font = Font.button
-        label.textColor = style.textColor
-        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
@@ -90,24 +87,6 @@ class CornersButton: UIButton {
         setupConstraints()
     }
     
-    convenience init(
-        style: CornersButtonStyle = .blue,
-        title: String,
-        icon: ButtonIcon? = nil,
-        position: IconPosition = .right,
-        target: Any? = nil,
-        action: Selector? = nil
-    ) {
-        self.init(style: style)
-        setTitle(title)
-        if let icon {
-            setIcon(icon, position: position)
-        }
-        if let target, let action {
-            addTarget(target, action: action, for: .touchUpInside)
-        }
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -145,7 +124,7 @@ class CornersButton: UIButton {
     }
     
     func setTitle(_ title: String) {
-        buttonLabel.text = title
+        buttonLabel.attributedText = Font.button.compose(title, color: style.textColor)
     }
     
     func setIcon(_ icon: ButtonIcon?, position: IconPosition = .right) {
