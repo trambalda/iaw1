@@ -20,13 +20,14 @@ class CornersButton: UIButton {
         case right
     }
     
-    private let style: CornerButtonStyle
+    private let style: CornersButtonStyle
     
     private lazy var leftIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
+        imageView.isUserInteractionEnabled = false
         return imageView
     }()
     
@@ -35,6 +36,7 @@ class CornersButton: UIButton {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
+        imageView.isUserInteractionEnabled = false
         return imageView
     }()
     
@@ -42,6 +44,7 @@ class CornersButton: UIButton {
         let label = UILabel()
         label.font = Font.button
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = false
         return label
     }()
     
@@ -50,6 +53,7 @@ class CornersButton: UIButton {
         stack.spacing = 5
         stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.isUserInteractionEnabled = false
         return stack
     }()
     
@@ -57,24 +61,11 @@ class CornersButton: UIButton {
         isEnabled ? 1.0 : 0.6
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        UIView.animate(withDuration: 0.1) {
-            self.alpha = 0.7
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        UIView.animate(withDuration: 0.1) {
-            self.alpha = self.alphaWhenTouch
-        }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        UIView.animate(withDuration: 0.1) {
-            self.alpha = self.alphaWhenTouch
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.1) {
+                self.alpha = self.isHighlighted ? 0.7 : self.alphaWhenTouch
+            }
         }
     }
     
@@ -108,6 +99,7 @@ class CornersButton: UIButton {
     private func setupButton() {
         backgroundColor = style.backgroundColor
         layer.cornerRadius = 18
+        isUserInteractionEnabled = true
         
         setupStackView()
         setupTitleLabel()
@@ -141,7 +133,7 @@ class CornersButton: UIButton {
         alpha = alphaWhenTouch
     }
     
-    init(style: CornerButtonStyle = .blue) {
+    init(style: CornersButtonStyle = .blue) {
         self.style = style
         super.init(frame: .zero)
         setupButton()
