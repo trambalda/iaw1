@@ -62,7 +62,7 @@ extension UILabel {
             lettering = -2
         case .heading5:
             self.font = Font.heading5
-            lettering = -3 // при значении -5 текст просто слипается в одну кучу, так же обнаружил что TWKEverett-Regular и Everett-Regular разные шрифты и сам пока в фигме искал нужный все перекопал
+            lettering = -3
         case .subtitle1:
             self.font = Font.subtitle1
             lettering = 0
