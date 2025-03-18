@@ -6,7 +6,7 @@ final class TextFieldsViewController: UIViewController {
         let textField = StringTextField(with: .emailStyle)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textFieldShouldReturn = {
-            self.nameTextField.becomeFirstResponder()
+            self.nameTextField.becomeTextFieldFirstResponder()
         }
         return textField
     }()
@@ -17,7 +17,7 @@ final class TextFieldsViewController: UIViewController {
         textField.textFieldShouldReturn = {
             print("Final Email:\(self.emailTextField.text ?? "")")
             print("Final Name:\(textField.text ?? "")")
-            textField.resignnFirstResponder()
+            textField.resignTextFieldFirstResponder()
         }
         return textField
     }()

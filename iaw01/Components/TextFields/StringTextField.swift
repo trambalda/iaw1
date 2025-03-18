@@ -2,8 +2,18 @@ import UIKit
 
 final class StringTextField: UIStackView {
     
-    var textDidChange: ((String) -> Void)?
     var textFieldShouldReturn: (() -> Void)?
+    
+    var text: String? {
+        get { textField.text }
+        set { textField.text = newValue }
+    }
+    
+    private let titleContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -37,11 +47,6 @@ final class StringTextField: UIStackView {
         return button
     }()
     
-    var text: String? {
-        get { textField.text }
-        set { textField.text = newValue }
-    }
-    
     init(with style: StringTextFieldStyle) {
         super.init(frame: .zero)
         setupStackViewProperties()
@@ -54,20 +59,32 @@ final class StringTextField: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func becomeTextFieldFirstResponder() {
+        textField.becomeFirstResponder()
+    }
+    
+    func resignTextFieldFirstResponder() {
+        textField.resignFirstResponder()
+    }
+    
     private func setupStackViewProperties() {
         axis = .vertical
         spacing = 6
     }
     
     private func setupLayout() {
-        addArrangedSubview(titleLabel)
+        addArrangedSubview(titleContainerView)
+        titleContainerView.addSubview(titleLabel)
         addArrangedSubview(containerView)
         containerView.addSubview(textField)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13),
+            titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor, constant: 13),
+            titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor, constant: -13),
+            titleLabel.topAnchor.constraint(equalTo: titleContainerView.topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: titleContainerView.bottomAnchor),
             
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             
@@ -92,14 +109,6 @@ final class StringTextField: UIStackView {
         )
            
         titleLabel.text = style.title
-    }
-    
-    func becomeFirstResponder() {
-        textField.becomeFirstResponder()
-    }
-    
-    func resignnFirstResponder() {
-        textField.resignFirstResponder()
     }
 
     @objc private func clearButtonTapped() {
