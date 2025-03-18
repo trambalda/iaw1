@@ -45,28 +45,30 @@ class CornersButton: UIButton {
         return stack
     }()
     
-    private lazy var buttonLabel: UILabel = {
+    private let buttonLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = false
         return label
     }()
     
-    private lazy var leftIconImageView: UIImageView = {
-        let imageView = iconImageView
-        return imageView
-    }()
-    
-    private lazy var rightIconImageView: UIImageView = {
-        let imageView = iconImageView
-        return imageView
-    }()
-    
-    private var iconImageView: UIImageView {
+    private let leftIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
+        imageView.isUserInteractionEnabled = false
         return imageView
-    }
+    }()
+    
+    private let rightIconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isHidden = true
+        imageView.isUserInteractionEnabled = false
+        return imageView
+    }()
     
     private var alphaWhenTouch: CGFloat {
         isEnabled ? 1.0 : 0.6
@@ -129,10 +131,7 @@ class CornersButton: UIButton {
             heightAnchor.constraint(equalToConstant: 64),
             
             leftIconImageView.widthAnchor.constraint(equalToConstant: 24),
-            leftIconImageView.heightAnchor.constraint(equalToConstant: 24),
-            
-            rightIconImageView.widthAnchor.constraint(equalToConstant: 24),
-            rightIconImageView.heightAnchor.constraint(equalToConstant: 24)
+            rightIconImageView.widthAnchor.constraint(equalToConstant: 24)
         ])
     }
     
