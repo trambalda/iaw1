@@ -47,23 +47,18 @@ class CornersButton: UIButton {
     
     private let buttonLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let leftIconImageView: UIImageView = {
+    private func CreateIconImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.isHidden = true
         return imageView
-    }()
+    }
     
-    private let rightIconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.isHidden = true
-        return imageView
-    }()
+    private lazy var leftIconImageView = CreateIconImageView()
+    private lazy var rightIconImageView = CreateIconImageView()
     
     private var alphaWhenTouch: CGFloat {
         isEnabled ? 1.0 : 0.6
@@ -73,10 +68,7 @@ class CornersButton: UIButton {
         self.style = style
         super.init(frame: .zero)
         
-        backgroundColor = style.backgroundColor
-        layer.cornerRadius = 18
-        translatesAutoresizingMaskIntoConstraints = false
-        
+        setupButton()
         setupLayout()
         setupConstraints()
     }
