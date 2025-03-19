@@ -60,16 +60,14 @@ class CodeInputView: UIView {
         textField.layer.cornerRadius = 15
         textField.backgroundColor = .light80
         textField.textColor = .dark100
-        textField.tintColor = .clear
         textField.delegate = self
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+//        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }
     
     private func updateTextFieldInteractions(currentTextField: UITextField?) {
         for textField in codeDigits {
             textField.isUserInteractionEnabled = true
-//            textField.isUserInteractionEnabled = (textField == currentTextField)
         }
     }
     // TODO: Доработать перемещение фокуса на предыдущую ячейку в моменте ввода кода
@@ -103,6 +101,7 @@ class CodeInputView: UIView {
 }
 
 // MARK: - UITextFieldDelegate
+// TODO: - Доделать функционал: в случае ошибки пользователя смещать фокус на предыдущий текстфилд,
 extension CodeInputView: UITextFieldDelegate {
     func textField(
         _ textField: UITextField,
@@ -112,11 +111,25 @@ extension CodeInputView: UITextFieldDelegate {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
-            if newText.isEmpty {
-                return true
+        if newText.isEmpty {
+            textField.text = ""
+            if textField.tag > 0, let previousTextField = self.codeDigits[safe: textField.tag - 1] {
+                previousTextField.becomeFirstResponder()
+            } else {
+                textField.resignFirstResponder()
             }
-            
-        return newText.count <= 1
+            return false
+        }
+        if newText.count == 1 {
+            textField.text = newText
+            if let nextTextField = self.codeDigits[safe: textField.tag + 1] {
+                nextTextField.becomeFirstResponder()
+            } else {
+                textField.resignFirstResponder()
+            }
+            return true
+        }
+        return false
     }
 }
 
