@@ -68,7 +68,8 @@ class CodeInputView: UIView {
     
     private func updateTextFieldInteractions(currentTextField: UITextField?) {
         for textField in codeDigits {
-            textField.isUserInteractionEnabled = (textField == currentTextField)
+            textField.isUserInteractionEnabled = true
+//            textField.isUserInteractionEnabled = (textField == currentTextField)
         }
     }
     // TODO: Доработать перемещение фокуса на предыдущую ячейку в моменте ввода кода
@@ -107,6 +108,7 @@ extension CodeInputView: UITextFieldDelegate {
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String) -> Bool {
+            
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
