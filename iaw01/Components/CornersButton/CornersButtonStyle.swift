@@ -1,9 +1,30 @@
 import UIKit
 
+enum IconPosition {
+    case left
+    case right
+}
+
 struct CornersButtonStyle {
     let backgroundColor: UIColor
     let disabledBackgroundColor: UIColor
     let textColor: UIColor
+    let iconPosition: IconPosition
+    let cornerRadius: CGFloat
+
+    init(
+        backgroundColor: UIColor,
+        disabledBackgroundColor: UIColor,
+        textColor: UIColor,
+        iconPosition: IconPosition = .right,
+        cornerRadius: CGFloat = 18
+    ) {
+        self.backgroundColor = backgroundColor
+        self.disabledBackgroundColor = disabledBackgroundColor
+        self.textColor = textColor
+        self.iconPosition = iconPosition
+        self.cornerRadius = cornerRadius
+    }
 }
 
 extension CornersButtonStyle {

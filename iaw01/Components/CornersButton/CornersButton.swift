@@ -1,24 +1,6 @@
 import UIKit
 
-class CornersButton: UIButton {
-    enum ButtonIcon {
-        case checkmarkCircle
-        case gps
-        case arrowRight
-        
-        var image: UIImage? {
-            switch self {
-            case .checkmarkCircle: return UIImage(resource: .tickCircle)
-            case .gps: return UIImage(resource: .gps)
-            case .arrowRight: return UIImage(resource: .rightChevron)
-            }
-        }
-    }
-    
-    enum IconPosition {
-        case left
-        case right
-    }
+class CornersButton: UIButton {    
     
     override var isHighlighted: Bool {
         didSet {
@@ -78,10 +60,10 @@ class CornersButton: UIButton {
         buttonLabel.attributedText = Font.button.compose(title, color: style.textColor)
     }
     
-    func setIcon(_ icon: ButtonIcon?, position: IconPosition = .right) {
+    func setIcon(_ icon: UIImage?, position: IconPosition = .right) {
         if let icon {
-            leftIconImageView.image = icon.image
-            rightIconImageView.image = icon.image
+            leftIconImageView.image = icon
+            rightIconImageView.image = icon
             
             leftIconImageView.tintColor = style.textColor
             rightIconImageView.tintColor = style.textColor
@@ -96,7 +78,7 @@ class CornersButton: UIButton {
     
     private func setupButton() {
         backgroundColor = style.backgroundColor
-        layer.cornerRadius = 18
+        layer.cornerRadius = style.cornerRadius
     }
     
     private func setupLayout() {
