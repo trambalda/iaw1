@@ -79,6 +79,14 @@ class CornersButton: UIButton {
     private func setupButton() {
         backgroundColor = style.backgroundColor
         layer.cornerRadius = style.cornerRadius
+        
+        if let title = style.title {
+            setTitle(title)
+        }
+        
+        if let icon = style.icon {
+            setIcon(icon, position: style.iconPosition)
+        } 
     }
     
     private func setupLayout() {

@@ -11,19 +11,25 @@ struct CornersButtonStyle {
     let textColor: UIColor
     let iconPosition: IconPosition
     let cornerRadius: CGFloat
+    let title: String?
+    let icon: UIImage?
 
     init(
         backgroundColor: UIColor,
         disabledBackgroundColor: UIColor,
         textColor: UIColor,
-        iconPosition: IconPosition = .right,
-        cornerRadius: CGFloat = 18
+        iconPosition: IconPosition = .left,
+        cornerRadius: CGFloat = 18,
+        title: String? = "Ok",
+        icon: UIImage? = UIImage(named: "tickCircle")
     ) {
         self.backgroundColor = backgroundColor
         self.disabledBackgroundColor = disabledBackgroundColor
         self.textColor = textColor
         self.iconPosition = iconPosition
         self.cornerRadius = cornerRadius
+        self.title = title
+        self.icon = icon
     }
 }
 
