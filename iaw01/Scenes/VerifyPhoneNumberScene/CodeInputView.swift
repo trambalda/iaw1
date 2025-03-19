@@ -26,12 +26,12 @@ class CodeInputView: UIView {
     
     private var codeDigits: [UITextField] = []
     
-    var onCodeEntered: ((String) -> Void)?
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
+        updateTextFieldInteractions(currentTextField: codeDigits.first)
+        codeDigits.first?.becomeFirstResponder()
     }
     
     required init?(coder: NSCoder) {
@@ -60,11 +60,18 @@ class CodeInputView: UIView {
         textField.layer.cornerRadius = 15
         textField.backgroundColor = .light80
         textField.textColor = .dark100
+        textField.tintColor = .clear
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     }
     
+    private func updateTextFieldInteractions(currentTextField: UITextField?) {
+        for textField in codeDigits {
+            textField.isUserInteractionEnabled = (textField == currentTextField)
+        }
+    }
+    // TODO: Доработать перемещение фокуса на предыдущую ячейку в моменте ввода кода
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         
@@ -77,22 +84,19 @@ class CodeInputView: UIView {
                 }
             }
             textField.resignFirstResponder()
-            notifyCodeEntered()
         } else if text.count == 1 {
             // Переходим к следующему полю
             if let nextTextField = codeDigits[safe: textField.tag + 1] {
+                updateTextFieldInteractions(currentTextField: nextTextField)
                 nextTextField.becomeFirstResponder()
-            } else {
-                textField.resignFirstResponder()
-                notifyCodeEntered()
             }
-        }
-    }
-    
-    private func notifyCodeEntered() {
-        let code = codeDigits.compactMap { $0.text }.joined()
-        if code.count == 6 {
-            onCodeEntered?(code)
+        } else if text.isEmpty {
+            if textField.tag > 0 {
+                if let previousTextField = codeDigits[safe: textField.tag - 1] {
+                    updateTextFieldInteractions(currentTextField: previousTextField)
+                    previousTextField.becomeFirstResponder()
+                }
+            }
         }
     }
 }
@@ -105,6 +109,11 @@ extension CodeInputView: UITextFieldDelegate {
         replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+            if newText.isEmpty {
+                return true
+            }
+            
         return newText.count <= 1
     }
 }

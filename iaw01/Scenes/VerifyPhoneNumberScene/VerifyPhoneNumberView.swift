@@ -65,10 +65,6 @@ class VerifyPhoneNumberView: UIView {
     
     private lazy var codeInputView: CodeInputView = {
         let view = CodeInputView()
-        view.onCodeEntered = { [weak self] code in
-            print("Code entered: \(code)")
-            // Здесь можно добавить обработку введенного кода
-        }
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -289,7 +285,6 @@ extension VerifyPhoneNumberView {
         else { return }
         
         keyboardHeight = keyboardFrame.height
-        
         adjustButtonPositionForKeyboard(isShowing: true, notification: notification)
     }
     
