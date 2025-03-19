@@ -6,20 +6,16 @@ class HomeView: UIView {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .light100
-        scrollView.alwaysBounceVertical = true
-        scrollView.contentInsetAdjustmentBehavior = .never
-        scrollView.addSubview(stackView)
         return scrollView
     }()
 
     lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [adressButton, helloLabel, homeSearchBar])
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 20
-        stack.alignment = .leading
-        stack.setCustomSpacing(12, after: helloLabel)
-        return stack
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.alignment = .leading
+        return stackView
     }()
     
     lazy var adressButton: UIButton = {
@@ -53,11 +49,11 @@ class HomeView: UIView {
         return homeAdressbutton
     }()
 
-    lazy var helloLabel: UILabel = {
-            let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
+    private let helloLabel: UILabel = {
+        let label = UILabel()
+        label.attributedText = Font.heading5.compose("Good Evening Luisa", color: .dark100)
+        return label
+    }()
     
     lazy var homeSearchBar: UITextField = {
         let textField = UITextField()
@@ -92,11 +88,10 @@ class HomeView: UIView {
     private func configure() {
         backgroundColor = UIColor(named: "light100")
         setupViews()
+        setupLayout()
         setupConstraints()
     }
-    func updateGreeting(timeOfDay: String, name: String) {
-            helloLabel.attributedText = Font.heading5.compose("Good \(timeOfDay) \(name)", color: .dark100)
-        }
+    
 }
 
 // MARK: - Layout
@@ -104,6 +99,15 @@ extension HomeView {
     
     private func setupViews() {
         addSubview(scrollView)
+        scrollView.addSubview(stackView)
+    }
+    
+    private func setupLayout() {
+        stackView.addArrangedSubview(adressButton)
+        stackView.addArrangedSubview(helloLabel)
+        stackView.addArrangedSubview(homeSearchBar)
+
+        stackView.setCustomSpacing(12, after: helloLabel)
     }
     
     private func setupConstraints() {
@@ -113,7 +117,7 @@ extension HomeView {
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
 
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 60),
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -16),
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 21),
             stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -21),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
