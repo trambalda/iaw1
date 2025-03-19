@@ -1,5 +1,10 @@
 import UIKit
 
+enum IconPosition {
+    case left
+    case right
+}
+
 class CornersButton: UIButton {    
     
     override var isHighlighted: Bool {
@@ -29,15 +34,15 @@ class CornersButton: UIButton {
     
     private let buttonLabel = UILabel()
     
-    private func CreateIconImageView() -> UIImageView {
+    private var iconImageView: UIImageView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.isHidden = true
         return imageView
     }
     
-    private lazy var leftIconImageView = CreateIconImageView()
-    private lazy var rightIconImageView = CreateIconImageView()
+    private lazy var leftIconImageView = iconImageView()
+    private lazy var rightIconImageView = iconImageView()
     
     private var alphaWhenTouch: CGFloat {
         isEnabled ? 1.0 : 0.6

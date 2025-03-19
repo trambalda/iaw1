@@ -1,10 +1,5 @@
 import UIKit
 
-enum IconPosition {
-    case left
-    case right
-}
-
 struct CornersButtonStyle {
     let backgroundColor: UIColor
     let disabledBackgroundColor: UIColor
@@ -13,48 +8,72 @@ struct CornersButtonStyle {
     let cornerRadius: CGFloat
     let title: String?
     let icon: UIImage?
-
-    init(
-        backgroundColor: UIColor,
-        disabledBackgroundColor: UIColor,
-        textColor: UIColor,
-        iconPosition: IconPosition = .left,
-        cornerRadius: CGFloat = 18,
-        title: String? = "Ok",
-        icon: UIImage? = UIImage(named: "tickCircle")
-    ) {
-        self.backgroundColor = backgroundColor
-        self.disabledBackgroundColor = disabledBackgroundColor
-        self.textColor = textColor
-        self.iconPosition = iconPosition
-        self.cornerRadius = cornerRadius
-        self.title = title
-        self.icon = icon
-    }
 }
 
 extension CornersButtonStyle {
-    static let blue = CornersButtonStyle(
-        backgroundColor: UIColor(resource: .blue100),
-        disabledBackgroundColor: UIColor(resource: .blue60),
-        textColor: UIColor(resource: .light100)
-    )
-    
-    static let pink = CornersButtonStyle(
-        backgroundColor: UIColor(resource: .pink100),
-        disabledBackgroundColor: UIColor(resource: .pink60),
-        textColor: UIColor(resource: .light100)
-    )
-    
-    static let dark = CornersButtonStyle(
-        backgroundColor: UIColor(resource: .dark100),
-        disabledBackgroundColor: UIColor(resource: .dark60),
-        textColor: UIColor(resource: .light100)
-    )
-    
-    static let light = CornersButtonStyle(
+
+    static let skip = CornersButtonStyle(
         backgroundColor: UIColor(resource: .light100),
         disabledBackgroundColor: UIColor(resource: .light80),
-        textColor: UIColor(resource: .dark90)
+        textColor: UIColor(resource: .dark90),
+        iconPosition: .right,
+        title: "Skip",
+        icon: UIImage(named: "rightChevron")
     )
+
+    static let next = CornersButtonStyle(
+        backgroundColor: UIColor(resource: .blue100),
+        disabledBackgroundColor: UIColor(resource: .blue60),
+        textColor: UIColor(resource: .light100),
+        iconPosition: .right,
+        title: "Next",
+        icon: UIImage(named: "rightChevron")
+    )
+
+    static let verify = CornersButtonStyle(
+        backgroundColor: UIColor(resource: .blue100),
+        disabledBackgroundColor: UIColor(resource: .blue60),
+        textColor: UIColor(resource: .light100),
+        iconPosition: .left,
+        title: "Verify and Continue",
+        icon: UIImage(named: "tickCircle")
+    )    
+
+    static let location = CornersButtonStyle(
+        backgroundColor: UIColor(resource: .blue100),
+        disabledBackgroundColor: UIColor(resource: .blue60),
+        textColor: UIColor(resource: .light100),
+        iconPosition: .left,
+        title: "Use Current Location",
+        icon: UIImage(named: "gps")
+    )    
+
+    static let login = CornersButtonStyle(
+        backgroundColor: UIColor(resource: .blue100),
+        disabledBackgroundColor: UIColor(resource: .blue60),
+        textColor: UIColor(resource: .light100),
+        iconPosition: .right,
+        title: "Login",
+        icon: UIImage(named: "rightChevron")
+    )
+
+    static let savePink = CornersButtonStyle(
+        backgroundColor: UIColor(resource: .pink100),
+        disabledBackgroundColor: UIColor(resource: .pink60),
+        textColor: UIColor(resource: .light100),
+        iconPosition: .left,
+        title: "Save and Use",
+        icon: UIImage(named: "tickCircle")
+    )
+    
+    static let saveDark = CornersButtonStyle(
+        backgroundColor: UIColor(resource: .dark100),
+        disabledBackgroundColor: UIColor(resource: .dark60),
+        textColor: UIColor(resource: .light100),
+        iconPosition: .left,
+        title: "Save",
+        icon: UIImage(named: "tickCircle")
+    )
+    
+
 } 
