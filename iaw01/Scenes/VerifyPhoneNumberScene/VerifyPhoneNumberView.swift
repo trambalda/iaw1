@@ -14,7 +14,7 @@ class VerifyPhoneNumberView: UIView {
     private var keyboardHeight: CGFloat = 0
     private var isKeyboardVisible = false
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
-    private var phoneNumberTextFieldTrailingConstraint: NSLayoutConstraint!
+    private var phoneEditButtonTrailingConstraint: NSLayoutConstraint!
     private var phoneNumberTextFieldIsActive = true
 
     private lazy var verifyHeaderLabel: UILabel = {
@@ -131,8 +131,8 @@ class VerifyPhoneNumberView: UIView {
             phoneEditButton.tintColor = .peach100
             phoneNumberTextField.isEnabled = true
             phoneNumberTextField.becomeFirstResponder()
-            phoneNumberTextFieldTrailingConstraint = containerViewForTextField.trailingAnchor.constraint(equalTo: phoneEditButton.leadingAnchor,constant: -21)
-            phoneNumberTextFieldTrailingConstraint.isActive = true
+            phoneEditButtonTrailingConstraint = phoneEditButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10)
+            phoneEditButtonTrailingConstraint.isActive = true
             
             UIView.animate(withDuration: 0.3) {
                 self.layoutIfNeeded()
@@ -144,7 +144,7 @@ class VerifyPhoneNumberView: UIView {
             phoneNumberTextField.isEnabled = false
             verifyButton.isHidden = false
             phoneNumberTextFieldIsActive = true
-            phoneNumberTextFieldTrailingConstraint.isActive = false
+            phoneEditButtonTrailingConstraint.isActive = false
             
             UIView.animate(withDuration: 0.3) {
                 self.layoutIfNeeded()
@@ -215,7 +215,7 @@ extension VerifyPhoneNumberView {
             phoneEditButton.topAnchor.constraint(equalTo: verifyDescLabel.bottomAnchor,constant: 21),
             phoneEditButton.heightAnchor.constraint(equalToConstant: constraintConstant),
             phoneEditButton.widthAnchor.constraint(equalToConstant: constraintConstant),
-            phoneEditButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21),
+            phoneEditButton.leadingAnchor.constraint(equalTo: containerViewForTextField.trailingAnchor,constant: 10),
             
             codeInputView.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor,constant: 40),
             codeInputView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
