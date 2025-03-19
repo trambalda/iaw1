@@ -45,10 +45,7 @@ class CornersButton: UIButton {
         return stack
     }()
     
-    private let buttonLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    private let buttonLabel = UILabel()
     
     private func CreateIconImageView() -> UIImageView {
         let imageView = UIImageView()
