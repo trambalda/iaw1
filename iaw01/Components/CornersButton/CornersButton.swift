@@ -48,25 +48,20 @@ class CornersButton: UIButton {
     private let buttonLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.isUserInteractionEnabled = false
         return label
     }()
     
     private let leftIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
-        imageView.isUserInteractionEnabled = false
         return imageView
     }()
     
     private let rightIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
-        imageView.isUserInteractionEnabled = false
         return imageView
     }()
     
