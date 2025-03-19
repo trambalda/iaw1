@@ -5,7 +5,6 @@ struct CornersButtonStyle {
     let disabledBackgroundColor: UIColor
     let textColor: UIColor
     let iconPosition: IconPosition
-    let cornerRadius: CGFloat
     let title: String?
     let icon: UIImage?
 }
@@ -29,6 +28,15 @@ extension CornersButtonStyle {
         title: "Next",
         icon: UIImage(named: "rightChevron")
     )
+
+     static let continueButton = CornersButtonStyle(
+        backgroundColor: UIColor(resource: .blue100),
+        disabledBackgroundColor: UIColor(resource: .blue60),
+        textColor: UIColor(resource: .light100),
+        iconPosition: .right,
+        title: "Continue",
+        icon: UIImage(named: "rightChevron")
+    )   
 
     static let verify = CornersButtonStyle(
         backgroundColor: UIColor(resource: .blue100),

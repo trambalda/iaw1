@@ -21,6 +21,8 @@ class CornersButton: UIButton {
         }
     }
     
+    private let cornerRadius: CGFloat = 18
+
     private let style: CornersButtonStyle
     
     private let stackView: UIStackView = {
@@ -41,14 +43,14 @@ class CornersButton: UIButton {
         return imageView
     }
     
-    private lazy var leftIconImageView = iconImageView()
-    private lazy var rightIconImageView = iconImageView()
+    private lazy var leftIconImageView = iconImageView
+    private lazy var rightIconImageView = iconImageView
     
     private var alphaWhenTouch: CGFloat {
         isEnabled ? 1.0 : 0.6
     }
     
-    init(style: CornersButtonStyle = .blue) {
+    init(style: CornersButtonStyle = .next) {
         self.style = style
         super.init(frame: .zero)
         
@@ -83,7 +85,7 @@ class CornersButton: UIButton {
     
     private func setupButton() {
         backgroundColor = style.backgroundColor
-        layer.cornerRadius = style.cornerRadius
+        layer.cornerRadius = cornerRadius
         
         if let title = style.title {
             setTitle(title)
