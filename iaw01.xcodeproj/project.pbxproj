@@ -74,7 +74,7 @@
 		21AA4B4F2D8160E30086697C /* iaw01 */ = {
 			isa = PBXGroup;
 			children = (
-				D5A640F52D8883CF00B99E81 /* Components */,
+				D5A640F52D8883CF00B99E81 /* Components2 */,
 				21AA4B6B2D817F990086697C /* Resources */,
 				21AA4B772D8186400086697C /* AppDelegate */,
 				21AA4B7A2D8187800086697C /* Scenes */,
@@ -157,12 +157,12 @@
 			path = CornersButton;
 			sourceTree = "<group>";
 		};
-		D5A640F52D8883CF00B99E81 /* Components */ = {
+		D5A640F52D8883CF00B99E81 /* Components2 */ = {
 			isa = PBXGroup;
 			children = (
 				D52040512D89B502009D0D1D /* CornersButton */,
 			);
-			path = Components;
+			path = Components2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
