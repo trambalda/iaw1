@@ -22,7 +22,7 @@ class CornersButton: UIButton {
     }
 
     private let style: CornersButtonStyle
-    private var onTap: (() -> Void)?
+    var onTap: (() -> Void)?
     
     private let stackView: UIStackView = {
         let stack = UIStackView()
@@ -80,10 +80,6 @@ class CornersButton: UIButton {
             leftIconImageView.isHidden = true
             rightIconImageView.isHidden = true
         }
-    }
-    
-    func setOnTap(_ action: @escaping () -> Void) {
-        onTap = action
     }
     
     @objc private func buttonTapped() {
