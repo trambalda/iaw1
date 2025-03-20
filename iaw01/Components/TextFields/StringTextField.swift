@@ -26,6 +26,7 @@ final class StringTextField: UIStackView {
         let view = UIView()
         view.backgroundColor = .light80
         view.layer.cornerRadius = 14
+        view.layer.borderColor = UIColor.dark100.cgColor
         return view
     }()
     
@@ -104,7 +105,10 @@ final class StringTextField: UIStackView {
             color: baseStyle.placeholderColor
         )
 
-        titleLabel.attributedText = baseStyle.fontFamily.compose(style.title ?? "", color: baseStyle.titleColor)
+        titleLabel.attributedText = baseStyle.fontFamily.compose(
+            style.title ?? "",
+            color: baseStyle.titleColor
+        )
     }
 
     @objc private func clearButtonTapped() {
@@ -119,12 +123,10 @@ extension StringTextField: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        containerView.layer.borderColor = UIColor.dark100.cgColor
         containerView.layer.borderWidth = 1.2
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        containerView.layer.borderColor = UIColor.clear.cgColor
         containerView.layer.borderWidth = 0
     }
 }
