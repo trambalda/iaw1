@@ -1,11 +1,11 @@
 import UIKit
 
-enum IconPosition {
-    case left
-    case right
-}
-
 class CornersButton: UIButton {    
+
+    enum IconPosition {
+        case left
+        case right
+    }
     
     override var isHighlighted: Bool {
         didSet {
@@ -20,10 +20,9 @@ class CornersButton: UIButton {
             updateAppearance()
         }
     }
-    
-    private let cornerRadius: CGFloat = 18
 
     private let style: CornersButtonStyle
+    private var onTap: (() -> Void)?
     
     private let stackView: UIStackView = {
         let stack = UIStackView()
@@ -50,7 +49,7 @@ class CornersButton: UIButton {
         isEnabled ? 1.0 : 0.6
     }
     
-    init(style: CornersButtonStyle = .next) {
+    init(style: CornersButtonStyle = .nextButton) {
         self.style = style
         super.init(frame: .zero)
         
@@ -83,9 +82,17 @@ class CornersButton: UIButton {
         }
     }
     
+    func setOnTap(_ action: @escaping () -> Void) {
+        onTap = action
+    }
+    
+    @objc private func buttonTapped() {
+        onTap?()
+    }
+    
     private func setupButton() {
         backgroundColor = style.backgroundColor
-        layer.cornerRadius = cornerRadius
+        layer.cornerRadius = 18
         
         if let title = style.title {
             setTitle(title)
@@ -94,6 +101,8 @@ class CornersButton: UIButton {
         if let icon = style.icon {
             setIcon(icon, position: style.iconPosition)
         } 
+
+        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     private func setupLayout() {
