@@ -4,7 +4,7 @@ final class DummyViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.setTextAndFont("Under construction", font: .heading3)
+        label.attributedText = Font.heading3.compose("Under construction", color: .black)
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -13,7 +13,7 @@ final class DummyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(resource: .light100)
+        view.backgroundColor = .light100
         addTitleLabel()
     }
     
