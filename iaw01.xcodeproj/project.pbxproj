@@ -31,6 +31,9 @@
 		8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
 		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
 		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
+		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
+		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
+		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +64,9 @@
 		869875462D8860E600C7BA58 /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
 		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
 		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
+		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
+		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
+		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,7 @@
 		1FCF129C2D8953B400386458 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D52040512D89B502009D0D1D /* CornersButton */,
 				1FA7539E2D82D81600B2324C /* TableViewCells */,
 				869875482D8860E600C7BA58 /* TextFields */,
 			);
@@ -203,6 +210,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 				869875442D8860DF00C7BA58 /* TextFieldsScene */,
 			);
@@ -225,6 +233,23 @@
 				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
 			);
 			path = TextFields;
+			sourceTree = "<group>";
+		};
+		D52040512D89B502009D0D1D /* CornersButton */ = {
+			isa = PBXGroup;
+			children = (
+				D520404F2D89B502009D0D1D /* CornersButton.swift */,
+				D52040502D89B502009D0D1D /* CornersButtonStyle.swift */,
+			);
+			path = CornersButton;
+			sourceTree = "<group>";
+		};
+		D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */ = {
+			isa = PBXGroup;
+			children = (
+				D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */,
+			);
+			path = CornersButtonsScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +332,7 @@
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
+				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
@@ -318,6 +344,8 @@
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
 				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,
+				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,
+				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
