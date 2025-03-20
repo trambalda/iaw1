@@ -1,10 +1,7 @@
 import UIKit
 
 final class RestaurantTableViewCell: UITableViewCell {
-    
-    static var empty = RestaurantCellModel(image: nil, title: "", address: "")
-    
-    var model: RestaurantCellModel = empty {
+    var model: RestaurantCellModel = .empty {
         didSet {
             nameLabel.text = model.title
             addressLabel.text = model.address
@@ -43,7 +40,7 @@ final class RestaurantTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
+        setupLayoutAndConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -59,7 +56,7 @@ final class RestaurantTableViewCell: UITableViewCell {
          arrowImage
     */
      
-    private func setupUI() {
+    private func setupLayoutAndConstraints() {
         let infoStack = UIStackView()
         infoStack.axis = .vertical
         infoStack.spacing = 1

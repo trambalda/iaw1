@@ -1,10 +1,7 @@
 import UIKit
 
 final class DishTableViewCell: UITableViewCell {
-    
-    static var empty = DishCellModel(foodImage: nil, foodTitle: "", restaurantImage: nil, restaurantTitle: "")
-    
-    var model: DishCellModel = empty {
+    var model: DishCellModel = .empty {
         didSet {
             nameLabel.text = model.foodTitle
             dishImage.image = model.foodImage ?? noPhotoImage
@@ -29,10 +26,7 @@ final class DishTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let noPhotoImage: UIImage? = {
-        let image = UIImage(systemName: "photo")
-        return image
-    }()
+    private let noPhotoImage = UIImage(systemName: "photo")
     
     private let restaurantLabel: UILabel = {
         let label = UILabel()
@@ -46,17 +40,13 @@ final class DishTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var dishImage: UIImageView = {
-        cellImageView
-    }()
+    private lazy var dishImage = cellImageView
      
-    private lazy var restaurantImage: UIImageView = {
-        cellImageView
-    }()
+    private lazy var restaurantImage = cellImageView
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
+        setupLayoutAndConstraints()
     }
         
     required init?(coder: NSCoder) {
@@ -74,7 +64,7 @@ final class DishTableViewCell: UITableViewCell {
         arrowImage
      */
     
-    private func setupUI() {
+    private func setupLayoutAndConstraints() {
         let restaurantStack = UIStackView()
         restaurantStack.spacing = 5
         restaurantStack.alignment = .center

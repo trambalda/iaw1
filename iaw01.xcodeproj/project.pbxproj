@@ -98,7 +98,6 @@
 			children = (
 				21AA4B7D2D818F380086697C /* README.md */,
 				21AA4B4F2D8160E30086697C /* iaw01 */,
-				1FCF129C2D8953B400386458 /* Components */,
 				21AA4B4E2D8160E30086697C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,6 +116,7 @@
 				21AA4B6B2D817F990086697C /* Resources */,
 				21AA4B772D8186400086697C /* AppDelegate */,
 				21AA4B7A2D8187800086697C /* Scenes */,
+				1FCF129C2D8953B400386458 /* Components */,
 				21AA4B792D81872E0086697C /* Configuration */,
 			);
 			path = iaw01;
