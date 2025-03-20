@@ -7,6 +7,18 @@
 
 import UIKit
 
+class PincodeTextField: UITextField {
+    weak var previousTextField: UITextField?
+    
+    override func deleteBackward() {
+        super.deleteBackward()
+        if self.text?.isEmpty ?? true {
+            self.previousTextField?.becomeFirstResponder()
+            previousTextField?.text = ""
+        }
+    }
+}
+
 class CodeInputView: UIView {
 
     private lazy var digitsStackView: UIStackView = {
@@ -30,7 +42,6 @@ class CodeInputView: UIView {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
-        updateTextFieldInteractions(currentTextField: codeDigits.first)
         codeDigits.first?.becomeFirstResponder()
     }
     
@@ -40,6 +51,7 @@ class CodeInputView: UIView {
     
     private func setupViews() {
         addSubview(digitsStackView)
+        
     }
     
     private func setupConstraints() {
@@ -52,8 +64,8 @@ class CodeInputView: UIView {
         ])
     }
     
-    private func createTextField() -> UITextField {
-        let textField = UITextField()
+    private func createTextField() -> PincodeTextField {
+        let textField = PincodeTextField()
         textField.font = Font.subtitle1.font
         textField.textAlignment = .center
         textField.keyboardType = .numberPad
@@ -61,47 +73,16 @@ class CodeInputView: UIView {
         textField.backgroundColor = .light80
         textField.textColor = .dark100
         textField.delegate = self
-//        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        return textField
-    }
-    
-    private func updateTextFieldInteractions(currentTextField: UITextField?) {
-        for textField in codeDigits {
-            textField.isUserInteractionEnabled = true
-        }
-    }
-    // TODO: Доработать перемещение фокуса на предыдущую ячейку в моменте ввода кода
-    @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text else { return }
+//        textField.isUserInteractionEnabled = false
         
-        if text.count > 1 {
-            // Разбиваем вставленный текст на символы
-            let characters = Array(text)
-            for (index, char) in characters.enumerated() {
-                if let field = codeDigits[safe: index] {
-                    field.text = String(char)
-                }
-            }
-            textField.resignFirstResponder()
-        } else if text.count == 1 {
-            // Переходим к следующему полю
-            if let nextTextField = codeDigits[safe: textField.tag + 1] {
-                updateTextFieldInteractions(currentTextField: nextTextField)
-                nextTextField.becomeFirstResponder()
-            }
-        } else if text.isEmpty {
-            if textField.tag > 0 {
-                if let previousTextField = codeDigits[safe: textField.tag - 1] {
-                    updateTextFieldInteractions(currentTextField: previousTextField)
-                    previousTextField.becomeFirstResponder()
-                }
-            }
+        if let previousTextField = codeDigits.last {
+            textField.previousTextField = previousTextField
         }
+        return textField
     }
 }
 
 // MARK: - UITextFieldDelegate
-// TODO: - Доделать функционал: в случае ошибки пользователя смещать фокус на предыдущий текстфилд,
 extension CodeInputView: UITextFieldDelegate {
     func textField(
         _ textField: UITextField,
@@ -113,13 +94,9 @@ extension CodeInputView: UITextFieldDelegate {
         
         if newText.isEmpty {
             textField.text = ""
-            if textField.tag > 0, let previousTextField = self.codeDigits[safe: textField.tag - 1] {
-                previousTextField.becomeFirstResponder()
-            } else {
-                textField.resignFirstResponder()
-            }
             return false
         }
+            
         if newText.count == 1 {
             textField.text = newText
             if let nextTextField = self.codeDigits[safe: textField.tag + 1] {
@@ -127,7 +104,7 @@ extension CodeInputView: UITextFieldDelegate {
             } else {
                 textField.resignFirstResponder()
             }
-            return true
+            return false
         }
         return false
     }

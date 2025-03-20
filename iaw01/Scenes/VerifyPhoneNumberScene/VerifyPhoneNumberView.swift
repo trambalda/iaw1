@@ -239,7 +239,8 @@ extension VerifyPhoneNumberView: UITextFieldDelegate{
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String) -> Bool {
-            let currentText = textField.text ?? ""
+            
+            let currentText = textField.text ?? "0"
             let newText = (currentText as NSString).replacingCharacters(
                 in: range,
                 with: string
