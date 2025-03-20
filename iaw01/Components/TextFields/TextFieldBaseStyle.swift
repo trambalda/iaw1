@@ -2,9 +2,12 @@ import UIKit
 
 struct TextFieldBaseStyle {
     let autocapitalizationType: UITextAutocapitalizationType = .none
+    let titleColor: UIColor = .dark100
     let textColor: UIColor = .dark100
     let backgroundColor: UIColor = .light80
-    let fontFamily = Font.body.font
+    let fontFamily = Font.body 
+    let font: UIFont = Font.body.font
+    let placeholderColor: UIColor = .dark60
 }
 
 struct StringTextFieldStyle {
