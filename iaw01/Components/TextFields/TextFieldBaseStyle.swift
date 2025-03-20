@@ -6,7 +6,6 @@ struct TextFieldBaseStyle {
     let textColor: UIColor = .dark100
     let backgroundColor: UIColor = .light80
     let fontFamily = Font.body 
-    let font: UIFont = Font.body.font
     let placeholderColor: UIColor = .dark60
 }
 

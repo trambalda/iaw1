@@ -97,14 +97,14 @@ final class StringTextField: UIStackView {
         textField.autocapitalizationType = baseStyle.autocapitalizationType
         textField.textColor = baseStyle.textColor
         textField.backgroundColor = baseStyle.backgroundColor
-        textField.font = baseStyle.font
+        textField.font = baseStyle.fontFamily.font
         textField.text = style.text
         textField.attributedPlaceholder = baseStyle.fontFamily.compose(
             style.placeholder,
             color: baseStyle.placeholderColor
         )
 
-        titleLabel.attributedText = Font.body.compose(style.title ?? "", color: baseStyle.titleColor)
+        titleLabel.attributedText = baseStyle.fontFamily.compose(style.title ?? "", color: baseStyle.titleColor)
     }
 
     @objc private func clearButtonTapped() {
