@@ -23,6 +23,10 @@
 		21AA4B742D8180A80086697C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B732D8180A80086697C /* Font.swift */; };
 		21AA4B762D81828D0086697C /* aeonik-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B752D81828D0086697C /* aeonik-medium.otf */; };
 		21AA4B7C2D81880A0086697C /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B7B2D81880A0086697C /* Factory.swift */; };
+		869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
+		8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
+		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
+		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 		21AA4B752D81828D0086697C /* aeonik-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aeonik-medium.otf"; sourceTree = "<group>"; };
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
+		869875462D8860E600C7BA58 /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
+		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
+		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +121,7 @@
 		21AA4B4F2D8160E30086697C /* iaw01 */ = {
 			isa = PBXGroup;
 			children = (
+				869875492D8860E600C7BA58 /* Components */,
 				21AA4B6B2D817F990086697C /* Resources */,
 				21AA4B772D8186400086697C /* AppDelegate */,
 				21AA4B7A2D8187800086697C /* Scenes */,
@@ -182,9 +191,36 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				869875442D8860DF00C7BA58 /* TextFieldsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		869875442D8860DF00C7BA58 /* TextFieldsScene */ = {
+			isa = PBXGroup;
+			children = (
+				869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */,
+			);
+			path = TextFieldsScene;
+			sourceTree = "<group>";
+		};
+		869875482D8860E600C7BA58 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				869875462D8860E600C7BA58 /* StringTextField.swift */,
+				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
+				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		869875492D8860E600C7BA58 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				869875482D8860E600C7BA58 /* TextFields */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,7 +297,11 @@
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
+				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
+				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
+				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
+				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,

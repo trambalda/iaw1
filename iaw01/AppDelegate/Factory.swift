@@ -4,4 +4,9 @@ final class Factory {
         let vc = DummyViewController()
         return vc
     }
+    
+    func createTextFieldsScene() -> TextFieldsViewController {
+        let vc = TextFieldsViewController()
+        return vc
+    }
 }
