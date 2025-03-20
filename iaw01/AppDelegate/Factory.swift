@@ -1,3 +1,5 @@
+import UIKit
+
 final class Factory {
     
     let appCoordinator: AppCoordinator
@@ -14,6 +16,11 @@ final class Factory {
     
     func createTextFieldsScene() -> TextFieldsViewController {
         let vc = TextFieldsViewController()
+        return vc
+    }
+    
+    func createCornersButtonsScene() -> CornersButtonsViewController {
+        let vc = CornersButtonsViewController()
         return vc
     }
 }

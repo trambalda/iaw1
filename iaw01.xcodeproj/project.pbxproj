@@ -33,6 +33,7 @@
 		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
 		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
 		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
+		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
 		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
 		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
+		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 				869875442D8860DF00C7BA58 /* TextFieldsScene */,
 			);
@@ -239,6 +242,14 @@
 				D52040502D89B502009D0D1D /* CornersButtonStyle.swift */,
 			);
 			path = CornersButton;
+			sourceTree = "<group>";
+		};
+		D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */ = {
+			isa = PBXGroup;
+			children = (
+				D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */,
+			);
+			path = CornersButtonsScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +332,7 @@
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
+				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
