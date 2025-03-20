@@ -8,5 +8,3 @@ struct TextFieldBaseStyle {
     let fontFamily = Font.body 
     let placeholderColor: UIColor = .dark60
 }
-
-

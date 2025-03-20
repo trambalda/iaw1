@@ -5,5 +5,5 @@ struct RestaurantCellModel {
     let title: String
     let address: String
     
-    static var empty = RestaurantCellModel(image: nil, title: "", address: "") 
+    static let empty = RestaurantCellModel(image: nil, title: "", address: "") 
 }

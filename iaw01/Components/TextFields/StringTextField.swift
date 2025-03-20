@@ -130,4 +130,3 @@ extension StringTextField: UITextFieldDelegate {
         containerView.layer.borderWidth = 0
     }
 }
-

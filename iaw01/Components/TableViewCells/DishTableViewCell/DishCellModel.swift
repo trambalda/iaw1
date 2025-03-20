@@ -6,6 +6,5 @@ struct DishCellModel {
     let restaurantImage: UIImage?
     let restaurantTitle: String
     
-    static var empty = DishCellModel(foodImage: nil, foodTitle: "", restaurantImage: nil, restaurantTitle: "")
+    static let empty = DishCellModel(foodImage: nil, foodTitle: "", restaurantImage: nil, restaurantTitle: "")
 }
-

@@ -5,7 +5,7 @@ struct Font {
     let font: UIFont
     let lettering: Double
     
-    func compose(_ text: String, color: UIColor?) -> NSAttributedString {
+    func compose(_ text: String, color: UIColor? = .black) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttributes(
             [
