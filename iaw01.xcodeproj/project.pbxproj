@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02B31D3F2D8C4DE800EC9031 /* AuthorizationSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D3D2D8C4DE800EC9031 /* AuthorizationSceneViewController.swift */; };
+		02B31D402D8C4DE800EC9031 /* AuthorizationSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D3C2D8C4DE800EC9031 /* AuthorizationSceneView.swift */; };
+		02B31D422D8C78AD00EC9031 /* AuthorizationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D412D8C78AD00EC9031 /* AuthorizationTitleView.swift */; };
+		02B31D442D8C793300EC9031 /* AuthorizationButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D432D8C793300EC9031 /* AuthorizationButtonsView.swift */; };
+		02B31D482D8C797C00EC9031 /* AuthorizationSocialNetworkLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D472D8C797C00EC9031 /* AuthorizationSocialNetworkLoginView.swift */; };
 		21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B502D8160E30086697C /* AppDelegate.swift */; };
 		21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B522D8160E30086697C /* SceneDelegate.swift */; };
 		21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B542D8160E30086697C /* DummyViewController.swift */; };
@@ -22,6 +27,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02B31D3C2D8C4DE800EC9031 /* AuthorizationSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSceneView.swift; sourceTree = "<group>"; };
+		02B31D3D2D8C4DE800EC9031 /* AuthorizationSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSceneViewController.swift; sourceTree = "<group>"; };
+		02B31D412D8C78AD00EC9031 /* AuthorizationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTitleView.swift; sourceTree = "<group>"; };
+		02B31D432D8C793300EC9031 /* AuthorizationButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationButtonsView.swift; sourceTree = "<group>"; };
+		02B31D472D8C797C00EC9031 /* AuthorizationSocialNetworkLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSocialNetworkLoginView.swift; sourceTree = "<group>"; };
 		21AA4B4D2D8160E30086697C /* iaw01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iaw01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21AA4B502D8160E30086697C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21AA4B522D8160E30086697C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,10 +49,6 @@
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		029A88982D845DFA0095C14F /* AuthorizationScreen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AuthorizationScreen; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		21AA4B4A2D8160E30086697C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -54,6 +60,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02B31D3E2D8C4DE800EC9031 /* AuthorizationScene */ = {
+			isa = PBXGroup;
+			children = (
+				02B31D3C2D8C4DE800EC9031 /* AuthorizationSceneView.swift */,
+				02B31D3D2D8C4DE800EC9031 /* AuthorizationSceneViewController.swift */,
+				02B31D412D8C78AD00EC9031 /* AuthorizationTitleView.swift */,
+				02B31D432D8C793300EC9031 /* AuthorizationButtonsView.swift */,
+				02B31D472D8C797C00EC9031 /* AuthorizationSocialNetworkLoginView.swift */,
+			);
+			path = AuthorizationScene;
+			sourceTree = "<group>";
+		};
 		21AA4B442D8160E30086697C = {
 			isa = PBXGroup;
 			children = (
@@ -142,7 +160,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				029A88982D845DFA0095C14F /* AuthorizationScreen */,
+				02B31D3E2D8C4DE800EC9031 /* AuthorizationScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 			);
 			path = Scenes;
@@ -162,9 +180,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				029A88982D845DFA0095C14F /* AuthorizationScreen */,
 			);
 			name = iaw01;
 			productName = iaw01;
@@ -226,11 +241,16 @@
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				21AA4B742D8180A80086697C /* Fonts.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
+				02B31D422D8C78AD00EC9031 /* AuthorizationTitleView.swift in Sources */,
+				02B31D442D8C793300EC9031 /* AuthorizationButtonsView.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
+				02B31D3F2D8C4DE800EC9031 /* AuthorizationSceneViewController.swift in Sources */,
+				02B31D402D8C4DE800EC9031 /* AuthorizationSceneView.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
+				02B31D482D8C797C00EC9031 /* AuthorizationSocialNetworkLoginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

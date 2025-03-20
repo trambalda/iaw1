@@ -22,7 +22,8 @@ final class RootTabBarController: UITabBarController {
         tabBar.backgroundColor = UIColor(resource: .light80)
         viewControllers = [
             configureController(with: factory.createDummyScene(), tabBarItem: .home),
-            configureController(with: factory.createDummyScene(), tabBarItem: .discover),
+//            configureController(with: factory.createDummyScene(), tabBarItem: .discover),
+            configureController(with: factory.createAuthorizationScene(), tabBarItem: .discover),
             configureController(with: factory.createDummyScene(), tabBarItem: .drivethru),
             configureController(with: factory.createDummyScene(), tabBarItem: .orders),
             configureController(with: factory.createDummyScene(), tabBarItem: .profile),

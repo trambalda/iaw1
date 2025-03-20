@@ -4,4 +4,9 @@ final class Factory {
         let vc = DummyViewController()
         return vc
     }
+    
+    func createAuthorizationScene() -> AuthorizationSceneViewController {
+        let vc = AuthorizationSceneViewController()
+        return vc
+    }
 }
