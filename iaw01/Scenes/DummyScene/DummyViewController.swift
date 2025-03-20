@@ -23,7 +23,7 @@ final class DummyViewController: UIViewController {
     }
     
     private func configure() {
-        title = "Scenes"
+        navigationItem.title = "Scenes"
     }
     
     private func route(to sceneType: SceneType) {
