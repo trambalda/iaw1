@@ -64,6 +64,10 @@ extension Font {
         font: UIFont(name: Family.everettRegular.title, size: 17)!,
         lettering: -1
     )
+    static let note = Font(
+        font: UIFont(name: Family.everettRegular.title, size: 13)!,
+        lettering: -1
+    )
     static let caption = Font(
         font: UIFont(name: Family.everettMedium.title, size: 12)!,
         lettering: 2

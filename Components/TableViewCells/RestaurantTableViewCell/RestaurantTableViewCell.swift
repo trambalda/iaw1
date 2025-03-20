@@ -1,26 +1,27 @@
-//
-//  RestaurantTableCell.swift
-//  iaw01
-//
-//  Created by Алина Ражева on 13.03.2025.
-//
-
 import UIKit
 
 final class RestaurantTableViewCell: UITableViewCell {
     
+    static var empty = RestaurantCellModel(image: nil, title: "", address: "")
+    
+    var model: RestaurantCellModel = empty {
+        didSet {
+            nameLabel.text = model.title
+            addressLabel.text = model.address
+            cellImage.image = model.image ?? UIImage(systemName: "photo")
+        }
+    }
+    
     private var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = Font.body
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Font.body.font
         return label
     }()
     
     private var addressLabel: UILabel = {
         let label = UILabel()
-        label.font = Font.note
+        label.font = Font.note.font
         label.textColor = .dark60
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -40,16 +41,7 @@ final class RestaurantTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    var model: RestaurantCellModel {
-        didSet {
-            nameLabel.text = model.title
-            addressLabel.text = model.address
-            cellImage.image = model.image ?? UIImage(systemName: "photo")
-        }
-    }
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        self.model = RestaurantCellModel(image: nil, title: "", address: "")
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
     }
@@ -58,14 +50,14 @@ final class RestaurantTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
    
-     /*
+    /*
       mainStack
          cellImage
          infoStack
              nameLabel
              addressLabel
          arrowImage
-      */
+    */
      
     private func setupUI() {
         let infoStack = UIStackView()

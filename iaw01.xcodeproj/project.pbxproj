@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F4E868B2D8814EB002D5293 /* DishCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E868A2D8814EB002D5293 /* DishCellModel.swift */; };
+		1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E868A2D8814EB002D5293 /* DishCellModel.swift */; };
 		1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E868C2D881500002D5293 /* RestaurantCellModel.swift */; };
 		1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7539F2D82E13700B2324C /* RestaurantTableViewCell.swift */; };
 		1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF12A12D89686600386458 /* DishTableViewCell.swift */; };
@@ -61,6 +61,7 @@
 		1FA7539E2D82D81600B2324C /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				1FCF129D2D89541300386458 /* DishTableViewCell */,
 				1FCF129E2D89541D00386458 /* RestaurantTableViewCell */,
 			);
 			path = TableViewCells;
@@ -88,7 +89,6 @@
 			children = (
 				1FA7539F2D82E13700B2324C /* RestaurantTableViewCell.swift */,
 				1F4E868C2D881500002D5293 /* RestaurantCellModel.swift */,
-				1FCF129D2D89541300386458 /* DishTableViewCell */,
 			);
 			path = RestaurantTableViewCell;
 			sourceTree = "<group>";
@@ -266,6 +266,7 @@
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
+				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,

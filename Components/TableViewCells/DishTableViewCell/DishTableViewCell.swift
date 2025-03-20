@@ -1,13 +1,17 @@
-//
-//  DishTableViewCell.swift
-//  iaw01
-//
-//  Created by Алина Ражева on 14.03.2025.
-//
-
 import UIKit
 
 final class DishTableViewCell: UITableViewCell {
+    
+    static var empty = DishCellModel(foodImage: nil, foodTitle: "", restaurantImage: nil, restaurantTitle: "")
+    
+    var model: DishCellModel = empty {
+        didSet {
+            nameLabel.text = model.foodTitle
+            dishImage.image = model.foodImage ?? noPhotoImage
+            restaurantImage.image = model.restaurantImage ?? noPhotoImage
+            restaurantLabel.text = model.restaurantTitle
+        }
+    }
     
     private let cellImageView: UIImageView = {
          let imageView = UIImageView()
@@ -32,15 +36,13 @@ final class DishTableViewCell: UITableViewCell {
     
     private let restaurantLabel: UILabel = {
         let label = UILabel()
-        label.font = Font.note
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Font.note.font
         return label
     }()
     
     private var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = Font.body
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Font.body.font
         return label
     }()
     
@@ -52,21 +54,11 @@ final class DishTableViewCell: UITableViewCell {
         cellImageView
     }()
     
-    var model: DishCellModel {
-        didSet {
-            nameLabel.text = model.foodTitle
-            dishImage.image = model.foodImage ?? noPhotoImage
-            restaurantImage.image = model.restaurantImage ?? noPhotoImage
-            restaurantLabel.text = model.restaurantTitle
-        }
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        self.model = DishCellModel(foodImage: nil, foodTitle: "", restaurantImage: nil, restaurantTitle: "")
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
     }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
