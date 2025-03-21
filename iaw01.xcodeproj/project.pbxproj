@@ -31,6 +31,8 @@
 		8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
 		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
 		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
+		869876BF2D8C8D1E00C7BA58 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BE2D8C8D1E00C7BA58 /* PasswordTextField.swift */; };
+		869876C32D8D9A8D00C7BA58 /* PasswordTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876C22D8D9A8D00C7BA58 /* PasswordTextFieldStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		869875462D8860E600C7BA58 /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
 		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
 		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
+		869876BE2D8C8D1E00C7BA58 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		869876C22D8D9A8D00C7BA58 /* PasswordTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextFieldStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,11 +224,21 @@
 		869875482D8860E600C7BA58 /* TextFields */ = {
 			isa = PBXGroup;
 			children = (
+				869876C12D8D9A7000C7BA58 /* Helpers */,
 				869875462D8860E600C7BA58 /* StringTextField.swift */,
-				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
-				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
+				869876BE2D8C8D1E00C7BA58 /* PasswordTextField.swift */,
 			);
 			path = TextFields;
+			sourceTree = "<group>";
+		};
+		869876C12D8D9A7000C7BA58 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
+				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
+				869876C22D8D9A8D00C7BA58 /* PasswordTextFieldStyle.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +315,8 @@
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
+				869876C32D8D9A8D00C7BA58 /* PasswordTextFieldStyle.swift in Sources */,
+				869876BF2D8C8D1E00C7BA58 /* PasswordTextField.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
