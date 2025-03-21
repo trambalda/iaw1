@@ -223,7 +223,7 @@ final class OnboardingView: UIView {
             
             pageControl?.currentPage = page
             titleLabel?.attributedText = Font.heading4.compose(content.title, color: .dark100)
-            descriptionLabel?.attributedText = Font.body.compose(content.description, color: .dark80)
+            descriptionLabel?.attributedText = Font.body.compose(content.description, color: .dark80)        
         }
         
         nextButton.setTitle(OnboardingContent.isLastPage(page) ? "Continue" : "Next")
