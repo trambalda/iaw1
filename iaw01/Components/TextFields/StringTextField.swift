@@ -46,6 +46,13 @@ final class StringTextField: UIStackView {
         return button
     }()
     
+    private lazy var showPassword: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(.eye, for: .normal)
+        button.addTarget(self, action: #selector(showPasswordButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     init(with style: StringTextFieldStyle) {
         super.init(frame: .zero)
         setupStackViewProperties()
@@ -94,7 +101,7 @@ final class StringTextField: UIStackView {
     
     private func configureField(with style: StringTextFieldStyle) {
         let baseStyle = TextFieldBaseStyle()
-        
+
         textField.autocapitalizationType = baseStyle.autocapitalizationType
         textField.textColor = baseStyle.textColor
         textField.backgroundColor = baseStyle.backgroundColor
@@ -109,10 +116,28 @@ final class StringTextField: UIStackView {
             style.title ?? "",
             color: baseStyle.titleColor
         )
+
+        textField.isSecureTextEntry = style.behavior.isSecure
+        textField.keyboardType = style.behavior.keyboardType
+        textField.rightViewMode = .whileEditing
+        
+        switch style.behavior {
+        case .password:
+            textField.rightView = showPassword
+            textField.isSecureTextEntry = true
+        default:
+            textField.rightView = clearButton
+        }
     }
 
     @objc private func clearButtonTapped() {
         textField.text = nil
+    }
+    
+    @objc private func showPasswordButtonTapped() {
+        textField.isSecureTextEntry.toggle()
+        let imageName = textField.isSecureTextEntry ? "eye" : "closedEye"
+        showPassword.setImage(UIImage(named: imageName), for: .normal)
     }
 }
 
