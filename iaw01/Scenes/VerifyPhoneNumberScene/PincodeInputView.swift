@@ -7,22 +7,7 @@
 
 import UIKit
 
-class PincodeInputView: UIView {
-
-    private lazy var pincodeTextFieldsStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 15
-        stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        for i in 1...6 {
-            let textField = createTextField
-            textField.tag = i
-            codeDigits.append(textField)
-            stack.addArrangedSubview(textField)
-        }
-        return stack
-    }()
+class PincodeInputView: UIStackView {
     
     private var createTextField: PincodeTextField {
         let textField = PincodeTextField()
@@ -45,26 +30,24 @@ class PincodeInputView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-        setupConstraints()
         codeDigits.first?.becomeFirstResponder()
     }
     
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func setupViews() {
-        addSubview(pincodeTextFieldsStackView)
-    }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            pincodeTextFieldsStackView.topAnchor.constraint(equalTo: topAnchor),
-            pincodeTextFieldsStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            pincodeTextFieldsStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            pincodeTextFieldsStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            pincodeTextFieldsStackView.heightAnchor.constraint(equalToConstant: 58)
-        ])
+        self.spacing = 15
+        self.distribution = .fillEqually
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        for i in 1...6 {
+            let textField = createTextField
+            textField.tag = i
+            codeDigits.append(textField)
+            self.addArrangedSubview(textField)
+        }
     }
 }
 
