@@ -15,7 +15,7 @@ class PincodeInputView: UIView {
         stack.distribution = .fillEqually
         stack.translatesAutoresizingMaskIntoConstraints = false
         
-        for i in 0..<6 {
+        for i in 1...6 {
             let textField = createTextField
             textField.tag = i
             codeDigits.append(textField)
@@ -82,7 +82,8 @@ extension PincodeInputView: UITextFieldDelegate {
             textField.text = ""
         } else if newText.count == 1 {
             textField.text = newText
-            if let nextTextField = self.codeDigits[safe: textField.tag + 1] {
+            if textField.tag < codeDigits.count {
+                let nextTextField = codeDigits[textField.tag]
                 nextTextField.becomeFirstResponder()
             } else {
                 textField.resignFirstResponder()
@@ -92,9 +93,3 @@ extension PincodeInputView: UITextFieldDelegate {
     }
 }
 
-// MARK: - Safe Access to Array
-extension Array {
-    subscript(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
-}
