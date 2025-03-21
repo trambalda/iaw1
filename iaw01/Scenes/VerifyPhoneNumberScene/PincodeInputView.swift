@@ -7,34 +7,38 @@
 
 import UIKit
 
-class PincodeTextField: UITextField {
-    weak var previousTextField: UITextField?
-    
-    override func deleteBackward() {
-        super.deleteBackward()
-        if self.text?.isEmpty ?? true {
-            self.previousTextField?.becomeFirstResponder()
-            previousTextField?.text = ""
-        }
-    }
-}
+class PincodeInputView: UIView {
 
-class CodeInputView: UIView {
-
-    private lazy var digitsStackView: UIStackView = {
+    private lazy var pincodeTextFieldsStackView: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 15
         stack.distribution = .fillEqually
         stack.translatesAutoresizingMaskIntoConstraints = false
         
         for i in 0..<6 {
-            let textField = createTextField()
+            let textField = createTextField
             textField.tag = i
             codeDigits.append(textField)
             stack.addArrangedSubview(textField)
         }
         return stack
     }()
+    
+    private var createTextField: PincodeTextField {
+        let textField = PincodeTextField()
+        textField.font = Font.subtitle1.font
+        textField.textAlignment = .center
+        textField.keyboardType = .numberPad
+        textField.layer.cornerRadius = 15
+        textField.backgroundColor = .light80
+        textField.textColor = .dark100
+        textField.delegate = self
+        
+        if let previousTextField = codeDigits.last {
+            textField.previousTextField = previousTextField
+        }
+        return textField
+    }
     
     private var codeDigits: [UITextField] = []
     
@@ -50,60 +54,39 @@ class CodeInputView: UIView {
     }
     
     private func setupViews() {
-        addSubview(digitsStackView)
+        addSubview(pincodeTextFieldsStackView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            digitsStackView.topAnchor.constraint(equalTo: topAnchor),
-            digitsStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            digitsStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            digitsStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            digitsStackView.heightAnchor.constraint(equalToConstant: 58)
+            pincodeTextFieldsStackView.topAnchor.constraint(equalTo: topAnchor),
+            pincodeTextFieldsStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            pincodeTextFieldsStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            pincodeTextFieldsStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            pincodeTextFieldsStackView.heightAnchor.constraint(equalToConstant: 58)
         ])
-    }
-    
-    private func createTextField() -> PincodeTextField {
-        let textField = PincodeTextField()
-        textField.font = Font.subtitle1.font
-        textField.textAlignment = .center
-        textField.keyboardType = .numberPad
-        textField.layer.cornerRadius = 15
-        textField.backgroundColor = .light80
-        textField.textColor = .dark100
-        textField.delegate = self
-//        textField.isUserInteractionEnabled = false
-        
-        if let previousTextField = codeDigits.last {
-            textField.previousTextField = previousTextField
-        }
-        return textField
     }
 }
 
-// MARK: - UITextFieldDelegate
-extension CodeInputView: UITextFieldDelegate {
+extension PincodeInputView: UITextFieldDelegate {
     func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
-        replacementString string: String) -> Bool {
+        replacementString string: String
+    ) -> Bool {
             
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
         if newText.isEmpty {
             textField.text = ""
-            return false
-        }
-            
-        if newText.count == 1 {
+        } else if newText.count == 1 {
             textField.text = newText
             if let nextTextField = self.codeDigits[safe: textField.tag + 1] {
                 nextTextField.becomeFirstResponder()
             } else {
                 textField.resignFirstResponder()
             }
-            return false
         }
         return false
     }
