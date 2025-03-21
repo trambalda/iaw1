@@ -9,7 +9,6 @@ extension SceneModel {
     static var models: [SceneModel] {
         [
             SceneModel(sceneType: .textFiedsScene, parameters: [:]),
-            SceneModel(sceneType: .cornersButtonsScene, parameters: [:])
         ]
     }
 }

@@ -30,8 +30,6 @@ final class DummyViewController: UIViewController {
         switch sceneType {
         case .textFiedsScene:
             appCoordinator?.showTextFieldScene(from: navigationController)
-        case .cornersButtonsScene:
-            appCoordinator?.showCornersButtonsScene(from: navigationController)
         }
     }
 }

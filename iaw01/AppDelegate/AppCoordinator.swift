@@ -28,9 +28,4 @@ final class AppCoordinator {
         let vc = factory.createTextFieldsScene()
         parent?.pushViewController(vc, animated: true)
     }
-    
-    func showCornersButtonsScene(from parent: UINavigationController?) {
-        let vc = factory.createCornersButtonsScene()
-        parent?.pushViewController(vc, animated: true)
-    }
 }
