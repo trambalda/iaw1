@@ -13,8 +13,8 @@ class PincodeTextField: UITextField {
     override func deleteBackward() {
         super.deleteBackward()
         if self.text?.isEmpty ?? true {
-            self.previousTextField?.becomeFirstResponder()
             previousTextField?.isUserInteractionEnabled = true
+            self.previousTextField?.becomeFirstResponder()
             previousTextField?.text = ""
         }
     }

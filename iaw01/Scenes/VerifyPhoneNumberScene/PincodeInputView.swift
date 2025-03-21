@@ -17,7 +17,7 @@ class PincodeInputView: UIStackView {
         textField.backgroundColor = .light80
         textField.textColor = .dark100
         textField.delegate = self
-//        textField.tintColor = .clear
+        textField.tintColor = .clear
         
         if let previousTextField = codeDigits.last {
             textField.previousTextField = previousTextField
@@ -47,7 +47,34 @@ class PincodeInputView: UIStackView {
             textField.tag = i
             codeDigits.append(textField)
             self.addArrangedSubview(textField)
+            
+            let tapGesture = UITapGestureRecognizer(
+                target: self,
+                action: #selector(handleTextFieldTap)
+            )
+            textField.addGestureRecognizer(tapGesture)
         }
+    }
+    
+    @objc func handleTextFieldTap(_ gesture: UITapGestureRecognizer) {
+        guard let textField = gesture.view as? UITextField else { return }
+        
+        if areAllFieldsFilled() {
+            for field in codeDigits {
+                field.isUserInteractionEnabled = true
+            }
+            
+            for field in codeDigits {
+                field.text = ""
+            }
+            codeDigits.first?.becomeFirstResponder()
+        } else {
+            textField.becomeFirstResponder()
+        }
+    }
+    
+    private func areAllFieldsFilled() -> Bool {
+        codeDigits.allSatisfy { !($0.text?.isEmpty ?? true)}
     }
 }
 
@@ -62,16 +89,31 @@ extension PincodeInputView: UITextFieldDelegate {
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
         if newText.isEmpty {
-            return true
+            textField.text = ""
         } else if newText.count == 1 {
             textField.text = newText
             if textField.tag < codeDigits.count {
-                textField.isUserInteractionEnabled = false
                 let nextTextField = codeDigits[textField.tag]
+                nextTextField.isUserInteractionEnabled = true
                 nextTextField.becomeFirstResponder()
+            } else {
+                textField.resignFirstResponder()
+                for item in codeDigits {
+                    item.isUserInteractionEnabled = true
+                }
             }
         }
         return false
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if !areAllFieldsFilled() {
+            var tmpArr = codeDigits
+            tmpArr.remove(at: textField.tag - 1)
+            for item in tmpArr {
+                item.isUserInteractionEnabled = false
+            }
+        }
     }
 }
 
