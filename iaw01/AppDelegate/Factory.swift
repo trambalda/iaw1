@@ -23,4 +23,9 @@ final class Factory {
         let vc = CornersButtonsViewController()
         return vc
     }
+
+    func createOnboardingScene() -> OnboardingViewController {
+        let vc = OnboardingViewController()
+        return vc
+    }
 }

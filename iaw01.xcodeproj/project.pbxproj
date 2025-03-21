@@ -34,6 +34,8 @@
 		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
 		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
 		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
+		D59B58A02D8DB2350049A3F9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B589E2D8DB2350049A3F9 /* OnboardingViewController.swift */; };
+		D59B58A12D8DB2350049A3F9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
 		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
 		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
+		D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		D59B589E2D8DB2350049A3F9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +214,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D59B589F2D8DB2350049A3F9 /* OnboardingScene */,
 				D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 				869875442D8860DF00C7BA58 /* TextFieldsScene */,
@@ -250,6 +255,15 @@
 				D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */,
 			);
 			path = CornersButtonsScene;
+			sourceTree = "<group>";
+		};
+		D59B589F2D8DB2350049A3F9 /* OnboardingScene */ = {
+			isa = PBXGroup;
+			children = (
+				D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */,
+				D59B589E2D8DB2350049A3F9 /* OnboardingViewController.swift */,
+			);
+			path = OnboardingScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +354,8 @@
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
+				D59B58A02D8DB2350049A3F9 /* OnboardingViewController.swift in Sources */,
+				D59B58A12D8DB2350049A3F9 /* OnboardingView.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
@@ -512,7 +528,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 29RYDJC44R;
+				DEVELOPMENT_TEAM = YWY49JTZKC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iaw01/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -526,7 +542,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.trambalda.iaw01;
+				PRODUCT_BUNDLE_IDENTIFIER = iCleverStyle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

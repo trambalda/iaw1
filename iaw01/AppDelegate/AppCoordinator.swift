@@ -33,4 +33,9 @@ final class AppCoordinator {
         let vc = factory.createCornersButtonsScene()
         parent?.pushViewController(vc, animated: true)
     }
+
+    func showOnboardingScene(from parent: UINavigationController?) {
+        let vc = factory.createOnboardingScene()
+        parent?.pushViewController(vc, animated: true)
+    }
 }
