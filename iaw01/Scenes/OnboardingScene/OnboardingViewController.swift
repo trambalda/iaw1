@@ -11,6 +11,7 @@ final class OnboardingViewController: UIViewController {
     private let contentView: OnboardingView
     private var currentPage = 0
     weak var delegate: OnboardingViewControllerDelegate?
+    var appCoordinator: AppCoordinator?
     
     // MARK: - Init
     
@@ -33,6 +34,7 @@ final class OnboardingViewController: UIViewController {
         super.viewDidLoad()
         setupActions()
         contentView.configure(with: currentPage)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - Private Methods
@@ -57,8 +59,6 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func finishOnboarding() {
-        // TODO: Сохранить флаг о том, что онбординг пройден
-        // UserDefaults.standard.set(true, forKey: "OnboardingCompleted")
-        delegate?.onboardingDidFinish()
+        appCoordinator?.completeOnboarding()
     }
 } 

@@ -16,7 +16,12 @@ final class AppCoordinator {
     }
     
     func start() {
-        showMainViewController()
+        let isOnboardingCompleted = UserDefaults.standard.bool(forKey: "isOnboardingCompleted")
+        if isOnboardingCompleted {
+            showMainViewController()
+        } else {
+            showOnboardingScene()
+        }
     }
     
     func showMainViewController() {
@@ -34,8 +39,14 @@ final class AppCoordinator {
         parent?.pushViewController(vc, animated: true)
     }
 
-    func showOnboardingScene(from parent: UINavigationController?) {
+    func showOnboardingScene(from parent: UINavigationController? = nil) {
         let vc = factory.createOnboardingScene()
-        parent?.pushViewController(vc, animated: true)
+        let navigationController = UINavigationController(rootViewController: vc)
+        window.rootViewController = navigationController
+    }
+    
+    func completeOnboarding() {
+        UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
+        showMainViewController()
     }
 }

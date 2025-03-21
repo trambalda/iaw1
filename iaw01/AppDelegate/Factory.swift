@@ -26,6 +26,7 @@ final class Factory {
 
     func createOnboardingScene() -> OnboardingViewController {
         let vc = OnboardingViewController()
+        vc.appCoordinator = appCoordinator
         return vc
     }
 }
