@@ -19,7 +19,7 @@ final class RootTabBarController: UITabBarController {
     }
     
     private func configureTabBar() {
-        tabBar.backgroundColor = UIColor(resource: .light80)
+        tabBar.backgroundColor = .light80
         viewControllers = [
             configureController(with: factory.createDummyScene(), tabBarItem: .home),
             configureController(with: factory.createDummyScene(), tabBarItem: .discover),

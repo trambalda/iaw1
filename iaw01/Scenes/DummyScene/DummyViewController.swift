@@ -2,27 +2,36 @@ import UIKit
 
 final class DummyViewController: UIViewController {
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.attributedText = Font.heading3.compose("Under construction", color: .black)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    var appCoordinator: AppCoordinator?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .light100
-        addTitleLabel()
+    private lazy var dummyView: DummyView = {
+        let view = DummyView(frame: .zero)
+        view.scenes = SceneModel.models
+        view.route = { sceneType in
+            self.route(to: sceneType)
+        }
+        return view
+    }()
+    
+    override func loadView() {
+        view = dummyView
     }
     
-    private func addTitleLabel() {
-        view.addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure()
+    }
+    
+    private func configure() {
+        navigationItem.title = "Scenes"
+    }
+    
+    private func route(to sceneType: SceneType) {
+        switch sceneType {
+        case .textFiedsScene:
+            appCoordinator?.showTextFieldScene(from: navigationController)
+        case .cornersButtonsScene:
+            appCoordinator?.showCornersButtonsScene(from: navigationController)
+        }
     }
 }

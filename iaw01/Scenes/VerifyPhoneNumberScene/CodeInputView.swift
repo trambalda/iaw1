@@ -51,7 +51,6 @@ class CodeInputView: UIView {
     
     private func setupViews() {
         addSubview(digitsStackView)
-        
     }
     
     private func setupConstraints() {
