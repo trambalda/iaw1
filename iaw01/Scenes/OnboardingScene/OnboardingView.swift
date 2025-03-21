@@ -119,18 +119,18 @@ final class OnboardingView: UIView {
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingContent.count)),
 
-            buttonsContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            buttonsContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            buttonsContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            buttonsContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             buttonsContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            buttonsContainer.heightAnchor.constraint(equalToConstant: 100),
+            buttonsContainer.heightAnchor.constraint(equalToConstant: 90),
             
-            nextButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -46),
-            nextButton.trailingAnchor.constraint(equalTo: buttonsContainer.trailingAnchor, constant: -20),
-            nextButton.widthAnchor.constraint(equalToConstant: 183),
+            nextButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: 0),
+            nextButton.trailingAnchor.constraint(equalTo: buttonsContainer.trailingAnchor, constant: 0),
+            nextButton.widthAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.55),
             
-            skipButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -46),
-            skipButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor, constant: 20),
-            skipButton.widthAnchor.constraint(equalToConstant: 153)
+            skipButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: 0),
+            skipButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor, constant: 0),
+            skipButton.widthAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.40)
         ])
     }
     
