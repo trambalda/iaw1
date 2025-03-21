@@ -14,6 +14,7 @@ class PincodeTextField: UITextField {
         super.deleteBackward()
         if self.text?.isEmpty ?? true {
             self.previousTextField?.becomeFirstResponder()
+            previousTextField?.isUserInteractionEnabled = true
             previousTextField?.text = ""
         }
     }

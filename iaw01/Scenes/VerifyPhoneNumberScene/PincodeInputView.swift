@@ -8,7 +8,6 @@
 import UIKit
 
 class PincodeInputView: UIStackView {
-    
     private var createTextField: PincodeTextField {
         let textField = PincodeTextField()
         textField.font = Font.subtitle1.font
@@ -18,6 +17,7 @@ class PincodeInputView: UIStackView {
         textField.backgroundColor = .light80
         textField.textColor = .dark100
         textField.delegate = self
+//        textField.tintColor = .clear
         
         if let previousTextField = codeDigits.last {
             textField.previousTextField = previousTextField
@@ -62,14 +62,13 @@ extension PincodeInputView: UITextFieldDelegate {
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
         if newText.isEmpty {
-            textField.text = ""
+            return true
         } else if newText.count == 1 {
             textField.text = newText
             if textField.tag < codeDigits.count {
+                textField.isUserInteractionEnabled = false
                 let nextTextField = codeDigits[textField.tag]
                 nextTextField.becomeFirstResponder()
-            } else {
-                textField.resignFirstResponder()
             }
         }
         return false
