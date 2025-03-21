@@ -5,9 +5,7 @@ protocol OnboardingViewDelegate: AnyObject {
 }
 
 final class OnboardingView: UIView {
-    
-    // MARK: - Properties
-    
+
     weak var delegate: OnboardingViewDelegate?
     
     private let contentContainer: UIView = {
@@ -25,9 +23,6 @@ final class OnboardingView: UIView {
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.alwaysBounceVertical = false
         scrollView.bounces = false
         scrollView.isDirectionalLockEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +33,7 @@ final class OnboardingView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = 0
+        //stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -67,8 +62,6 @@ final class OnboardingView: UIView {
         return button
     }()
     
-    // MARK: - Init
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -77,8 +70,6 @@ final class OnboardingView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Setup
     
     private func setupUI() {
         backgroundColor = .white
@@ -124,11 +115,11 @@ final class OnboardingView: UIView {
             buttonsContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             buttonsContainer.heightAnchor.constraint(equalToConstant: 90),
             
-            nextButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: 0),
+            nextButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -20),
             nextButton.trailingAnchor.constraint(equalTo: buttonsContainer.trailingAnchor, constant: 0),
             nextButton.widthAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.55),
             
-            skipButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: 0),
+            skipButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -20),
             skipButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor, constant: 0),
             skipButton.widthAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.40)
         ])
@@ -207,9 +198,7 @@ final class OnboardingView: UIView {
         nextButton.setTitle("Next")
         skipButton.setTitle("Skip")
     }
-    
-    // MARK: - Public Methods
-    
+       
     func configure(with page: Int) {
         for (index, pageView) in pageViews.enumerated() {
             let content = OnboardingContent.pages[index]
