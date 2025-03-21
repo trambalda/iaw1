@@ -159,6 +159,12 @@ final class OnboardingView: UIView {
         illustrationLabel.attributedText = Font.body.compose("ILLUSTRATION HERE", color: .dark80)
         illustrationLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        let pageControl = UIPageControl()
+        pageControl.numberOfPages = OnboardingContent.count
+        pageControl.currentPageIndicatorTintColor = .peach100
+        pageControl.pageIndicatorTintColor = .light80
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        
         let titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -166,9 +172,10 @@ final class OnboardingView: UIView {
         let descriptionLabel = UILabel()
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         view.addSubview(illustrationContainer)
         illustrationContainer.addSubview(illustrationLabel)
+        view.addSubview(pageControl)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         
@@ -181,7 +188,10 @@ final class OnboardingView: UIView {
             illustrationLabel.centerXAnchor.constraint(equalTo: illustrationContainer.centerXAnchor),
             illustrationLabel.centerYAnchor.constraint(equalTo: illustrationContainer.centerYAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: illustrationContainer.bottomAnchor, constant: 72),
+            pageControl.topAnchor.constraint(equalTo: illustrationContainer.bottomAnchor, constant: 20),
+            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            titleLabel.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 32),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
@@ -201,20 +211,17 @@ final class OnboardingView: UIView {
     // MARK: - Public Methods
     
     func configure(with page: Int) {
-        pageControl.currentPage = page
-        pageControl.numberOfPages = OnboardingContent.count
-        
-        let content = OnboardingContent.pages[page]
-        
         for (index, pageView) in pageViews.enumerated() {
             let content = OnboardingContent.pages[index]
-            let titleLabel = pageView.subviews.first { $0 is UILabel && $0 != pageView.subviews.first } as? UILabel
+            let titleLabel = pageView.subviews.first { $0 is UILabel } as? UILabel
             let descriptionLabel = pageView.subviews.last { $0 is UILabel } as? UILabel
+            let pageControl = pageView.subviews.first { $0 is UIPageControl } as? UIPageControl
             
             if let imageView = content.image {
                 // TODO: Добавить отображение изображения
             }
             
+            pageControl?.currentPage = page
             titleLabel?.attributedText = Font.heading4.compose(content.title, color: .dark100)
             descriptionLabel?.attributedText = Font.body.compose(content.description, color: .dark80)
         }
