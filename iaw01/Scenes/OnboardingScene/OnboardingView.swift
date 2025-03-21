@@ -1,8 +1,14 @@
 import UIKit
 
+protocol OnboardingViewDelegate: AnyObject {
+    func onboardingView(_ view: OnboardingView, didChangePage page: Int)
+}
+
 final class OnboardingView: UIView {
     
     // MARK: - Properties
+    
+    weak var delegate: OnboardingViewDelegate?
     
     private let contentContainer: UIView = {
         let view = UIView()
@@ -41,7 +47,7 @@ final class OnboardingView: UIView {
     
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = 3
+        pageControl.numberOfPages = OnboardingContent.count
         pageControl.currentPage = 0
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = .peach100
@@ -111,7 +117,7 @@ final class OnboardingView: UIView {
             contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-            contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(3)),
+            contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingContent.count)),
 
             buttonsContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             buttonsContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
@@ -129,13 +135,15 @@ final class OnboardingView: UIView {
     }
     
     private func setupPages() {
-        for _ in 0...2 {
+        for _ in 0..<OnboardingContent.count {
             let pageView = createPageView()
             pageViews.append(pageView)
             contentStackView.addArrangedSubview(pageView)
             
             pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         }
+        
+        contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingContent.count)).isActive = true
     }
     
     private func createPageView() -> UIView {
@@ -194,30 +202,24 @@ final class OnboardingView: UIView {
     
     func configure(with page: Int) {
         pageControl.currentPage = page
+        pageControl.numberOfPages = OnboardingContent.count
         
-        let titles = [
-            "Wide range of Food Categories & more",
-            "Free Deliveries for ONE MONTH!!",
-            "Get started on Ordering your Food"
-        ]
-        
-        let descriptions = [
-            "Browse through our extensive list of restaurants and dishes, and when you're ready to order, simply add your desired items to your cart and checkout. It's that easy!",
-            "Get your favorite meals delivered to your doorstep for free with our online food delivery app - enjoy a whole month of complimentary delivery!",
-            "Please create an account or sign in to your existing account to start browsing our selection of delicious meals from your favorite restaurants."
-        ]
+        let content = OnboardingContent.pages[page]
         
         for (index, pageView) in pageViews.enumerated() {
+            let content = OnboardingContent.pages[index]
             let titleLabel = pageView.subviews.first { $0 is UILabel && $0 != pageView.subviews.first } as? UILabel
             let descriptionLabel = pageView.subviews.last { $0 is UILabel } as? UILabel
-            let pageControl = pageView.subviews.first { $0 is UIPageControl } as? UIPageControl
             
-            titleLabel?.attributedText = Font.heading4.compose(titles[index], color: .dark100)
-            descriptionLabel?.attributedText = Font.body.compose(descriptions[index], color: .dark80)
-            pageControl?.currentPage = page
+            if let imageView = content.image {
+                // TODO: Добавить отображение изображения
+            }
+            
+            titleLabel?.attributedText = Font.heading4.compose(content.title, color: .dark100)
+            descriptionLabel?.attributedText = Font.body.compose(content.description, color: .dark80)
         }
         
-        nextButton.setTitle(page == 2 ? "Continue" : "Next")
+        nextButton.setTitle(OnboardingContent.isLastPage(page) ? "Continue" : "Next")
         
         let contentOffset = CGPoint(x: scrollView.bounds.width * CGFloat(page), y: 0)
         scrollView.setContentOffset(contentOffset, animated: true)
@@ -236,5 +238,6 @@ extension OnboardingView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / scrollView.bounds.width)
         configure(with: page)
+        delegate?.onboardingView(self, didChangePage: page)
     }
 } 

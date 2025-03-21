@@ -36,6 +36,7 @@
 		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
 		D59B58A02D8DB2350049A3F9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B589E2D8DB2350049A3F9 /* OnboardingViewController.swift */; };
 		D59B58A12D8DB2350049A3F9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */; };
+		D59B58A32D8DCCCF0049A3F9 /* OnboardingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58A22D8DCCCF0049A3F9 /* OnboardingContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
 		D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D59B589E2D8DB2350049A3F9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		D59B58A22D8DCCCF0049A3F9 /* OnboardingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 		D59B589F2D8DB2350049A3F9 /* OnboardingScene */ = {
 			isa = PBXGroup;
 			children = (
+				D59B58A22D8DCCCF0049A3F9 /* OnboardingContent.swift */,
 				D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */,
 				D59B589E2D8DB2350049A3F9 /* OnboardingViewController.swift */,
 			);
@@ -340,6 +343,7 @@
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
+				D59B58A32D8DCCCF0049A3F9 /* OnboardingContent.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,

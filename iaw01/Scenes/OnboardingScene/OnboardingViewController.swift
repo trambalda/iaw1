@@ -18,6 +18,7 @@ final class OnboardingViewController: UIViewController {
     init() {
         contentView = OnboardingView()
         super.init(nibName: nil, bundle: nil)
+        contentView.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -50,7 +51,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func handleNextButton() {
-        if currentPage < 2 {
+        if currentPage < OnboardingContent.count - 1 {
             currentPage += 1
             contentView.configure(with: currentPage)
         } else {
@@ -60,5 +61,11 @@ final class OnboardingViewController: UIViewController {
     
     private func finishOnboarding() {
         appCoordinator?.completeOnboarding()
+    }
+}
+
+extension OnboardingViewController: OnboardingViewDelegate {
+    func onboardingView(_ view: OnboardingView, didChangePage page: Int) {
+        currentPage = page
     }
 } 
