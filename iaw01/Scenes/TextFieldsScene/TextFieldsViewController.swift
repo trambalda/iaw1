@@ -12,7 +12,6 @@ final class TextFieldsViewController: UIViewController {
     
     private lazy var emailTextField: StringTextField = {
         let textField = StringTextField(with: .emailStyle)
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textFieldShouldReturn = {
             self.nameTextField.becomeTextFieldFirstResponder()
         }
@@ -21,7 +20,6 @@ final class TextFieldsViewController: UIViewController {
     
     private lazy var nameTextField: StringTextField = {
         let textField = StringTextField(with: .nameStyle)
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textFieldShouldReturn = {
             self.passwordTextField.becomeTextFieldFirstResponder()
         }
@@ -30,7 +28,6 @@ final class TextFieldsViewController: UIViewController {
     
     private lazy var passwordTextField: StringTextField = {
         let textField = StringTextField(with: .passwordStyle)
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textFieldShouldReturn = {
             self.createPasswordTextField.becomeTextFieldFirstResponder()
         }
@@ -39,7 +36,6 @@ final class TextFieldsViewController: UIViewController {
     
     private lazy var createPasswordTextField: StringTextField = {
         let textField = StringTextField(with: .createPasswordStyle)
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textFieldShouldReturn = {
             textField.resignTextFieldFirstResponder()
         }
