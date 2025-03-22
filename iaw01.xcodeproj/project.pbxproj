@@ -228,19 +228,11 @@
 		869875482D8860E600C7BA58 /* TextFields */ = {
 			isa = PBXGroup;
 			children = (
-				869876C12D8D9A7000C7BA58 /* Helpers */,
 				869875462D8860E600C7BA58 /* StringTextField.swift */,
+				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
+				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
 			);
 			path = TextFields;
-			sourceTree = "<group>";
-		};
-		869876C12D8D9A7000C7BA58 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
-				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		D52040512D89B502009D0D1D /* CornersButton */ = {

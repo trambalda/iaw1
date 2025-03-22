@@ -2,6 +2,14 @@ import UIKit
 
 final class TextFieldsViewController: UIViewController {
     
+    private let textFieldsStack: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 16
+        return stack
+    }()
+    
     private lazy var emailTextField: StringTextField = {
         let textField = StringTextField(with: .emailStyle)
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -12,11 +20,27 @@ final class TextFieldsViewController: UIViewController {
     }()
     
     private lazy var nameTextField: StringTextField = {
+        let textField = StringTextField(with: .nameStyle)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.textFieldShouldReturn = {
+            self.passwordTextField.becomeTextFieldFirstResponder()
+        }
+        return textField
+    }()
+    
+    private lazy var passwordTextField: StringTextField = {
+        let textField = StringTextField(with: .passwordStyle)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.textFieldShouldReturn = {
+            self.createPasswordTextField.becomeTextFieldFirstResponder()
+        }
+        return textField
+    }()
+    
+    private lazy var createPasswordTextField: StringTextField = {
         let textField = StringTextField(with: .createPasswordStyle)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textFieldShouldReturn = {
-            print("Final Email:\(self.emailTextField.text ?? "")")
-            print("Final Name:\(textField.text ?? "")")
             textField.resignTextFieldFirstResponder()
         }
         return textField
@@ -31,21 +55,22 @@ final class TextFieldsViewController: UIViewController {
     }
     
     private func setupLayout() {
-        view.addSubview(emailTextField)
-        view.addSubview(nameTextField)
+        view.addSubview(textFieldsStack)
+        [emailTextField, nameTextField, passwordTextField, createPasswordTextField].forEach {
+            textFieldsStack.addArrangedSubview($0)
+        }
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            emailTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
-            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            emailTextField.heightAnchor.constraint(equalToConstant: 80),
+            textFieldsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
 
-            nameTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
-            nameTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
-            nameTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
-            nameTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor)
+            emailTextField.heightAnchor.constraint(equalToConstant: 80),
+            nameTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
+            passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
+            createPasswordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor)
         ])
     }
 }

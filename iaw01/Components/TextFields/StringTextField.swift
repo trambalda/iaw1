@@ -124,7 +124,6 @@ final class StringTextField: UIStackView {
         switch style.behavior {
         case .password:
             textField.rightView = showPassword
-            textField.isSecureTextEntry = true
         default:
             textField.rightView = clearButton
         }

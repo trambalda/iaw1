@@ -2,7 +2,9 @@ import UIKit
 
 struct StringTextFieldStyle {
     enum Behavior {
-        case string, email, password
+        case string
+        case email
+        case password
         
         var isSecure: Bool {
             self == .password
@@ -10,9 +12,9 @@ struct StringTextFieldStyle {
         
         var keyboardType: UIKeyboardType {
             switch self {
-            case .string: return .default
-            case .email: return .emailAddress
-            case .password: return .default
+            case .string: .default
+            case .email: .emailAddress
+            case .password: .default
             }
         }
     }
