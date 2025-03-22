@@ -12,8 +12,8 @@ struct StringTextFieldStyle {
         
         var keyboardType: UIKeyboardType {
             switch self {
-            case .string: .default
-            case .email: .emailAddress
+            case .string:   .default
+            case .email:    .emailAddress
             case .password: .default
             }
         }

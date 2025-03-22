@@ -87,6 +87,8 @@ final class StringTextField: UIStackView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            self.heightAnchor.constraint(equalToConstant: 80),
+            
             titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor, constant: 13),
             titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
             titleLabel.topAnchor.constraint(equalTo: titleContainerView.topAnchor),
@@ -124,7 +126,7 @@ final class StringTextField: UIStackView {
         switch style.behavior {
         case .password:
             textField.rightView = showPassword
-        default:
+        case .string, .email:
             textField.rightView = clearButton
         }
     }
@@ -135,8 +137,8 @@ final class StringTextField: UIStackView {
     
     @objc private func showPasswordButtonTapped() {
         textField.isSecureTextEntry.toggle()
-        let imageName = textField.isSecureTextEntry ? "eye" : "closedEye"
-        showPassword.setImage(UIImage(named: imageName), for: .normal)
+        let imageName: UIImage = textField.isSecureTextEntry ? .eye : .closedEye
+        showPassword.setImage(imageName, for: .normal)
     }
 }
 

@@ -56,9 +56,10 @@ final class TextFieldsViewController: UIViewController {
     
     private func setupLayout() {
         view.addSubview(textFieldsStack)
-        [emailTextField, nameTextField, passwordTextField, createPasswordTextField].forEach {
-            textFieldsStack.addArrangedSubview($0)
-        }
+        textFieldsStack.addArrangedSubview(emailTextField)
+        textFieldsStack.addArrangedSubview(nameTextField)
+        textFieldsStack.addArrangedSubview(passwordTextField)
+        textFieldsStack.addArrangedSubview(createPasswordTextField)
     }
     
     private func setupConstraints() {
@@ -66,11 +67,6 @@ final class TextFieldsViewController: UIViewController {
             textFieldsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-
-            emailTextField.heightAnchor.constraint(equalToConstant: 80),
-            nameTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
-            passwordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
-            createPasswordTextField.heightAnchor.constraint(equalTo: emailTextField.heightAnchor)
         ])
     }
 }
