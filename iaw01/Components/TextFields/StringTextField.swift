@@ -9,11 +9,7 @@ final class StringTextField: UIStackView {
         set { textField.text = newValue }
     }
     
-    private let titleContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private let titleContainerView = UIView()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -43,6 +39,13 @@ final class StringTextField: UIStackView {
         let button = UIButton(type: .system)
         button.setImage(.closeCircle, for: .normal)
         button.addTarget(self, action: #selector(clearButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var showPassword: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(.eye, for: .normal)
+        button.addTarget(self, action: #selector(showPasswordButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -80,6 +83,8 @@ final class StringTextField: UIStackView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: 80),
+            
             titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor, constant: 13),
             titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
             titleLabel.topAnchor.constraint(equalTo: titleContainerView.topAnchor),
@@ -94,7 +99,7 @@ final class StringTextField: UIStackView {
     
     private func configureField(with style: StringTextFieldStyle) {
         let baseStyle = TextFieldBaseStyle()
-        
+
         textField.autocapitalizationType = baseStyle.autocapitalizationType
         textField.textColor = baseStyle.textColor
         textField.backgroundColor = baseStyle.backgroundColor
@@ -109,10 +114,27 @@ final class StringTextField: UIStackView {
             style.title ?? "",
             color: baseStyle.titleColor
         )
+
+        textField.isSecureTextEntry = style.behavior.isSecure
+        textField.keyboardType = style.behavior.keyboardType
+        textField.rightViewMode = .whileEditing
+        
+        switch style.behavior {
+        case .password:
+            textField.rightView = showPassword
+        case .string, .email:
+            textField.rightView = clearButton
+        }
     }
 
     @objc private func clearButtonTapped() {
         textField.text = nil
+    }
+    
+    @objc private func showPasswordButtonTapped() {
+        textField.isSecureTextEntry.toggle()
+        let image: UIImage = textField.isSecureTextEntry ? .eye : .closedEye
+        showPassword.setImage(image, for: .normal)
     }
 }
 

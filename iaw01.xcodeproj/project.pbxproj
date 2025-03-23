@@ -229,8 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				869875462D8860E600C7BA58 /* StringTextField.swift */,
-				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
 				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
+				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
