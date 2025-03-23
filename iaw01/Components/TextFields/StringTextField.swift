@@ -9,11 +9,7 @@ final class StringTextField: UIStackView {
         set { textField.text = newValue }
     }
     
-    private let titleContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private let titleContainerView = UIView()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
