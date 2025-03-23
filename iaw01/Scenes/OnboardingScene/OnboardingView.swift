@@ -5,18 +5,20 @@ protocol OnboardingViewDelegate: AnyObject {
 }
 
 final class OnboardingView: UIView {
-
+    
     weak var delegate: OnboardingViewDelegate?
+    
+    private var pageViews: [UIView] = []
     
     private var padding: CGFloat {
         return UIScreen.main.bounds.height > 800 ? 20 : 10
     }
-
+    
     var screenAspectRatio: CGFloat {
         let screenSize = UIScreen.main.bounds.size
         return screenSize.width / screenSize.height
     }
-
+    
     private let contentContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -44,8 +46,6 @@ final class OnboardingView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
-    private var pageViews: [UIView] = []
     
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
@@ -130,7 +130,6 @@ final class OnboardingView: UIView {
             skipButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor, constant: 0),
             skipButton.widthAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.40)
         ])
-
     }
     
     private func setupPages() {
@@ -160,7 +159,6 @@ final class OnboardingView: UIView {
         illustrationContainer.clipsToBounds = true
         illustrationContainer.translatesAutoresizingMaskIntoConstraints = false
         
-        // Проверяем наличие изображения
         if let image = content.image {
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFill
@@ -231,7 +229,7 @@ final class OnboardingView: UIView {
         nextButton.setTitle("Next")
         skipButton.setTitle("Skip")
     }
-       
+    
     func configure(with page: Int) {
         for (_, pageView) in pageViews.enumerated() {
             let pageControl = pageView.subviews.first { $0 is UIPageControl } as? UIPageControl

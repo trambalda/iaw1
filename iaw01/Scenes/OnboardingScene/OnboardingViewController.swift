@@ -7,11 +7,11 @@ protocol OnboardingViewControllerDelegate: AnyObject {
 final class OnboardingViewController: UIViewController {
     
     weak var delegate: OnboardingViewControllerDelegate?
-    var appCoordinator: AppCoordinator?   
+    var appCoordinator: AppCoordinator?
+    
     private let contentView: OnboardingView
     private var currentPage = 0
-
-       
+    
     init() {
         contentView = OnboardingView()
         super.init(nibName: nil, bundle: nil)
@@ -21,7 +21,7 @@ final class OnboardingViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-      
+    
     override func loadView() {
         view = contentView
     }
@@ -32,7 +32,7 @@ final class OnboardingViewController: UIViewController {
         contentView.configure(with: currentPage)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-     
+    
     private func setupActions() {
         contentView.setNextButtonAction { [weak self] in
             self?.handleNextButton()

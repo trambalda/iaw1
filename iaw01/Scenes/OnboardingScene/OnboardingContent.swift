@@ -7,6 +7,7 @@ struct OnboardingPage {
 }
 
 enum OnboardingContent {
+
     static let pages: [OnboardingPage] = [
         OnboardingPage(
             image: UIImage(named: "testphoto07"),
