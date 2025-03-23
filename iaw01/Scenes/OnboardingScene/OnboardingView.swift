@@ -8,6 +8,15 @@ final class OnboardingView: UIView {
 
     weak var delegate: OnboardingViewDelegate?
     
+    private var padding: CGFloat {
+        return UIScreen.main.bounds.height > 800 ? 20 : 10
+    }
+
+    var screenAspectRatio: CGFloat {
+        let screenSize = UIScreen.main.bounds.size
+        return screenSize.width / screenSize.height
+    }
+
     private let contentContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -31,9 +40,7 @@ final class OnboardingView: UIView {
     
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        //stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -110,19 +117,20 @@ final class OnboardingView: UIView {
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingContent.count)),
 
-            buttonsContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            buttonsContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            buttonsContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: padding),
+            buttonsContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -padding),
             buttonsContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             buttonsContainer.heightAnchor.constraint(equalToConstant: 90),
             
-            nextButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -20),
+            nextButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -padding),
             nextButton.trailingAnchor.constraint(equalTo: buttonsContainer.trailingAnchor, constant: 0),
             nextButton.widthAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.55),
             
-            skipButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -20),
+            skipButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -padding),
             skipButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor, constant: 0),
             skipButton.widthAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.40)
         ])
+
     }
     
     private func setupPages() {
@@ -134,7 +142,11 @@ final class OnboardingView: UIView {
             pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         }
         
-        contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingContent.count)).isActive = true
+        contentStackView.widthAnchor.constraint(
+            equalTo: scrollView.widthAnchor, 
+            multiplier: CGFloat(OnboardingContent.count)
+        )
+        .isActive = true
     }
     
     private func createPageView() -> UIView {
@@ -171,26 +183,26 @@ final class OnboardingView: UIView {
         view.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
-            illustrationContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            illustrationContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            illustrationContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            illustrationContainer.heightAnchor.constraint(equalToConstant: 367),
-            
+            illustrationContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            illustrationContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            illustrationContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            illustrationContainer.heightAnchor.constraint(equalTo: illustrationContainer.widthAnchor, multiplier: self.screenAspectRatio > 0.5 ? 0.8 : 1),
+
             illustrationLabel.centerXAnchor.constraint(equalTo: illustrationContainer.centerXAnchor),
             illustrationLabel.centerYAnchor.constraint(equalTo: illustrationContainer.centerYAnchor),
             
-            pageControl.topAnchor.constraint(equalTo: illustrationContainer.bottomAnchor, constant: 20),
-            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            pageControl.topAnchor.constraint(equalTo: illustrationContainer.bottomAnchor, constant: padding),
+            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             
-            titleLabel.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 32),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            titleLabel.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: padding),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 13),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
-        
+
         return view
     }
     
