@@ -25,6 +25,12 @@ class PincodeInputView: UIStackView {
         return textField
     }
     
+    private var isPincodeFilled: Bool {
+        codeDigits.allSatisfy {
+            $0.text != nil && $0.text!.isEmpty == false
+        }
+    }
+    
     private var codeDigits: [UITextField] = []
     
     override init(frame: CGRect) {
@@ -59,7 +65,7 @@ class PincodeInputView: UIStackView {
     @objc func handleTextFieldTap(_ gesture: UITapGestureRecognizer) {
         guard let textField = gesture.view as? UITextField else { return }
         
-        if areAllFieldsFilled() {
+        if isPincodeFilled {
             for field in codeDigits {
                 field.isUserInteractionEnabled = true
             }
@@ -71,10 +77,6 @@ class PincodeInputView: UIStackView {
         } else {
             textField.becomeFirstResponder()
         }
-    }
-    
-    private func areAllFieldsFilled() -> Bool {
-        codeDigits.allSatisfy { !($0.text?.isEmpty ?? true)}
     }
 }
 
@@ -90,7 +92,7 @@ extension PincodeInputView: UITextFieldDelegate {
         
         if newText.isEmpty {
             textField.text = ""
-        } else if newText.count == 1 {
+        } else {
             textField.text = newText
             if textField.tag < codeDigits.count {
                 let nextTextField = codeDigits[textField.tag]
@@ -107,12 +109,11 @@ extension PincodeInputView: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if !areAllFieldsFilled() {
-            var tmpArr = codeDigits
-            tmpArr.remove(at: textField.tag - 1)
-            for item in tmpArr {
-                item.isUserInteractionEnabled = false
-            }
+        guard isPincodeFilled else { return }
+        var tmpArr = codeDigits
+        tmpArr.remove(at: textField.tag - 1)
+        for item in tmpArr {
+            item.isUserInteractionEnabled = false
         }
     }
 }
