@@ -29,8 +29,9 @@ class AuthorizationSceneView: UIView {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
+            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21)
         ])
     }
 }

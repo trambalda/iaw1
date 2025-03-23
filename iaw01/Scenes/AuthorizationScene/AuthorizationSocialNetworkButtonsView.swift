@@ -11,8 +11,7 @@ class AuthorizationSocialNetworkButtonsView: UIView {
     
     private let loginUsingLable: UILabel = {
         let label = UILabel()
-//        label.setTextAndFont("Or Login Using:", font: .body)
-        label.textColor = .dark80
+        label.attributedText = Font.body.compose("r Login Using:", color: .dark80)
         return label
     }()
     
@@ -24,36 +23,39 @@ class AuthorizationSocialNetworkButtonsView: UIView {
     
     private lazy var lineContainerView: UIView = {
         let view = UIView()
+//        Все что касается укладывания в сабьвью выносим в метод setupLayout()
         view.addSubview(lineViewNearWithLoginUsing)
         return view
     }()
     
     private let loginUsingStackView: UIStackView = {
         let stackView = UIStackView()
+//        Дефолтные не указываем
         stackView.axis = .horizontal
         stackView.spacing = 16
         return stackView
     }()
     
-    private static func createSocialNetworkButton(imageName: String) -> UIButton {
+    private func createButton(imageName: String) -> UIButton {
         let button = UIButton(type: .custom)
         button.backgroundColor = .white
         button.layer.cornerRadius = 35.5
         button.layer.borderWidth = 1.5
         button.layer.borderColor = UIColor.light60.cgColor
         button.clipsToBounds = true
-        
+//        Поставить галку в ассетах, а тут withRenderingMode(.alwaysOriginal) убрать
         let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
         button.setImage(image, for: .normal)
         
         return button
     }
     
-    private let googleButton = createSocialNetworkButton(imageName: "googleLogo")
-    private let appleButton = createSocialNetworkButton(imageName: "appleLogo")
+    private lazy var googleButton = createButton(imageName: "googleLogo")
+    private lazy var appleButton = createButton(imageName: "appleLogo")
     
     private lazy var stackViewSocialNetworkButton: UIStackView = {
         let stackViewInContainer = UIStackView()
+        // Дефолные не указываем
         stackViewInContainer.axis = .horizontal
         stackViewInContainer.spacing = 20
         stackViewInContainer.distribution = .fillEqually
@@ -61,7 +63,10 @@ class AuthorizationSocialNetworkButtonsView: UIView {
         return stackViewInContainer
     }()
     
-    
+//    Обединить все в два метода
+//    setupLayout()
+//    setupConstraints()
+//    Структура верстки по сути везде должна быть одна и та же
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayoutLoginUsingView()
@@ -86,8 +91,6 @@ class AuthorizationSocialNetworkButtonsView: UIView {
         stackViewSocialNetworkButton.addArrangedSubview(appleButton)
     }
 }
-
-// MARK: - Constraints
 
 extension AuthorizationSocialNetworkButtonsView {
     
