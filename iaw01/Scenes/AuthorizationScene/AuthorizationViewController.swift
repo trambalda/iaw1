@@ -7,22 +7,18 @@
 
 import UIKit
 
-class AuthorizationSceneViewController: UIViewController {
+class AuthorizationViewController: UIViewController {
     
-    private lazy var authorizationSceneView: AuthorizationSceneView = {
+    private lazy var authorizationView: AuthorizationSceneView = {
         let view = AuthorizationSceneView(frame: UIScreen.main.bounds)
         return view
     }()
     
     override func loadView() {
-        view = authorizationSceneView
+        view = authorizationView
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
-    
-
 }

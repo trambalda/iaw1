@@ -1,5 +1,5 @@
 //
-//  AuthorizationSocialNetworkLoginView.swift
+//  AuthorizationSocialNetworkButtonsView.swift
 //  iaw01
 //
 //  Created by Дария Акатова on 19.03.2025.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class AuthorizationSocialNetworkLoginView: UIView {
+class AuthorizationSocialNetworkButtonsView: UIView {
     
     private let loginUsingLable: UILabel = {
         let label = UILabel()
-        label.setTextAndFont("Or Login Using:", font: .body)
+//        label.setTextAndFont("Or Login Using:", font: .body)
         label.textColor = .dark80
         return label
     }()
@@ -89,7 +89,7 @@ class AuthorizationSocialNetworkLoginView: UIView {
 
 // MARK: - Constraints
 
-extension AuthorizationSocialNetworkLoginView {
+extension AuthorizationSocialNetworkButtonsView {
     
     private func setupConstraintsLoginUsing() {
   

@@ -4,12 +4,13 @@ final class AppCoordinator {
     
     private let window: UIWindow
     private let presenter: UINavigationController
-    private let factory: Factory
+    private lazy var factory: Factory = {
+        Factory(appCoordinator: self)
+    }()
     
     init(window: UIWindow) {
         self.window = window
-        self.presenter = UINavigationController()
-        self.factory = Factory()
+        presenter = UINavigationController()
         window.rootViewController = presenter
         window.makeKeyAndVisible()
     }
@@ -21,5 +22,20 @@ final class AppCoordinator {
     func showMainViewController() {
         let rootTabBarController = RootTabBarController(factory: factory)
         window.rootViewController = rootTabBarController
+    }
+    
+    func showTextFieldScene(from parent: UINavigationController?) {
+        let vc = factory.createTextFieldsScene()
+        parent?.pushViewController(vc, animated: true)
+    }
+    
+    func showCornersButtonsScene(from parent: UINavigationController?) {
+        let vc = factory.createCornersButtonsScene()
+        parent?.pushViewController(vc, animated: true)
+    }
+    
+    func showAuthorizationViewController(from parent: UINavigationController?) {
+        let vc = factory.createAuthorizationScene()
+        parent?.pushViewController(vc, animated: true)
     }
 }
