@@ -134,8 +134,9 @@ final class OnboardingView: UIView {
     }
     
     private func setupPages() {
-        for _ in 0..<OnboardingContent.count {
-            let pageView = createPageView()
+        for index in 0..<OnboardingContent.count {
+            let content = OnboardingContent.pages[index]
+            let pageView = createPageView(with: content)
             pageViews.append(pageView)
             contentStackView.addArrangedSubview(pageView)
             
@@ -149,18 +150,40 @@ final class OnboardingView: UIView {
         .isActive = true
     }
     
-    private func createPageView() -> UIView {
+    private func createPageView(with content: OnboardingPage) -> UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
         let illustrationContainer = UIView()
         illustrationContainer.backgroundColor = .light80
         illustrationContainer.layer.cornerRadius = 20
+        illustrationContainer.clipsToBounds = true
         illustrationContainer.translatesAutoresizingMaskIntoConstraints = false
         
-        let illustrationLabel = UILabel()
-        illustrationLabel.attributedText = Font.body.compose("ILLUSTRATION HERE", color: .dark80)
-        illustrationLabel.translatesAutoresizingMaskIntoConstraints = false
+        // Проверяем наличие изображения
+        if let image = content.image {
+            let imageView = UIImageView(image: image)
+            imageView.contentMode = .scaleAspectFill
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            illustrationContainer.addSubview(imageView)
+            
+            NSLayoutConstraint.activate([
+                imageView.topAnchor.constraint(equalTo: illustrationContainer.topAnchor),
+                imageView.leadingAnchor.constraint(equalTo: illustrationContainer.leadingAnchor),
+                imageView.trailingAnchor.constraint(equalTo: illustrationContainer.trailingAnchor),
+                imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor)
+            ])
+        } else {
+            let illustrationLabel = UILabel()
+            illustrationLabel.attributedText = Font.body.compose("ILLUSTRATION HERE", color: .dark80)
+            illustrationLabel.translatesAutoresizingMaskIntoConstraints = false
+            illustrationContainer.addSubview(illustrationLabel)
+            
+            NSLayoutConstraint.activate([
+                illustrationLabel.centerXAnchor.constraint(equalTo: illustrationContainer.centerXAnchor),
+                illustrationLabel.centerYAnchor.constraint(equalTo: illustrationContainer.centerYAnchor)
+            ])
+        }
         
         let pageControl = UIPageControl()
         pageControl.numberOfPages = OnboardingContent.count
@@ -170,14 +193,15 @@ final class OnboardingView: UIView {
         
         let titleLabel = UILabel()
         titleLabel.numberOfLines = 0
+        titleLabel.attributedText = Font.heading4.compose(content.title, color: .dark100)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let descriptionLabel = UILabel()
         descriptionLabel.numberOfLines = 0
+        descriptionLabel.attributedText = Font.body.compose(content.description, color: .dark80)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(illustrationContainer)
-        illustrationContainer.addSubview(illustrationLabel)
         view.addSubview(pageControl)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
@@ -187,9 +211,6 @@ final class OnboardingView: UIView {
             illustrationContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             illustrationContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             illustrationContainer.heightAnchor.constraint(equalTo: illustrationContainer.widthAnchor, multiplier: self.screenAspectRatio > 0.5 ? 0.8 : 1),
-
-            illustrationLabel.centerXAnchor.constraint(equalTo: illustrationContainer.centerXAnchor),
-            illustrationLabel.centerYAnchor.constraint(equalTo: illustrationContainer.centerYAnchor),
             
             pageControl.topAnchor.constraint(equalTo: illustrationContainer.bottomAnchor, constant: padding),
             pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
@@ -212,19 +233,9 @@ final class OnboardingView: UIView {
     }
        
     func configure(with page: Int) {
-        for (index, pageView) in pageViews.enumerated() {
-            let content = OnboardingContent.pages[index]
-            let titleLabel = pageView.subviews.first { $0 is UILabel } as? UILabel
-            let descriptionLabel = pageView.subviews.last { $0 is UILabel } as? UILabel
+        for (_, pageView) in pageViews.enumerated() {
             let pageControl = pageView.subviews.first { $0 is UIPageControl } as? UIPageControl
-            
-            if let imageView = content.image {
-                // TODO: Добавить отображение изображения
-            }
-            
             pageControl?.currentPage = page
-            titleLabel?.attributedText = Font.heading4.compose(content.title, color: .dark100)
-            descriptionLabel?.attributedText = Font.body.compose(content.description, color: .dark80)        
         }
         
         nextButton.setTitle(OnboardingContent.isLastPage(page) ? "Continue" : "Next")
