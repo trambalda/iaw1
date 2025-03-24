@@ -26,11 +26,6 @@ class PincodeInputView: UIView {
         
         codeDigits.first?.isUserInteractionEnabled = true
         
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(handleTapOnView))
-        addGestureRecognizer(tapGesture)
-        
         return stack
     }()
     
@@ -54,11 +49,35 @@ class PincodeInputView: UIView {
     
     private var isPincodeFilled: Bool {
         codeDigits.allSatisfy {
-            $0.text != nil && $0.text!.isEmpty == false
+            $0.text.noTNilNotEmpty
         }
     }
 
     private var codeDigits: [UITextField] = []
+    
+    private func setupLayoutAndConstraints() {
+        addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: self.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
+    }
+    
+    private func showKeyBoardWithDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            self.codeDigits.first?.becomeFirstResponder()
+        }
+    }
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleTapOnView))
+        addGestureRecognizer(tapGesture)
+    }
     
     @objc func handleTapOnView(_ gesture: UITapGestureRecognizer) {
         resetPincode()
@@ -73,29 +92,11 @@ class PincodeInputView: UIView {
         }
     }
     
-    private func setupLayoutAndConstraints() {
-        addSubview(stackView)
-        
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-        ])
-    }
-    
-    private func showKeyBoardWithDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            UIView.animate(withDuration: 0.3) {
-                self.codeDigits.first?.becomeFirstResponder()
-            }
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayoutAndConstraints()
         showKeyBoardWithDelay()
+        addTapGesture()
     }
     
     required init?(coder: NSCoder) {
