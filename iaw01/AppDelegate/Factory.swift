@@ -24,7 +24,7 @@ final class Factory {
         return vc
     }
     
-    func createVerifyPhoneNumberViewController() -> VerifyPhoneNumberViewController {
+    func createVerifyPhoneNumberScene() -> VerifyPhoneNumberViewController {
         let vc = VerifyPhoneNumberViewController()
         return vc
     }

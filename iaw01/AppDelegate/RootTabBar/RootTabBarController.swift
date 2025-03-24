@@ -25,7 +25,7 @@ final class RootTabBarController: UITabBarController {
             configureController(with: factory.createDummyScene(), tabBarItem: .discover),
             configureController(with: factory.createDummyScene(), tabBarItem: .drivethru),
             configureController(with: factory.createDummyScene(), tabBarItem: .orders),
-            configureController(with: factory.createVerifyPhoneNumberViewController(), tabBarItem: .profile),
+            configureController(with: factory.createDummyScene(), tabBarItem: .profile),
         ]
     }
     

@@ -7,10 +7,36 @@
 
 import UIKit
 
-class PincodeInputView: UIStackView {
+class PincodeInputView: UIView {
+    private lazy var stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 15
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        for i in 1...6 {
+            let textField = createTextField
+            textField.tag = i
+            codeDigits.append(textField)
+            stack.addArrangedSubview(textField)
+            stack.isUserInteractionEnabled = false
+            
+            if textField.tag != 1 {
+                textField.isUserInteractionEnabled = false
+            }
+            
+            let tapGesture = UITapGestureRecognizer(
+                target: self,
+                action: #selector(handleTapOnView))
+            self.addGestureRecognizer(tapGesture)
+        }
+        
+        return stack
+    }()
+    
     private var createTextField: PincodeTextField {
         let textField = PincodeTextField()
-        textField.font = Font.subtitle1.font
+        textField.font =  Font.subtitle1.font
         textField.textAlignment = .center
         textField.keyboardType = .numberPad
         textField.layer.cornerRadius = 15
@@ -22,61 +48,47 @@ class PincodeInputView: UIStackView {
         if let previousTextField = codeDigits.last {
             textField.previousTextField = previousTextField
         }
+        
         return textField
     }
     
     private var isPincodeFilled: Bool {
-        codeDigits.allSatisfy {
-            $0.text != nil && $0.text!.isEmpty == false
-        }
+        codeDigits.allSatisfy { $0.text != nil && $0.text!.isEmpty == false
+            }
     }
-    
+
     private var codeDigits: [UITextField] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
+        self.addSubview(stackView)
         codeDigits.first?.becomeFirstResponder()
+        setupConstraints()
     }
     
-    required init(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViews() {
-        self.spacing = 15
-        self.distribution = .fillEqually
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
-        for i in 1...6 {
-            let textField = createTextField
-            textField.tag = i
-            codeDigits.append(textField)
-            self.addArrangedSubview(textField)
-            
-            let tapGesture = UITapGestureRecognizer(
-                target: self,
-                action: #selector(handleTextFieldTap)
-            )
-            textField.addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    @objc func handleTextFieldTap(_ gesture: UITapGestureRecognizer) {
-        guard let textField = gesture.view as? UITextField else { return }
+    @objc func handleTapOnView(_ gesture: UITapGestureRecognizer) {
+        guard let _ = gesture.view else { return }
         
         if isPincodeFilled {
-            for field in codeDigits {
-                field.isUserInteractionEnabled = true
-            }
-            
             for field in codeDigits {
                 field.text = ""
             }
             codeDigits.first?.becomeFirstResponder()
-        } else {
-            textField.becomeFirstResponder()
         }
+        
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: self.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
     }
 }
 
@@ -100,21 +112,10 @@ extension PincodeInputView: UITextFieldDelegate {
                 nextTextField.becomeFirstResponder()
             } else {
                 textField.resignFirstResponder()
-                for item in codeDigits {
-                    item.isUserInteractionEnabled = true
-                }
             }
         }
         return false
     }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        guard isPincodeFilled else { return }
-        var tmpArr = codeDigits
-        tmpArr.remove(at: textField.tag - 1)
-        for item in tmpArr {
-            item.isUserInteractionEnabled = false
-        }
-    }
 }
+
 

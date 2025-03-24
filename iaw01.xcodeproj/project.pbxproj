@@ -232,8 +232,8 @@
 			children = (
 				3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */,
 				3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */,
-				3F45F97C2D8A15BF005BD993 /* PincodeInputView.swift */,
 				3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */,
+				3F45F97C2D8A15BF005BD993 /* PincodeInputView.swift */,
 			);
 			path = VerifyPhoneNumberScene;
 			sourceTree = "<group>";
