@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E868A2D8814EB002D5293 /* DishCellModel.swift */; };
+		1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E868C2D881500002D5293 /* RestaurantCellModel.swift */; };
+		1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7539F2D82E13700B2324C /* RestaurantTableViewCell.swift */; };
+		1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF12A12D89686600386458 /* DishTableViewCell.swift */; };
+		2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2182AF912D8C594600B5BF26 /* DummyView.swift */; };
+		2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2182AF932D8C690300B5BF26 /* ScenesTableViewCell.swift */; };
+		2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2182AF952D8C692F00B5BF26 /* SceneModel.swift */; };
+		2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2182AF972D8C694900B5BF26 /* SceneType.swift */; };
 		21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B502D8160E30086697C /* AppDelegate.swift */; };
 		21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B522D8160E30086697C /* SceneDelegate.swift */; };
 		21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B542D8160E30086697C /* DummyViewController.swift */; };
@@ -19,11 +27,28 @@
 		21AA4B742D8180A80086697C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B732D8180A80086697C /* Font.swift */; };
 		21AA4B762D81828D0086697C /* aeonik-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B752D81828D0086697C /* aeonik-medium.otf */; };
 		21AA4B7C2D81880A0086697C /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B7B2D81880A0086697C /* Factory.swift */; };
+		869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
+		8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
+		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
+		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
+		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
+		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
+		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
 		DAC6091A2D8700300070CE0C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC609182D8700280070CE0C /* HomeViewController.swift */; };
 		DAC6091D2D89F4960070CE0C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6091C2D89F48C0070CE0C /* HomeView.swift */; };
+		DAC6091F2D91E3A50070CE0C /* HomeAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6091E2D91E3A30070CE0C /* HomeAddressView.swift */; };
+		DAC609212D91E3BA0070CE0C /* HomeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC609202D91E3B80070CE0C /* HomeSearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F4E868A2D8814EB002D5293 /* DishCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCellModel.swift; sourceTree = "<group>"; };
+		1F4E868C2D881500002D5293 /* RestaurantCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellModel.swift; sourceTree = "<group>"; };
+		1FA7539F2D82E13700B2324C /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
+		1FCF12A12D89686600386458 /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
+		2182AF912D8C594600B5BF26 /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
+		2182AF932D8C690300B5BF26 /* ScenesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenesTableViewCell.swift; sourceTree = "<group>"; };
+		2182AF952D8C692F00B5BF26 /* SceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneModel.swift; sourceTree = "<group>"; };
+		2182AF972D8C694900B5BF26 /* SceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneType.swift; sourceTree = "<group>"; };
 		21AA4B4D2D8160E30086697C /* iaw01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iaw01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21AA4B502D8160E30086697C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21AA4B522D8160E30086697C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,8 +64,17 @@
 		21AA4B752D81828D0086697C /* aeonik-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aeonik-medium.otf"; sourceTree = "<group>"; };
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
+		869875462D8860E600C7BA58 /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
+		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
+		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
+		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
+		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
+		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
 		DAC609182D8700280070CE0C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DAC6091C2D89F48C0070CE0C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		DAC6091E2D91E3A30070CE0C /* HomeAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAddressView.swift; sourceTree = "<group>"; };
+		DAC609202D91E3B80070CE0C /* HomeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +88,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1FA7539E2D82D81600B2324C /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				1FCF129D2D89541300386458 /* DishTableViewCell */,
+				1FCF129E2D89541D00386458 /* RestaurantTableViewCell */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		1FCF129C2D8953B400386458 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D52040512D89B502009D0D1D /* CornersButton */,
+				1FA7539E2D82D81600B2324C /* TableViewCells */,
+				869875482D8860E600C7BA58 /* TextFields */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		1FCF129D2D89541300386458 /* DishTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				1FCF12A12D89686600386458 /* DishTableViewCell.swift */,
+				1F4E868A2D8814EB002D5293 /* DishCellModel.swift */,
+			);
+			path = DishTableViewCell;
+			sourceTree = "<group>";
+		};
+		1FCF129E2D89541D00386458 /* RestaurantTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				1FA7539F2D82E13700B2324C /* RestaurantTableViewCell.swift */,
+				1F4E868C2D881500002D5293 /* RestaurantCellModel.swift */,
+			);
+			path = RestaurantTableViewCell;
+			sourceTree = "<group>";
+		};
 		21AA4B442D8160E30086697C = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +148,7 @@
 				21AA4B6B2D817F990086697C /* Resources */,
 				21AA4B772D8186400086697C /* AppDelegate */,
 				21AA4B7A2D8187800086697C /* Scenes */,
+				1FCF129C2D8953B400386458 /* Components */,
 				21AA4B792D81872E0086697C /* Configuration */,
 			);
 			path = iaw01;
@@ -127,6 +199,10 @@
 			isa = PBXGroup;
 			children = (
 				21AA4B542D8160E30086697C /* DummyViewController.swift */,
+				2182AF912D8C594600B5BF26 /* DummyView.swift */,
+				2182AF932D8C690300B5BF26 /* ScenesTableViewCell.swift */,
+				2182AF972D8C694900B5BF26 /* SceneType.swift */,
+				2182AF952D8C692F00B5BF26 /* SceneModel.swift */,
 			);
 			path = DummyScene;
 			sourceTree = "<group>";
@@ -143,14 +219,53 @@
 			isa = PBXGroup;
 			children = (
 				DAC6091B2D88B0B00070CE0C /* HomeScene */,
+				D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
+				869875442D8860DF00C7BA58 /* TextFieldsScene */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		869875442D8860DF00C7BA58 /* TextFieldsScene */ = {
+			isa = PBXGroup;
+			children = (
+				869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */,
+			);
+			path = TextFieldsScene;
+			sourceTree = "<group>";
+		};
+		869875482D8860E600C7BA58 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				869875462D8860E600C7BA58 /* StringTextField.swift */,
+				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
+				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		D52040512D89B502009D0D1D /* CornersButton */ = {
+			isa = PBXGroup;
+			children = (
+				D520404F2D89B502009D0D1D /* CornersButton.swift */,
+				D52040502D89B502009D0D1D /* CornersButtonStyle.swift */,
+			);
+			path = CornersButton;
+			sourceTree = "<group>";
+		};
+		D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */ = {
+			isa = PBXGroup;
+			children = (
+				D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */,
+			);
+			path = CornersButtonsScene;
 			sourceTree = "<group>";
 		};
 		DAC6091B2D88B0B00070CE0C /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
+				DAC609202D91E3B80070CE0C /* HomeSearchView.swift */,
+				DAC6091E2D91E3A30070CE0C /* HomeAddressView.swift */,
 				DAC6091C2D89F48C0070CE0C /* HomeView.swift */,
 				DAC609182D8700280070CE0C /* HomeViewController.swift */,
 			);
@@ -231,13 +346,31 @@
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
+				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
+				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
+				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
+				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				DAC6091D2D89F4960070CE0C /* HomeView.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
+				DAC6091F2D91E3A50070CE0C /* HomeAddressView.swift in Sources */,
 				DAC6091A2D8700300070CE0C /* HomeViewController.swift in Sources */,
+				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
+				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
+				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
+				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
+				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
+				DAC609212D91E3BA0070CE0C /* HomeSearchView.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
+				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
+				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
+				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
+				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
+				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,
+				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,
+				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

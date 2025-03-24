@@ -5,7 +5,7 @@ struct Font {
     let font: UIFont
     let lettering: Double
     
-    func compose(_ text: String, color: UIColor?) -> NSAttributedString {
+    func compose(_ text: String, color: UIColor? = .black) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttributes(
             [
@@ -66,6 +66,10 @@ extension Font {
     )
     static let body = Font(
         font: UIFont(name: Family.everettRegular.title, size: 17)!,
+        lettering: -1
+    )
+    static let note = Font(
+        font: UIFont(name: Family.everettRegular.title, size: 13)!,
         lettering: -1
     )
     static let caption = Font(
