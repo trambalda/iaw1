@@ -13,23 +13,23 @@ class PincodeInputView: UIView {
         stack.spacing = 15
         stack.distribution = .fillEqually
         stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.isUserInteractionEnabled = false
         
         for i in 1...6 {
             let textField = createTextField
             textField.tag = i
+            textField.isUserInteractionEnabled = false
+            
             codeDigits.append(textField)
             stack.addArrangedSubview(textField)
-            stack.isUserInteractionEnabled = false
-            
-            if textField.tag != 1 {
-                textField.isUserInteractionEnabled = false
-            }
-            
-            let tapGesture = UITapGestureRecognizer(
-                target: self,
-                action: #selector(handleTapOnView))
-            self.addGestureRecognizer(tapGesture)
         }
+        
+        codeDigits.first?.isUserInteractionEnabled = true
+        
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleTapOnView))
+        addGestureRecognizer(tapGesture)
         
         return stack
     }()
@@ -53,42 +53,53 @@ class PincodeInputView: UIView {
     }
     
     private var isPincodeFilled: Bool {
-        codeDigits.allSatisfy { $0.text != nil && $0.text!.isEmpty == false
-            }
+        codeDigits.allSatisfy {
+            $0.text != nil && $0.text!.isEmpty == false
+        }
     }
 
     private var codeDigits: [UITextField] = []
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.addSubview(stackView)
-        codeDigits.first?.becomeFirstResponder()
-        setupConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     @objc func handleTapOnView(_ gesture: UITapGestureRecognizer) {
-        guard let _ = gesture.view else { return }
-        
+        resetPincode()
+    }
+    
+    private func resetPincode() {
         if isPincodeFilled {
             for field in codeDigits {
                 field.text = ""
             }
             codeDigits.first?.becomeFirstResponder()
         }
-        
     }
     
-    private func setupConstraints() {
+    private func setupLayoutAndConstraints() {
+        addSubview(stackView)
+        
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
+    }
+    
+    private func showKeyBoardWithDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            UIView.animate(withDuration: 0.3) {
+                self.codeDigits.first?.becomeFirstResponder()
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupLayoutAndConstraints()
+        showKeyBoardWithDelay()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
