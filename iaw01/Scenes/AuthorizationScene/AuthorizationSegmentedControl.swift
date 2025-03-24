@@ -9,29 +9,36 @@ import UIKit
 
 class AuthorizationSegmentedControl: UIView {
     
-    private enum Constants {
-        static let containerHeight: CGFloat = 63
-        static let buttonHeight: CGFloat = 43
-        static let containerCornerRadius: CGFloat = containerHeight / 2
-        static let buttonCornerRadius: CGFloat = buttonHeight / 2
-    }
+    var toggleTextField: ((Bool) -> Void)?
+    
+    private let containerHeight: CGFloat = 63
+    private let buttonHeight: CGFloat = 43
     
     private  func createButton(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.backgroundColor = .pink100
         button.setTitle(title, for: .normal)
         button.setTitleColor(.light100, for: .normal)
-        button.layer.cornerRadius = Constants.buttonCornerRadius
+        button.layer.cornerRadius = buttonHeight / 2
         return button
     }
     
-    private lazy var loginButton: UIButton = createButton(title: "Login")
-    private lazy var signUpButton: UIButton = createButton(title: "Sign Up")
+    private lazy var loginButton: UIButton = {
+        let button = createButton(title: "Login")
+        button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+        return button
+    }()
     
-    private let containerView: UIView = {
+    private lazy var signUpButton: UIButton = {
+        let button = createButton(title: "Sign Up")
+        button.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var  containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .pink60
-        view.layer.cornerRadius = Constants.containerCornerRadius
+        view.layer.cornerRadius = containerHeight / 2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -44,7 +51,6 @@ class AuthorizationSegmentedControl: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,6 +74,26 @@ class AuthorizationSegmentedControl: UIView {
         stackView.addArrangedSubview(loginButton)
         stackView.addArrangedSubview(signUpButton)
     }
+    
+    @objc private func loginTapped() {
+        toggleTextField?(true)
+        updateButtonColors(isLogin: true)
+    }
+    
+    @objc private func signUpTapped() {
+        toggleTextField?(false)
+        updateButtonColors(isLogin: false)
+    }
+    
+    func updateButtonColors(isLogin: Bool) {
+        if isLogin {
+            loginButton.backgroundColor = .pink100
+            signUpButton.backgroundColor = .pink60
+        } else {
+            loginButton.backgroundColor = .pink60
+            signUpButton.backgroundColor = .pink100
+        }
+    }
 }
 
 extension AuthorizationSegmentedControl {
@@ -78,16 +104,16 @@ extension AuthorizationSegmentedControl {
             containerView.topAnchor.constraint(equalTo: topAnchor, constant: 21),
             containerView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             containerView.widthAnchor.constraint(equalToConstant: 358),
-            containerView.heightAnchor.constraint(equalToConstant: Constants.containerHeight),
+            containerView.heightAnchor.constraint(equalToConstant: containerHeight),
             
             stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            stackView.heightAnchor.constraint(equalToConstant: Constants.buttonHeight),
+            stackView.heightAnchor.constraint(equalToConstant: buttonHeight),
             
-            loginButton.heightAnchor.constraint(equalToConstant: Constants.buttonHeight),
-            signUpButton.heightAnchor.constraint(equalToConstant: Constants.buttonHeight)
+            loginButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+            signUpButton.heightAnchor.constraint(equalToConstant: buttonHeight)
         ])
     }
 }
