@@ -38,6 +38,7 @@
 		D59B58A12D8DB2350049A3F9 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */; };
 		D59B58A32D8DCCCF0049A3F9 /* OnboardingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58A22D8DCCCF0049A3F9 /* OnboardingContent.swift */; };
 		D5DC6E1F2D93156D0063FC7A /* StoredVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC6E1E2D93156D0063FC7A /* StoredVariables.swift */; };
+		D5DC6E212D931B100063FC7A /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC6E202D931B100063FC7A /* OnboardingPageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		D59B589E2D8DB2350049A3F9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		D59B58A22D8DCCCF0049A3F9 /* OnboardingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContent.swift; sourceTree = "<group>"; };
 		D5DC6E1E2D93156D0063FC7A /* StoredVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredVariables.swift; sourceTree = "<group>"; };
+		D5DC6E202D931B100063FC7A /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +267,7 @@
 		D59B589F2D8DB2350049A3F9 /* OnboardingScene */ = {
 			isa = PBXGroup;
 			children = (
+				D5DC6E202D931B100063FC7A /* OnboardingPageView.swift */,
 				D59B58A22D8DCCCF0049A3F9 /* OnboardingContent.swift */,
 				D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */,
 				D59B589E2D8DB2350049A3F9 /* OnboardingViewController.swift */,
@@ -366,6 +369,7 @@
 				D59B58A12D8DB2350049A3F9 /* OnboardingView.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
+				D5DC6E212D931B100063FC7A /* OnboardingPageView.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
 				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,
 				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,

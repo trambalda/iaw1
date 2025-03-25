@@ -2,7 +2,7 @@ import UIKit
 
 final class OnboardingView: UIView {
     
-    private var pageViews: [UIView] = []
+    private var pageViews: [OnboardingPageView] = []
     private var onPageChanged: ((Int) -> Void)?
     
     private var isIPhoneSE: Bool {
@@ -125,8 +125,8 @@ final class OnboardingView: UIView {
             buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
             
             // Высота кнопок
-            //skipButton.heightAnchor.constraint(equalToConstant: 64),
-            //nextButton.heightAnchor.constraint(equalToConstant: 64)
+            skipButton.heightAnchor.constraint(equalToConstant: 64),
+            nextButton.heightAnchor.constraint(equalToConstant: 64)
         ])
         
         // Установка ширины кнопок
@@ -156,87 +156,11 @@ final class OnboardingView: UIView {
         .isActive = true
     }
     
-    private func createPageView(with content: OnboardingPage) -> UIView {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        let illustrationContainer = UIView()
-        illustrationContainer.backgroundColor = .light80
-        illustrationContainer.layer.cornerRadius = 20
-        illustrationContainer.clipsToBounds = true
-        illustrationContainer.translatesAutoresizingMaskIntoConstraints = false
-        
-        if let image = content.image {
-            let imageView = UIImageView(image: image)
-            imageView.contentMode = .scaleAspectFill
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            illustrationContainer.addSubview(imageView)
-            
-            NSLayoutConstraint.activate([
-                imageView.topAnchor.constraint(equalTo: illustrationContainer.topAnchor),
-                imageView.leadingAnchor.constraint(equalTo: illustrationContainer.leadingAnchor),
-                imageView.trailingAnchor.constraint(equalTo: illustrationContainer.trailingAnchor),
-                imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor)
-            ])
-        } else {
-            let illustrationLabel = UILabel()
-            illustrationLabel.attributedText = Font.body.compose("ILLUSTRATION HERE", color: .dark80)
-            illustrationLabel.translatesAutoresizingMaskIntoConstraints = false
-            illustrationContainer.addSubview(illustrationLabel)
-            
-            NSLayoutConstraint.activate([
-                illustrationLabel.centerXAnchor.constraint(equalTo: illustrationContainer.centerXAnchor),
-                illustrationLabel.centerYAnchor.constraint(equalTo: illustrationContainer.centerYAnchor)
-            ])
-        }
-        
-        let pageControl = UIPageControl()
-        pageControl.numberOfPages = OnboardingPage.count
-        pageControl.currentPageIndicatorTintColor = .peach100
-        pageControl.pageIndicatorTintColor = .light80
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        
-        let titleLabel = UILabel()
-        titleLabel.numberOfLines = 0
-        titleLabel.attributedText = Font.heading4.compose(content.title, color: .dark100)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        let descriptionLabel = UILabel()
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.attributedText = Font.body.compose(content.description, color: .dark80)
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        view.addSubview(illustrationContainer)
-        view.addSubview(pageControl)
-        view.addSubview(titleLabel)
-        view.addSubview(descriptionLabel)
-        
-        NSLayoutConstraint.activate([
-            illustrationContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            illustrationContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            illustrationContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        if isIPhoneSE {
-            illustrationContainer.heightAnchor.constraint(equalToConstant: 250).isActive = true
-        } else {
-            illustrationContainer.heightAnchor.constraint(equalTo: illustrationContainer.widthAnchor).isActive = true
-        }
-        
-        NSLayoutConstraint.activate([
-            pageControl.topAnchor.constraint(equalTo: illustrationContainer.bottomAnchor, constant: 20),
-            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            
-            titleLabel.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-
-        return view
+    private func createPageView(with content: OnboardingPage) -> OnboardingPageView {
+        let pageView = OnboardingPageView()
+        pageView.translatesAutoresizingMaskIntoConstraints = false
+        pageView.configure(with: content)
+        return pageView
     }
     
     private func setupButtons() {
@@ -246,8 +170,7 @@ final class OnboardingView: UIView {
     
     func configure(with page: Int) {
         for (_, pageView) in pageViews.enumerated() {
-            let pageControl = pageView.subviews.first { $0 is UIPageControl } as? UIPageControl
-            pageControl?.currentPage = page
+            pageView.updateCurrentPage(page)
         }
         
         nextButton.setTitle(OnboardingPage.isLastPage(page) ? "Continue" : "Next")
