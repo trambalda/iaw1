@@ -95,7 +95,6 @@ final class OnboardingView: UIView {
     }
     
     private func setupContainers() {
-        // Добавляем элементы напрямую на view, без использования mainStackView
         addSubview(scrollView)
         addSubview(buttonsStackView)
         
@@ -104,13 +103,11 @@ final class OnboardingView: UIView {
         buttonsStackView.addArrangedSubview(nextButton)
         
         NSLayoutConstraint.activate([
-            // Ограничения для scrollView
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -20),
             
-            // Ограничения для contentStackView внутри scrollView
             contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
@@ -118,18 +115,15 @@ final class OnboardingView: UIView {
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingPage.count)),
             
-            // Ограничения для buttonsStackView
             buttonsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             buttonsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             buttonsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
             buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
             
-            // Высота кнопок
             skipButton.heightAnchor.constraint(equalToConstant: 64),
             nextButton.heightAnchor.constraint(equalToConstant: 64)
         ])
         
-        // Установка ширины кнопок
         let skipButtonWidth = skipButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.40)
         skipButtonWidth.priority = .defaultHigh
         skipButtonWidth.isActive = true
