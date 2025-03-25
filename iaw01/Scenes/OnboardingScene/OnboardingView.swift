@@ -18,21 +18,19 @@ final class OnboardingView: UIView {
         }
     }
     
-    var screenAspectRatio: CGFloat {
-        let screenSize = UIScreen.main.bounds.size
-        return screenSize.width / screenSize.height
-    }
-    
-    private let contentContainer: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
-    private let buttonsContainer: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     private let scrollView: UIScrollView = {
@@ -55,7 +53,6 @@ final class OnboardingView: UIView {
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.numberOfPages = OnboardingPage.count
-        pageControl.currentPage = 0
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = .peach100
         pageControl.pageIndicatorTintColor = .light80
@@ -95,25 +92,24 @@ final class OnboardingView: UIView {
     }
     
     private func setupContainers() {
-        addSubview(contentContainer)
-        addSubview(buttonsContainer)
+        addSubview(mainStackView)
         
-        contentContainer.addSubview(scrollView)
+        mainStackView.addArrangedSubview(scrollView)
         scrollView.addSubview(contentStackView)
         
-        buttonsContainer.addSubview(nextButton)
-        buttonsContainer.addSubview(skipButton)
+        mainStackView.addArrangedSubview(buttonsStackView)
+        
+        addSubview(skipButton)
+        addSubview(nextButton)
         
         NSLayoutConstraint.activate([
-            contentContainer.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            contentContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            contentContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            contentContainer.bottomAnchor.constraint(equalTo: buttonsContainer.topAnchor),
-                        
-            scrollView.topAnchor.constraint(equalTo: contentContainer.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: contentContainer.bottomAnchor),
+            mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            
+            scrollView.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
             
             contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -121,19 +117,20 @@ final class OnboardingView: UIView {
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingPage.count)),
-
-            buttonsContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            buttonsContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            buttonsContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            buttonsContainer.heightAnchor.constraint(equalToConstant: 90),
             
-            nextButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -20),
-            nextButton.trailingAnchor.constraint(equalTo: buttonsContainer.trailingAnchor, constant: 0),
-            nextButton.widthAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.55),
+            buttonsStackView.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 20),
+            buttonsStackView.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor, constant: -20),
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 90),
             
-            skipButton.bottomAnchor.constraint(equalTo: buttonsContainer.bottomAnchor, constant: -20),
-            skipButton.leadingAnchor.constraint(equalTo: buttonsContainer.leadingAnchor, constant: 0),
-            skipButton.widthAnchor.constraint(equalTo: buttonsContainer.widthAnchor, multiplier: 0.40)
+            skipButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            skipButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            skipButton.heightAnchor.constraint(equalToConstant: 50),
+            skipButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.40, constant: -25),
+            
+            nextButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            nextButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            nextButton.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.55, constant: -25)
         ])
     }
     
