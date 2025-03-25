@@ -44,7 +44,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func handleNextButton() {
-        if currentPage < OnboardingContent.count - 1 {
+        if currentPage < OnboardingPage.count - 1 {
             currentPage += 1
             contentView.configure(with: currentPage)
         } else {

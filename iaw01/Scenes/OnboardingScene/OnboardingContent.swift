@@ -6,8 +6,7 @@ struct OnboardingPage {
     let description: String
 }
 
-enum OnboardingContent {
-
+extension OnboardingPage {
     static let pages: [OnboardingPage] = [
         OnboardingPage(
             image: UIImage(named: "testphoto07"),
