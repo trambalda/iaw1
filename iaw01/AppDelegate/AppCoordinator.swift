@@ -16,7 +16,7 @@ final class AppCoordinator {
     }
     
     func start() {
-        let isOnboardingCompleted = UserDefaults.standard.bool(forKey: "isOnboardingCompleted")
+        let isOnboardingCompleted = UserDefaults.standard.bool(forKey: StoredVariables.isOnboardingCompleted.name)
         if isOnboardingCompleted {
             showMainViewController()
         } else {
@@ -43,10 +43,5 @@ final class AppCoordinator {
         let vc = factory.createOnboardingScene()
         let navigationController = UINavigationController(rootViewController: vc)
         window.rootViewController = navigationController
-    }
-    
-    func completeOnboarding() {
-        UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
-        showMainViewController()
     }
 }
