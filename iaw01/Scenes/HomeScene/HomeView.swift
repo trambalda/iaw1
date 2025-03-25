@@ -76,7 +76,7 @@ extension HomeView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
