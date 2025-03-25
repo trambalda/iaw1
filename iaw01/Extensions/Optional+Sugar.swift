@@ -5,10 +5,8 @@
 //  Created by Dinar Mukhlisov on 24.03.2025.
 //
 
-import Foundation
-
 extension Optional where Wrapped == String {
-    var noTNilNotEmpty: Bool {
+    var notNilNotEmpty: Bool {
         self?.isEmpty == false
     }
 }

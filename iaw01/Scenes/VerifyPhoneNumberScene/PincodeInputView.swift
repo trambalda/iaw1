@@ -49,7 +49,7 @@ class PincodeInputView: UIView {
     
     private var isPincodeFilled: Bool {
         codeDigits.allSatisfy {
-            $0.text.noTNilNotEmpty
+            $0.text.notNilNotEmpty
         }
     }
 
@@ -70,9 +70,10 @@ class PincodeInputView: UIView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
             self.codeDigits.first?.becomeFirstResponder()
         }
+        
     }
     
-    private func addTapGesture() {
+    private func addTapGestureForStartPincodeInput() {
         let tapGesture = UITapGestureRecognizer(
             target: self,
             action: #selector(handleTapOnView))
@@ -84,11 +85,13 @@ class PincodeInputView: UIView {
     }
     
     private func resetPincode() {
-        if isPincodeFilled {
-            for field in codeDigits {
-                field.text = ""
-            }
-            codeDigits.first?.becomeFirstResponder()
+        guard isPincodeFilled else {
+            return
+        }
+        for field in codeDigits {
+            field.text = ""
+
+        codeDigits.first?.becomeFirstResponder()
         }
     }
     
@@ -96,11 +99,16 @@ class PincodeInputView: UIView {
         super.init(frame: frame)
         setupLayoutAndConstraints()
         showKeyBoardWithDelay()
-        addTapGesture()
+        addTapGestureForStartPincodeInput()
+        print("PincodeInputView Inited")
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("PincodeInputView deallocated")
     }
 }
 
