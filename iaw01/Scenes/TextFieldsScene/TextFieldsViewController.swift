@@ -13,7 +13,7 @@ final class TextFieldsViewController: UIViewController {
     private lazy var emailTextField: StringTextField = {
         let textField = StringTextField(with: .emailStyle)
         textField.textFieldShouldReturn = {
-            self.nameTextField.becomeTextFieldFirstResponder()
+            self.phoneTextField.becomeTextFieldFirstResponder()
         }
         return textField
     }()
@@ -37,11 +37,20 @@ final class TextFieldsViewController: UIViewController {
     private lazy var createPasswordTextField: StringTextField = {
         let textField = StringTextField(with: .createPasswordStyle)
         textField.textFieldShouldReturn = {
-            textField.resignTextFieldFirstResponder()
+            self.phoneTextField.becomeTextFieldFirstResponder()
         }
         return textField
     }()
     
+    private lazy var phoneTextField: StringTextField = {
+        let textField = StringTextField(with: .phoneNumberStyle)
+        textField.textFieldShouldReturn = {
+            print("Phone Number: \(textField.getFullPhoneNumber() ?? "")")
+            textField.resignTextFieldFirstResponder()
+        }
+        return textField
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .light100
@@ -53,9 +62,10 @@ final class TextFieldsViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(textFieldsStack)
         textFieldsStack.addArrangedSubview(emailTextField)
-        textFieldsStack.addArrangedSubview(nameTextField)
-        textFieldsStack.addArrangedSubview(passwordTextField)
-        textFieldsStack.addArrangedSubview(createPasswordTextField)
+        //textFieldsStack.addArrangedSubview(nameTextField)
+        //textFieldsStack.addArrangedSubview(passwordTextField)
+        //textFieldsStack.addArrangedSubview(createPasswordTextField)
+        textFieldsStack.addArrangedSubview(phoneTextField)
     }
     
     private func setupConstraints() {
@@ -66,3 +76,4 @@ final class TextFieldsViewController: UIViewController {
         ])
     }
 }
+

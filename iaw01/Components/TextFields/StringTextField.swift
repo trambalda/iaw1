@@ -11,6 +11,10 @@ final class StringTextField: UIStackView {
     
     private let titleContainerView = UIView()
     
+    private let phonePrefixView = PhonePrefixView()
+    
+    private var phonePrefix: String = ""
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -42,6 +46,12 @@ final class StringTextField: UIStackView {
         return button
     }()
     
+    private lazy var button: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(.closeCircle, for: .normal)
+        return button
+    }()
+    
     private lazy var showPassword: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(.eye, for: .normal)
@@ -55,6 +65,10 @@ final class StringTextField: UIStackView {
         setupLayout()
         setupConstraints()
         configureField(with: style)
+        
+        phonePrefixView.prefixDidChange = { [weak self] prefix in
+            self?.phonePrefix = prefix
+        }
     }
     
     required init(coder: NSCoder) {
@@ -67,6 +81,11 @@ final class StringTextField: UIStackView {
     
     func resignTextFieldFirstResponder() {
         textField.resignFirstResponder()
+    }
+    
+    func getFullPhoneNumber() -> String? {
+        guard let phoneNumber = textField.text else { return nil }
+        return phonePrefix + phoneNumber
     }
     
     private func setupStackViewProperties() {
@@ -124,9 +143,12 @@ final class StringTextField: UIStackView {
             textField.rightView = showPassword
         case .string, .email:
             textField.rightView = clearButton
+        case .phoneNumber:
+            textField.leftViewMode = .always
+            textField.leftView = phonePrefixView
         }
     }
-
+    
     @objc private func clearButtonTapped() {
         textField.text = nil
     }
