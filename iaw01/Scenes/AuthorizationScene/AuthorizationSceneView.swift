@@ -10,66 +10,58 @@ import UIKit
 class AuthorizationSceneView: UIView {
     
     private let titleView = AuthorizationTitleView()
-    private let buttonsView = AuthorizationSegmentedControl()
+    private let segmentedControl = AuthorizationSegmentedControl()
     private let socialLoginView = AuthorizationSocialNetworkButtonsView()
-    
-    private let emailTextFieldView:  StringTextField = {
-        let textField = StringTextField(with: .emailStyle)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
-    private let nameTextFieldView: StringTextField = {
-        let textField = StringTextField(with: .nameStyle)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isHidden = true
-        return textField
-    }()
+    private let emailTextFieldView = StringTextField(with: .emailStyle)
+    private let nameTextFieldView =  StringTextField(with: .nameStyle)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        buttonsView.toggleTextField = { [weak self] isLoginSelected in
-            self?.emailTextFieldView.isHidden = !isLoginSelected
-            self?.nameTextFieldView.isHidden = isLoginSelected
-            
-            if isLoginSelected {
-                self?.buttonsView.updateButtonColors(isLogin: true)
-            } else {
-                self?.buttonsView.updateButtonColors(isLogin: false)
-            }
-        }
-        setupLayoutAndConstraints()
+        configure()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private  func configure() {
+        setupButtonAction()
+        setupLayoutAndConstraints()
+        setupButtonAction()
+    }
+    
+    private func setupButtonAction() {
+        segmentedControl.toggleTextField = { [weak self] selection in
+            switch selection {
+            case .login:
+                self?.emailTextFieldView.isHidden = false
+                self?.nameTextFieldView.isHidden = true
+            case .signUp:
+                self?.emailTextFieldView.isHidden = true
+                self?.nameTextFieldView.isHidden = false
+            }
+        }
     }
     
     private func setupLayoutAndConstraints() {
-        let stackView = UIStackView(arrangedSubviews: [titleView,
-                                                       buttonsView,
-                                                       emailTextFieldView,
-                                                       nameTextFieldView,
-                                                       socialLoginView])
+        let stackView = UIStackView(arrangedSubviews: [
+            titleView,
+            segmentedControl,
+            emailTextFieldView,
+            nameTextFieldView,
+            socialLoginView])
+        
         stackView.axis = .vertical
         addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
-            
-            emailTextFieldView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 180),
-            emailTextFieldView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            emailTextFieldView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            emailTextFieldView.heightAnchor.constraint(equalToConstant: 80),
-            
-            nameTextFieldView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 180),
-            nameTextFieldView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            nameTextFieldView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            nameTextFieldView.heightAnchor.constraint(equalToConstant: 80)
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21)
         ])
     }
+    
 }

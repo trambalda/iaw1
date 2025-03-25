@@ -9,12 +9,17 @@ import UIKit
 
 class AuthorizationSegmentedControl: UIView {
     
-    var toggleTextField: ((Bool) -> Void)?
+    enum Selection {
+        case login
+        case signUp
+    }
     
-    private let containerHeight: CGFloat = 63
+    var toggleTextField: ((Selection) -> Void)?
+    
+    private let viewHeight: CGFloat = 63
     private let buttonHeight: CGFloat = 43
     
-    private  func createButton(title: String) -> UIButton {
+    private func createButton(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.backgroundColor = .pink100
         button.setTitle(title, for: .normal)
@@ -35,14 +40,6 @@ class AuthorizationSegmentedControl: UIView {
         return button
     }()
     
-    private lazy var  containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .pink60
-        view.layer.cornerRadius = containerHeight / 2
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 10
@@ -57,41 +54,48 @@ class AuthorizationSegmentedControl: UIView {
         configure()
     }
     
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         configure()
     }
     
     private func configure() {
         setupLayout()
         setupConstraints()
+        
+        updateButtonColors(selection: .login)
     }
     
     private func setupLayout() {
-        addSubview(containerView)
-        containerView.addSubview(stackView)
+        backgroundColor = .pink60
+        layer.cornerRadius = viewHeight / 2
+        translatesAutoresizingMaskIntoConstraints = false
+        
         addSubview(stackView)
         stackView.addArrangedSubview(loginButton)
         stackView.addArrangedSubview(signUpButton)
+        
     }
     
     @objc private func loginTapped() {
-        toggleTextField?(true)
-        updateButtonColors(isLogin: true)
+        toggleTextField?(.login)
+        updateButtonColors(selection: .login)
     }
     
     @objc private func signUpTapped() {
-        toggleTextField?(false)
-        updateButtonColors(isLogin: false)
+        toggleTextField?(.signUp)
+        updateButtonColors(selection: .signUp)
     }
     
-    func updateButtonColors(isLogin: Bool) {
-        if isLogin {
-            loginButton.backgroundColor = .pink100
-            signUpButton.backgroundColor = .pink60
-        } else {
-            loginButton.backgroundColor = .pink60
-            signUpButton.backgroundColor = .pink100
+    func updateButtonColors(selection: Selection) {
+        
+        switch selection {
+        case .login:
+                loginButton.backgroundColor = .pink100
+                signUpButton.backgroundColor = .pink60
+        case .signUp:
+                loginButton.backgroundColor = .pink60
+                signUpButton.backgroundColor = .pink100
         }
     }
 }
@@ -101,19 +105,15 @@ extension AuthorizationSegmentedControl {
         
         NSLayoutConstraint.activate([
             
-            containerView.topAnchor.constraint(equalTo: topAnchor, constant: 21),
-            containerView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 358),
-            containerView.heightAnchor.constraint(equalToConstant: containerHeight),
-            
-            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            heightAnchor.constraint(equalToConstant: viewHeight),            
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             loginButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             signUpButton.heightAnchor.constraint(equalToConstant: buttonHeight)
+ 
         ])
     }
 }
