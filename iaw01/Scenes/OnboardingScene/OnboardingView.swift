@@ -28,7 +28,8 @@ final class OnboardingView: UIView {
     
     private let buttonsStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 10
+        //stackView.spacing = 10
+        stackView.alignment = .bottom
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -99,8 +100,8 @@ final class OnboardingView: UIView {
         
         mainStackView.addArrangedSubview(buttonsStackView)
         
-        addSubview(skipButton)
-        addSubview(nextButton)
+        buttonsStackView.addArrangedSubview(skipButton)
+        buttonsStackView.addArrangedSubview(nextButton)
         
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -120,18 +121,15 @@ final class OnboardingView: UIView {
             
             buttonsStackView.leadingAnchor.constraint(equalTo: mainStackView.leadingAnchor, constant: 20),
             buttonsStackView.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor, constant: -20),
-            buttonsStackView.heightAnchor.constraint(equalToConstant: 90),
-            
-            skipButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            skipButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            skipButton.heightAnchor.constraint(equalToConstant: 50),
-            skipButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.40, constant: -25),
-            
-            nextButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            nextButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            nextButton.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.55, constant: -25)
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 84),
+            buttonsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
         ])
+        
+        let skipButtonWidth = skipButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.40)
+        skipButtonWidth.isActive = true
+        
+        let nextButtonWidth = nextButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.55)
+        nextButtonWidth.isActive = true
     }
     
     private func setupPages() {
