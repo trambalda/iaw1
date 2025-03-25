@@ -36,6 +36,7 @@ final class OnboardingView: UIView {
         scrollView.isPagingEnabled = true
         scrollView.bounces = false
         scrollView.isDirectionalLockEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
