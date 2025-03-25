@@ -1,14 +1,9 @@
 import UIKit
 
-protocol OnboardingViewDelegate: AnyObject {
-    func onboardingView(_ view: OnboardingView, didChangePage page: Int)
-}
-
 final class OnboardingView: UIView {
     
-    weak var delegate: OnboardingViewDelegate?
-    
     private var pageViews: [UIView] = []
+    private var onPageChanged: ((Int) -> Void)?
     
     private var padding: CGFloat {
         return UIScreen.main.bounds.height > 800 ? 20 : 10
@@ -250,12 +245,16 @@ final class OnboardingView: UIView {
     func setSkipButtonAction(_ action: @escaping () -> Void) {
         skipButton.onTap = action
     }
+    
+    func setPageChangeAction(_ action: @escaping (Int) -> Void) {
+        onPageChanged = action
+    }
 }
 
 extension OnboardingView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / scrollView.bounds.width)
         configure(with: page)
-        delegate?.onboardingView(self, didChangePage: page)
+        onPageChanged?(page)
     }
 } 

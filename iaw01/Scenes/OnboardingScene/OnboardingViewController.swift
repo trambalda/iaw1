@@ -15,7 +15,7 @@ final class OnboardingViewController: UIViewController {
     init() {
         contentView = OnboardingView()
         super.init(nibName: nil, bundle: nil)
-        contentView.delegate = self
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -31,6 +31,12 @@ final class OnboardingViewController: UIViewController {
         setupActions()
         contentView.configure(with: currentPage)
         navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    private func setupView() {
+        contentView.setPageChangeAction { [weak self] page in
+            self?.currentPage = page
+        }
     }
     
     private func setupActions() {
@@ -54,11 +60,5 @@ final class OnboardingViewController: UIViewController {
     
     private func finishOnboarding() {
         appCoordinator?.completeOnboarding()
-    }
-}
-
-extension OnboardingViewController: OnboardingViewDelegate {
-    func onboardingView(_ view: OnboardingView, didChangePage page: Int) {
-        currentPage = page
     }
 } 
