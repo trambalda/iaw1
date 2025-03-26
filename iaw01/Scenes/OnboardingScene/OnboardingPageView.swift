@@ -95,15 +95,13 @@ final class OnboardingPageView: UIView {
     
     private func setupLayout() {
         addSubview(contentStackView)
-        
-        // Настраиваем контейнер для иллюстрации
+    
         if isIPhoneSE {
             illustrationContainer.heightAnchor.constraint(equalToConstant: 250).isActive = true
         } else {
             illustrationContainer.heightAnchor.constraint(equalTo: illustrationContainer.widthAnchor).isActive = true
         }
         
-        // Добавляем элементы в стек
         contentStackView.addArrangedSubview(illustrationContainer)
         contentStackView.addArrangedSubview(pageControl)
         contentStackView.addArrangedSubview(titleLabel)
@@ -120,14 +118,12 @@ final class OnboardingPageView: UIView {
     }
     
     func configure(with content: OnboardingPage, currentPage: Int = 0) {
-        // Настраиваем текстовые данные
+
         titleLabel.attributedText = Font.heading4.compose(content.title, color: .dark100)
         descriptionLabel.attributedText = Font.body.compose(content.description, color: .dark80)
-        
-        // Настраиваем индикатор страниц
+
         pageControl.currentPage = currentPage
-        
-        // Настраиваем иллюстрацию
+
         imageView.image = content.image ?? UIImage(systemName: "photo")
         imageView.tintColor = .lightGray
         
