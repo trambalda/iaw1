@@ -60,6 +60,9 @@ extension Font {
         font: UIFont(name: Family.everettMedium.title, size: 21)!,
         lettering: -1
     )
+    static let name = Font(
+        font: UIFont(name: Family.everettRegular.title, size: 36)!, lettering: 0
+    )
     static let body = Font(
         font: UIFont(name: Family.everettRegular.title, size: 17)!,
         lettering: -1

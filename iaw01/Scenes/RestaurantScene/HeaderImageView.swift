@@ -1,6 +1,12 @@
 import UIKit
 
 final class HeaderImageView: UIView {
+    var model: RestaurantModel = .empty {
+        didSet {
+            imageView.image = model.image ?? UIImage(systemName: "photo")
+        }
+    }
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill

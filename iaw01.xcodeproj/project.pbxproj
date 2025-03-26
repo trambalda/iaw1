@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F0F43B62D93F9DE00D87BBD /* RestaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0F43B52D93F9DE00D87BBD /* RestaurantModel.swift */; };
 		1F3BB5082D92F682004C52F9 /* RestaurantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BB5072D92F682004C52F9 /* RestaurantInfoView.swift */; };
 		1F3BB50A2D92F6AC004C52F9 /* MenuTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BB5092D92F6AC004C52F9 /* MenuTimeView.swift */; };
 		1F3BB50C2D92F6C8004C52F9 /* MenuCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BB50B2D92F6C8004C52F9 /* MenuCategoryView.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F0F43B52D93F9DE00D87BBD /* RestaurantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
 		1F3BB5072D92F682004C52F9 /* RestaurantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoView.swift; sourceTree = "<group>"; };
 		1F3BB5092D92F6AC004C52F9 /* MenuTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTimeView.swift; sourceTree = "<group>"; };
 		1F3BB50B2D92F6C8004C52F9 /* MenuCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategoryView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				1F3BB5092D92F6AC004C52F9 /* MenuTimeView.swift */,
 				1F3BB50B2D92F6C8004C52F9 /* MenuCategoryView.swift */,
 				1F3BB50D2D92F6E6004C52F9 /* MenuItemListView.swift */,
+				1F0F43B52D93F9DE00D87BBD /* RestaurantModel.swift */,
 			);
 			path = RestaurantScene;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				1F8A42712D8D5A3A00E00E9C /* NavigationBarView.swift in Sources */,
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				1F3BB50A2D92F6AC004C52F9 /* MenuTimeView.swift in Sources */,
+				1F0F43B62D93F9DE00D87BBD /* RestaurantModel.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				1F3BB50C2D92F6C8004C52F9 /* MenuCategoryView.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
