@@ -15,16 +15,21 @@ class PincodeInputView: UIView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.isUserInteractionEnabled = false
         
+        var previousTextField: PincodeTextField?
+        
         for i in 1...6 {
             let textField = createTextField
             textField.tag = i
-            textField.isUserInteractionEnabled = false
+            if i == 1 {
+                textField.isUserInteractionEnabled = true
+            } else {
+                textField.isUserInteractionEnabled = false
+            }
+            textField.previousTextField = previousTextField
             
-            codeDigits.append(textField)
             stack.addArrangedSubview(textField)
+            previousTextField = textField
         }
-        
-        codeDigits.first?.isUserInteractionEnabled = true
         
         return stack
     }()
@@ -39,21 +44,14 @@ class PincodeInputView: UIView {
         textField.textColor = .dark100
         textField.delegate = self
         textField.tintColor = .clear
-        
-        if let previousTextField = codeDigits.last {
-            textField.previousTextField = previousTextField
-        }
-        
         return textField
     }
     
     private var isPincodeFilled: Bool {
-        codeDigits.allSatisfy {
-            $0.text.notNilNotEmpty
-        }
+        stackView.arrangedSubviews
+            .compactMap { $0 as? UITextField }
+            .allSatisfy { $0.text.notNilNotEmpty }
     }
-
-    private var codeDigits: [UITextField] = []
     
     private func setupLayoutAndConstraints() {
         addSubview(stackView)
@@ -67,10 +65,9 @@ class PincodeInputView: UIView {
     }
     
     private func showKeyBoardWithDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-            self.codeDigits.first?.becomeFirstResponder()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in
+            (self?.stackView.arrangedSubviews.first as? UITextField)?.becomeFirstResponder()
         }
-        
     }
     
     private func addTapGestureForStartPincodeInput() {
@@ -88,11 +85,11 @@ class PincodeInputView: UIView {
         guard isPincodeFilled else {
             return
         }
-        for field in codeDigits {
-            field.text = ""
-
-        codeDigits.first?.becomeFirstResponder()
-        }
+        
+        stackView.arrangedSubviews
+            .compactMap { $0 as? UITextField }
+            .forEach { $0.text = "" }
+        (stackView.arrangedSubviews.first as? UITextField)?.becomeFirstResponder()
     }
     
     override init(frame: CGRect) {
@@ -100,15 +97,10 @@ class PincodeInputView: UIView {
         setupLayoutAndConstraints()
         showKeyBoardWithDelay()
         addTapGestureForStartPincodeInput()
-        print("PincodeInputView Inited")
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        print("PincodeInputView deallocated")
     }
 }
 
@@ -126,8 +118,7 @@ extension PincodeInputView: UITextFieldDelegate {
             textField.text = ""
         } else {
             textField.text = newText
-            if textField.tag < codeDigits.count {
-                let nextTextField = codeDigits[textField.tag]
+            if let nextTextField = stackView.arrangedSubviews.first(where: {($0 as? UITextField)?.tag == textField.tag + 1 }) as? UITextField {
                 nextTextField.isUserInteractionEnabled = true
                 nextTextField.becomeFirstResponder()
             } else {
