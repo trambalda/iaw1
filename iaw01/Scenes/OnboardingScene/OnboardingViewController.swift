@@ -32,19 +32,25 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func setupOnboardingView() {
-        onboardingView.setPageChangeAction { [weak self] page in
+        setupUI()
+        setupActions()
+        onboardingView.configure(with: currentPage)
+    }
+    
+    private func setupUI() {
+        onboardingView.onPageChanged = { [weak self] page in
             self?.currentPage = page
         }
-        
-        onboardingView.setNextButtonAction { [weak self] in
+    }
+    
+    private func setupActions() {
+        onboardingView.onNextButtonTap = { [weak self] in
             self?.handleNextButton()
         }
         
-        onboardingView.setSkipButtonAction { [weak self] in
+        onboardingView.onSkipButtonTap = { [weak self] in
             self?.finishOnboarding()
         }
-        
-        onboardingView.configure(with: currentPage)
     }
     
     private func handleNextButton() {

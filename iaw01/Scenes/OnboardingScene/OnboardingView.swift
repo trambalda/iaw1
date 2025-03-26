@@ -3,7 +3,10 @@ import UIKit
 final class OnboardingView: UIView {
     
     private var pageViews: [OnboardingPageView] = []
-    private var onPageChanged: ((Int) -> Void)?
+    
+    var onNextButtonTap: (() -> Void)?
+    var onSkipButtonTap: (() -> Void)?
+    var onPageChanged: ((Int) -> Void)?
     
     private var illustrationHeight: CGFloat {
         Constants.Screen.isIPhoneSE ? 250 : 350
@@ -80,7 +83,7 @@ final class OnboardingView: UIView {
         
         setupContainers()
         setupPages()
-        setupButtons()
+        setupActions()
         
         configure(with: 0)
     }
@@ -113,11 +116,7 @@ final class OnboardingView: UIView {
             buttonsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             buttonsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             buttonsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
-            
-            // Высота кнопок
-            skipButton.heightAnchor.constraint(equalToConstant: 64),
-            nextButton.heightAnchor.constraint(equalToConstant: 64)
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 64)
         ])
         
         // Установка ширины кнопок
@@ -154,9 +153,14 @@ final class OnboardingView: UIView {
         return pageView
     }
     
-    private func setupButtons() {
-        nextButton.setTitle("Next")
-        skipButton.setTitle("Skip")
+    private func setupActions() {
+        nextButton.onTap = { [weak self] in
+            self?.onNextButtonTap?()
+        }
+        
+        skipButton.onTap = { [weak self] in
+            self?.onSkipButtonTap?()
+        }
     }
     
     func configure(with page: Int) {
@@ -168,18 +172,6 @@ final class OnboardingView: UIView {
         
         let contentOffset = CGPoint(x: scrollView.bounds.width * CGFloat(page), y: 0)
         scrollView.setContentOffset(contentOffset, animated: true)
-    }
-    
-    func setNextButtonAction(_ action: @escaping () -> Void) {
-        nextButton.onTap = action
-    }
-    
-    func setSkipButtonAction(_ action: @escaping () -> Void) {
-        skipButton.onTap = action
-    }
-    
-    func setPageChangeAction(_ action: @escaping (Int) -> Void) {
-        onPageChanged = action
     }
 }
 
