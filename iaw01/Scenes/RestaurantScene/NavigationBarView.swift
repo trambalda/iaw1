@@ -14,6 +14,12 @@ final class NavigationBarView: UIView {
         return button
     }()
     
+    private let moreButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.more, for: .normal)
+        return button
+    }()
+    
     private let searchButton: UIButton = {
         let button = UIButton()
         button.setImage(.search, for: .normal)
@@ -43,22 +49,23 @@ final class NavigationBarView: UIView {
         backButtonStack.addArrangedSubview(backButton)
         backButtonStack.addArrangedSubview(backLabel)
         
-        let actionButtonStack = UIStackView()
-        actionButtonStack.spacing = 16
-        actionButtonStack.alignment = .center
-        actionButtonStack.translatesAutoresizingMaskIntoConstraints = false
-        actionButtonStack.addArrangedSubview(searchButton)
-        actionButtonStack.addArrangedSubview(shoppingBagButton)
+        let actionsButtonStack = UIStackView()
+        actionsButtonStack.spacing = 16
+        actionsButtonStack.alignment = .center
+        actionsButtonStack.translatesAutoresizingMaskIntoConstraints = false
+        actionsButtonStack.addArrangedSubview(moreButton)
+        actionsButtonStack.addArrangedSubview(searchButton)
+        actionsButtonStack.addArrangedSubview(shoppingBagButton)
         
         addSubview(backButtonStack)
-        addSubview(actionButtonStack)
+        addSubview(actionsButtonStack)
         
         NSLayoutConstraint.activate([
             backButtonStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
             backButtonStack.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            actionButtonStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
-            actionButtonStack.centerYAnchor.constraint(equalTo: centerYAnchor)
+            actionsButtonStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
+            actionsButtonStack.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }
