@@ -81,22 +81,24 @@ final class OnboardingView: UIView {
         backgroundColor = .white
         scrollView.delegate = self
         
-        setupContainers()
+        setupLayout()
+        setupConstraints()
         setupPages()
         setupActions()
         
         configure(with: 0)
     }
     
-    private func setupContainers() {
-        // Добавляем элементы напрямую на view, без использования mainStackView
+    private func setupLayout() {
         addSubview(scrollView)
         addSubview(buttonsStackView)
         
         scrollView.addSubview(contentStackView)
         buttonsStackView.addArrangedSubview(skipButton)
         buttonsStackView.addArrangedSubview(nextButton)
-        
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             // Ограничения для scrollView
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),

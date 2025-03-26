@@ -24,7 +24,7 @@ extension OnboardingPage {
             description: "Please create an account or sign in to your existing account to start browsing our selection of delicious meals from your favorite restaurants."
         ),
         OnboardingPage(
-            image: nil, // TODO: Добавить изображение
+            image: UIImage(named: "testphoto04"),
             title: "Ordering your Food",
             description: "It's that easy! Just browse through our selection of delicious meals from your favorite restaurants."
         )

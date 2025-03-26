@@ -61,6 +61,24 @@ final class OnboardingPageView: UIView {
         return stackView
     }()
     
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let illustrationImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let illustrationHeight: CGFloat = 250
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -71,6 +89,11 @@ final class OnboardingPageView: UIView {
     }
     
     private func setupUI() {
+        setupLayout()
+        setupConstraints()
+    }
+    
+    private func setupLayout() {
         addSubview(contentStackView)
         
         // Настраиваем контейнер для иллюстрации
@@ -85,24 +108,14 @@ final class OnboardingPageView: UIView {
         contentStackView.addArrangedSubview(pageControl)
         contentStackView.addArrangedSubview(titleLabel)
         contentStackView.addArrangedSubview(descriptionLabel)
-        
-        // Настраиваем констрейнты
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0),
-            
-            illustrationContainer.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            illustrationContainer.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
-            
-            pageControl.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            
-            titleLabel.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
-            
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor)
+            contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0)
         ])
     }
     
@@ -115,27 +128,16 @@ final class OnboardingPageView: UIView {
         pageControl.currentPage = currentPage
         
         // Настраиваем иллюстрацию
-        if let image = content.image {
-            imageView.image = image
-            illustrationLabel.isHidden = true
-            
-            illustrationContainer.addSubview(imageView)
-            NSLayoutConstraint.activate([
-                imageView.topAnchor.constraint(equalTo: illustrationContainer.topAnchor),
-                imageView.leadingAnchor.constraint(equalTo: illustrationContainer.leadingAnchor),
-                imageView.trailingAnchor.constraint(equalTo: illustrationContainer.trailingAnchor),
-                imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor)
-            ])
-        } else {
-            imageView.isHidden = true
-            illustrationLabel.isHidden = false
-            
-            illustrationContainer.addSubview(illustrationLabel)
-            NSLayoutConstraint.activate([
-                illustrationLabel.centerXAnchor.constraint(equalTo: illustrationContainer.centerXAnchor),
-                illustrationLabel.centerYAnchor.constraint(equalTo: illustrationContainer.centerYAnchor)
-            ])
-        }
+        imageView.image = content.image ?? UIImage(systemName: "photo")
+        imageView.tintColor = .lightGray
+        
+        illustrationContainer.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: illustrationContainer.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: illustrationContainer.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: illustrationContainer.trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor)
+        ])
     }
     
     func updateCurrentPage(_ page: Int) {
