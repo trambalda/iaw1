@@ -5,13 +5,14 @@ struct LinkButtonStyles {
     let textColor: UIColor
     let title: String
     let url: URL?
+    let errorURL: URL? = URL(string: "https://www.figma.com/404")
 }
 
 extension LinkButtonStyles {
     static let forgotPassword = LinkButtonStyles(
         textColor: .dark80,
         title: "Forgot Password?",
-        url: nil
+        url: URL(string: "https://")
     )
 
     static let getNewCode = LinkButtonStyles(
