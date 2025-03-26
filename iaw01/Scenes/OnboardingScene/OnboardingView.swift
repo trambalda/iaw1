@@ -3,19 +3,13 @@ import UIKit
 final class OnboardingView: UIView {
     
     private var pageViews: [OnboardingPageView] = []
-    private var onPageChanged: ((Int) -> Void)?
     
-    private var isIPhoneSE: Bool {
-        UIScreen.main.bounds.height <= 667
-    }
+    var onNextButtonTap: (() -> Void)?
+    var onSkipButtonTap: (() -> Void)?
+    var onPageChanged: ((Int) -> Void)?
     
     private var illustrationHeight: CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
-        if screenHeight <= 667 {
-            return 250 
-        } else {
-            return 350 
-        }
+        Constants.Screen.isIPhoneSE ? 250 : 350
     }
     
     private let mainStackView: UIStackView = {
@@ -87,43 +81,42 @@ final class OnboardingView: UIView {
         backgroundColor = .white
         scrollView.delegate = self
         
-        setupContainers()
+        setupLayout()
+        setupConstraints()
         setupPages()
-        setupButtons()
+        setupActions()
         
         configure(with: 0)
     }
     
-    private func setupContainers() {
+    private func setupLayout() {
         addSubview(scrollView)
         addSubview(buttonsStackView)
         
         scrollView.addSubview(contentStackView)
         buttonsStackView.addArrangedSubview(skipButton)
         buttonsStackView.addArrangedSubview(nextButton)
-        
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -20),
-            
             contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingPage.count)),
-            
+
             buttonsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             buttonsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             buttonsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
-            
-            skipButton.heightAnchor.constraint(equalToConstant: 64),
-            nextButton.heightAnchor.constraint(equalToConstant: 64)
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 64)
         ])
-        
+
         let skipButtonWidth = skipButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.40)
         skipButtonWidth.priority = .defaultHigh
         skipButtonWidth.isActive = true
@@ -157,9 +150,14 @@ final class OnboardingView: UIView {
         return pageView
     }
     
-    private func setupButtons() {
-        nextButton.setTitle("Next")
-        skipButton.setTitle("Skip")
+    private func setupActions() {
+        nextButton.onTap = { [weak self] in
+            self?.onNextButtonTap?()
+        }
+        
+        skipButton.onTap = { [weak self] in
+            self?.onSkipButtonTap?()
+        }
     }
     
     func configure(with page: Int) {
@@ -171,18 +169,6 @@ final class OnboardingView: UIView {
         
         let contentOffset = CGPoint(x: scrollView.bounds.width * CGFloat(page), y: 0)
         scrollView.setContentOffset(contentOffset, animated: true)
-    }
-    
-    func setNextButtonAction(_ action: @escaping () -> Void) {
-        nextButton.onTap = action
-    }
-    
-    func setSkipButtonAction(_ action: @escaping () -> Void) {
-        skipButton.onTap = action
-    }
-    
-    func setPageChangeAction(_ action: @escaping (Int) -> Void) {
-        onPageChanged = action
     }
 }
 

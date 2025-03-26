@@ -61,6 +61,24 @@ final class OnboardingPageView: UIView {
         return stackView
     }()
     
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let illustrationImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let illustrationHeight: CGFloat = 250
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -71,66 +89,51 @@ final class OnboardingPageView: UIView {
     }
     
     private func setupUI() {
+        setupLayout()
+        setupConstraints()
+    }
+    
+    private func setupLayout() {
         addSubview(contentStackView)
-
+    
         if isIPhoneSE {
             illustrationContainer.heightAnchor.constraint(equalToConstant: 250).isActive = true
         } else {
             illustrationContainer.heightAnchor.constraint(equalTo: illustrationContainer.widthAnchor).isActive = true
         }
         
-
         contentStackView.addArrangedSubview(illustrationContainer)
         contentStackView.addArrangedSubview(pageControl)
         contentStackView.addArrangedSubview(titleLabel)
         contentStackView.addArrangedSubview(descriptionLabel)
-        
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0),
-            
-            illustrationContainer.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            illustrationContainer.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
-            
-            pageControl.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            
-            titleLabel.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
-            
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor)
+            contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0)
         ])
     }
     
     func configure(with content: OnboardingPage, currentPage: Int = 0) {
+
         titleLabel.attributedText = Font.heading4.compose(content.title, color: .dark100)
         descriptionLabel.attributedText = Font.body.compose(content.description, color: .dark80)
-        
+
         pageControl.currentPage = currentPage
+
+        imageView.image = content.image ?? UIImage(systemName: "photo")
+        imageView.tintColor = .lightGray
         
-        if let image = content.image {
-            imageView.image = image
-            illustrationLabel.isHidden = true
-            
-            illustrationContainer.addSubview(imageView)
-            NSLayoutConstraint.activate([
-                imageView.topAnchor.constraint(equalTo: illustrationContainer.topAnchor),
-                imageView.leadingAnchor.constraint(equalTo: illustrationContainer.leadingAnchor),
-                imageView.trailingAnchor.constraint(equalTo: illustrationContainer.trailingAnchor),
-                imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor)
-            ])
-        } else {
-            imageView.isHidden = true
-            illustrationLabel.isHidden = false
-            
-            illustrationContainer.addSubview(illustrationLabel)
-            NSLayoutConstraint.activate([
-                illustrationLabel.centerXAnchor.constraint(equalTo: illustrationContainer.centerXAnchor),
-                illustrationLabel.centerYAnchor.constraint(equalTo: illustrationContainer.centerYAnchor)
-            ])
-        }
+        illustrationContainer.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: illustrationContainer.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: illustrationContainer.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: illustrationContainer.trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor)
+        ])
     }
     
     func updateCurrentPage(_ page: Int) {
