@@ -2,11 +2,7 @@ import UIKit
 
 final class DummyView: UIView {
     
-    var scenes: [SceneModel] = [] {
-        didSet {
-            scenesTableView.reloadData()
-        }
-    }
+    var scenes: [SceneModel] = [] 
     var route: ((SceneType) -> Void)?
 
     private lazy var scenesTableView: UITableView = {

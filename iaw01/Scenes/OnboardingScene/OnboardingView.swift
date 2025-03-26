@@ -5,17 +5,8 @@ final class OnboardingView: UIView {
     private var pageViews: [OnboardingPageView] = []
     private var onPageChanged: ((Int) -> Void)?
     
-    private var isIPhoneSE: Bool {
-        UIScreen.main.bounds.height <= 667
-    }
-    
     private var illustrationHeight: CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
-        if screenHeight <= 667 {
-            return 250 
-        } else {
-            return 350 
-        }
+        Constants.Screen.isIPhoneSE ? 250 : 350
     }
     
     private let mainStackView: UIStackView = {

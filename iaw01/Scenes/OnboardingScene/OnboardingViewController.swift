@@ -9,13 +9,12 @@ final class OnboardingViewController: UIViewController {
     weak var delegate: OnboardingViewControllerDelegate?
     var appCoordinator: AppCoordinator?
     
-    private let contentView: OnboardingView
+    private let onboardingView: OnboardingView
     private var currentPage = 0
     
     init() {
-        contentView = OnboardingView()
+        onboardingView = OnboardingView()
         super.init(nibName: nil, bundle: nil)
-        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -23,43 +22,42 @@ final class OnboardingViewController: UIViewController {
     }
     
     override func loadView() {
-        view = contentView
+        view = onboardingView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupActions()
-        contentView.configure(with: currentPage)
+        setupOnboardingView()
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    private func setupView() {
-        contentView.setPageChangeAction { [weak self] page in
+    private func setupOnboardingView() {
+        onboardingView.setPageChangeAction { [weak self] page in
             self?.currentPage = page
         }
-    }
-    
-    private func setupActions() {
-        contentView.setNextButtonAction { [weak self] in
+        
+        onboardingView.setNextButtonAction { [weak self] in
             self?.handleNextButton()
         }
         
-        contentView.setSkipButtonAction { [weak self] in
+        onboardingView.setSkipButtonAction { [weak self] in
             self?.finishOnboarding()
         }
+        
+        onboardingView.configure(with: currentPage)
     }
     
     private func handleNextButton() {
         if currentPage < OnboardingPage.count - 1 {
             currentPage += 1
-            contentView.configure(with: currentPage)
+            onboardingView.configure(with: currentPage)
         } else {
             finishOnboarding()
         }
     }
     
     private func finishOnboarding() {
-        UserDefaults.standard.set(true, forKey: StoredVariables.isOnboardingCompleted.name)
+        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.isOnboardingCompleted.key)
         appCoordinator?.start()
     }
 } 
