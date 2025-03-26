@@ -61,11 +61,16 @@ extension Font {
         lettering: -1
     )
     static let name = Font(
-        font: UIFont(name: Family.everettRegular.title, size: 36)!, lettering: 0
+        font: UIFont(name: Family.everettRegular.title, size: 36)!,
+        lettering: 0
     )
     static let body = Font(
         font: UIFont(name: Family.everettRegular.title, size: 17)!,
         lettering: -1
+    )
+    static let info = Font(
+        font: UIFont(name: Family.everettRegular.title, size: 14)!,
+        lettering: 0
     )
     static let note = Font(
         font: UIFont(name: Family.everettRegular.title, size: 13)!,
