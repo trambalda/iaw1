@@ -72,7 +72,7 @@ final class RestaurantInfoView: UIView {
     }
     
     func setupLayoutAndConstraints() {
-        contentView.backgroundColor = .light80
+        contentView.backgroundColor = .light60
         contentView.layer.cornerRadius = 10
         contentView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentView)

@@ -60,9 +60,13 @@ extension Font {
         font: UIFont(name: Family.everettMedium.title, size: 21)!,
         lettering: -1
     )
+    static let segment = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 17)!,
+        lettering: -1
+    )
     static let name = Font(
         font: UIFont(name: Family.everettRegular.title, size: 36)!,
-        lettering: 0
+        lettering: -5
     )
     static let body = Font(
         font: UIFont(name: Family.everettRegular.title, size: 17)!,
@@ -70,7 +74,7 @@ extension Font {
     )
     static let info = Font(
         font: UIFont(name: Family.everettRegular.title, size: 14)!,
-        lettering: 0
+        lettering: -1
     )
     static let note = Font(
         font: UIFont(name: Family.everettRegular.title, size: 13)!,
