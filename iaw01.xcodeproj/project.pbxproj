@@ -32,6 +32,7 @@
 		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
 		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
 		CE4D24C12D95B05F00325BAE /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C02D95B05400325BAE /* TabBarViewModel.swift */; };
+		CE4D24C32D95C1DB00325BAE /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C22D95C1D200325BAE /* TabBarView.swift */; };
 		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
 		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
 		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
@@ -66,6 +67,7 @@
 		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
 		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
 		CE4D24C02D95B05400325BAE /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
+		CE4D24C22D95C1D200325BAE /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
 		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
 		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				21AA4B662D817C080086697C /* RootTabBarController.swift */,
 				21AA4B682D817C2F0086697C /* RootTabBarItem.swift */,
 				CE4D24C02D95B05400325BAE /* TabBarViewModel.swift */,
+				CE4D24C22D95C1D200325BAE /* TabBarView.swift */,
 			);
 			path = RootTabBar;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				CE4D24C12D95B05F00325BAE /* TabBarViewModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
+				CE4D24C32D95C1DB00325BAE /* TabBarView.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
 				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,

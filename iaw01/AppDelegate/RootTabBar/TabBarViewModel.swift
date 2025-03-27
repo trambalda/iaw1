@@ -2,21 +2,61 @@
 import UIKit
 
 final class TabBarViewModel {
-    
+
     func setupViewControllers(factory: Factory) -> [UINavigationController] {
         [
-            configureController(with: factory.createDummyScene(), tabBarItem: .home),
-            configureController(with: factory.createDummyScene(), tabBarItem: .discover),
-            configureController(with: factory.createDummyScene(), tabBarItem: .drivethru),
-            configureController(with: factory.createDummyScene(), tabBarItem: .orders),
-            configureController(with: factory.createDummyScene(), tabBarItem: .profile)
+            configureController(with: factory.createDummyScene()),
+            configureController(with: factory.createDummyScene()),
+            configureController(with: factory.createDummyScene()),
+            configureController(with: factory.createDummyScene()),
+            configureController(with: factory.createDummyScene())
         ]
     }
 
-    private func configureController(with vc: UIViewController, tabBarItem: RootTabBarItem) -> UINavigationController {
+    func createTabItems(with configure: RootTabBarItem) -> [TabBarItem] {
+        [
+            TabBarItem(
+                index: 0,
+                title: configure.title,
+                image: configure.image,
+                selectedImage: configure.selectedImage
+            ),
+            TabBarItem(
+                index: 1,
+                title: configure.title,
+                image: configure.image,
+                selectedImage: configure.selectedImage
+            ),
+            TabBarItem(
+                index: 2,
+                title: configure.title,
+                image: configure.image,
+                selectedImage: configure.selectedImage
+            ),
+            TabBarItem(
+                index: 3,
+                title: configure.title,
+                image: configure.image,
+                selectedImage: configure.selectedImage
+            ),
+            TabBarItem(
+                index: 4,
+                title: configure.title,
+                image: configure.image,
+                selectedImage: configure.selectedImage
+            ),
+            TabBarItem(
+                index: 5,
+                title: configure.title,
+                image: configure.image,
+                selectedImage: configure.selectedImage
+            ),
+
+        ]
+    }
+
+    private func configureController(with vc: UIViewController) -> UINavigationController {
         let navigationVC = UINavigationController(rootViewController: vc)
-        navigationVC.tabBarItem.title = tabBarItem.title
-        navigationVC.tabBarItem.image = tabBarItem.image
         return navigationVC
     }
 }

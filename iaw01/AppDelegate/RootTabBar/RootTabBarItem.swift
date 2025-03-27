@@ -38,3 +38,10 @@ enum RootTabBarItem {
         }
     }
 }
+
+struct TabBarItem {
+    let index: Int
+    let title: String
+    let image: UIImage
+    let selectedImage: UIImage
+}
