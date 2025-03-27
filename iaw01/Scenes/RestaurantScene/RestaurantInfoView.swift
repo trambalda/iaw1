@@ -36,6 +36,7 @@ final class RestaurantInfoView: UIView {
         let label = UILabel()
         label.text = "Ratings:"
         label.font = Font.info.font
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -71,25 +72,26 @@ final class RestaurantInfoView: UIView {
     }
     
     func setupLayoutAndConstraints() {
-        contentView.backgroundColor = .dark60
+        contentView.backgroundColor = .light80
         contentView.layer.cornerRadius = 10
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentView)
         
         let ratingStack = UIStackView()
         ratingStack.spacing = 7
-        ratingStack.alignment = .leading
+        ratingStack.alignment = .bottom
         ratingStack.addArrangedSubview(ratingImage)
         ratingStack.addArrangedSubview(ratingLabel)
         
         let timeStack = UIStackView()
         timeStack.spacing = 8
-        timeStack.alignment = .leading
+        timeStack.alignment = .bottom
         timeStack.addArrangedSubview(timeImage)
         timeStack.addArrangedSubview(timeLabel)
         
         let typeOfFoodStack = UIStackView()
         typeOfFoodStack.spacing = 9
-        typeOfFoodStack.alignment = .leading
+        typeOfFoodStack.alignment = .bottom
         typeOfFoodStack.addArrangedSubview(typeOfFoodImage)
         typeOfFoodStack.addArrangedSubview(typeOfFoodLabel)
         
@@ -104,6 +106,7 @@ final class RestaurantInfoView: UIView {
         let mainStack = UIStackView()
         mainStack.spacing = 101
         mainStack.alignment = .center
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
         mainStack.addArrangedSubview(infoStack)
         mainStack.addArrangedSubview(infoButton)
         
@@ -111,8 +114,8 @@ final class RestaurantInfoView: UIView {
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
-            contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
+            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentView.heightAnchor.constraint(equalToConstant: 109),
             
             mainStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
@@ -126,7 +129,10 @@ final class RestaurantInfoView: UIView {
             timeImage.widthAnchor.constraint(equalToConstant: 18),
             
             typeOfFoodImage.heightAnchor.constraint(equalToConstant: 16),
-            typeOfFoodImage.widthAnchor.constraint(equalToConstant: 16)
+            typeOfFoodImage.widthAnchor.constraint(equalToConstant: 16),
+            
+            infoButton.widthAnchor.constraint(equalToConstant: 50),
+            infoButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }

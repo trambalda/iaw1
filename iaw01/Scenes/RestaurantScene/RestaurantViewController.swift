@@ -36,7 +36,7 @@ final class RestaurantViewController: UIViewController {
         contentView.addSubview(menuCategoryView)
         contentView.addSubview(menuItemListView)
         
-        [navigationBarView, headerImageView, restaurantHeaderView, restaurantInfoView, menuTimeView, menuCategoryView, menuItemListView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
+        [scrollView, contentView, navigationBarView, headerImageView, restaurantHeaderView, restaurantInfoView, menuTimeView, menuCategoryView, menuItemListView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         headerImageViewHeightConstraint = headerImageView.heightAnchor.constraint(equalToConstant: 164)
@@ -56,8 +56,9 @@ final class RestaurantViewController: UIViewController {
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.bottomAnchor.constraint(equalTo: menuItemListView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor),
             
             headerImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             headerImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -71,7 +72,7 @@ final class RestaurantViewController: UIViewController {
             
             restaurantInfoView.topAnchor.constraint(equalTo: restaurantHeaderView.bottomAnchor, constant: 20),
             restaurantInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 21),
-            restaurantInfoView.trailingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -21),
+            restaurantInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -21),
             restaurantInfoViewHeightConstraint,
             
             menuTimeView.topAnchor.constraint(equalTo: restaurantInfoView.bottomAnchor, constant: 18),
@@ -87,7 +88,7 @@ final class RestaurantViewController: UIViewController {
             menuItemListView.topAnchor.constraint(equalTo: menuCategoryView.bottomAnchor, constant: 9),
             menuItemListView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 21),
             menuItemListView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -21),
-            menuItemListView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            menuItemListView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
 }

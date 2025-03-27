@@ -96,7 +96,7 @@ final class RestaurantHeaderView: UIView {
         
         NSLayoutConstraint.activate([
             mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 18),
-            mainStack.leadingAnchor.constraint(equalTo: leftAnchor, constant: 21),
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
             mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
             
             restaurantImage.widthAnchor.constraint(equalToConstant: 64),

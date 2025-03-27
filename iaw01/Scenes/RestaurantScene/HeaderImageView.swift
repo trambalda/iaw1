@@ -11,6 +11,7 @@ final class HeaderImageView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.image = UIImage(systemName: "restaurant")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

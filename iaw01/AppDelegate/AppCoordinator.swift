@@ -33,4 +33,9 @@ final class AppCoordinator {
         let vc = factory.createCornersButtonsScene()
         parent?.pushViewController(vc, animated: true)
     }
+    
+    func showRestaurantViewController(from parent: UINavigationController?) {
+        let vc = factory.createRestaurantScene()
+        parent?.pushViewController(vc, animated: true)
+    }
 }

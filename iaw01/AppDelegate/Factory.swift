@@ -23,4 +23,9 @@ final class Factory {
         let vc = CornersButtonsViewController()
         return vc
     }
+    
+    func createRestaurantScene() -> RestaurantViewController {
+        let vc = RestaurantViewController()
+        return vc
+    }
 }
