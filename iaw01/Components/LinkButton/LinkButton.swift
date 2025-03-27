@@ -3,8 +3,6 @@ import UIKit
 
 final class LinkButton: UIButton {
 
-    var onTap: (() -> Void)?
-
     override var isHighlighted: Bool {
         didSet {
             UIView.animate(withDuration: 0.1) {
@@ -51,12 +49,12 @@ final class LinkButton: UIButton {
     }
 
     @objc private func buttonTapped() {
-        guard let url = style.url else {
-            return UIApplication.shared.open(style.errorURL ?? URL(fileURLWithPath: ""))
+        if let urlLink = style.url {
+            let url = URL(string: urlLink) ?? URL(fileURLWithPath: "")
+            UIApplication.shared.open(url)
+        } else {
+            UIApplication.shared.open(Constans.url404)
         }
-
-        UIApplication.shared.open(url)
-        onTap?()
     }
 
     private func setupConstraints() {
