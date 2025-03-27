@@ -22,4 +22,9 @@ class VerifyPhoneNumberViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .light100
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        verifyPhoneNumberView.codeInputView.firstTextFieldBecomeFirstResponder()
+    }
 }

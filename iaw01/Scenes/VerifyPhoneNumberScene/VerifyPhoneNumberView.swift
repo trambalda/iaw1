@@ -63,7 +63,7 @@ class VerifyPhoneNumberView: UIView {
         return button
     }()
     
-    private lazy var codeInputView: PincodeInputView = {
+    lazy var codeInputView: PincodeInputView = {
         let view = PincodeInputView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
