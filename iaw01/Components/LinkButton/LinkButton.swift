@@ -13,7 +13,7 @@ final class LinkButton: UIButton {
         }
     }
 
-    private let style: LinkButtonStyles
+    private let style: LinkButtonStyle
 
     private lazy var label: UILabel = {
         let label = UILabel()
@@ -29,13 +29,13 @@ final class LinkButton: UIButton {
         return label
     }()
 
-    init(style: LinkButtonStyles) {
+    init(style: LinkButtonStyle) {
         self.style = style
         super.init(frame: .zero)
 
+        configure()
         setupLayout()
         setupConstraints()
-        configure()
     }
 
     required init?(coder: NSCoder) {
@@ -50,7 +50,7 @@ final class LinkButton: UIButton {
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
 
-    @objc func buttonTapped() {
+    @objc private func buttonTapped() {
         guard let url = style.url else {
             return UIApplication.shared.open(style.errorURL ?? URL(fileURLWithPath: ""))
         }
