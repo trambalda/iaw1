@@ -13,20 +13,29 @@ final class LinkButton: UIButton {
         }
     }
 
-    private let styleLink: LinkButtonStyles
+    private let style: LinkButtonStyles
 
-    private lazy var linkLabel: UILabel = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        return $0
-    }(UILabel())
+    private lazy var label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.attributedText = NSAttributedString(
+            string: style.title,
+            attributes: [
+                .foregroundColor: style.textColor,
+                .font: Font.body.font,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
+            ]
+        )
+        return label
+    }()
 
     init(style: LinkButtonStyles) {
-        self.styleLink = style
+        self.style = style
         super.init(frame: .zero)
 
         setupLayout()
         setupConstraints()
-        setupTitle()
+        configure()
     }
 
     required init?(coder: NSCoder) {
@@ -34,37 +43,28 @@ final class LinkButton: UIButton {
     }
 
     private func setupLayout() {
-        addSubview(linkLabel)
+        addSubview(label)
+    }
+
+    private func configure() {
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
 
     @objc func buttonTapped() {
-        guard let url = styleLink.url else {
-            return UIApplication.shared.open(styleLink.errorURL ?? URL(fileURLWithPath: ""))
+        guard let url = style.url else {
+            return UIApplication.shared.open(style.errorURL ?? URL(fileURLWithPath: ""))
         }
 
         UIApplication.shared.open(url)
         onTap?()
     }
 
-    private func setupTitle() {
-        let attributedText = NSAttributedString(
-            string: styleLink.title,
-            attributes: [
-                .foregroundColor: styleLink.textColor,
-                .font: Font.body.font,
-                .underlineStyle: NSUnderlineStyle.single.rawValue
-            ]
-        )
-        linkLabel.attributedText = attributedText
-    }
-
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            linkLabel.topAnchor.constraint(equalTo: topAnchor),
-            linkLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            linkLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            linkLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            label.topAnchor.constraint(equalTo: topAnchor),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
