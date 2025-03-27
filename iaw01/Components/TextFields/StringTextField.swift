@@ -80,6 +80,8 @@ final class StringTextField: UIStackView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: 80),
+            
             titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor, constant: 13),
             titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
             titleLabel.topAnchor.constraint(equalTo: titleContainerView.topAnchor),

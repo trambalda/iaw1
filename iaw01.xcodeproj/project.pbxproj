@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02B31D3F2D8C4DE800EC9031 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D3D2D8C4DE800EC9031 /* AuthorizationViewController.swift */; };
-		02B31D402D8C4DE800EC9031 /* AuthorizationSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D3C2D8C4DE800EC9031 /* AuthorizationSceneView.swift */; };
+		02B31D402D8C4DE800EC9031 /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D3C2D8C4DE800EC9031 /* AuthorizationView.swift */; };
 		02B31D422D8C78AD00EC9031 /* AuthorizationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D412D8C78AD00EC9031 /* AuthorizationTitleView.swift */; };
 		02B31D442D8C793300EC9031 /* AuthorizationSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D432D8C793300EC9031 /* AuthorizationSegmentedControl.swift */; };
 		02B31D482D8C797C00EC9031 /* AuthorizationSocialNetworkButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D472D8C797C00EC9031 /* AuthorizationSocialNetworkButtonsView.swift */; };
@@ -42,7 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		02B31D3C2D8C4DE800EC9031 /* AuthorizationSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSceneView.swift; sourceTree = "<group>"; };
+		02B31D3C2D8C4DE800EC9031 /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
 		02B31D3D2D8C4DE800EC9031 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		02B31D412D8C78AD00EC9031 /* AuthorizationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTitleView.swift; sourceTree = "<group>"; };
 		02B31D432D8C793300EC9031 /* AuthorizationSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSegmentedControl.swift; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 		02B31D3E2D8C4DE800EC9031 /* AuthorizationScene */ = {
 			isa = PBXGroup;
 			children = (
-				02B31D3C2D8C4DE800EC9031 /* AuthorizationSceneView.swift */,
+				02B31D3C2D8C4DE800EC9031 /* AuthorizationView.swift */,
 				02B31D3D2D8C4DE800EC9031 /* AuthorizationViewController.swift */,
 				02B31D412D8C78AD00EC9031 /* AuthorizationTitleView.swift */,
 				02B31D432D8C793300EC9031 /* AuthorizationSegmentedControl.swift */,
@@ -364,7 +364,7 @@
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
 				02B31D3F2D8C4DE800EC9031 /* AuthorizationViewController.swift in Sources */,
-				02B31D402D8C4DE800EC9031 /* AuthorizationSceneView.swift in Sources */,
+				02B31D402D8C4DE800EC9031 /* AuthorizationView.swift in Sources */,
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,

@@ -9,8 +9,8 @@ import UIKit
 
 class AuthorizationViewController: UIViewController {
     
-    private lazy var authorizationView: AuthorizationSceneView = {
-        let view = AuthorizationSceneView(frame: UIScreen.main.bounds)
+    private lazy var authorizationView: AuthorizationView = {
+        let view = AuthorizationView(frame: UIScreen.main.bounds)
         return view
     }()
     
