@@ -1,19 +1,9 @@
 
 import UIKit
 
-final class TabViewModel {
-
-    var factory: Factory
-
-    init(factory: Factory) {
-        self.factory = factory
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupViewControllers() -> [UIViewController] {
+final class TabBarViewModel {
+    
+    func setupViewControllers(factory: Factory) -> [UINavigationController] {
         [
             configureController(with: factory.createDummyScene(), tabBarItem: .home),
             configureController(with: factory.createDummyScene(), tabBarItem: .discover),

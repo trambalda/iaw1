@@ -3,7 +3,8 @@ import UIKit
 final class RootTabBarController: UITabBarController {
     
     var factory: Factory
-    
+    private let tabBarModel = TabBarViewModel()
+
     init(factory: Factory) {
         self.factory = factory
         super.init(nibName: nil, bundle: nil)
@@ -15,24 +16,13 @@ final class RootTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setViewControllers(tabBarModel.setupViewControllers(factory: factory), animated: true)
         configureTabBar()
     }
     
     private func configureTabBar() {
         tabBar.backgroundColor = .light80
-        viewControllers = [
-            configureController(with: factory.createDummyScene(), tabBarItem: .home),
-            configureController(with: factory.createDummyScene(), tabBarItem: .discover),
-            configureController(with: factory.createDummyScene(), tabBarItem: .drivethru),
-            configureController(with: factory.createDummyScene(), tabBarItem: .orders),
-            configureController(with: factory.createDummyScene(), tabBarItem: .profile),
-        ]
     }
     
-    private func configureController(with vc: UIViewController, tabBarItem: RootTabBarItem) -> UINavigationController {
-        let nc = UINavigationController(rootViewController: vc)
-        nc.tabBarItem.title = tabBarItem.title
-        nc.tabBarItem.image = tabBarItem.image
-        return nc
-    }
+
 }
