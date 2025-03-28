@@ -2,6 +2,8 @@ import UIKit
 
 final class OnboardingPageView: UIView {
     
+    private var pages: [OnboardingPage] = []
+    
     private let illustrationContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .light80
@@ -20,7 +22,6 @@ final class OnboardingPageView: UIView {
     
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = OnboardingPage.pages.count
         pageControl.currentPageIndicatorTintColor = .peach100
         pageControl.pageIndicatorTintColor = .light80
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +92,11 @@ final class OnboardingPageView: UIView {
             imageView.trailingAnchor.constraint(equalTo: illustrationContainer.trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor)
         ])
+    }
+    
+    func configure(with pages: [OnboardingPage]) {
+        self.pages = pages
+        pageControl.numberOfPages = pages.count
     }
     
     func configure(with content: OnboardingPage, currentPage: Int = 0) {

@@ -11,8 +11,10 @@ final class OnboardingViewController: UIViewController {
     
     private let onboardingView: OnboardingView
     private var currentPage = 0
+    private let pages: [OnboardingPage]
     
-    init() {
+    init(pages: [OnboardingPage] = OnboardingPage.pages) {
+        self.pages = pages
         onboardingView = OnboardingView()
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,7 +36,7 @@ final class OnboardingViewController: UIViewController {
     private func setupOnboardingView() {
         setupUI()
         setupActions()
-        onboardingView.configure(with: currentPage)
+        onboardingView.configure(with: pages)
     }
     
     private func setupUI() {
@@ -54,7 +56,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func handleNextButton() {
-        if currentPage < OnboardingPage.pages.count - 1 {
+        if currentPage < pages.count - 1 {
             currentPage += 1
             onboardingView.configure(with: currentPage)
         } else {

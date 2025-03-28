@@ -2,6 +2,7 @@ import UIKit
 
 final class OnboardingView: UIView {
     
+    private var pages: [OnboardingPage] = []
     private var pageViews: [OnboardingPageView] = []
     
     var onNextButtonTap: (() -> Void)?
@@ -21,8 +22,9 @@ final class OnboardingView: UIView {
     
     private let buttonsStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fill
         stackView.alignment = .center
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -46,7 +48,6 @@ final class OnboardingView: UIView {
     
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = OnboardingPage.pages.count
         pageControl.currentPageIndicatorTintColor = .peach100
         pageControl.pageIndicatorTintColor = .light80
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -67,26 +68,19 @@ final class OnboardingView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        setupLayout()
+        setupConstraints()
+        setupActions()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    private func setupLayout() {
         backgroundColor = .white
         scrollView.delegate = self
         
-        setupLayout()
-        setupConstraints()
-        setupPages()
-        setupActions()
-        
-        configure(with: 0)
-    }
-    
-    private func setupLayout() {
         addSubview(scrollView)
         addSubview(buttonsStackView)
         
@@ -97,7 +91,6 @@ final class OnboardingView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
@@ -108,32 +101,31 @@ final class OnboardingView: UIView {
             contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-            contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingPage.pages.count)),
 
             buttonsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             buttonsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             buttonsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            buttonsStackView.heightAnchor.constraint(equalToConstant: 64)
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
+            
+            nextButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.55)
         ])
-
-        let skipButtonWidth = skipButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.40)
-        skipButtonWidth.priority = .defaultHigh
-        skipButtonWidth.isActive = true
-        
-        let nextButtonWidth = nextButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.55)
-        nextButtonWidth.priority = .defaultHigh
-        nextButtonWidth.isActive = true
     }
     
     private func setupPages() {
-        for index in 0..<OnboardingPage.pages.count {
-            let content = OnboardingPage.pages[index]
+        for index in 0..<pages.count {
+            let content = pages[index]
             let pageView = createPageView(with: content)
             pageViews.append(pageView)
             contentStackView.addArrangedSubview(pageView)
             
             pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         }
+        
+        // Устанавливаем ширину contentStackView после добавления всех страниц
+        contentStackView.widthAnchor.constraint(
+            equalTo: scrollView.widthAnchor,
+            multiplier: CGFloat(pages.count)
+        ).isActive = true
     }
     
     private func createPageView(with content: OnboardingPage) -> OnboardingPageView {
@@ -153,12 +145,20 @@ final class OnboardingView: UIView {
         }
     }
     
+    func configure(with pages: [OnboardingPage]) {
+        self.pages = pages
+        pageControl.numberOfPages = pages.count
+        setupPages()
+        configure(with: 0)
+    }
+    
     func configure(with page: Int) {
         for (_, pageView) in pageViews.enumerated() {
             pageView.updateCurrentPage(page)
         }
         
-        nextButton.setTitle(OnboardingPage.isLastPage(page) ? "Continue" : "Next")
+        let isLastPage = page == pages.count - 1
+        nextButton.setTitle(isLastPage ? "Continue" : "Next")
         
         let contentOffset = CGPoint(x: scrollView.bounds.width * CGFloat(page), y: 0)
         scrollView.setContentOffset(contentOffset, animated: true)
