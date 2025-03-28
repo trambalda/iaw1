@@ -4,9 +4,7 @@ struct OnboardingPage {
     let image: UIImage?
     let title: String
     let description: String
-}
-
-extension OnboardingPage {
+    
     static let pages: [OnboardingPage] = [
         OnboardingPage(
             image: UIImage(named: "testphoto07"),
@@ -30,11 +28,5 @@ extension OnboardingPage {
         )
     ]
     
-    static var count: Int {
-        pages.count
-    }
-    
-    static func isLastPage(_ index: Int) -> Bool {
-        index == pages.count - 1
-    }
+    static func isLastPage(_ index: Int) -> Bool { index == pages.count - 1 }
 } 

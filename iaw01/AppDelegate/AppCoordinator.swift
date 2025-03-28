@@ -16,7 +16,7 @@ final class AppCoordinator {
     }
     
     func start() {
-        let isOnboardingCompleted = UserDefaults.standard.bool(forKey: Constants.UserDefaults.isOnboardingCompleted.key)
+        let isOnboardingCompleted = UserDefaults.standard.bool(forKey: UserDefaultsKeys.isOnboardingCompletedKey)
         if isOnboardingCompleted {
             showMainViewController()
         } else {

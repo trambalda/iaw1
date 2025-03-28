@@ -5,21 +5,32 @@ protocol OnboardingViewControllerDelegate: AnyObject {
 }
 
 final class OnboardingViewController: UIViewController {
-    
+
     weak var delegate: OnboardingViewControllerDelegate?
     var appCoordinator: AppCoordinator?
-    
-    private let onboardingView: OnboardingView
+
+    private let pages: [OnboardingPage]
     private var currentPage = 0
-    
-    init() {
-        onboardingView = OnboardingView()
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
+    private lazy var onboardingView: OnboardingView = {
+        let view = OnboardingView()
+
+        view.configure(with: pages)
+        
+        view.onPageChanged = { [weak self] page in
+            self?.currentPage = page
+        }
+        
+        view.onNextButtonTap = { [weak self] in
+            self?.handleNextButton()
+        }
+        
+        view.onSkipButtonTap = { [weak self] in
+            self?.finishOnboarding()
+        }
+        
+        return view
+    }()
     
     override func loadView() {
         view = onboardingView
@@ -27,34 +38,11 @@ final class OnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupOnboardingView()
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
-    private func setupOnboardingView() {
-        setupUI()
-        setupActions()
-        onboardingView.configure(with: currentPage)
-    }
-    
-    private func setupUI() {
-        onboardingView.onPageChanged = { [weak self] page in
-            self?.currentPage = page
-        }
-    }
-    
-    private func setupActions() {
-        onboardingView.onNextButtonTap = { [weak self] in
-            self?.handleNextButton()
-        }
-        
-        onboardingView.onSkipButtonTap = { [weak self] in
-            self?.finishOnboarding()
-        }
-    }
-    
+
     private func handleNextButton() {
-        if currentPage < OnboardingPage.count - 1 {
+        if currentPage < pages.count - 1 {
             currentPage += 1
             onboardingView.configure(with: currentPage)
         } else {
@@ -63,7 +51,16 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func finishOnboarding() {
-        UserDefaults.standard.set(true, forKey: Constants.UserDefaults.isOnboardingCompleted.key)
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isOnboardingCompletedKey)
         appCoordinator?.start()
+    }
+
+    init(pages: [OnboardingPage] = OnboardingPage.pages) {
+        self.pages = pages
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 } 
