@@ -18,16 +18,9 @@ final class OnboardingPageView: UIView {
         return imageView
     }()
     
-    private let illustrationLabel: UILabel = {
-        let label = UILabel()
-        label.attributedText = Font.body.compose("ILLUSTRATION HERE", color: .dark80)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = OnboardingPage.count
+        pageControl.numberOfPages = OnboardingPage.pages.count
         pageControl.currentPageIndicatorTintColor = .peach100
         pageControl.pageIndicatorTintColor = .light80
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -58,17 +51,6 @@ final class OnboardingPageView: UIView {
     }
     
     private lazy var contentStackView = verticalStackView
-    
-    private lazy var mainStackView = verticalStackView
-    
-    private let illustrationImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    private let illustrationHeight: CGFloat = 250
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -46,10 +46,10 @@ final class OnboardingView: UIView {
     
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = OnboardingPage.count
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.numberOfPages = OnboardingPage.pages.count
         pageControl.currentPageIndicatorTintColor = .peach100
         pageControl.pageIndicatorTintColor = .light80
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
     }()
     
@@ -108,7 +108,7 @@ final class OnboardingView: UIView {
             contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-            contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingPage.count)),
+            contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: CGFloat(OnboardingPage.pages.count)),
 
             buttonsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             buttonsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -126,7 +126,7 @@ final class OnboardingView: UIView {
     }
     
     private func setupPages() {
-        for index in 0..<OnboardingPage.count {
+        for index in 0..<OnboardingPage.pages.count {
             let content = OnboardingPage.pages[index]
             let pageView = createPageView(with: content)
             pageViews.append(pageView)

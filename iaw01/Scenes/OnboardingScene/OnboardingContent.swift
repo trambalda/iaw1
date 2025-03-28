@@ -30,10 +30,6 @@ extension OnboardingPage {
         )
     ]
     
-    static var count: Int {
-        pages.count
-    }
-    
     static func isLastPage(_ index: Int) -> Bool {
         index == pages.count - 1
     }
