@@ -23,7 +23,6 @@ final class OnboardingPageView: UIView {
         pageControl.currentPageIndicatorTintColor = .peach100
         pageControl.pageIndicatorTintColor = .light80
         pageControl.isUserInteractionEnabled = false
-        pageControl.hidesForSinglePage = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
     }()
@@ -81,9 +80,9 @@ final class OnboardingPageView: UIView {
         
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0),
+            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
             illustrationHeightConstraint,
             

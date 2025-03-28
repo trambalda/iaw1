@@ -9,23 +9,6 @@ final class OnboardingView: UIView {
     private var pages: [OnboardingPage] = []
     private var pageViews: [OnboardingPageView] = []
     
-    private let mainStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 20
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private let buttonsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.distribution = .fill
-        stackView.alignment = .center
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
@@ -55,6 +38,15 @@ final class OnboardingView: UIView {
         return button
     }()
 
+    private let buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -70,30 +62,31 @@ final class OnboardingView: UIView {
         backgroundColor = .white
         scrollView.delegate = self
         
-        addSubview(mainStackView)
-        
-        mainStackView.addArrangedSubview(scrollView)
-        mainStackView.addArrangedSubview(buttonsStackView)
-        
+        addSubview(scrollView)
+        addSubview(buttonsStackView)
         scrollView.addSubview(contentStackView)
+        
         buttonsStackView.addArrangedSubview(skipButton)
         buttonsStackView.addArrangedSubview(nextButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            mainStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            mainStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            
-            buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
+            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -20),
             
             contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+            
+            buttonsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            buttonsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            buttonsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
             
             nextButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.55)
         ])
