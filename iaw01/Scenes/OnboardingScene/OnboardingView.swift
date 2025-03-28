@@ -9,21 +9,18 @@ final class OnboardingView: UIView {
     var onPageChanged: ((Int) -> Void)?
     
     private var illustrationHeight: CGFloat {
-        Constants.Screen.isIPhoneSE ? 250 : 350
+        Screen.isIPhoneSE ? 250 : 350
     }
     
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     private let buttonsStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -137,12 +134,6 @@ final class OnboardingView: UIView {
             
             pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         }
-        
-        contentStackView.widthAnchor.constraint(
-            equalTo: scrollView.widthAnchor, 
-            multiplier: CGFloat(OnboardingPage.count)
-        )
-        .isActive = true
     }
     
     private func createPageView(with content: OnboardingPage) -> OnboardingPageView {
