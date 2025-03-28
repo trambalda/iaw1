@@ -73,7 +73,7 @@ class PincodeInputView: UIView {
         addGestureRecognizer(tapGesture)
     }
     
-    @objc func handleTapOnView(_ gesture: UITapGestureRecognizer) {
+    @objc private func handleTapOnView() {
         resetPincode()
     }
     
@@ -121,10 +121,13 @@ extension PincodeInputView: UITextFieldDelegate {
         return false
     }
     
-    private func findTextField(with tag: Int)-> UITextField? {
-        stackView.arrangedSubviews.first { view in
-            (view as? UITextField)?.tag == tag
-        } as? UITextField
+    private func findTextField(with tag: Int) -> UITextField? {
+        for view in stackView.arrangedSubviews {
+            if let textField = view as? UITextField, textField.tag == tag {
+                return textField
+            }
+        }
+        return nil
     }
 }
 

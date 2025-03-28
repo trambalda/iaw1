@@ -14,8 +14,8 @@ class VerifyPhoneNumberView: UIView {
     private var keyboardHeight: CGFloat = 0
     private var isKeyboardVisible = false
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
-    private var phoneEditButtonTrailingConstraint: NSLayoutConstraint!
-    private var phoneNumberTextFieldIsActive = true
+    private var phoneEditButtonTrailingConstraint: NSLayoutConstraint!  // +++
+    private var phoneNumberTextFieldIsActive = true // +++
 
     private lazy var verifyHeaderLabel: UILabel = {
         let label = UILabel()
@@ -33,7 +33,7 @@ class VerifyPhoneNumberView: UIView {
         return label
     }()
     
-    private lazy var phoneNumberTextField: UITextField = {
+    private lazy var phoneNumberTextField: UITextField = { // +++
         let textField = UITextField()
         textField.isEnabled = false
         textField.keyboardType = .numberPad
@@ -52,7 +52,7 @@ class VerifyPhoneNumberView: UIView {
         return container
     }()
     
-    private lazy var phoneEditButton: UIButton = {
+    private lazy var phoneEditButton: UIButton = { // +++
         let button = UIButton()
         let buttonWidth: CGFloat = 39
         button.setImage(.phoneEditButton, for: .normal)
@@ -63,13 +63,17 @@ class VerifyPhoneNumberView: UIView {
         return button
     }()
     
-    lazy var codeInputView: PincodeInputView = {
+    private lazy var pincodeInputView: PincodeInputView = {
         let view = PincodeInputView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var codeDigits: [UITextField] = []
+    private lazy var phoneNumberInputView: PhoneNumberInputView = {
+        let view = PhoneNumberInputView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }
     
     private lazy var getNewCodeStackView: UIStackView = {
         let stack = UIStackView()
@@ -110,14 +114,8 @@ class VerifyPhoneNumberView: UIView {
         return button
     }()
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text, text.count == 1 else { return }
-
-        if let nextTextField = codeDigits[safe: textField.tag + 1] {
-                nextTextField.becomeFirstResponder()
-        } else {
-            textField.resignFirstResponder()
-        }
+    func activatePincodeInput() {
+        pincodeInputView.firstTextFieldBecomeFirstResponder()
     }
     
     @objc private func verifyButtonDidTapped() {
@@ -186,7 +184,7 @@ extension VerifyPhoneNumberView {
         addSubview(containerViewForTextField)
         addSubview(getNewCodeStackView)
         addSubview(phoneEditButton)
-        addSubview(codeInputView)
+        addSubview(pincodeInputView)
         addSubview(verifyButton)
         containerViewForTextField.addSubview(phoneNumberTextField)
         getNewCodeStackView.addArrangedSubview(getNewCodeLabel)
@@ -217,12 +215,12 @@ extension VerifyPhoneNumberView {
             phoneEditButton.widthAnchor.constraint(equalToConstant: constraintConstant),
             phoneEditButton.leadingAnchor.constraint(equalTo: containerViewForTextField.trailingAnchor,constant: 10),
             
-            codeInputView.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor,constant: 40),
-            codeInputView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
-            codeInputView.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21),
-            codeInputView.heightAnchor.constraint(equalToConstant: 58),
+            pincodeInputView.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor,constant: 40),
+            pincodeInputView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
+            pincodeInputView.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21),
+            pincodeInputView.heightAnchor.constraint(equalToConstant: 58),
             
-            getNewCodeStackView.topAnchor.constraint(equalTo: codeInputView.bottomAnchor,constant: 10),
+            getNewCodeStackView.topAnchor.constraint(equalTo: pincodeInputView.bottomAnchor,constant: 10),
             getNewCodeStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),

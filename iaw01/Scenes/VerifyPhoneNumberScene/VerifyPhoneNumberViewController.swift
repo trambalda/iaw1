@@ -25,6 +25,6 @@ class VerifyPhoneNumberViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        verifyPhoneNumberView.codeInputView.firstTextFieldBecomeFirstResponder()
+        verifyPhoneNumberView.activatePincodeInput()
     }
 }
