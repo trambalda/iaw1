@@ -2,20 +2,19 @@ import UIKit
 
 final class OnboardingView: UIView {
     
-    private var pages: [OnboardingPage] = []
-    private var pageViews: [OnboardingPageView] = []
-    
+    // MARK: - Публичные замыкания
     var onNextButtonTap: (() -> Void)?
     var onSkipButtonTap: (() -> Void)?
     var onPageChanged: ((Int) -> Void)?
     
-    private var illustrationHeight: CGFloat {
-        Screen.isIPhoneSE ? 250 : 350
-    }
+    // MARK: - Приватные хранимые свойства
+    private var pages: [OnboardingPage] = []
+    private var pageViews: [OnboardingPageView] = []
     
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -54,6 +53,7 @@ final class OnboardingView: UIView {
         return pageControl
     }()
     
+    // MARK: - Lazy свойства
     private lazy var nextButton: CornersButton = {
         let button = CornersButton(style: .nextButton)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -66,6 +66,12 @@ final class OnboardingView: UIView {
         return button
     }()
     
+    // MARK: - Вычисляемые свойства
+    private var illustrationHeight: CGFloat {
+        Screen.isIPhoneSE ? 250 : 350
+    }
+    
+    // MARK: - Инициализаторы
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -73,16 +79,19 @@ final class OnboardingView: UIView {
         setupActions()
     }
     
-     required init?(coder: NSCoder) {
-         fatalError("init(coder:) has not been implemented")
-     }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
+    // MARK: - Приватные методы настройки
     private func setupLayout() {
         backgroundColor = .white
         scrollView.delegate = self
         
-        addSubview(scrollView)
-        addSubview(buttonsStackView)
+        addSubview(mainStackView)
+        
+        mainStackView.addArrangedSubview(scrollView)
+        mainStackView.addArrangedSubview(buttonsStackView)
         
         scrollView.addSubview(contentStackView)
         buttonsStackView.addArrangedSubview(skipButton)
@@ -91,21 +100,18 @@ final class OnboardingView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -20),
-
+            mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            mainStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            mainStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
+            
             contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-
-            buttonsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            buttonsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            buttonsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
             
             nextButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.55)
         ])
@@ -145,6 +151,7 @@ final class OnboardingView: UIView {
         }
     }
     
+    // MARK: - Публичные методы
     func configure(with pages: [OnboardingPage]) {
         self.pages = pages
         pageControl.numberOfPages = pages.count
@@ -165,6 +172,7 @@ final class OnboardingView: UIView {
     }
 }
 
+// MARK: - UIScrollViewDelegate
 extension OnboardingView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / scrollView.bounds.width)

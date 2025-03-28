@@ -2,7 +2,8 @@ import UIKit
 
 final class OnboardingPageView: UIView {
     
-    private var pages: [OnboardingPage] = []
+    // MARK: - Приватные хранимые свойства
+    private var pagesCount: Int = 0
     
     private let illustrationContainer: UIView = {
         let view = UIView()
@@ -42,6 +43,7 @@ final class OnboardingPageView: UIView {
         return label
     }()
     
+    // MARK: - Вычисляемые свойства
     private var verticalStackView: UIStackView {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -51,8 +53,10 @@ final class OnboardingPageView: UIView {
         return stackView
     }
     
+    // MARK: - Lazy свойства
     private lazy var contentStackView = verticalStackView
     
+    // MARK: - Инициализаторы
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -63,6 +67,7 @@ final class OnboardingPageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Приватные методы
     private func setupLayout() {
         addSubview(contentStackView)
         
@@ -81,8 +86,8 @@ final class OnboardingPageView: UIView {
         
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0),
             
             illustrationHeightConstraint,
@@ -94,9 +99,10 @@ final class OnboardingPageView: UIView {
         ])
     }
     
+    // MARK: - Публичные методы
     func configure(with pages: [OnboardingPage]) {
-        self.pages = pages
-        pageControl.numberOfPages = pages.count
+        self.pagesCount = pages.count
+        pageControl.numberOfPages = pagesCount
     }
     
     func configure(with content: OnboardingPage, currentPage: Int = 0) {

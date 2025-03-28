@@ -6,9 +6,15 @@ protocol OnboardingViewControllerDelegate: AnyObject {
 
 final class OnboardingViewController: UIViewController {
     
+    // MARK: - Публичные свойства
     weak var delegate: OnboardingViewControllerDelegate?
     var appCoordinator: AppCoordinator?
     
+    // MARK: - Приватные хранимые свойства
+    private let pages: [OnboardingPage]
+    private var currentPage = 0
+    
+    // MARK: - Lazy свойства
     private lazy var onboardingView: OnboardingView = {
         let view = OnboardingView()
         view.configure(with: pages)
@@ -28,18 +34,7 @@ final class OnboardingViewController: UIViewController {
         return view
     }()
     
-    private var currentPage = 0
-    private let pages: [OnboardingPage]
-    
-    init(pages: [OnboardingPage] = OnboardingPage.pages) {
-        self.pages = pages
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    // MARK: - Методы жизненного цикла
     override func loadView() {
         view = onboardingView
     }
@@ -49,6 +44,7 @@ final class OnboardingViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    // MARK: - Приватные методы
     private func handleNextButton() {
         if currentPage < pages.count - 1 {
             currentPage += 1
@@ -61,5 +57,15 @@ final class OnboardingViewController: UIViewController {
     private func finishOnboarding() {
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isOnboardingCompletedKey)
         appCoordinator?.start()
+    }
+    
+    // MARK: - Инициализаторы
+    init(pages: [OnboardingPage] = OnboardingPage.pages) {
+        self.pages = pages
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 } 
