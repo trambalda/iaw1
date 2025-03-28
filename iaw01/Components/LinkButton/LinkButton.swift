@@ -49,12 +49,9 @@ final class LinkButton: UIButton {
     }
 
     @objc private func buttonTapped() {
-        if let urlLink = style.url {
-            let url = URL(string: urlLink) ?? URL(fileURLWithPath: "")
-            UIApplication.shared.open(url)
-        } else {
-            UIApplication.shared.open(Constans.url404)
-        }
+        let urlString = style.url == nil ? "" : style.url!
+        let url = URL(string: urlString) ?? Constans.url404
+        UIApplication.shared.open(url)
     }
 
     private func setupConstraints() {
