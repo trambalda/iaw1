@@ -2,8 +2,6 @@ import UIKit
 
 final class OnboardingPageView: UIView {
 
-    private var pagesCount: Int = 0
-    
     private let illustrationContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .light80
@@ -20,17 +18,12 @@ final class OnboardingPageView: UIView {
         return imageView
     }()
     
-    private let pageControlContainer: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.currentPageIndicatorTintColor = .peach100
         pageControl.pageIndicatorTintColor = .light80
         pageControl.isUserInteractionEnabled = false
+        pageControl.hidesForSinglePage = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
     }()
@@ -74,10 +67,9 @@ final class OnboardingPageView: UIView {
         addSubview(contentStackView)
         
         illustrationContainer.addSubview(imageView)
-        pageControlContainer.addSubview(pageControl)
         
         contentStackView.addArrangedSubview(illustrationContainer)
-        contentStackView.addArrangedSubview(pageControlContainer)
+        contentStackView.addArrangedSubview(pageControl)
         contentStackView.addArrangedSubview(titleLabel)
         contentStackView.addArrangedSubview(descriptionLabel)
     }
@@ -100,32 +92,22 @@ final class OnboardingPageView: UIView {
             imageView.trailingAnchor.constraint(equalTo: illustrationContainer.trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor),
             
-            pageControlContainer.heightAnchor.constraint(equalToConstant: 40),
-            pageControlContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),
-            
-            pageControl.leadingAnchor.constraint(equalTo: pageControlContainer.leadingAnchor),
-            pageControl.centerYAnchor.constraint(equalTo: pageControlContainer.centerYAnchor)
+            pageControl.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor)
         ])
     }
 
-    func configure(with pages: [OnboardingPage]) {
-        self.pagesCount = pages.count
-        pageControl.numberOfPages = pagesCount
-
-        pageControl.hidesForSinglePage = false
-    }
-    
-    func configure(with content: OnboardingPage, currentPage: Int = 0) {
+    func configure(with content: OnboardingPage, allPages: [OnboardingPage], currentPage: Int = 0) {
+        pageControl.numberOfPages = allPages.count
+        pageControl.currentPage = currentPage
+        
         titleLabel.attributedText = Font.heading4.compose(content.title, color: .dark100)
         descriptionLabel.attributedText = Font.body.compose(content.description, color: .dark80)
-
-        if pageControl.numberOfPages == 0 {
-            pageControl.numberOfPages = OnboardingPage.pages.count
-        }
-        pageControl.currentPage = currentPage
-
         imageView.image = content.image ?? UIImage(systemName: "photo")
         imageView.tintColor = .lightGray
+    }
+    
+    func configure(with pages: [OnboardingPage]) {
+        pageControl.numberOfPages = pages.count
     }
     
     func updateCurrentPage(_ page: Int) {

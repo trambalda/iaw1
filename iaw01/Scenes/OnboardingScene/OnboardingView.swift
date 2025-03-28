@@ -55,10 +55,6 @@ final class OnboardingView: UIView {
         return button
     }()
 
-    private var illustrationHeight: CGFloat {
-        Screen.isIPhoneSE ? 250 : 350
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -106,7 +102,7 @@ final class OnboardingView: UIView {
     private func setupPages() {
         for index in 0..<pages.count {
             let content = pages[index]
-            let pageView = createPageView(with: content)
+            let pageView = createPageView(with: content, index: index)
             pageViews.append(pageView)
             contentStackView.addArrangedSubview(pageView)
             
@@ -119,12 +115,11 @@ final class OnboardingView: UIView {
         ).isActive = true
     }
     
-    private func createPageView(with content: OnboardingPage) -> OnboardingPageView {
+    private func createPageView(with content: OnboardingPage, index: Int) -> OnboardingPageView {
         let pageView = OnboardingPageView()
         pageView.translatesAutoresizingMaskIntoConstraints = false
-
-        pageView.configure(with: pages)
-        pageView.configure(with: content)
+        
+        pageView.configure(with: content, allPages: pages, currentPage: index)
         
         return pageView
     }
