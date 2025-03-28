@@ -5,18 +5,16 @@ protocol OnboardingViewControllerDelegate: AnyObject {
 }
 
 final class OnboardingViewController: UIViewController {
-    
-    // MARK: - Публичные свойства
+
     weak var delegate: OnboardingViewControllerDelegate?
     var appCoordinator: AppCoordinator?
-    
-    // MARK: - Приватные хранимые свойства
+
     private let pages: [OnboardingPage]
     private var currentPage = 0
-    
-    // MARK: - Lazy свойства
+
     private lazy var onboardingView: OnboardingView = {
         let view = OnboardingView()
+
         view.configure(with: pages)
         
         view.onPageChanged = { [weak self] page in
@@ -34,7 +32,6 @@ final class OnboardingViewController: UIViewController {
         return view
     }()
     
-    // MARK: - Методы жизненного цикла
     override func loadView() {
         view = onboardingView
     }
@@ -43,8 +40,7 @@ final class OnboardingViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
-    // MARK: - Приватные методы
+
     private func handleNextButton() {
         if currentPage < pages.count - 1 {
             currentPage += 1
@@ -58,8 +54,7 @@ final class OnboardingViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isOnboardingCompletedKey)
         appCoordinator?.start()
     }
-    
-    // MARK: - Инициализаторы
+
     init(pages: [OnboardingPage] = OnboardingPage.pages) {
         self.pages = pages
         super.init(nibName: nil, bundle: nil)

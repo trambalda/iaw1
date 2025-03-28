@@ -1,13 +1,11 @@
 import UIKit
 
 final class OnboardingView: UIView {
-    
-    // MARK: - Публичные замыкания
+
     var onNextButtonTap: (() -> Void)?
     var onSkipButtonTap: (() -> Void)?
     var onPageChanged: ((Int) -> Void)?
-    
-    // MARK: - Приватные хранимые свойства
+
     private var pages: [OnboardingPage] = []
     private var pageViews: [OnboardingPageView] = []
     
@@ -44,16 +42,7 @@ final class OnboardingView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
-    private let pageControl: UIPageControl = {
-        let pageControl = UIPageControl()
-        pageControl.currentPageIndicatorTintColor = .peach100
-        pageControl.pageIndicatorTintColor = .light80
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        return pageControl
-    }()
-    
-    // MARK: - Lazy свойства
+
     private lazy var nextButton: CornersButton = {
         let button = CornersButton(style: .nextButton)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -65,13 +54,11 @@ final class OnboardingView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    // MARK: - Вычисляемые свойства
+
     private var illustrationHeight: CGFloat {
         Screen.isIPhoneSE ? 250 : 350
     }
-    
-    // MARK: - Инициализаторы
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -82,8 +69,7 @@ final class OnboardingView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Приватные методы настройки
+
     private func setupLayout() {
         backgroundColor = .white
         scrollView.delegate = self
@@ -126,8 +112,7 @@ final class OnboardingView: UIView {
             
             pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         }
-        
-        // Устанавливаем ширину contentStackView после добавления всех страниц
+
         contentStackView.widthAnchor.constraint(
             equalTo: scrollView.widthAnchor,
             multiplier: CGFloat(pages.count)
@@ -137,7 +122,10 @@ final class OnboardingView: UIView {
     private func createPageView(with content: OnboardingPage) -> OnboardingPageView {
         let pageView = OnboardingPageView()
         pageView.translatesAutoresizingMaskIntoConstraints = false
+
+        pageView.configure(with: pages)
         pageView.configure(with: content)
+        
         return pageView
     }
     
@@ -150,11 +138,9 @@ final class OnboardingView: UIView {
             self?.onSkipButtonTap?()
         }
     }
-    
-    // MARK: - Публичные методы
+
     func configure(with pages: [OnboardingPage]) {
         self.pages = pages
-        pageControl.numberOfPages = pages.count
         setupPages()
         configure(with: 0)
     }
@@ -172,7 +158,6 @@ final class OnboardingView: UIView {
     }
 }
 
-// MARK: - UIScrollViewDelegate
 extension OnboardingView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / scrollView.bounds.width)

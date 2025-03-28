@@ -1,8 +1,7 @@
 import UIKit
 
 final class OnboardingPageView: UIView {
-    
-    // MARK: - Приватные хранимые свойства
+
     private var pagesCount: Int = 0
     
     private let illustrationContainer: UIView = {
@@ -21,10 +20,17 @@ final class OnboardingPageView: UIView {
         return imageView
     }()
     
+    private let pageControlContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.currentPageIndicatorTintColor = .peach100
         pageControl.pageIndicatorTintColor = .light80
+        pageControl.isUserInteractionEnabled = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
     }()
@@ -42,8 +48,7 @@ final class OnboardingPageView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    // MARK: - Вычисляемые свойства
+
     private var verticalStackView: UIStackView {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -52,11 +57,9 @@ final class OnboardingPageView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }
-    
-    // MARK: - Lazy свойства
+
     private lazy var contentStackView = verticalStackView
-    
-    // MARK: - Инициализаторы
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -66,15 +69,15 @@ final class OnboardingPageView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Приватные методы
+
     private func setupLayout() {
         addSubview(contentStackView)
         
         illustrationContainer.addSubview(imageView)
+        pageControlContainer.addSubview(pageControl)
         
         contentStackView.addArrangedSubview(illustrationContainer)
-        contentStackView.addArrangedSubview(pageControl)
+        contentStackView.addArrangedSubview(pageControlContainer)
         contentStackView.addArrangedSubview(titleLabel)
         contentStackView.addArrangedSubview(descriptionLabel)
     }
@@ -86,8 +89,8 @@ final class OnboardingPageView: UIView {
         
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: 0),
             
             illustrationHeightConstraint,
@@ -95,20 +98,30 @@ final class OnboardingPageView: UIView {
             imageView.topAnchor.constraint(equalTo: illustrationContainer.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: illustrationContainer.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: illustrationContainer.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor)
+            imageView.bottomAnchor.constraint(equalTo: illustrationContainer.bottomAnchor),
+            
+            pageControlContainer.heightAnchor.constraint(equalToConstant: 40),
+            pageControlContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),
+            
+            pageControl.leadingAnchor.constraint(equalTo: pageControlContainer.leadingAnchor),
+            pageControl.centerYAnchor.constraint(equalTo: pageControlContainer.centerYAnchor)
         ])
     }
-    
-    // MARK: - Публичные методы
+
     func configure(with pages: [OnboardingPage]) {
         self.pagesCount = pages.count
         pageControl.numberOfPages = pagesCount
+
+        pageControl.hidesForSinglePage = false
     }
     
     func configure(with content: OnboardingPage, currentPage: Int = 0) {
         titleLabel.attributedText = Font.heading4.compose(content.title, color: .dark100)
         descriptionLabel.attributedText = Font.body.compose(content.description, color: .dark80)
 
+        if pageControl.numberOfPages == 0 {
+            pageControl.numberOfPages = OnboardingPage.pages.count
+        }
         pageControl.currentPage = currentPage
 
         imageView.image = content.image ?? UIImage(systemName: "photo")
