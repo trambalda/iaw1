@@ -78,7 +78,10 @@ class PincodeInputView: UIView {
     }
     
     private func resetPincode() {
-        guard isPincodeFilled else { return }
+        guard isPincodeFilled else {
+            firstTextFieldBecomeFirstResponder()
+            return
+        }
         
         stackView.arrangedSubviews
             .compactMap { $0 as? UITextField }
@@ -130,5 +133,3 @@ extension PincodeInputView: UITextFieldDelegate {
         return nil
     }
 }
-
-
