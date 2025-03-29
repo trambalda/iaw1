@@ -2,6 +2,14 @@ import UIKit
 
 final class TextFieldsViewController: UIViewController {
     
+    private let linkButton: LinkButton = {
+        let linkButton = LinkButton(style: .forgotPassword)
+        linkButton.onTap = {
+            print("linkButton tapped")
+        }
+        return linkButton
+    }()
+    
     private let textFieldsStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -61,6 +69,7 @@ final class TextFieldsViewController: UIViewController {
     
     private func setupLayout() {
         view.addSubview(textFieldsStack)
+        textFieldsStack.addArrangedSubview(linkButton)
         textFieldsStack.addArrangedSubview(emailTextField)
         //textFieldsStack.addArrangedSubview(nameTextField)
         //textFieldsStack.addArrangedSubview(passwordTextField)
