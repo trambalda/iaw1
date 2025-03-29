@@ -1,7 +1,8 @@
-
 import UIKit
 
 final class LinkButton: UIButton {
+    
+    var onTap: (() -> ())?
 
     override var isHighlighted: Bool {
         didSet {
@@ -49,9 +50,12 @@ final class LinkButton: UIButton {
     }
 
     @objc private func buttonTapped() {
-        let urlString = style.url == nil ? "" : style.url!
-        let url = URL(string: urlString) ?? Constans.url404
-        UIApplication.shared.open(url)
+        if let urlString = style.url {
+            let url = URL(string: urlString) ?? Constans.url404
+            UIApplication.shared.open(url)
+        } else {
+            onTap?()
+        }
     }
 
     private func setupConstraints() {

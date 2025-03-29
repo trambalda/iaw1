@@ -1,4 +1,3 @@
-
 import UIKit
 
 struct LinkButtonStyle {
@@ -11,7 +10,7 @@ extension LinkButtonStyle {
     static let forgotPassword = LinkButtonStyle(
         textColor: .dark80,
         title: "Forgot Password?",
-        url: "https://"
+        url: nil
     )
 
     static let getNewCode = LinkButtonStyle(
