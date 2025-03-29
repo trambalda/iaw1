@@ -2,11 +2,9 @@ import UIKit
 
 final class PhonePrefixView: UIView {
     
-    var prefixDidChange: ((String) -> Void)?
+    var prefixDidChange: ((PhoneCountry) -> Void)?
     
-    private let countryCodes = [
-        ("US", "+1"), ("BY", "+375"), ("FR", "+33"), ("RU", "+7")
-    ]
+    private weak var parentView: UIView?
     
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
@@ -27,32 +25,6 @@ final class PhonePrefixView: UIView {
         button.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
         return button
     }()
-
-    private lazy var phonePrefixPicker: UIPickerView = {
-        let picker = UIPickerView()
-        picker.translatesAutoresizingMaskIntoConstraints = false
-        picker.delegate = self
-        picker.dataSource = self
-        picker.backgroundColor = .light80
-        return picker
-    }()
-    
-    private lazy var pickerToolbar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.translatesAutoresizingMaskIntoConstraints = false
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTapped))
-        toolbar.setItems([doneButton], animated: true)
-        return toolbar
-    }()
-    
-    private lazy var pickerTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.inputView = phonePrefixPicker
-        textField.inputAccessoryView = pickerToolbar
-        return textField
-    }()
     
     private lazy var lineContainerView = UIView()
     
@@ -63,8 +35,19 @@ final class PhonePrefixView: UIView {
         return view
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private lazy var countryPickerView: CountryPickerView = {
+        let view = CountryPickerView()
+        view.isHidden = true
+        view.onCountrySelected = { [weak self] country in
+            self?.phonePrefixLabel.attributedText = Font.body.compose(country.phoneCode, color: .dark100)
+            self?.prefixDidChange?(country)
+        }
+        return view
+    }()
+    
+    init(parent: UIView?) {
+        self.parentView = parent
+        super.init(frame: .zero)
         setupLayout()
         setupConstraints()
     }
@@ -79,7 +62,6 @@ final class PhonePrefixView: UIView {
         containerStackView.addArrangedSubview(showPickerButton)
         containerStackView.addArrangedSubview(lineContainerView)
         lineContainerView.addSubview(lineView)
-        addSubview(pickerTextField)
     }
     
     private func setupConstraints() {
@@ -99,32 +81,20 @@ final class PhonePrefixView: UIView {
     }
     
     @objc private func showPicker() {
-        pickerTextField.becomeFirstResponder()
-    }
-    
-    @objc private func doneButtonTapped() {
-        pickerTextField.resignFirstResponder()
-    }
-}
-
-extension PhonePrefixView: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(countryCodes[row].1) (\(countryCodes[row].0))"
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let selectedPrefix = countryCodes[row].1
-        phonePrefixLabel.attributedText = Font.body.compose(countryCodes[row].1, color: .dark100)
-        prefixDidChange?(selectedPrefix)
+        guard let parentView = parentView else { return }
+        
+        parentView.addSubview(countryPickerView)
+        countryPickerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            countryPickerView.topAnchor.constraint(equalTo: parentView.centerYAnchor),
+            countryPickerView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
+            countryPickerView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+            countryPickerView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
+        ])
+        
+        countryPickerView.isHidden = false
     }
 }
 
-extension PhonePrefixView: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        countryCodes.count
-    }
-}
+

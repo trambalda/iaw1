@@ -5,7 +5,6 @@ struct StringTextFieldStyle {
         case string
         case email
         case password
-        case phoneNumber
         
         var isSecure: Bool {
             self == .password
@@ -13,10 +12,9 @@ struct StringTextFieldStyle {
         
         var keyboardType: UIKeyboardType {
             switch self {
-            case .string:       .default
-            case .email:        .emailAddress
-            case .password:     .default
-            case .phoneNumber:  .default
+            case .string:   .default
+            case .email:    .emailAddress
+            case .password: .default
             }
         }
     }
@@ -50,11 +48,5 @@ extension StringTextFieldStyle {
         title: "Create Password",
         placeholder: "Enter your Password",
         behavior: .password
-    )
-    
-    static let phoneNumberStyle = StringTextFieldStyle(
-        title: "Phone Number",
-        placeholder: "000 000 0000",
-        behavior: .phoneNumber
     )
 }

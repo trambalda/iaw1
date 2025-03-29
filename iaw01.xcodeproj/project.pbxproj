@@ -27,6 +27,11 @@
 		21AA4B742D8180A80086697C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B732D8180A80086697C /* Font.swift */; };
 		21AA4B762D81828D0086697C /* aeonik-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B752D81828D0086697C /* aeonik-medium.otf */; };
 		21AA4B7C2D81880A0086697C /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B7B2D81880A0086697C /* Factory.swift */; };
+		860852232D9747BA0038A9EF /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860852222D9747BA0038A9EF /* PhoneTextField.swift */; };
+		860852272D9749650038A9EF /* PhoneTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860852262D9749650038A9EF /* PhoneTextFieldStyle.swift */; };
+		868044992D94765400CBE1EC /* PhoneCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868044982D94765300CBE1EC /* PhoneCountry.swift */; };
+		8680452D2D94906B00CBE1EC /* CountryPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8680452C2D94906B00CBE1EC /* CountryPickerCell.swift */; };
+		8680452F2D94908D00CBE1EC /* CountryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8680452E2D94908D00CBE1EC /* CountryPickerView.swift */; };
 		869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
 		8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
 		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
@@ -61,6 +66,11 @@
 		21AA4B752D81828D0086697C /* aeonik-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aeonik-medium.otf"; sourceTree = "<group>"; };
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		860852222D9747BA0038A9EF /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
+		860852262D9749650038A9EF /* PhoneTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextFieldStyle.swift; sourceTree = "<group>"; };
+		868044982D94765300CBE1EC /* PhoneCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCountry.swift; sourceTree = "<group>"; };
+		8680452C2D94906B00CBE1EC /* CountryPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryPickerCell.swift; sourceTree = "<group>"; };
+		8680452E2D94908D00CBE1EC /* CountryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryPickerView.swift; sourceTree = "<group>"; };
 		869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
 		869875462D8860E600C7BA58 /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
 		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
@@ -231,9 +241,14 @@
 			isa = PBXGroup;
 			children = (
 				869875462D8860E600C7BA58 /* StringTextField.swift */,
-				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
+				860852222D9747BA0038A9EF /* PhoneTextField.swift */,
 				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
+				869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */,
+				860852262D9749650038A9EF /* PhoneTextFieldStyle.swift */,
 				869878362D918ECD00C7BA58 /* PhonePrefixView.swift */,
+				868044982D94765300CBE1EC /* PhoneCountry.swift */,
+				8680452C2D94906B00CBE1EC /* CountryPickerCell.swift */,
+				8680452E2D94908D00CBE1EC /* CountryPickerView.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -329,8 +344,11 @@
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
+				860852232D9747BA0038A9EF /* PhoneTextField.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
+				868044992D94765400CBE1EC /* PhoneCountry.swift in Sources */,
 				869878372D918ECD00C7BA58 /* PhonePrefixView.swift in Sources */,
+				8680452D2D94906B00CBE1EC /* CountryPickerCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
@@ -345,12 +363,14 @@
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
+				860852272D9749650038A9EF /* PhoneTextFieldStyle.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
 				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,
 				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,
 				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
+				8680452F2D94908D00CBE1EC /* CountryPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

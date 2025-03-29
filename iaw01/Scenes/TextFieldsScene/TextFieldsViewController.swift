@@ -17,40 +17,40 @@ final class TextFieldsViewController: UIViewController {
         }
         return textField
     }()
+//    
+//    private lazy var nameTextField: StringTextField = {
+//        let textField = StringTextField(with: .nameStyle)
+//        textField.textFieldShouldReturn = {
+//            self.passwordTextField.becomeTextFieldFirstResponder()
+//        }
+//        return textField
+//    }()
+//    
+//    private lazy var passwordTextField: StringTextField = {
+//        let textField = StringTextField(with: .passwordStyle)
+//        textField.textFieldShouldReturn = {
+//            self.createPasswordTextField.becomeTextFieldFirstResponder()
+//        }
+//        return textField
+//    }()
+//    
+//    private lazy var createPasswordTextField: StringTextField = {
+//        let textField = StringTextField(with: .createPasswordStyle)
+//        textField.textFieldShouldReturn = {
+//            self.phoneTextField.becomeTextFieldFirstResponder()
+//        }
+//        return textField
+//    }()
     
-    private lazy var nameTextField: StringTextField = {
-        let textField = StringTextField(with: .nameStyle)
-        textField.textFieldShouldReturn = {
-            self.passwordTextField.becomeTextFieldFirstResponder()
-        }
-        return textField
-    }()
-    
-    private lazy var passwordTextField: StringTextField = {
-        let textField = StringTextField(with: .passwordStyle)
-        textField.textFieldShouldReturn = {
-            self.createPasswordTextField.becomeTextFieldFirstResponder()
-        }
-        return textField
-    }()
-    
-    private lazy var createPasswordTextField: StringTextField = {
-        let textField = StringTextField(with: .createPasswordStyle)
-        textField.textFieldShouldReturn = {
-            self.phoneTextField.becomeTextFieldFirstResponder()
-        }
-        return textField
-    }()
-    
-    private lazy var phoneTextField: StringTextField = {
-        let textField = StringTextField(with: .phoneNumberStyle)
+    private lazy var phoneTextField: PhoneTextField = {
+        let textField = PhoneTextField(with: .phoneNumberStyle, parent: self.view)
         textField.textFieldShouldReturn = {
             print("Phone Number: \(textField.getFullPhoneNumber() ?? "")")
             textField.resignTextFieldFirstResponder()
         }
         return textField
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .light100

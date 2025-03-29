@@ -1,6 +1,6 @@
 import UIKit
 
-final class StringTextField: UIStackView {
+final class PhoneTextField: UIStackView {
     
     var textFieldShouldReturn: (() -> Void)?
     
@@ -10,6 +10,12 @@ final class StringTextField: UIStackView {
     }
     
     private let titleContainerView = UIView()
+    
+    private let phonePrefixView: PhonePrefixView
+    
+    private var phonePrefix: String = ""
+    
+    private var currentMask: String = "(###)###-####"
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -29,32 +35,23 @@ final class StringTextField: UIStackView {
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.rightView = clearButton
-        textField.rightViewMode = .whileEditing
+        textField.leftViewMode = .always
+        textField.leftView = phonePrefixView
         textField.delegate = self
         return textField
     }()
     
-    private lazy var clearButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(.closeCircle, for: .normal)
-        button.addTarget(self, action: #selector(clearButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var showPassword: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(.eye, for: .normal)
-        button.addTarget(self, action: #selector(showPasswordButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    init(with style: StringTextFieldStyle) {
+    init(with style: PhoneTextFieldStyle, parent: UIView? = nil) {
+        self.phonePrefixView = PhonePrefixView(parent: parent)
         super.init(frame: .zero)
         setupStackViewProperties()
         setupLayout()
         setupConstraints()
         configureField(with: style)
+        
+        phonePrefixView.prefixDidChange = { [weak self] country in
+            self?.refreshPhoneField(for: country)
+        }
     }
     
     required init(coder: NSCoder) {
@@ -67,6 +64,11 @@ final class StringTextField: UIStackView {
     
     func resignTextFieldFirstResponder() {
         textField.resignFirstResponder()
+    }
+    
+    func getFullPhoneNumber() -> String? {
+        guard let phoneNumber = textField.text else { return nil }
+        return phonePrefix + phoneNumber
     }
     
     private func setupStackViewProperties() {
@@ -97,7 +99,7 @@ final class StringTextField: UIStackView {
         ])
     }
     
-    private func configureField(with style: StringTextFieldStyle) {
+    private func configureField(with style: PhoneTextFieldStyle) {
         let baseStyle = TextFieldBaseStyle()
 
         textField.autocapitalizationType = baseStyle.autocapitalizationType
@@ -114,31 +116,45 @@ final class StringTextField: UIStackView {
             style.title ?? "",
             color: baseStyle.titleColor
         )
-
-        textField.isSecureTextEntry = style.behavior.isSecure
-        textField.keyboardType = style.behavior.keyboardType
-        textField.rightViewMode = .whileEditing
-        
-        switch style.behavior {
-        case .password:
-            textField.rightView = showPassword
-        case .string, .email:
-            textField.rightView = clearButton
-        }
-    }
-
-    @objc private func clearButtonTapped() {
-        textField.text = nil
     }
     
-    @objc private func showPasswordButtonTapped() {
-        textField.isSecureTextEntry.toggle()
-        let image: UIImage = textField.isSecureTextEntry ? .eye : .closedEye
-        showPassword.setImage(image, for: .normal)
+    private func refreshPhoneField(for country: PhoneCountry) {
+        phonePrefix = country.phoneCode
+        textField.text = nil
+        currentMask = country.mask
+    }
+    
+    private func applyingMask(_ text: String, with mask: String) -> String {
+        var result = ""
+        var index = text.startIndex
+        
+        for char in mask {
+            if index == text.endIndex {
+                break
+            }
+            
+            if char == "#" {
+                result.append(text[index])
+                index = text.index(after: index)
+            } else {
+                result.append(char)
+            }
+        }
+        return result
+    }
+    
+    private func updateTextFieldState(for string: String) {
+        if string.contains(where: { $0.isLetter }) {
+            titleLabel.attributedText = Font.body.compose("Введите только цифры", color: .systemRed120)
+            containerView.layer.borderColor = UIColor.systemRed120.cgColor
+        } else {
+            titleLabel.attributedText = Font.body.compose("Phone Number", color: .dark100)
+            containerView.layer.borderColor = UIColor.dark100.cgColor
+        }
     }
 }
 
-extension StringTextField: UITextFieldDelegate {
+extension PhoneTextField: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textFieldShouldReturn?()
         return true
@@ -151,4 +167,16 @@ extension StringTextField: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         containerView.layer.borderWidth = 0
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let rawText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        let digits = rawText.filter { $0.isNumber }
+
+        updateTextFieldState(for: string)
+        
+        let formattedText = applyingMask(digits, with: currentMask)
+        textField.text = formattedText
+        return false
+    }
 }
+
