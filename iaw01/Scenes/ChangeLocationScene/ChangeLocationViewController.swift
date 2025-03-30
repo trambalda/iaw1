@@ -7,6 +7,7 @@
 import UIKit
 
 //add model
+//
 
 struct LocationSection {
     let title: String
