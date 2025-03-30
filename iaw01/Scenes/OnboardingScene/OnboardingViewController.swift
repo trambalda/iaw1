@@ -10,13 +10,13 @@ final class OnboardingViewController: UIViewController {
     var appCoordinator: AppCoordinator?
 
     private let pages = OnboardingPage.pages
-    private var currentPage = 0
+    private var currentPageNumber = 0
 
     private lazy var onboardingView: OnboardingView = {
         let view = OnboardingView()
-        view.configure(with: pages)
-        view.onPageChanged = { [weak self] page in
-            self?.currentPage = page
+        view.pages = pages
+        view.onPageChanged = { [weak self] pageNumber in
+            self?.currentPageNumber = pageNumber
         }
         view.onNextButtonTap = { [weak self] in
             self?.handleNextButton()
@@ -37,9 +37,9 @@ final class OnboardingViewController: UIViewController {
     }
 
     private func handleNextButton() {
-        if currentPage < pages.count - 1 {
-            currentPage += 1
-            onboardingView.configure(with: currentPage)
+        if currentPageNumber < pages.count - 1 {
+            currentPageNumber += 1
+            onboardingView.changePage(on: currentPageNumber)
         } else {
             finishOnboarding()
         }
