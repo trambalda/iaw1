@@ -8,8 +8,6 @@
 import UIKit
 
 class VerifyPhoneNumberView: UIView {
-    
-//    private let constraintConstant: CGFloat = 39
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
     
     private lazy var labelsAndPhoneNumberTextFieldStackView: UIStackView = {
