@@ -6,7 +6,7 @@ final class OnboardingView: UIView {
     var onSkipButtonTap: (() -> Void)?
     var onPageChanged: ((Int) -> Void)?
 
-    var pages: [OnboardingPage] = [] {
+    var pages: [OnboardingPageModel] = [] {
         didSet {
             pageViews.forEach { $0.removeFromSuperview() }
             pageViews.removeAll()
@@ -83,9 +83,8 @@ final class OnboardingView: UIView {
         scrollView.delegate = self
         
         addSubview(scrollView)
-        addSubview(buttonsStackView)
         scrollView.addSubview(contentStackView)
-        
+        addSubview(buttonsStackView)
         buttonsStackView.addArrangedSubview(skipButton)
         buttonsStackView.addArrangedSubview(nextButton)
     }

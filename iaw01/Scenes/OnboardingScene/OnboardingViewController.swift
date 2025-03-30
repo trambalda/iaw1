@@ -9,7 +9,7 @@ final class OnboardingViewController: UIViewController {
     weak var delegate: OnboardingViewControllerDelegate?
     var appCoordinator: AppCoordinator?
 
-    private let pages = OnboardingPage.pages
+    private let pages = OnboardingPageModel.pages
     private var currentPageNumber = 0
 
     private lazy var onboardingView: OnboardingView = {
