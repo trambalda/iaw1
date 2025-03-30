@@ -142,7 +142,6 @@ extension VerifyPhoneNumberView {
     }
 }
 
-// MARK: - UITextFieldDelegate
 extension VerifyPhoneNumberView: UITextFieldDelegate{
     func textField(
         _ textField: UITextField,
@@ -159,33 +158,27 @@ extension VerifyPhoneNumberView: UITextFieldDelegate{
 }
 
 extension VerifyPhoneNumberView {
+    
     private func registerForKeyboardNotifications() {
-        NotificationCenter.default.addObserver(
+        NotificationCenter.registerKeyboardNotifications(
             self,
             selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
+            name: UIResponder.keyboardWillShowNotification)
         
-        NotificationCenter.default.addObserver(
+        NotificationCenter.registerKeyboardNotifications(
             self,
             selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
+            name: UIResponder.keyboardWillHideNotification)
     }
     
     private func unregisterFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(
+        NotificationCenter.unregisterKeyboardNotifications(
             self,
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
+            name: UIResponder.keyboardWillShowNotification)
+        
+        NotificationCenter.unregisterKeyboardNotifications(
             self,
-            name: UIResponder.keyboardDidHideNotification,
-            object: nil
-        )
+            name: UIResponder.keyboardDidHideNotification)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
