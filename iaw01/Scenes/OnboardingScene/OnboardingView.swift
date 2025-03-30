@@ -6,7 +6,14 @@ final class OnboardingView: UIView {
     var onSkipButtonTap: (() -> Void)?
     var onPageChanged: ((Int) -> Void)?
 
-    private var pages: [OnboardingPage] = []
+    var pages: [OnboardingPageModel] = [] {
+        didSet {
+            pageViews.forEach { $0.removeFromSuperview() }
+            pageViews.removeAll()
+            createPageViews()
+            changePage(on: 0)
+        }
+    }
     private var pageViews: [OnboardingPageView] = []
     
     private let scrollView: UIScrollView = {
@@ -29,12 +36,18 @@ final class OnboardingView: UIView {
     private lazy var nextButton: CornersButton = {
         let button = CornersButton(style: .nextButton)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.onTap = { [weak self] in
+            self?.onNextButtonTap?()
+        }
         return button
     }()
     
     private lazy var skipButton: CornersButton = {
         let button = CornersButton(style: .skipButton)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.onTap = { [weak self] in
+            self?.onSkipButtonTap?()
+        }
         return button
     }()
 
@@ -51,11 +64,18 @@ final class OnboardingView: UIView {
         super.init(frame: frame)
         setupLayout()
         setupConstraints()
-        setupActions()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func changePage(on pageNumber: Int) {
+        let isLastPage = pageNumber == pages.count - 1
+        nextButton.setTitle(isLastPage ? "Continue" : "Next")
+        
+        let contentOffset = CGPoint(x: scrollView.bounds.width * CGFloat(pageNumber), y: 0)
+        scrollView.setContentOffset(contentOffset, animated: true)
     }
 
     private func setupLayout() {
@@ -63,9 +83,8 @@ final class OnboardingView: UIView {
         scrollView.delegate = self
         
         addSubview(scrollView)
-        addSubview(buttonsStackView)
         scrollView.addSubview(contentStackView)
-        
+        addSubview(buttonsStackView)
         buttonsStackView.addArrangedSubview(skipButton)
         buttonsStackView.addArrangedSubview(nextButton)
     }
@@ -92,10 +111,14 @@ final class OnboardingView: UIView {
         ])
     }
     
-    private func setupPages() {
+    private func createPageViews() {
         for index in 0..<pages.count {
             let content = pages[index]
-            let pageView = createPageView(with: content, index: index)
+            
+            let pageView = OnboardingPageView()
+            pageView.translatesAutoresizingMaskIntoConstraints = false
+            pageView.configure(with: content, allPages: pages, currentPage: index)
+            
             pageViews.append(pageView)
             contentStackView.addArrangedSubview(pageView)
             
@@ -107,49 +130,12 @@ final class OnboardingView: UIView {
             multiplier: CGFloat(pages.count)
         ).isActive = true
     }
-    
-    private func createPageView(with content: OnboardingPage, index: Int) -> OnboardingPageView {
-        let pageView = OnboardingPageView()
-        pageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        pageView.configure(with: content, allPages: pages, currentPage: index)
-        
-        return pageView
-    }
-    
-    private func setupActions() {
-        nextButton.onTap = { [weak self] in
-            self?.onNextButtonTap?()
-        }
-        
-        skipButton.onTap = { [weak self] in
-            self?.onSkipButtonTap?()
-        }
-    }
-
-    func configure(with pages: [OnboardingPage]) {
-        self.pages = pages
-        setupPages()
-        configure(with: 0)
-    }
-    
-    func configure(with page: Int) {
-        for (_, pageView) in pageViews.enumerated() {
-            pageView.updateCurrentPage(page)
-        }
-        
-        let isLastPage = page == pages.count - 1
-        nextButton.setTitle(isLastPage ? "Continue" : "Next")
-        
-        let contentOffset = CGPoint(x: scrollView.bounds.width * CGFloat(page), y: 0)
-        scrollView.setContentOffset(contentOffset, animated: true)
-    }
 }
 
 extension OnboardingView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let page = Int(scrollView.contentOffset.x / scrollView.bounds.width)
-        configure(with: page)
-        onPageChanged?(page)
+        let pageNumber = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+        changePage(on: pageNumber)
+        onPageChanged?(pageNumber)
     }
 } 

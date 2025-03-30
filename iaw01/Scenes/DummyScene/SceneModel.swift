@@ -10,7 +10,7 @@ extension SceneModel {
         [
             SceneModel(sceneType: .textFiedsScene, parameters: [:]),
             SceneModel(sceneType: .cornersButtonsScene, parameters: [:]),
-            SceneModel(sceneType: .onboardingScene, parameters: [:])
+            SceneModel(sceneType: .onboardingScene, parameters: [:]),
         ]
     }
 }

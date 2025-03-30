@@ -64,9 +64,7 @@ final class OnboardingPageView: UIView {
 
     private func setupLayout() {
         addSubview(contentStackView)
-        
         illustrationContainer.addSubview(imageView)
-        
         contentStackView.addArrangedSubview(illustrationContainer)
         contentStackView.addArrangedSubview(pageControl)
         contentStackView.addArrangedSubview(titleLabel)
@@ -74,9 +72,7 @@ final class OnboardingPageView: UIView {
     }
     
     private func setupConstraints() {
-        let illustrationHeightConstraint = Screen.isIPhoneSE
-            ? illustrationContainer.heightAnchor.constraint(equalToConstant: 250)
-            : illustrationContainer.heightAnchor.constraint(equalTo: illustrationContainer.widthAnchor)
+        let illustrationHeight: CGFloat = Constants.isIPhoneSE ? 250 : 367
         
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
@@ -84,7 +80,7 @@ final class OnboardingPageView: UIView {
             contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
-            illustrationHeightConstraint,
+            illustrationContainer.heightAnchor.constraint(equalToConstant: illustrationHeight),
             
             imageView.topAnchor.constraint(equalTo: illustrationContainer.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: illustrationContainer.leadingAnchor),
@@ -95,7 +91,7 @@ final class OnboardingPageView: UIView {
         ])
     }
 
-    func configure(with content: OnboardingPage, allPages: [OnboardingPage], currentPage: Int = 0) {
+    func configure(with content: OnboardingPageModel, allPages: [OnboardingPageModel], currentPage: Int = 0) {
         pageControl.numberOfPages = allPages.count
         pageControl.currentPage = currentPage
         
@@ -105,7 +101,7 @@ final class OnboardingPageView: UIView {
         imageView.tintColor = .lightGray
     }
     
-    func configure(with pages: [OnboardingPage]) {
+    func configure(with pages: [OnboardingPageModel]) {
         pageControl.numberOfPages = pages.count
     }
     
