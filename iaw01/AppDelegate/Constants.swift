@@ -1,9 +1,7 @@
 import UIKit
 
-struct Screen {
+struct Constants {
+    static let url404 = URL(string: "http://errorpage404.tilda.ws")!
     static let isIPhoneSE = UIScreen.main.bounds.height == 667
-}
-
-struct UserDefaultsKeys {
     static let isOnboardingCompletedKey = "isOnboardingCompleted"
-} 
+}

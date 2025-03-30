@@ -72,7 +72,7 @@ final class OnboardingPageView: UIView {
     }
     
     private func setupConstraints() {
-        let illustrationHeight: CGFloat = Screen.isIPhoneSE ? 250 : 367
+        let illustrationHeight: CGFloat = Constants.isIPhoneSE ? 250 : 367
         
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),

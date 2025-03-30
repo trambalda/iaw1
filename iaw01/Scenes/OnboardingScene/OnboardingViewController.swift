@@ -46,7 +46,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func finishOnboarding() {
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isOnboardingCompletedKey)
+        UserDefaults.standard.set(true, forKey: Constants.isOnboardingCompletedKey)
         appCoordinator?.start()
     }
 } 
