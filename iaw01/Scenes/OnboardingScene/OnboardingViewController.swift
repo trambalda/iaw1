@@ -9,26 +9,21 @@ final class OnboardingViewController: UIViewController {
     weak var delegate: OnboardingViewControllerDelegate?
     var appCoordinator: AppCoordinator?
 
-    private let pages: [OnboardingPage]
+    private let pages = OnboardingPage.pages
     private var currentPage = 0
 
     private lazy var onboardingView: OnboardingView = {
         let view = OnboardingView()
-
         view.configure(with: pages)
-        
         view.onPageChanged = { [weak self] page in
             self?.currentPage = page
         }
-        
         view.onNextButtonTap = { [weak self] in
             self?.handleNextButton()
         }
-        
         view.onSkipButtonTap = { [weak self] in
             self?.finishOnboarding()
         }
-        
         return view
     }()
     
@@ -53,14 +48,5 @@ final class OnboardingViewController: UIViewController {
     private func finishOnboarding() {
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isOnboardingCompletedKey)
         appCoordinator?.start()
-    }
-
-    init(pages: [OnboardingPage] = OnboardingPage.pages) {
-        self.pages = pages
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 } 
