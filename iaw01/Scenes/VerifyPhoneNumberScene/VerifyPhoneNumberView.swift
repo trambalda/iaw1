@@ -13,7 +13,32 @@ class VerifyPhoneNumberView: UIView {
     
     private var keyboardHeight: CGFloat = 0
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
-
+    
+    private lazy var labelsAndPhoneNumberTextFieldStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 20
+        stack.distribution = .fill
+        stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private lazy var pinCodeInputAndGetNewCodeLabelsStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 30
+        stack.distribution = .fill
+        stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private lazy var getNewCodeStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 1
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     private lazy var verifyHeaderLabel: UILabel = {
         let label = UILabel()
         label.attributedText = Font.heading4.compose("Verify Phone Number", color: nil)
@@ -42,13 +67,6 @@ class VerifyPhoneNumberView: UIView {
         return view
     }()
     
-    private lazy var getNewCodeStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 1
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
     private lazy var getNewCodeLabel: UILabel = {
         let label = UILabel()
         label.attributedText = Font.body.compose("Didn't Receive Code?", color: nil)
@@ -56,21 +74,9 @@ class VerifyPhoneNumberView: UIView {
         return label
     }()
     
-    private lazy var getNewCodeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("", for: .normal)
-        button.titleLabel?.textColor = .pink100
-        button.setAttributedTitle(attributedTitle, for: .normal)
+    private lazy var getNewCodeButton: LinkButton = {
+        let button = LinkButton(style: .getNewCode)
         return button
-    }()
-    
-    private lazy var attributedTitle: NSMutableAttributedString = {
-        let attributedTitle = NSMutableAttributedString(string: "Get a New one")
-        attributedTitle.addAttribute(
-            .underlineStyle,
-            value: NSUnderlineStyle.single.rawValue,
-            range: NSRange(location: 0, length: attributedTitle.length))
-        return attributedTitle
     }()
     
     private lazy var verifyButton: UIButton = {
@@ -107,14 +113,16 @@ class VerifyPhoneNumberView: UIView {
 
 extension VerifyPhoneNumberView {
     private func setupViews() {
-        addSubview(verifyHeaderLabel)
-        addSubview(verifyDescLabel)
-        addSubview(phoneNumberInputView)
-        addSubview(pincodeInputView)
-        addSubview(getNewCodeStackView)
-        addSubview(verifyButton)
+        addSubview(labelsAndPhoneNumberTextFieldStackView)
+        labelsAndPhoneNumberTextFieldStackView.addArrangedSubview(verifyHeaderLabel)
+        labelsAndPhoneNumberTextFieldStackView.addArrangedSubview(verifyDescLabel)
+        labelsAndPhoneNumberTextFieldStackView.addArrangedSubview(phoneNumberInputView)
+        addSubview(pinCodeInputAndGetNewCodeLabelsStackView)
+        pinCodeInputAndGetNewCodeLabelsStackView.addArrangedSubview(pincodeInputView)
         getNewCodeStackView.addArrangedSubview(getNewCodeLabel)
         getNewCodeStackView.addArrangedSubview(getNewCodeButton)
+        pinCodeInputAndGetNewCodeLabelsStackView.addArrangedSubview(getNewCodeStackView)
+        addSubview(verifyButton)
         
         phoneNumberInputView.onVerifyButtonVisibilityChanged = { [weak self] hide in
             UIView.animate(withDuration: 0.3) {
@@ -126,30 +134,21 @@ extension VerifyPhoneNumberView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            verifyHeaderLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,constant: 21),
-            verifyHeaderLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
-            verifyHeaderLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21),
+            labelsAndPhoneNumberTextFieldStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 21),
+            labelsAndPhoneNumberTextFieldStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 21),
+            labelsAndPhoneNumberTextFieldStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -21),
             
-            verifyDescLabel.topAnchor.constraint(equalTo: verifyHeaderLabel.bottomAnchor,constant: 10),
-            verifyDescLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
-            verifyDescLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21),
-            
-            phoneNumberInputView.topAnchor.constraint(equalTo: verifyDescLabel.bottomAnchor, constant: 15),
-            phoneNumberInputView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 21),
-            phoneNumberInputView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -21),
-            
-            pincodeInputView.topAnchor.constraint(equalTo: phoneNumberInputView.bottomAnchor,constant: 40),
-            pincodeInputView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,constant: 21),
-            pincodeInputView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,constant: -21),
             pincodeInputView.heightAnchor.constraint(equalToConstant: 58),
             
-            getNewCodeStackView.topAnchor.constraint(equalTo: pincodeInputView.bottomAnchor,constant: 10),
-            getNewCodeStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            pinCodeInputAndGetNewCodeLabelsStackView.topAnchor.constraint(equalTo: labelsAndPhoneNumberTextFieldStackView.bottomAnchor, constant: 30),
+            pinCodeInputAndGetNewCodeLabelsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 21),
+            pinCodeInputAndGetNewCodeLabelsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -21),
             
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
-            verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21),
+            verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21)
+//            verifyButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -21)
         ])
-        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,constant: -21)
+        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -21)
         verifyButtonBottomConstraint.isActive = true
     }
 }
