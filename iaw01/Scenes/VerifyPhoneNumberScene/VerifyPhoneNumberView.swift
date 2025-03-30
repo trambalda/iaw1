@@ -9,32 +9,21 @@ import UIKit
 
 class VerifyPhoneNumberView: UIView {
     
-    private let constraintConstant: CGFloat = 39
-    
-    private var keyboardHeight: CGFloat = 0
+//    private let constraintConstant: CGFloat = 39
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
     
     private lazy var labelsAndPhoneNumberTextFieldStackView: UIStackView = {
         let stack = UIStackView()
-        stack.spacing = 20
+        stack.spacing = 18
         stack.distribution = .fill
         stack.axis = .vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
-    private lazy var pinCodeInputAndGetNewCodeLabelsStackView: UIStackView = {
+    private lazy var getNewCodeLabelAndButtonStackView: UIStackView = {
         let stack = UIStackView()
-        stack.spacing = 30
-        stack.distribution = .fill
-        stack.axis = .vertical
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    private lazy var getNewCodeStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 1
+        stack.spacing = 5
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -117,11 +106,10 @@ extension VerifyPhoneNumberView {
         labelsAndPhoneNumberTextFieldStackView.addArrangedSubview(verifyHeaderLabel)
         labelsAndPhoneNumberTextFieldStackView.addArrangedSubview(verifyDescLabel)
         labelsAndPhoneNumberTextFieldStackView.addArrangedSubview(phoneNumberInputView)
-        addSubview(pinCodeInputAndGetNewCodeLabelsStackView)
-        pinCodeInputAndGetNewCodeLabelsStackView.addArrangedSubview(pincodeInputView)
-        getNewCodeStackView.addArrangedSubview(getNewCodeLabel)
-        getNewCodeStackView.addArrangedSubview(getNewCodeButton)
-        pinCodeInputAndGetNewCodeLabelsStackView.addArrangedSubview(getNewCodeStackView)
+        addSubview(getNewCodeLabelAndButtonStackView)
+        getNewCodeLabelAndButtonStackView.addArrangedSubview(getNewCodeLabel)
+        getNewCodeLabelAndButtonStackView.addArrangedSubview(getNewCodeButton)
+        addSubview(pincodeInputView)
         addSubview(verifyButton)
         
         phoneNumberInputView.onVerifyButtonVisibilityChanged = { [weak self] hide in
@@ -138,17 +126,18 @@ extension VerifyPhoneNumberView {
             labelsAndPhoneNumberTextFieldStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 21),
             labelsAndPhoneNumberTextFieldStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -21),
             
+            pincodeInputView.topAnchor.constraint(equalTo: labelsAndPhoneNumberTextFieldStackView.bottomAnchor, constant: 44),
+            pincodeInputView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
+            pincodeInputView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
             pincodeInputView.heightAnchor.constraint(equalToConstant: 58),
             
-            pinCodeInputAndGetNewCodeLabelsStackView.topAnchor.constraint(equalTo: labelsAndPhoneNumberTextFieldStackView.bottomAnchor, constant: 30),
-            pinCodeInputAndGetNewCodeLabelsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 21),
-            pinCodeInputAndGetNewCodeLabelsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -21),
+            getNewCodeLabelAndButtonStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            getNewCodeLabelAndButtonStackView.topAnchor.constraint(equalTo: pincodeInputView.bottomAnchor, constant: 45),
             
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
             verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21)
-//            verifyButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -21)
         ])
-        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -21)
+        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -95)
         verifyButtonBottomConstraint.isActive = true
     }
 }
@@ -204,17 +193,17 @@ extension VerifyPhoneNumberView {
             let userInfo = notification.userInfo,
             let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
         else { return }
-        
-        keyboardHeight = keyboardFrame.height
-        adjustButtonPositionForKeyboard(isShowing: true, notification: notification)
+    
+        let bottomPadding: CGFloat = -keyboardFrame.height + (-15)
+        changeVerifyButtonPosition(isShowing: true, notification: notification, bottomPadding: bottomPadding)
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        adjustButtonPositionForKeyboard(isShowing: false, notification: notification)
+        let bottomPadding: CGFloat = -100
+        changeVerifyButtonPosition(isShowing: false, notification: notification, bottomPadding: bottomPadding)
     }
     
-    private func adjustButtonPositionForKeyboard(isShowing: Bool, notification: Notification) {
-        let bottomPadding: CGFloat = isShowing ? -keyboardHeight : -21
+    private func changeVerifyButtonPosition(isShowing: Bool, notification: Notification, bottomPadding: CGFloat) {
         let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.3
         
         UIView.animate(withDuration: animationDuration) {
