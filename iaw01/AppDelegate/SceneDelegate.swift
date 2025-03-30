@@ -12,15 +12,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func setupWindow(scene: UIScene, connectionOptions: UIScene.ConnectionOptions? = nil) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        appCoordinator = AppCoordinator(window: window!)
+        var coordinator: AppCoordinator!
+        let factory = Factory(appCoordinator: coordinator)
+        coordinator = AppCoordinator(window: window!, factory: factory)
+        self.appCoordinator = coordinator
+        
+       // appCoordinator = AppCoordinator(window: window!)
         appCoordinator.start()
         
-        // Fenster sichtbar machen
-        window!.makeKeyAndVisible()
     }
 }

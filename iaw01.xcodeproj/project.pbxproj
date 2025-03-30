@@ -9,26 +9,44 @@
 /* Begin PBXBuildFile section */
 		21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B502D8160E30086697C /* AppDelegate.swift */; };
 		21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B522D8160E30086697C /* SceneDelegate.swift */; };
-		21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B542D8160E30086697C /* DummyViewController.swift */; };
 		21AA4B5A2D8160E50086697C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B592D8160E50086697C /* Assets.xcassets */; };
 		21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B642D81627D0086697C /* AppCoordinator.swift */; };
 		21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B662D817C080086697C /* RootTabBarController.swift */; };
 		21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B682D817C2F0086697C /* RootTabBarItem.swift */; };
 		21AA4B702D817FC00086697C /* TWKEverett-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B6F2D817FC00086697C /* TWKEverett-Medium.otf */; };
 		21AA4B722D817FC70086697C /* TWKEverett-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B712D817FC70086697C /* TWKEverett-Regular.otf */; };
-		21AA4B742D8180A80086697C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B732D8180A80086697C /* Fonts.swift */; };
 		21AA4B762D81828D0086697C /* aeonik-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B752D81828D0086697C /* aeonik-medium.otf */; };
 		21AA4B7C2D81880A0086697C /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B7B2D81880A0086697C /* Factory.swift */; };
 		C92BCA492D843CC800EE6904 /* ChangeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BCA482D843CC000EE6904 /* ChangeLocationViewController.swift */; };
 		C92BCA4B2D8472F500EE6904 /* ChangeLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BCA4A2D84728B00EE6904 /* ChangeLocationView.swift */; };
 		C92BCA4D2D84731200EE6904 /* ChangeLocationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BCA4C2D8472FB00EE6904 /* ChangeLocationModels.swift */; };
+		C97D31872D9958DC00CB1FCA /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31852D9958DC00CB1FCA /* CornersButtonsViewController.swift */; };
+		C97D318A2D9958E400CB1FCA /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31882D9958E400CB1FCA /* TextFieldsViewController.swift */; };
+		C97D318C2D9959B900CB1FCA /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D318B2D9959B900CB1FCA /* Constans.swift */; };
+		C97D319F2D995A3300CB1FCA /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D319C2D995A3300CB1FCA /* TextFieldBaseStyle.swift */; };
+		C97D31A02D995A3300CB1FCA /* LinkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31912D995A3300CB1FCA /* LinkButtonStyle.swift */; };
+		C97D31A12D995A3300CB1FCA /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31972D995A3300CB1FCA /* RestaurantTableViewCell.swift */; };
+		C97D31A22D995A3300CB1FCA /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D318E2D995A3300CB1FCA /* CornersButtonStyle.swift */; };
+		C97D31A32D995A3300CB1FCA /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D318D2D995A3300CB1FCA /* CornersButton.swift */; };
+		C97D31A42D995A3300CB1FCA /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D319A2D995A3300CB1FCA /* StringTextField.swift */; };
+		C97D31A52D995A3300CB1FCA /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D319B2D995A3300CB1FCA /* StringTextFieldStyle.swift */; };
+		C97D31A62D995A3300CB1FCA /* RestaurantCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31962D995A3300CB1FCA /* RestaurantCellModel.swift */; };
+		C97D31A72D995A3300CB1FCA /* DishCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31932D995A3300CB1FCA /* DishCellModel.swift */; };
+		C97D31A82D995A3300CB1FCA /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31902D995A3300CB1FCA /* LinkButton.swift */; };
+		C97D31A92D995A3300CB1FCA /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31942D995A3300CB1FCA /* DishTableViewCell.swift */; };
+		C97D31AC2D995B6600CB1FCA /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31AB2D995B6600CB1FCA /* Font.swift */; };
+		C97D31B32D995BF000CB1FCA /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31AE2D995BF000CB1FCA /* DummyViewController.swift */; };
+		C97D31B42D995BF000CB1FCA /* SceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31AF2D995BF000CB1FCA /* SceneModel.swift */; };
+		C97D31B52D995BF000CB1FCA /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31AD2D995BF000CB1FCA /* DummyView.swift */; };
+		C97D31B62D995BF000CB1FCA /* ScenesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31B02D995BF000CB1FCA /* ScenesTableViewCell.swift */; };
+		C97D31B72D995BF000CB1FCA /* SceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31B12D995BF000CB1FCA /* SceneType.swift */; };
+		C97D31B92D996FF100CB1FCA /* ChangeLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31B82D996FEE00CB1FCA /* ChangeLocationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		21AA4B4D2D8160E30086697C /* iaw01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iaw01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21AA4B502D8160E30086697C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21AA4B522D8160E30086697C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		21AA4B542D8160E30086697C /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		21AA4B592D8160E50086697C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21AA4B5E2D8160E50086697C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21AA4B642D81627D0086697C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -36,13 +54,33 @@
 		21AA4B682D817C2F0086697C /* RootTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarItem.swift; sourceTree = "<group>"; };
 		21AA4B6F2D817FC00086697C /* TWKEverett-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TWKEverett-Medium.otf"; sourceTree = "<group>"; };
 		21AA4B712D817FC70086697C /* TWKEverett-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TWKEverett-Regular.otf"; sourceTree = "<group>"; };
-		21AA4B732D8180A80086697C /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		21AA4B752D81828D0086697C /* aeonik-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aeonik-medium.otf"; sourceTree = "<group>"; };
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C92BCA482D843CC000EE6904 /* ChangeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationViewController.swift; sourceTree = "<group>"; };
 		C92BCA4A2D84728B00EE6904 /* ChangeLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationView.swift; sourceTree = "<group>"; };
 		C92BCA4C2D8472FB00EE6904 /* ChangeLocationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationModels.swift; sourceTree = "<group>"; };
+		C97D31852D9958DC00CB1FCA /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
+		C97D31882D9958E400CB1FCA /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
+		C97D318B2D9959B900CB1FCA /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		C97D318D2D995A3300CB1FCA /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
+		C97D318E2D995A3300CB1FCA /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
+		C97D31902D995A3300CB1FCA /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
+		C97D31912D995A3300CB1FCA /* LinkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonStyle.swift; sourceTree = "<group>"; };
+		C97D31932D995A3300CB1FCA /* DishCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCellModel.swift; sourceTree = "<group>"; };
+		C97D31942D995A3300CB1FCA /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
+		C97D31962D995A3300CB1FCA /* RestaurantCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellModel.swift; sourceTree = "<group>"; };
+		C97D31972D995A3300CB1FCA /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
+		C97D319A2D995A3300CB1FCA /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
+		C97D319B2D995A3300CB1FCA /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
+		C97D319C2D995A3300CB1FCA /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
+		C97D31AB2D995B6600CB1FCA /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		C97D31AD2D995BF000CB1FCA /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
+		C97D31AE2D995BF000CB1FCA /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
+		C97D31AF2D995BF000CB1FCA /* SceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneModel.swift; sourceTree = "<group>"; };
+		C97D31B02D995BF000CB1FCA /* ScenesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenesTableViewCell.swift; sourceTree = "<group>"; };
+		C97D31B12D995BF000CB1FCA /* SceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneType.swift; sourceTree = "<group>"; };
+		C97D31B82D996FEE00CB1FCA /* ChangeLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +116,7 @@
 			children = (
 				21AA4B6B2D817F990086697C /* Resources */,
 				21AA4B772D8186400086697C /* AppDelegate */,
+				C97D319E2D995A3300CB1FCA /* Components */,
 				21AA4B7A2D8187800086697C /* Scenes */,
 				21AA4B792D81872E0086697C /* Configuration */,
 			);
@@ -97,7 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				21AA4B592D8160E50086697C /* Assets.xcassets */,
-				21AA4B732D8180A80086697C /* Fonts.swift */,
+				C97D31AB2D995B6600CB1FCA /* Font.swift */,
 				21AA4B6C2D817FA50086697C /* Fonts */,
 			);
 			path = Resources;
@@ -116,6 +155,7 @@
 		21AA4B772D8186400086697C /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				C97D318B2D9959B900CB1FCA /* Constans.swift */,
 				21AA4B502D8160E30086697C /* AppDelegate.swift */,
 				21AA4B522D8160E30086697C /* SceneDelegate.swift */,
 				21AA4B642D81627D0086697C /* AppCoordinator.swift */,
@@ -123,14 +163,6 @@
 				21AA4B6A2D817C410086697C /* RootTabBar */,
 			);
 			path = AppDelegate;
-			sourceTree = "<group>";
-		};
-		21AA4B782D81864F0086697C /* DummyScene */ = {
-			isa = PBXGroup;
-			children = (
-				21AA4B542D8160E30086697C /* DummyViewController.swift */,
-			);
-			path = DummyScene;
 			sourceTree = "<group>";
 		};
 		21AA4B792D81872E0086697C /* Configuration */ = {
@@ -144,8 +176,10 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C97D31862D9958DC00CB1FCA /* CornersButtonsScene */,
 				C92BCA472D84398B00EE6904 /* ChangeLocationScene */,
-				21AA4B782D81864F0086697C /* DummyScene */,
+				C97D31892D9958E400CB1FCA /* TextFieldsScene */,
+				C97D31B22D995BF000CB1FCA /* DummyScene */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -153,11 +187,106 @@
 		C92BCA472D84398B00EE6904 /* ChangeLocationScene */ = {
 			isa = PBXGroup;
 			children = (
+				C97D31B82D996FEE00CB1FCA /* ChangeLocationCell.swift */,
 				C92BCA4C2D8472FB00EE6904 /* ChangeLocationModels.swift */,
 				C92BCA4A2D84728B00EE6904 /* ChangeLocationView.swift */,
 				C92BCA482D843CC000EE6904 /* ChangeLocationViewController.swift */,
 			);
 			path = ChangeLocationScene;
+			sourceTree = "<group>";
+		};
+		C97D31862D9958DC00CB1FCA /* CornersButtonsScene */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31852D9958DC00CB1FCA /* CornersButtonsViewController.swift */,
+			);
+			path = CornersButtonsScene;
+			sourceTree = "<group>";
+		};
+		C97D31892D9958E400CB1FCA /* TextFieldsScene */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31882D9958E400CB1FCA /* TextFieldsViewController.swift */,
+			);
+			path = TextFieldsScene;
+			sourceTree = "<group>";
+		};
+		C97D318F2D995A3300CB1FCA /* CornersButton */ = {
+			isa = PBXGroup;
+			children = (
+				C97D318D2D995A3300CB1FCA /* CornersButton.swift */,
+				C97D318E2D995A3300CB1FCA /* CornersButtonStyle.swift */,
+			);
+			path = CornersButton;
+			sourceTree = "<group>";
+		};
+		C97D31922D995A3300CB1FCA /* LinkButton */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31902D995A3300CB1FCA /* LinkButton.swift */,
+				C97D31912D995A3300CB1FCA /* LinkButtonStyle.swift */,
+			);
+			path = LinkButton;
+			sourceTree = "<group>";
+		};
+		C97D31952D995A3300CB1FCA /* DishTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31932D995A3300CB1FCA /* DishCellModel.swift */,
+				C97D31942D995A3300CB1FCA /* DishTableViewCell.swift */,
+			);
+			path = DishTableViewCell;
+			sourceTree = "<group>";
+		};
+		C97D31982D995A3300CB1FCA /* RestaurantTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31962D995A3300CB1FCA /* RestaurantCellModel.swift */,
+				C97D31972D995A3300CB1FCA /* RestaurantTableViewCell.swift */,
+			);
+			path = RestaurantTableViewCell;
+			sourceTree = "<group>";
+		};
+		C97D31992D995A3300CB1FCA /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31952D995A3300CB1FCA /* DishTableViewCell */,
+				C97D31982D995A3300CB1FCA /* RestaurantTableViewCell */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		C97D319D2D995A3300CB1FCA /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				C97D319A2D995A3300CB1FCA /* StringTextField.swift */,
+				C97D319B2D995A3300CB1FCA /* StringTextFieldStyle.swift */,
+				C97D319C2D995A3300CB1FCA /* TextFieldBaseStyle.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		C97D319E2D995A3300CB1FCA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C97D318F2D995A3300CB1FCA /* CornersButton */,
+				C97D31922D995A3300CB1FCA /* LinkButton */,
+				C97D31992D995A3300CB1FCA /* TableViewCells */,
+				C97D319D2D995A3300CB1FCA /* TextFields */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C97D31B22D995BF000CB1FCA /* DummyScene */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31AD2D995BF000CB1FCA /* DummyView.swift */,
+				C97D31AE2D995BF000CB1FCA /* DummyViewController.swift */,
+				C97D31AF2D995BF000CB1FCA /* SceneModel.swift */,
+				C97D31B02D995BF000CB1FCA /* ScenesTableViewCell.swift */,
+				C97D31B12D995BF000CB1FCA /* SceneType.swift */,
+			);
+			path = DummyScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,15 +363,34 @@
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				C92BCA492D843CC800EE6904 /* ChangeLocationViewController.swift in Sources */,
-				21AA4B742D8180A80086697C /* Fonts.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
+				C97D319F2D995A3300CB1FCA /* TextFieldBaseStyle.swift in Sources */,
+				C97D31A02D995A3300CB1FCA /* LinkButtonStyle.swift in Sources */,
+				C97D31A12D995A3300CB1FCA /* RestaurantTableViewCell.swift in Sources */,
+				C97D31A22D995A3300CB1FCA /* CornersButtonStyle.swift in Sources */,
+				C97D31A32D995A3300CB1FCA /* CornersButton.swift in Sources */,
+				C97D31A42D995A3300CB1FCA /* StringTextField.swift in Sources */,
+				C97D31A52D995A3300CB1FCA /* StringTextFieldStyle.swift in Sources */,
+				C97D31B92D996FF100CB1FCA /* ChangeLocationCell.swift in Sources */,
+				C97D31A62D995A3300CB1FCA /* RestaurantCellModel.swift in Sources */,
+				C97D31A72D995A3300CB1FCA /* DishCellModel.swift in Sources */,
+				C97D31A82D995A3300CB1FCA /* LinkButton.swift in Sources */,
+				C97D31A92D995A3300CB1FCA /* DishTableViewCell.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
-				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
 				C92BCA4D2D84731200EE6904 /* ChangeLocationModels.swift in Sources */,
+				C97D31AC2D995B6600CB1FCA /* Font.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
 				C92BCA4B2D8472F500EE6904 /* ChangeLocationView.swift in Sources */,
+				C97D318A2D9958E400CB1FCA /* TextFieldsViewController.swift in Sources */,
+				C97D318C2D9959B900CB1FCA /* Constans.swift in Sources */,
+				C97D31B32D995BF000CB1FCA /* DummyViewController.swift in Sources */,
+				C97D31B42D995BF000CB1FCA /* SceneModel.swift in Sources */,
+				C97D31B52D995BF000CB1FCA /* DummyView.swift in Sources */,
+				C97D31B62D995BF000CB1FCA /* ScenesTableViewCell.swift in Sources */,
+				C97D31B72D995BF000CB1FCA /* SceneType.swift in Sources */,
+				C97D31872D9958DC00CB1FCA /* CornersButtonsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
