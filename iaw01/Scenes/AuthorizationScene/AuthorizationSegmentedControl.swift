@@ -20,22 +20,16 @@ class AuthorizationSegmentedControl: UIView {
     private let buttonHeight: CGFloat = 43
     private var selectedLeadingConstraint: NSLayoutConstraint!
     
-    private func createButton(title: String) -> UIButton {
-        let button = UIButton(type: .system)
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(.light100, for: .normal)
-        button.layer.cornerRadius = buttonHeight / 2
-        return button
-    }
-    
     private lazy var loginButton: UIButton = {
-        let button = createButton(title: "Login")
+        let button = UIButton()
+        button.setTitle("Login", for: .normal)
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
     
     private lazy var signUpButton: UIButton = {
-        let button = createButton(title: "Sign Up")
+        let button = UIButton()
+        button.setTitle("Sign Up", for: .normal)
         button.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
         return button
     }()
@@ -48,7 +42,7 @@ class AuthorizationSegmentedControl: UIView {
         return stackView
     }()
     
-    private lazy var selectionButton: UIView = {
+    private lazy var selectionView: UIView = {
         let view = UIView()
         view.backgroundColor = .pink100
         view.layer.cornerRadius = buttonHeight / 2
@@ -59,6 +53,7 @@ class AuthorizationSegmentedControl: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        loginTapped()
     }
     
     required init?(coder: NSCoder) {
@@ -67,19 +62,19 @@ class AuthorizationSegmentedControl: UIView {
     }
     
     private func configure() {
-        setupLayout()
-        setupConstraints()
-        
         backgroundColor = .pink60
         layer.cornerRadius = viewHeight / 2
         translatesAutoresizingMaskIntoConstraints = false
+        
+        setupLayout()
+        setupConstraints()
     }
     
     private func setupLayout() {
+        addSubview(selectionView)
         addSubview(stackView)
         stackView.addArrangedSubview(loginButton)
         stackView.addArrangedSubview(signUpButton)
-        addSubview(selectionButton)
     }
     
     @objc private func loginTapped() {
@@ -93,17 +88,23 @@ class AuthorizationSegmentedControl: UIView {
     }
     
     func updateSelectionButton(position: Selection, animated: Bool) {
-        let selectedButton = position == .login ? loginButton : signUpButton
+        let selectedButton: UIButton
+        let unselectedButton: UIButton
+        
+        switch position {
+        case .login:
+            selectedButton = loginButton
+            unselectedButton = signUpButton
+        case .signUp:
+            selectedButton = signUpButton
+            unselectedButton = loginButton
+        }
         
         selectedLeadingConstraint.constant = selectedButton.frame.origin.x - loginButton.frame.origin.x
-        
-        if animated {
-            UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
-            }
-        }
-        else {
+        UIView.animate(withDuration: 0.3) {
             self.layoutIfNeeded()
+            selectedButton.setTitleColor(.light100, for: .normal)
+            unselectedButton.setTitleColor(.pink100, for: .normal)
         }
     }
     
@@ -116,12 +117,12 @@ class AuthorizationSegmentedControl: UIView {
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.heightAnchor.constraint(equalToConstant: buttonHeight),
             
-            selectionButton.topAnchor.constraint(equalTo: stackView.topAnchor),
-            selectionButton.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
-            selectionButton.widthAnchor.constraint(equalTo: loginButton.widthAnchor)
+            selectionView.topAnchor.constraint(equalTo: stackView.topAnchor),
+            selectionView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
+            selectionView.widthAnchor.constraint(equalTo: loginButton.widthAnchor)
         ])
         
-        selectedLeadingConstraint = selectionButton.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor)
+        selectedLeadingConstraint = selectionView.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor)
         selectedLeadingConstraint.isActive = true
     }
 }

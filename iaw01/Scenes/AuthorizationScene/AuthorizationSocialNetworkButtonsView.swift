@@ -11,7 +11,7 @@ class AuthorizationSocialNetworkButtonsView: UIView {
     
     private let loginUsingLable: UILabel = {
         let label = UILabel()
-        label.attributedText = Font.body.compose("r Login Using:", color: .dark80)
+        label.attributedText = Font.body.compose("Or Login Using:", color: .dark80)
         return label
     }()
     
@@ -101,8 +101,7 @@ extension AuthorizationSocialNetworkButtonsView {
   
           NSLayoutConstraint.activate([
               loginUsingStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//  нужно установить  loginUsingStackView.topAnchor.constraint(equalTo: forgotPasswordLable.bottomAnchor, constant: 38), не знаю, как правильно реализовать
-              loginUsingStackView.topAnchor.constraint(equalTo: topAnchor, constant: 486),
+              loginUsingStackView.topAnchor.constraint(equalTo: topAnchor, constant: 100),
               loginUsingStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
               loginUsingStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
   
