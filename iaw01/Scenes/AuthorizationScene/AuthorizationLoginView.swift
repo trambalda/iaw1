@@ -15,7 +15,6 @@ class AuthorizationLoginView: UIStackView {
     private let emailTextField: StringTextField = {
         let textField = StringTextField(with: .emailStyle)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.alpha = 1.0
         return textField
     }()
     
@@ -34,6 +33,6 @@ class AuthorizationLoginView: UIStackView {
     }
     
     private func setupLayout() {
-        addSubview(emailTextField)
+        addArrangedSubview(emailTextField)
     }
 }

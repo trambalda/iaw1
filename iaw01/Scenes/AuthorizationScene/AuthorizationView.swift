@@ -18,8 +18,17 @@ class AuthorizationView: UIView {
         return control
     }()
     
-    private let loginView = AuthorizationLoginView()
-    private let signupView = AuthorizationSignupView()
+    private let loginView: AuthorizationLoginView = {
+        let view = AuthorizationLoginView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let signupView: AuthorizationSignupView = {
+        let view = AuthorizationSignupView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private let containerView: UIView = {
         let view = UIView()
@@ -46,6 +55,8 @@ class AuthorizationView: UIView {
     
     private func configure() {
         backgroundColor = .light100
+        loginView.alpha = 1.0
+        signupView.alpha = 0.0
         setupLayout()
         setupConstraints()
     }
@@ -81,10 +92,22 @@ class AuthorizationView: UIView {
     }
     
     private func setupConstraints() {
+     
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21)
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
+            
+            loginView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            loginView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            loginView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            loginView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            
+            signupView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            signupView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            signupView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            signupView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            
         ])
     }
 }

@@ -28,11 +28,10 @@ class AuthorizationSignupView: UIStackView {
     }
     
     private func configure(){
-        alpha = 0.0 
         setupLayout()
     }
     
     private func setupLayout() {
-        addSubview(nameTextField)
+        addArrangedSubview(nameTextField)
     }
 }
