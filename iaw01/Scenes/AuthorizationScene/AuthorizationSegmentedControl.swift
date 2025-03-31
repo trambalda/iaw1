@@ -53,7 +53,6 @@ class AuthorizationSegmentedControl: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        loginTapped()
     }
     
     required init?(coder: NSCoder) {
@@ -68,6 +67,7 @@ class AuthorizationSegmentedControl: UIView {
         
         setupLayout()
         setupConstraints()
+        loginTapped()
     }
     
     private func setupLayout() {
@@ -78,16 +78,16 @@ class AuthorizationSegmentedControl: UIView {
     }
     
     @objc private func loginTapped() {
+        updateSelectionButton(position: .login)
         toggleTextField?(.login)
-        updateSelectionButton(position: .login, animated: true)
     }
     
     @objc private func signUpTapped() {
+        updateSelectionButton(position: .signUp)
         toggleTextField?(.signUp)
-        updateSelectionButton(position: .signUp, animated: true)
     }
     
-    func updateSelectionButton(position: Selection, animated: Bool) {
+    func updateSelectionButton(position: Selection) {
         let selectedButton: UIButton
         let unselectedButton: UIButton
         
@@ -109,7 +109,6 @@ class AuthorizationSegmentedControl: UIView {
     }
     
     private func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: viewHeight),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),

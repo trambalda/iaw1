@@ -30,11 +30,7 @@ class AuthorizationView: UIView {
         return view
     }()
     
-    private let containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private let containerView = UIView()
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -55,10 +51,9 @@ class AuthorizationView: UIView {
     
     private func configure() {
         backgroundColor = .light100
-        loginView.alpha = 1.0
-        signupView.alpha = 0.0
         setupLayout()
         setupConstraints()
+        switchView(to: .login)
     }
     
     private func switchView(to selection: AuthorizationSegmentedControl.Selection) {
@@ -92,7 +87,6 @@ class AuthorizationView: UIView {
     }
     
     private func setupConstraints() {
-     
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
@@ -106,8 +100,7 @@ class AuthorizationView: UIView {
             signupView.topAnchor.constraint(equalTo: containerView.topAnchor),
             signupView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             signupView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            signupView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-            
+            signupView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
         ])
     }
 }

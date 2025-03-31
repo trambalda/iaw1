@@ -11,11 +11,8 @@ import UIKit
 //То есть это отдельные вью, которые тут просто инитятся и добавляются в containerView, и переключаются через альфу.
 
 class AuthorizationSignupView: UIStackView {
-    private let nameTextField: StringTextField = {
-        let textField = StringTextField(with: .nameStyle)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
+    
+    private let nameTextField = StringTextField(with: .nameStyle)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +24,8 @@ class AuthorizationSignupView: UIStackView {
         configure()
     }
     
-    private func configure(){
+    private func configure() {
+        axis = .vertical
         setupLayout()
     }
     
