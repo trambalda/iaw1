@@ -4,6 +4,7 @@ final class RootTabBarController: UITabBarController {
 
     var factory: Factory
     private let tabBarModel = TabBarViewModel()
+    private var indicatorCenterConstraint: NSLayoutConstraint?
 
     private lazy var backgroundView: UIView = {
         let view = UIView()
@@ -21,6 +22,14 @@ final class RootTabBarController: UITabBarController {
         stack.alignment = .center
         stack.distribution = .equalSpacing
         return stack
+    }()
+
+    private lazy var indicator: UIView = {
+        let view = UIView()
+        view.backgroundColor = .dark100
+        view.layer.cornerRadius = 2.5
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     init(factory: Factory) {
@@ -45,9 +54,11 @@ final class RootTabBarController: UITabBarController {
 
     private func setupLayout() {
         view.addSubview(backgroundView)
+        view.addSubview(indicator)
     }
 
     private func setupTabBarPages(pages: [RootTabBarItem]) {
+        stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         pages.enumerated().forEach {
             if $0.offset == 0 {
                 stack.addArrangedSubview(createOneTabItem(item: $0.element, isFirst: true))
@@ -67,11 +78,34 @@ final class RootTabBarController: UITabBarController {
             }
 
             selectedItem.isActive.toggle()
+            self.animateIndicator(to: selectedItem)
             self.selectedIndex = RootTabBarItem.allCases.firstIndex(of: item) ?? 0
         }
     }
 
+    private func animateIndicator(to item: UIView) {
+        let newConstraint = indicator.centerXAnchor.constraint(equalTo: item.centerXAnchor)
+        indicatorCenterConstraint?.isActive = false
+
+        indicatorCenterConstraint = newConstraint
+        indicatorCenterConstraint?.isActive = true
+
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            usingSpringWithDamping: 0.8,
+            initialSpringVelocity: 0.5, options: [.curveEaseInOut]) { [weak self] in
+                guard let self else { return }
+                self.view.layoutIfNeeded()
+            }
+    }
+
     private func setupConstraints() {
+
+        guard let firstItem = stack.arrangedSubviews.first else { return }
+        indicatorCenterConstraint = indicator.centerXAnchor.constraint(equalTo: firstItem.centerXAnchor)
+        indicatorCenterConstraint?.isActive = true
+
         NSLayoutConstraint.activate([
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -82,7 +116,13 @@ final class RootTabBarController: UITabBarController {
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 16),
             stack.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 27),
-            stack.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -27),
+            stack.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -27)
+        ])
+
+        NSLayoutConstraint.activate([
+            indicator.heightAnchor.constraint(equalToConstant: 5),
+            indicator.widthAnchor.constraint(equalToConstant: 5),
+            indicator.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 3)
         ])
     }
 

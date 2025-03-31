@@ -8,21 +8,14 @@ final class TabBarVIews: UIView {
 
     var isActive: Bool {
         willSet {
-            self.indicator.alpha = newValue ? 1 : 0
-            self.image.image = newValue ? self.item.selectedImage : self.item.image
-
-            self.title.font = newValue
-            ? UIFont(name: Font.Family.everettMedium.title, size: 12)
-            : UIFont(name: Font.Family.everettRegular.title, size: 12)
-
-            let transform = newValue ? CGAffineTransform(translationX: 0, y: -2) : .identity
+            let transform = newValue ? CGAffineTransform(translationX: 0, y: -3) : .identity
 
             UIView.animate(
                 withDuration: 0.4,
                 delay: 0,
-                usingSpringWithDamping: 0.6,
+                usingSpringWithDamping: 0.5,
                 initialSpringVelocity: 0.5,
-                options: [.curveEaseOut, .transitionCrossDissolve]
+                options: [.curveEaseOut]
             ) {
                 [weak self] in
                 guard let self else { return }
@@ -40,7 +33,7 @@ final class TabBarVIews: UIView {
         let view = UIView()
         view.backgroundColor = .clear
         view.isUserInteractionEnabled = true
-        view.addSubviews(subviews: image, title, indicator)
+        view.addSubviews(subviews: image, title)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToTab)))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -49,7 +42,7 @@ final class TabBarVIews: UIView {
     private lazy var image: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        image.image = !isActive ? item.image : item.selectedImage
+        image.image = item.image
         image.tintColor = .black
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -59,22 +52,9 @@ final class TabBarVIews: UIView {
         let title = UILabel()
         title.textColor = .dark100
         title.text = item.title
-
-        title.font = isActive
-        ? UIFont(name: Font.Family.everettMedium.title, size: 12)
-        : UIFont(name: Font.Family.everettRegular.title, size: 12)
-
+        title.font = UIFont(name: Font.Family.everettRegular.title, size: 12)
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
-    }()
-
-    private lazy var indicator: UIView = {
-        let view = UIView()
-        view.backgroundColor = .dark100
-        view.alpha = !isActive ? 0 : 1
-        view.layer.cornerRadius = 2.5
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
     }()
 
     init(tabItem: RootTabBarItem, imageRightConstraints: NSLayoutConstraint? = nil, isActive: Bool,
@@ -106,8 +86,8 @@ final class TabBarVIews: UIView {
 
     private func setupIsActive() {
         if isActive {
-            image.transform = CGAffineTransform(translationX: 0, y: -2)
-            title.transform = CGAffineTransform(translationX: 0, y: -2)
+            image.transform = CGAffineTransform(translationX: 0, y: -3)
+            title.transform = CGAffineTransform(translationX: 0, y: -3)
         }
     }
 
@@ -126,12 +106,7 @@ final class TabBarVIews: UIView {
             title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 4),
             title.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 5),
             title.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -5),
-            title.bottomAnchor.constraint(equalTo: indicator.topAnchor, constant: -6),
-
-            indicator.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-            indicator.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            indicator.heightAnchor.constraint(equalToConstant: 5),
-            indicator.widthAnchor.constraint(equalToConstant: 5)
+            title.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -6),
         ])
     }
 }
