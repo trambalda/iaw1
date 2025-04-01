@@ -8,7 +8,20 @@
 import UIKit
 
 class VerifyPhoneNumberView: UIView {
+    
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
+    
+    private var tabBarHeight: CGFloat {
+        guard
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let rootViewController = windowScene.windows.first?.rootViewController
+        else { return 0 }
+        
+        if let tabBarController = rootViewController as? UITabBarController {
+            return tabBarController.tabBar.frame.height + rootViewController.view.safeAreaInsets.bottom
+        }
+        return rootViewController.view.safeAreaInsets.bottom
+    }
     
     private lazy var labelsAndPhoneNumberTextFieldStackView: UIStackView = {
         let stack = UIStackView()
@@ -132,7 +145,7 @@ extension VerifyPhoneNumberView {
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
             verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21)
         ])
-        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -95)
+        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -tabBarHeight)
         verifyButtonBottomConstraint.isActive = true
     }
 }
@@ -156,12 +169,12 @@ extension VerifyPhoneNumberView {
             let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
         else { return }
     
-        let bottomPadding: CGFloat = -keyboardFrame.height + (-15)
+        let bottomPadding: CGFloat = -keyboardFrame.height
         changeVerifyButtonPosition(notification: notification, bottomPadding: bottomPadding)
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        let bottomPadding: CGFloat = -100
+        let bottomPadding: CGFloat = -tabBarHeight
         changeVerifyButtonPosition(notification: notification, bottomPadding: bottomPadding)
     }
     
