@@ -107,10 +107,13 @@ extension PincodeInputView: UITextFieldDelegate {
         replacementString string: String
     ) -> Bool {
         
-        if string.isEmpty {
+        let currentText = textField.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        if newText.isEmpty {
             textField.text = ""
         } else {
-            textField.text = string
+            textField.text = newText
             if let nextTextField = findTextField(with: textField.tag + 1) {
                 nextTextField.isUserInteractionEnabled = true
                 nextTextField.becomeFirstResponder()
