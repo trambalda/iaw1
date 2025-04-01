@@ -4,10 +4,13 @@ final class RestaurantHeaderView: UIView {
     var model: RestaurantModel = .empty {
         didSet {
             restaurantImage.image = model.logo ?? UIImage(systemName: "photo")
-            restaurantLabel.text = model.title
-            locationLabel.text = model.location
+            restaurantLabel.attributedText = Font.name.compose(model.title)
+            locationLabel.attributedText = Font.body.compose(model.location)
         }
     }
+    
+    private let restaurantLabel = UILabel()
+    private let locationLabel = UILabel()
     
     private let restaurantImage: UIImageView = {
         let image = UIImageView()
@@ -15,18 +18,6 @@ final class RestaurantHeaderView: UIView {
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
-    }()
-    
-    private let restaurantLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.name.font
-        return label
-    }()
-    
-    private let locationLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.body.font
-        return label
     }()
     
     private let locationImage: UIImageView = {
@@ -47,6 +38,7 @@ final class RestaurantHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         setupLayoutAndConstraints()
     }
     
@@ -67,30 +59,22 @@ final class RestaurantHeaderView: UIView {
      */
     
     func  setupLayoutAndConstraints() {
-        let locationStack = UIStackView()
+        let locationStack = UIStackView(arrangedSubviews: [locationImage, locationLabel])
         locationStack.spacing = 4
         locationStack.alignment = .leading
-        locationStack.addArrangedSubview(locationImage)
-        locationStack.addArrangedSubview(locationLabel)
         
-        let infoStack = UIStackView()
+        let infoStack = UIStackView(arrangedSubviews: [restaurantLabel, locationStack])
         infoStack.axis = .vertical
         infoStack.spacing = 2
         infoStack.alignment = .leading
-        infoStack.addArrangedSubview(restaurantLabel)
-        infoStack.addArrangedSubview(locationStack)
         
-        let restaurantStack = UIStackView()
+        let restaurantStack = UIStackView(arrangedSubviews: [restaurantImage, infoStack])
         restaurantStack.spacing = 15
         restaurantStack.alignment = .leading
-        restaurantStack.addArrangedSubview(restaurantImage)
-        restaurantStack.addArrangedSubview(infoStack)
         
-        let mainStack = UIStackView()
+        let mainStack = UIStackView(arrangedSubviews: [restaurantStack, favoriteButton])
         mainStack.spacing = 22
         mainStack.alignment = .top
-        mainStack.addArrangedSubview(restaurantStack)
-        mainStack.addArrangedSubview(favoriteButton)
         
         addSubview(mainStack)
         

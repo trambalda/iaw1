@@ -8,8 +8,14 @@ final class MenuTimeView: UIView {
         return scrollView
     }()
     
-    private let segmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["Breakfast Menu", "Lunch & Dinner", "Overnight Menu"])
+    private let menuOptions: [MenuModel] = [
+        MenuModel(title: "Breakfast Menu"),
+        MenuModel(title: "Lunch & Dinner"),
+        MenuModel(title: "Overnight Menu")
+    ]
+
+    private lazy var segmentedControl: UISegmentedControl = {
+        let control = UISegmentedControl(items: menuOptions.map { $0.title })
         control.selectedSegmentIndex = 1
         control.backgroundColor = .light80
         
@@ -30,6 +36,7 @@ final class MenuTimeView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         setupLayoutAndConstraints()
     }
     

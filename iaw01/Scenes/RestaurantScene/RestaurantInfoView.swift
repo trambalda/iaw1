@@ -3,13 +3,15 @@ import UIKit
 final class RestaurantInfoView: UIView {
     var model: RestaurantModel = .empty {
         didSet {
-            ratingLabel.text = "Ratings: \(model.rating)"
-            timeLabel.text = "Delivers in \(model.time) min"
-            typeOfFoodLabel.text = model.typeOfFood
+            ratingLabel.attributedText = Font.info.compose("Ratings: \(model.rating)")
+            timeLabel.attributedText = Font.info.compose("Delivers in \(model.time) min")
+            typeOfFoodLabel.attributedText = Font.info.compose(model.typeOfFood)
         }
     }
     
-    private let contentView = UIView()
+    private let ratingLabel = UILabel()
+    private let timeLabel = UILabel()
+    private let typeOfFoodLabel = UILabel()
     
     private let ratingImage: UIImageView = {
         let image = UIImageView(image: .star)
@@ -32,27 +34,6 @@ final class RestaurantInfoView: UIView {
         return image
     }()
     
-    private let ratingLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Ratings:"
-        label.font = Font.info.font
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let timeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Delivers in "
-        label.font = Font.info.font
-        return label
-    }()
-   
-    private let typeOfFoodLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.info.font
-        return label
-    }()
-    
     private let infoButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .light100
@@ -64,6 +45,7 @@ final class RestaurantInfoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         setupLayoutAndConstraints()
     }
     
@@ -71,56 +53,57 @@ final class RestaurantInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /*
+     mainStack
+        infoStack
+            ratingStack
+                ratingImage
+                ratingLabel
+            timeStack
+                timeImage
+                timeLabel
+            typeOfFoodStack
+                typeOfFoodImage
+                typeOfFoodLabel
+        infoButton
+     */
+    
     func setupLayoutAndConstraints() {
-        contentView.backgroundColor = .light60
-        contentView.layer.cornerRadius = 10
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(contentView)
+        backgroundColor = .light60
+        layer.cornerRadius = 10
         
-        let ratingStack = UIStackView()
-        ratingStack.spacing = 7
+        let ratingStack = UIStackView(arrangedSubviews: [ratingImage, ratingLabel])
+        ratingStack.spacing = 8
         ratingStack.alignment = .bottom
-        ratingStack.addArrangedSubview(ratingImage)
-        ratingStack.addArrangedSubview(ratingLabel)
         
-        let timeStack = UIStackView()
+        let timeStack = UIStackView(arrangedSubviews: [timeImage, timeLabel])
         timeStack.spacing = 8
         timeStack.alignment = .bottom
-        timeStack.addArrangedSubview(timeImage)
-        timeStack.addArrangedSubview(timeLabel)
         
-        let typeOfFoodStack = UIStackView()
-        typeOfFoodStack.spacing = 9
+        let typeOfFoodStack = UIStackView(arrangedSubviews: [typeOfFoodImage, typeOfFoodLabel])
+        typeOfFoodStack.spacing = 8
         typeOfFoodStack.alignment = .bottom
-        typeOfFoodStack.addArrangedSubview(typeOfFoodImage)
-        typeOfFoodStack.addArrangedSubview(typeOfFoodLabel)
         
-        let infoStack = UIStackView()
+        let infoStack = UIStackView(arrangedSubviews: [ratingStack, timeStack, typeOfFoodStack])
         infoStack.axis = .vertical
         infoStack.spacing = 10
         infoStack.alignment = .leading
-        infoStack.addArrangedSubview(ratingStack)
-        infoStack.addArrangedSubview(timeStack)
-        infoStack.addArrangedSubview(typeOfFoodStack)
         
-        let mainStack = UIStackView()
+        let mainStack = UIStackView(arrangedSubviews: [infoStack, infoButton])
         mainStack.spacing = 101
         mainStack.alignment = .center
         mainStack.translatesAutoresizingMaskIntoConstraints = false
-        mainStack.addArrangedSubview(infoStack)
-        mainStack.addArrangedSubview(infoButton)
         
-        contentView.addSubview(mainStack)
+        addSubview(mainStack)
         
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 109),
+            leadingAnchor.constraint(equalTo: leadingAnchor),
+            trailingAnchor.constraint(equalTo: trailingAnchor),
+            heightAnchor.constraint(equalToConstant: 109),
             
-            mainStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             
             ratingImage.heightAnchor.constraint(equalToConstant: 20),
             ratingImage.widthAnchor.constraint(equalToConstant: 20),

@@ -1,95 +1,73 @@
 import UIKit
 
 final class RestaurantViewController: UIViewController {
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
+    private let restaurantView = RestaurantView()
     
-    private let navigationBarView = NavigationBarView()
-    private let headerImageView = HeaderImageView()
-    private let restaurantHeaderView = RestaurantHeaderView()
-    private let restaurantInfoView = RestaurantInfoView()
-    private let menuTimeView = MenuTimeView()
-    private let menuCategoryView = MenuCategoryView()
-    private let menuItemListView = MenuItemListView()
-    
-    private var headerImageViewHeightConstraint: NSLayoutConstraint!
-    private var restaurantInfoViewHeightConstraint: NSLayoutConstraint!
+    override func loadView() {
+        view = restaurantView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayoutAndConstraints()
-        scrollView.delegate = self
+        restaurantView.scrollView.delegate = self
+        setupNavigationBar()
     }
     
-    func setupLayoutAndConstraints() {
-        view.backgroundColor = .white
-        view.addSubview(navigationBarView)
+    func setupNavigationBar() {
+        let backButton = UIButton(type: .system)
+        var backButtonConfig = UIButton.Configuration.plain()
+        backButtonConfig.image = .arrowLeft
+        backButtonConfig.imagePadding = 7
+        backButtonConfig.baseForegroundColor = .dark100
         
-        scrollView.showsVerticalScrollIndicator = false
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+        var attributedTitle = AttributedString("Back")
+        attributedTitle.font = Font.backButton.font
+          
+        backButtonConfig.attributedTitle = attributedTitle
         
-        contentView.addSubview(headerImageView)
-        contentView.addSubview(restaurantHeaderView)
-        contentView.addSubview(restaurantInfoView)
-        contentView.addSubview(menuTimeView)
-        contentView.addSubview(menuCategoryView)
-        contentView.addSubview(menuItemListView)
+        backButton.configuration = backButtonConfig
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+       
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
         
-        [scrollView, contentView, navigationBarView, headerImageView, restaurantHeaderView, restaurantInfoView, menuTimeView, menuCategoryView, menuItemListView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+        let moreButton = UIButton(type: .system)
+        moreButton.setImage(UIImage(named: "more"), for: .normal)
+        moreButton.tintColor = .dark100
+        moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
         
-        headerImageViewHeightConstraint = headerImageView.heightAnchor.constraint(equalToConstant: 164)
-        restaurantInfoViewHeightConstraint = restaurantInfoView.heightAnchor.constraint(equalToConstant: 109)
+        let searchButton = UIButton(type: .system)
+        searchButton.setImage(UIImage(named: "search"), for: .normal)
+        searchButton.tintColor = .dark100
+        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
         
-        NSLayoutConstraint.activate([
-            navigationBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            navigationBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            navigationBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            navigationBarView.heightAnchor.constraint(equalToConstant: 49),
-            
-            scrollView.topAnchor.constraint(equalTo: navigationBarView.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: menuItemListView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor),
-            
-            headerImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            headerImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            headerImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            headerImageViewHeightConstraint,
-            
-            restaurantHeaderView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 22),
-            restaurantHeaderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 21),
-            restaurantHeaderView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -21),
-            restaurantHeaderView.heightAnchor.constraint(equalToConstant: 66),
-            
-            restaurantInfoView.topAnchor.constraint(equalTo: restaurantHeaderView.bottomAnchor, constant: 20),
-            restaurantInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 21),
-            restaurantInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -21),
-            restaurantInfoViewHeightConstraint,
-            
-            menuTimeView.topAnchor.constraint(equalTo: restaurantInfoView.bottomAnchor, constant: 18),
-            menuTimeView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            menuTimeView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            menuTimeView.heightAnchor.constraint(equalToConstant: 59),
-            
-            menuCategoryView.topAnchor.constraint(equalTo: menuTimeView.bottomAnchor, constant: 18),
-            menuCategoryView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 21),
-            menuCategoryView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -21),
-            menuCategoryView.heightAnchor.constraint(equalToConstant: 40),
-            
-            menuItemListView.topAnchor.constraint(equalTo: menuCategoryView.bottomAnchor, constant: 9),
-            menuItemListView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 21),
-            menuItemListView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -21),
-            menuItemListView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
-        ])
+        let shoppingBagButton = UIButton(type: .system)
+        shoppingBagButton.setImage(UIImage(named: "shoppingBag"), for: .normal)
+        shoppingBagButton.tintColor = .dark100
+        shoppingBagButton.addTarget(self, action: #selector(shoppingBagButtonTapped), for: .touchUpInside)
+        
+        let rightStack = UIStackView(arrangedSubviews: [moreButton, searchButton, shoppingBagButton])
+        rightStack.spacing = 32
+        rightStack.alignment = .center
+        
+        let rightBarButtonItem = UIBarButtonItem(customView: rightStack)
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func moreButtonTapped() {
+        
+    }
+    
+    @objc private func searchButtonTapped() {
+        
+    }
+    
+    @objc private func shoppingBagButtonTapped() {
+        
     }
 }
 
@@ -100,17 +78,17 @@ extension RestaurantViewController: UIScrollViewDelegate {
         let newHeaderImageViewHeightConstraint = max(164 - offset, 0)
         let newRestaurantInfoViewHeightConstraint = max(109 - offset / 2, 0)
         
-        headerImageViewHeightConstraint.constant = newHeaderImageViewHeightConstraint
-        restaurantInfoViewHeightConstraint.constant = newRestaurantInfoViewHeightConstraint
+        restaurantView.headerImageViewHeightConstraint.constant = newHeaderImageViewHeightConstraint
+        restaurantView.restaurantInfoViewHeightConstraint.constant = newRestaurantInfoViewHeightConstraint
         
         if newHeaderImageViewHeightConstraint == 0 {
-            restaurantHeaderView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-            menuTimeView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-            menuCategoryView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
+            restaurantView.restaurantHeaderView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
+            restaurantView.menuTimeView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
+            restaurantView.menuCategoryView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
         } else {
-            restaurantHeaderView.transform = .identity
-            menuTimeView.transform = .identity
-            menuCategoryView.transform = .identity
+            restaurantView.restaurantHeaderView.transform = .identity
+            restaurantView.menuTimeView.transform = .identity
+            restaurantView.menuCategoryView.transform = .identity
         }
     }
 }
