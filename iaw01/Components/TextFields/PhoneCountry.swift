@@ -1,16 +1,16 @@
 import UIKit
 
 struct PhoneCountry {
+    let flag: String
     let phoneCode: String
     let mask: String
-    let flag: String // для теста
     
     static let allCountries: [PhoneCountry] = [
-        PhoneCountry(phoneCode: "+1", mask: "(###)###-####", flag: "🇺🇸"),
-        PhoneCountry(phoneCode: "+7", mask: "(###)###-##-##", flag: "🇷🇺"),
-        PhoneCountry(phoneCode: "+375", mask: "(##)###-##-##", flag: "🇧🇾"),
-        PhoneCountry(phoneCode: "+1", mask: "(###)###-####", flag: "🇺🇸"),
-        PhoneCountry(phoneCode: "+44", mask: "(###)###-##-##", flag: "🇬🇧"),
-        PhoneCountry(phoneCode: "+375", mask: "(##)###-##-##", flag: "🇧🇾"),
+        PhoneCountry(flag: "🇺🇸", phoneCode: "+1", mask: "(###)###-####"),
+        PhoneCountry(flag: "🇷🇺", phoneCode: "+7", mask: "(###)###-##-##"),
+        PhoneCountry(flag: "🇧🇾", phoneCode: "+375", mask: "(##)###-##-##"),
+        PhoneCountry(flag: "🇺🇸", phoneCode: "+1", mask: "(###)###-####"),
+        PhoneCountry(flag: "🇬🇧", phoneCode: "+44", mask: "(#)###-##-##"),
+        PhoneCountry(flag: "🇧🇾", phoneCode: "+375", mask: "(##)###-##-##"),
     ]
 }

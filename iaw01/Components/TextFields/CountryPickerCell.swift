@@ -5,17 +5,18 @@ final class CountryPickerCell: UITableViewCell {
     private let flagAndCodeStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.spacing = 3
         return stack
+    }()
+    
+    private let countryFlagLabel: UILabel = {
+        let label = UILabel()
+        return label
     }()
     
     private let countryCodeLable: UILabel = {
         let label = UILabel()
         label.font = Font.body.font
-        return label
-    }()
-    
-    private let countryFlagLabel: UILabel = {
-        let label = UILabel()
         return label
     }()
     
@@ -30,14 +31,13 @@ final class CountryPickerCell: UITableViewCell {
     
     private func setupLayoutAndConstraints() {
         contentView.addSubview(flagAndCodeStackView)
-        flagAndCodeStackView.addArrangedSubview(countryCodeLable)
         flagAndCodeStackView.addArrangedSubview(countryFlagLabel)
+        flagAndCodeStackView.addArrangedSubview(countryCodeLable)
         
         NSLayoutConstraint.activate([
             flagAndCodeStackView.topAnchor.constraint(equalTo: topAnchor),
             flagAndCodeStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            flagAndCodeStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            flagAndCodeStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            flagAndCodeStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13),
         ])
     }
     

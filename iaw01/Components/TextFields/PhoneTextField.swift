@@ -9,13 +9,15 @@ final class PhoneTextField: UIStackView {
         set { textField.text = newValue }
     }
     
-    private let titleContainerView = UIView()
+    private weak var superView: UIView?
     
-    private let phonePrefixView: PhonePrefixView
+    private lazy var leftTextFieldView = PhonePrefixView(parent: self)
     
     private var phonePrefix: String = ""
     
     private var currentMask: String = "(###)###-####"
+    
+    private let titleContainerView = UIView()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -35,23 +37,31 @@ final class PhoneTextField: UIStackView {
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.keyboardType = .phonePad
         textField.leftViewMode = .always
-        textField.leftView = phonePrefixView
+        textField.leftView = leftTextFieldView
         textField.delegate = self
         return textField
     }()
     
-    init(with style: PhoneTextFieldStyle, parent: UIView? = nil) {
-        self.phonePrefixView = PhonePrefixView(parent: parent)
+    private lazy var countryPickerView: CountryPickerView = {
+        let view = CountryPickerView()
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.onCountrySelected = { [weak self] country in
+            self?.leftTextFieldView.updatePrefix(with: country)
+            self?.refreshPhoneField(for: country)
+        }
+        return view
+    }()
+    
+    init(with style: PhoneTextFieldStyle, superView: UIView?) {
+        self.superView = superView
         super.init(frame: .zero)
         setupStackViewProperties()
         setupLayout()
         setupConstraints()
         configureField(with: style)
-        
-        phonePrefixView.prefixDidChange = { [weak self] country in
-            self?.refreshPhoneField(for: country)
-        }
     }
     
     required init(coder: NSCoder) {
@@ -71,6 +81,20 @@ final class PhoneTextField: UIStackView {
         return phonePrefix + phoneNumber
     }
     
+    func toggleCountryPicker() {
+        if countryPickerView.isHidden {
+            showPickerView()
+        } else {
+            hidePickerView()
+        }
+    }
+    
+    func updatePhonePrefix(with code: String) {
+        phonePrefix = code
+        textField.text = nil
+        currentMask = "(###)###-####"
+    }
+
     private func setupStackViewProperties() {
         axis = .vertical
         spacing = 6
@@ -101,7 +125,7 @@ final class PhoneTextField: UIStackView {
     
     private func configureField(with style: PhoneTextFieldStyle) {
         let baseStyle = TextFieldBaseStyle()
-
+        
         textField.autocapitalizationType = baseStyle.autocapitalizationType
         textField.textColor = baseStyle.textColor
         textField.backgroundColor = baseStyle.backgroundColor
@@ -111,7 +135,7 @@ final class PhoneTextField: UIStackView {
             style.placeholder,
             color: baseStyle.placeholderColor
         )
-
+        
         titleLabel.attributedText = baseStyle.fontFamily.compose(
             style.title ?? "",
             color: baseStyle.titleColor
@@ -124,7 +148,7 @@ final class PhoneTextField: UIStackView {
         currentMask = country.mask
     }
     
-    private func applyingMask(_ text: String, with mask: String) -> String {
+    private func applyingMask(for text: String, with mask: String) -> String {
         var result = ""
         var index = text.startIndex
         
@@ -152,6 +176,45 @@ final class PhoneTextField: UIStackView {
             containerView.layer.borderColor = UIColor.dark100.cgColor
         }
     }
+    
+    private func showPickerView() {
+        superView?.addSubview(countryPickerView)
+        
+        if convert(bounds, to: nil).maxY + 200 > UIScreen.main.bounds.height {
+            NSLayoutConstraint.activate([
+                countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor),
+                countryPickerView.heightAnchor.constraint(equalToConstant: 160),
+                countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                countryPickerView.trailingAnchor.constraint(equalTo: leftTextFieldView.trailingAnchor, constant: -11),
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                countryPickerView.topAnchor.constraint(equalTo: containerView.bottomAnchor),
+                countryPickerView.heightAnchor.constraint(equalToConstant: 160),
+                countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                countryPickerView.trailingAnchor.constraint(equalTo: leftTextFieldView.trailingAnchor, constant: -11),
+            ])
+        }
+
+        countryPickerView.alpha = 0
+        countryPickerView.transform = CGAffineTransform(translationX: 0, y: 20)
+        countryPickerView.isHidden = false
+        
+        UIView.animate(withDuration: 0.3) {
+            self.countryPickerView.alpha = 1
+            self.countryPickerView.transform = .identity
+        }
+    }
+    
+    private func hidePickerView() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.countryPickerView.transform = CGAffineTransform(translationX: 0, y: 20)
+            self.countryPickerView.alpha = 0
+        }) { _ in
+            self.countryPickerView.isHidden = true
+            self.countryPickerView.transform = .identity
+        }
+    }
 }
 
 extension PhoneTextField: UITextFieldDelegate {
@@ -171,12 +234,17 @@ extension PhoneTextField: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let rawText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
         let digits = rawText.filter { $0.isNumber }
-
+        
         updateTextFieldState(for: string)
         
-        let formattedText = applyingMask(digits, with: currentMask)
+        let formattedText = applyingMask(for: digits, with: currentMask)
         textField.text = formattedText
+        
+        let maxPhoneLength = currentMask.filter { $0 == "#" }.count
+        
+        if digits.count >= maxPhoneLength {
+            textFieldShouldReturn?()
+        }
         return false
     }
 }
-

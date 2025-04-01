@@ -2,9 +2,7 @@ import UIKit
 
 final class PhonePrefixView: UIView {
     
-    var prefixDidChange: ((PhoneCountry) -> Void)?
-    
-    private weak var parentView: UIView?
+    private weak var parentView: PhoneTextField?
     
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
@@ -13,10 +11,31 @@ final class PhonePrefixView: UIView {
         return stack
     }()
     
-    private let phonePrefixLabel: UILabel = {
+    private let phonePrefixStackView = UIStackView()
+    
+    private lazy var flagLabel: UILabel = {
         let label = UILabel()
-        label.attributedText = Font.body.compose("+1", color: .dark60)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+
+    private lazy var flagContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(flagLabel)
+        view.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        return view
+    }()
+
+    private lazy var phonePrefixTextField: UITextField = {
+        let textField = UITextField()
+        textField.leftViewMode = .always
+        textField.leftView = flagContainerView
+        textField.attributedText = Font.body.compose("+123", color: .dark100)
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        textField.delegate = self
+        textField.keyboardType = .numberPad
+        return textField
     }()
     
     private lazy var showPickerButton: UIButton = {
@@ -34,18 +53,8 @@ final class PhonePrefixView: UIView {
         view.backgroundColor = .light60
         return view
     }()
-    
-    private lazy var countryPickerView: CountryPickerView = {
-        let view = CountryPickerView()
-        view.isHidden = true
-        view.onCountrySelected = { [weak self] country in
-            self?.phonePrefixLabel.attributedText = Font.body.compose(country.phoneCode, color: .dark100)
-            self?.prefixDidChange?(country)
-        }
-        return view
-    }()
-    
-    init(parent: UIView?) {
+
+    init(parent: PhoneTextField?) {
         self.parentView = parent
         super.init(frame: .zero)
         setupLayout()
@@ -56,9 +65,15 @@ final class PhonePrefixView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func updatePrefix(with country: PhoneCountry) {
+        flagLabel.text = country.flag
+        phonePrefixTextField.text = country.phoneCode
+    }
+    
     private func setupLayout() {
         addSubview(containerStackView)
-        containerStackView.addArrangedSubview(phonePrefixLabel)
+        containerStackView.addArrangedSubview(phonePrefixStackView)
+        phonePrefixStackView.addArrangedSubview(phonePrefixTextField)
         containerStackView.addArrangedSubview(showPickerButton)
         containerStackView.addArrangedSubview(lineContainerView)
         lineContainerView.addSubview(lineView)
@@ -71,30 +86,52 @@ final class PhonePrefixView: UIView {
             containerStackView.topAnchor.constraint(equalTo: topAnchor),
             containerStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
+            phonePrefixStackView.widthAnchor.constraint(equalToConstant: 67),
+            
             lineContainerView.widthAnchor.constraint(equalToConstant: 20),
             
             lineView.widthAnchor.constraint(equalToConstant: 1),
             lineView.centerXAnchor.constraint(equalTo: lineContainerView.centerXAnchor, constant: -2),
             lineView.topAnchor.constraint(equalTo: lineContainerView.topAnchor),
             lineView.bottomAnchor.constraint(equalTo: lineContainerView.bottomAnchor),
+            
+            flagLabel.leadingAnchor.constraint(equalTo: flagContainerView.leadingAnchor),
+            flagLabel.trailingAnchor.constraint(equalTo: flagContainerView.trailingAnchor),
+            flagLabel.topAnchor.constraint(equalTo: flagContainerView.topAnchor),
+            flagLabel.bottomAnchor.constraint(equalTo: flagContainerView.bottomAnchor),
         ])
     }
     
     @objc private func showPicker() {
-        guard let parentView = parentView else { return }
-        
-        parentView.addSubview(countryPickerView)
-        countryPickerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            countryPickerView.topAnchor.constraint(equalTo: parentView.centerYAnchor),
-            countryPickerView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
-            countryPickerView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
-            countryPickerView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
-        ])
-        
-        countryPickerView.isHidden = false
+        parentView?.toggleCountryPicker()
+    }
+
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text, !text.isEmpty else { return }
+        parentView?.updatePhonePrefix(with: text)
     }
 }
 
-
+extension PhonePrefixView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let newText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        
+        if string == "+" || (range.location == 0 && string.isEmpty) {
+            return false
+        }
+        
+        let shouldChange = newText.count <= 4
+        
+        if newText.count == 4 {
+            DispatchQueue.main.async {
+                textField.resignFirstResponder()
+            }
+        }
+        return shouldChange
+    }
+}

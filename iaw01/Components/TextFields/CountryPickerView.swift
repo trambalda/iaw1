@@ -6,23 +6,13 @@ final class CountryPickerView: UIView {
     
     private let phoneCountries = PhoneCountry.allCountries
     
-    private var selectedCountry: PhoneCountry?
-    
-    private lazy var doneButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Done", for: .normal)
-        button.setTitleColor(.blue120, for: .normal)
-        button.titleLabel?.font = Font.body.font
-        button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.register(CountryPickerCell.self, forCellReuseIdentifier: "CountryPickerCell")
-        table.rowHeight = 50
+        table.rowHeight = 40
+        table.backgroundColor = .light80
+        table.showsVerticalScrollIndicator = false
         table.dataSource = self
         table.delegate = self
         return table
@@ -31,11 +21,9 @@ final class CountryPickerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .light80
-        layer.cornerRadius = 16
-        
         setupLayout()
         setupConstraints()
+        configureView()
     }
     
     required init?(coder: NSCoder) {
@@ -44,34 +32,22 @@ final class CountryPickerView: UIView {
     
     private func setupLayout() {
         addSubview(tableView)
-        addSubview(doneButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            doneButton.topAnchor.constraint(equalTo: topAnchor),
-            doneButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            doneButton.heightAnchor.constraint(equalToConstant: 35),
-            
-            tableView.topAnchor.constraint(equalTo: doneButton.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
     
-    @objc private func doneButtonTapped() {
-        if let selectedCountry = selectedCountry {
-            onCountrySelected?(selectedCountry)
-        }
-        UIView.animate(withDuration: 0.3, animations: {
-            self.transform = CGAffineTransform(translationX: 0, y: 20)
-            self.alpha = 0
-        }) { _ in
-            self.isHidden = true
-            self.transform = .identity
-            self.alpha = 1
-        }
+    private func configureView() {
+        layer.cornerRadius = 16
+        layer.borderColor = UIColor.light60.cgColor
+        layer.borderWidth = 1
+        layer.masksToBounds = true
     }
 }
 
@@ -94,6 +70,14 @@ extension CountryPickerView: UITableViewDataSource {
 
 extension CountryPickerView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedCountry = phoneCountries[indexPath.row]
+        onCountrySelected?(phoneCountries[indexPath.row])
+        UIView.animate(withDuration: 0.3, animations: {
+            self.transform = CGAffineTransform(translationX: 0, y: 20)
+            self.alpha = 0
+        }) { _ in
+            self.isHidden = true
+            self.transform = .identity
+            self.alpha = 1
+        }
     }
 }

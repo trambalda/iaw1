@@ -51,7 +51,7 @@ final class TextFieldsViewController: UIViewController {
 //    }()
     
     private lazy var phoneTextField: PhoneTextField = {
-        let textField = PhoneTextField(with: .phoneNumberStyle, parent: self.view)
+        let textField = PhoneTextField(with: .phoneNumberStyle, superView: self.view)
         textField.textFieldShouldReturn = {
             print("Phone Number: \(textField.getFullPhoneNumber() ?? "")")
             textField.resignTextFieldFirstResponder()
@@ -79,7 +79,7 @@ final class TextFieldsViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            textFieldsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            textFieldsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         ])
