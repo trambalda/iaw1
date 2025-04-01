@@ -13,7 +13,6 @@ class VerifyPhoneNumberView: UIView {
     private lazy var labelsAndPhoneNumberTextFieldStackView: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 18
-        stack.distribution = .fill
         stack.axis = .vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -61,10 +60,7 @@ class VerifyPhoneNumberView: UIView {
         return label
     }()
     
-    private lazy var getNewCodeButton: LinkButton = {
-        let button = LinkButton(style: .getNewCode)
-        return button
-    }()
+    private var getNewCodeButton = LinkButton(style: .getNewCode)
     
     private lazy var verifyButton: UIButton = {
         let button = UIButton()
@@ -86,7 +82,7 @@ class VerifyPhoneNumberView: UIView {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
-        registerForKeyboardNotifications()
+        setupObservers()
     }
     
     required init?(coder: NSCoder) {
@@ -94,7 +90,8 @@ class VerifyPhoneNumberView: UIView {
     }
     
     deinit {
-        unregisterFromKeyboardNotifications()
+        NotificationCenter.unregisterKeyboardNotifications(self, name: UIResponder.keyboardWillShowNotification)
+        NotificationCenter.unregisterKeyboardNotifications(self, name: UIResponder.keyboardDidHideNotification)
     }
 }
 
@@ -141,42 +138,16 @@ extension VerifyPhoneNumberView {
 }
 
 extension VerifyPhoneNumberView: UITextFieldDelegate{
-    func textField(
-        _ textField: UITextField,
-        shouldChangeCharactersIn range: NSRange,
-        replacementString string: String) -> Bool {
-            
-            let currentText = textField.text ?? "0"
-            let newText = (currentText as NSString).replacingCharacters(
-                in: range,
-                with: string
-            )
-            return newText.count <= 1
-        }
+    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String
+    ) -> Bool {
+        string.count <= 1
+    }
 }
 
 extension VerifyPhoneNumberView {
-    
-    private func registerForKeyboardNotifications() {
-        NotificationCenter.registerKeyboardNotifications(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification)
-        
-        NotificationCenter.registerKeyboardNotifications(
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification)
-    }
-    
-    private func unregisterFromKeyboardNotifications() {
-        NotificationCenter.unregisterKeyboardNotifications(
-            self,
-            name: UIResponder.keyboardWillShowNotification)
-        
-        NotificationCenter.unregisterKeyboardNotifications(
-            self,
-            name: UIResponder.keyboardDidHideNotification)
+    private func setupObservers() {
+        NotificationCenter.registerKeyboardNotifications(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification)
+        NotificationCenter.registerKeyboardNotifications(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -186,15 +157,15 @@ extension VerifyPhoneNumberView {
         else { return }
     
         let bottomPadding: CGFloat = -keyboardFrame.height + (-15)
-        changeVerifyButtonPosition(isShowing: true, notification: notification, bottomPadding: bottomPadding)
+        changeVerifyButtonPosition(notification: notification, bottomPadding: bottomPadding)
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
         let bottomPadding: CGFloat = -100
-        changeVerifyButtonPosition(isShowing: false, notification: notification, bottomPadding: bottomPadding)
+        changeVerifyButtonPosition(notification: notification, bottomPadding: bottomPadding)
     }
     
-    private func changeVerifyButtonPosition(isShowing: Bool, notification: Notification, bottomPadding: CGFloat) {
+    private func changeVerifyButtonPosition(notification: Notification, bottomPadding: CGFloat) {
         let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.3
         
         UIView.animate(withDuration: animationDuration) {
