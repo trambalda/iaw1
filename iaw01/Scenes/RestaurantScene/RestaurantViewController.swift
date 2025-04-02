@@ -2,6 +2,7 @@ import UIKit
 
 final class RestaurantViewController: UIViewController {
     private let restaurantView = RestaurantView()
+    private let model = RestaurantModel.mock
     
     override func loadView() {
         view = restaurantView
@@ -10,6 +11,7 @@ final class RestaurantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         restaurantView.scrollView.delegate = self
+        restaurantView.configure(with: model)
         setupNavigationBar()
     }
     

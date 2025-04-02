@@ -7,18 +7,16 @@ final class HeaderImageView: UIView {
         }
     }
     
-    private let imageView: UIImageView = {
+    var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(systemName: "restaurant")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        translatesAutoresizingMaskIntoConstraints = false
         setupLayoutAndConstraints()
     }
     

@@ -5,13 +5,31 @@ final class RestaurantInfoView: UIView {
         didSet {
             ratingLabel.attributedText = Font.info.compose("Ratings: \(model.rating)")
             timeLabel.attributedText = Font.info.compose("Delivers in \(model.time) min")
-            typeOfFoodLabel.attributedText = Font.info.compose(model.typeOfFood)
+            typeOfFoodLabel.attributedText = Font.info.compose(model.typeOfFood.isEmpty ? "Нет данных" : model.typeOfFood)
         }
     }
     
-    private let ratingLabel = UILabel()
-    private let timeLabel = UILabel()
-    private let typeOfFoodLabel = UILabel()
+    ///private let ratingLabel = UILabel()
+    ///private let timeLabel = UILabel()
+    ///private let typeOfFoodLabel = UILabel()
+    
+    private let ratingLabel: UILabel = {
+        let label = UILabel()
+        label.font = Font.info.font
+        return label
+    }()
+    
+    private let timeLabel: UILabel = {
+        let label = UILabel()
+        label.font = Font.info.font
+        return label
+    }()
+    
+    private let typeOfFoodLabel: UILabel = {
+        let label = UILabel()
+        label.font = Font.info.font
+        return label
+    }()
     
     private let ratingImage: UIImageView = {
         let image = UIImageView(image: .star)
@@ -51,6 +69,12 @@ final class RestaurantInfoView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(with model: RestaurantModel) {
+        ratingLabel.text = "Ratings: \(model.rating)"
+        timeLabel.text = "Delivers in \(model.time) min"
+        typeOfFoodLabel.text = model.typeOfFood
     }
     
     /*
@@ -104,6 +128,7 @@ final class RestaurantInfoView: UIView {
             mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            mainStack.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             ratingImage.heightAnchor.constraint(equalToConstant: 20),
             ratingImage.widthAnchor.constraint(equalToConstant: 20),

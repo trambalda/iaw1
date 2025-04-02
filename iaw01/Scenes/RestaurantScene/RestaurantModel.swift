@@ -11,3 +11,12 @@ struct RestaurantModel {
     
     static let empty = RestaurantModel(image: nil, logo: nil, title: "", location: "", rating: "", time: "", typeOfFood: "")
 }
+
+extension RestaurantModel {
+    static let mock = RestaurantModel(image: .restaurant,
+                                      logo: .logo,
+                                      title: "McDonald's",
+                                      location: "Bramlea & Sandalwood",
+                                      rating: "4.5", time: "15-20",
+                                      typeOfFood: "Burgers")
+}
