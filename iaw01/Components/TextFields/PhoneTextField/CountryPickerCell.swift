@@ -41,8 +41,8 @@ final class CountryPickerCell: UITableViewCell {
         ])
     }
     
-    func configure(with country: PhoneCountry) {
+    func configure(with country: CountryCodeModel) {
         countryFlagLabel.text = country.flag
-        countryCodeLable.text = country.phoneCode
+        countryCodeLable.text = country.code
     }
 }

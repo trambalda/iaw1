@@ -4,6 +4,10 @@ final class PhonePrefixView: UIView {
     
     private weak var parentView: PhoneTextField?
     
+    private lazy var maxCountryCodeLength: Int = {
+        CountryCodeModel.countryCodes.map { $0.code.count }.max() ?? 4
+    }()
+    
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -65,9 +69,12 @@ final class PhonePrefixView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updatePrefix(with country: PhoneCountry) {
-        flagLabel.text = country.flag
-        phonePrefixTextField.text = country.phoneCode
+    var selectedCountry: CountryCodeModel? {
+        didSet {
+            guard let country = selectedCountry else { return }
+            flagLabel.text = country.flag
+            phonePrefixTextField.text = country.code
+        }
     }
     
     private func setupLayout() {
@@ -125,9 +132,9 @@ extension PhonePrefixView: UITextFieldDelegate {
             return false
         }
         
-        let shouldChange = newText.count <= 4
+        let shouldChange = newText.count <= maxCountryCodeLength
         
-        if newText.count == 4 {
+        if newText.count == maxCountryCodeLength {
             DispatchQueue.main.async {
                 textField.resignFirstResponder()
             }

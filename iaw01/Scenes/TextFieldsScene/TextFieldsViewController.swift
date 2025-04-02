@@ -2,6 +2,13 @@ import UIKit
 
 final class TextFieldsViewController: UIViewController {
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.alwaysBounceVertical = true
+        return scrollView
+    }()
+    
     private let linkButton: LinkButton = {
         let linkButton = LinkButton(style: .forgotPassword)
         linkButton.onTap = {
@@ -21,39 +28,39 @@ final class TextFieldsViewController: UIViewController {
     private lazy var emailTextField: StringTextField = {
         let textField = StringTextField(with: .emailStyle)
         textField.textFieldShouldReturn = {
+            self.nameTextField.becomeTextFieldFirstResponder()
+        }
+        return textField
+    }()
+    
+    private lazy var nameTextField: StringTextField = {
+        let textField = StringTextField(with: .nameStyle)
+        textField.textFieldShouldReturn = {
+            self.passwordTextField.becomeTextFieldFirstResponder()
+        }
+        return textField
+    }()
+    
+    private lazy var passwordTextField: StringTextField = {
+        let textField = StringTextField(with: .passwordStyle)
+        textField.textFieldShouldReturn = {
+            self.createPasswordTextField.becomeTextFieldFirstResponder()
+        }
+        return textField
+    }()
+    
+    private lazy var createPasswordTextField: StringTextField = {
+        let textField = StringTextField(with: .createPasswordStyle)
+        textField.textFieldShouldReturn = {
             self.phoneTextField.becomeTextFieldFirstResponder()
         }
         return textField
     }()
-//    
-//    private lazy var nameTextField: StringTextField = {
-//        let textField = StringTextField(with: .nameStyle)
-//        textField.textFieldShouldReturn = {
-//            self.passwordTextField.becomeTextFieldFirstResponder()
-//        }
-//        return textField
-//    }()
-//    
-//    private lazy var passwordTextField: StringTextField = {
-//        let textField = StringTextField(with: .passwordStyle)
-//        textField.textFieldShouldReturn = {
-//            self.createPasswordTextField.becomeTextFieldFirstResponder()
-//        }
-//        return textField
-//    }()
-//    
-//    private lazy var createPasswordTextField: StringTextField = {
-//        let textField = StringTextField(with: .createPasswordStyle)
-//        textField.textFieldShouldReturn = {
-//            self.phoneTextField.becomeTextFieldFirstResponder()
-//        }
-//        return textField
-//    }()
     
     private lazy var phoneTextField: PhoneTextField = {
-        let textField = PhoneTextField(with: .phoneNumberStyle, superView: self.view)
+        let textField = PhoneTextField(with: .phoneNumberStyle, parent: self.view)
         textField.textFieldShouldReturn = {
-            print("Phone Number: \(textField.getFullPhoneNumber() ?? "")")
+            print("Phone Number: \(textField.phoneNumber.fullNumber ?? "")")
             textField.resignTextFieldFirstResponder()
         }
         return textField
@@ -68,20 +75,28 @@ final class TextFieldsViewController: UIViewController {
     }
     
     private func setupLayout() {
-        view.addSubview(textFieldsStack)
+        view.addSubview(scrollView)
+        scrollView.addSubview(textFieldsStack)
         textFieldsStack.addArrangedSubview(linkButton)
         textFieldsStack.addArrangedSubview(emailTextField)
-        //textFieldsStack.addArrangedSubview(nameTextField)
-        //textFieldsStack.addArrangedSubview(passwordTextField)
-        //textFieldsStack.addArrangedSubview(createPasswordTextField)
+        textFieldsStack.addArrangedSubview(nameTextField)
+        textFieldsStack.addArrangedSubview(passwordTextField)
+        textFieldsStack.addArrangedSubview(createPasswordTextField)
         textFieldsStack.addArrangedSubview(phoneTextField)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            textFieldsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            textFieldsStack.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            textFieldsStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            textFieldsStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            textFieldsStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            textFieldsStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32),
         ])
     }
 }

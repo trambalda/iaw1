@@ -9,13 +9,13 @@ final class PhoneTextField: UIStackView {
         set { textField.text = newValue }
     }
     
-    private weak var superView: UIView?
+    private weak var parent: UIView?
     
-    private lazy var leftTextFieldView = PhonePrefixView(parent: self)
+    private lazy var phonePrefixView = PhonePrefixView(parent: self)
     
     private var phonePrefix: String = ""
     
-    private var currentMask: String = "(###)###-####"
+    private var currentMask: String = ""
     
     private let titleContainerView = UIView()
 
@@ -39,7 +39,7 @@ final class PhoneTextField: UIStackView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = .phonePad
         textField.leftViewMode = .always
-        textField.leftView = leftTextFieldView
+        textField.leftView = phonePrefixView
         textField.delegate = self
         return textField
     }()
@@ -49,14 +49,14 @@ final class PhoneTextField: UIStackView {
         view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         view.onCountrySelected = { [weak self] country in
-            self?.leftTextFieldView.updatePrefix(with: country)
+            self?.phonePrefixView.selectedCountry = country
             self?.refreshPhoneField(for: country)
         }
         return view
     }()
     
-    init(with style: PhoneTextFieldStyle, superView: UIView?) {
-        self.superView = superView
+    init(with style: PhoneTextFieldStyle, parent: UIView?) {
+        self.parent = parent
         super.init(frame: .zero)
         setupStackViewProperties()
         setupLayout()
@@ -76,9 +76,8 @@ final class PhoneTextField: UIStackView {
         textField.resignFirstResponder()
     }
     
-    func getFullPhoneNumber() -> String? {
-        guard let phoneNumber = textField.text else { return nil }
-        return phonePrefix + phoneNumber
+    var phoneNumber: PhoneNumber {
+        PhoneNumber(number: textField.text, countryCode: phonePrefix)
     }
     
     func toggleCountryPicker() {
@@ -92,7 +91,14 @@ final class PhoneTextField: UIStackView {
     func updatePhonePrefix(with code: String) {
         phonePrefix = code
         textField.text = nil
-        currentMask = "(###)###-####"
+        
+        if let country = CountryCodeModel.countryCodes.first(where: { $0.code == code }) {
+            currentMask = country.mask
+            phonePrefixView.selectedCountry = country
+        } else {
+            currentMask = CountryCodeModel.defaultMask
+            phonePrefixView.selectedCountry = nil
+        }
     }
 
     private func setupStackViewProperties() {
@@ -142,8 +148,8 @@ final class PhoneTextField: UIStackView {
         )
     }
     
-    private func refreshPhoneField(for country: PhoneCountry) {
-        phonePrefix = country.phoneCode
+    private func refreshPhoneField(for country: CountryCodeModel) {
+        phonePrefix = country.code
         textField.text = nil
         currentMask = country.mask
     }
@@ -178,22 +184,31 @@ final class PhoneTextField: UIStackView {
     }
     
     private func showPickerView() {
-        superView?.addSubview(countryPickerView)
+        parent?.addSubview(countryPickerView)
         
-        if convert(bounds, to: nil).maxY + 200 > UIScreen.main.bounds.height {
-            NSLayoutConstraint.activate([
-                countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor),
-                countryPickerView.heightAnchor.constraint(equalToConstant: 160),
-                countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                countryPickerView.trailingAnchor.constraint(equalTo: leftTextFieldView.trailingAnchor, constant: -11),
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-                countryPickerView.topAnchor.constraint(equalTo: containerView.bottomAnchor),
-                countryPickerView.heightAnchor.constraint(equalToConstant: 160),
-                countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                countryPickerView.trailingAnchor.constraint(equalTo: leftTextFieldView.trailingAnchor, constant: -11),
-            ])
+        if let parentView = parent {
+            let textFieldFrame = convert(bounds, to: nil)
+            var visibleHeight = parentView.bounds.height
+            
+            if let scrollView = parentView as? UIScrollView {
+                visibleHeight += scrollView.contentOffset.y
+            }
+            
+            if textFieldFrame.maxY + 200 > visibleHeight {
+                NSLayoutConstraint.activate([
+                    countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor),
+                    countryPickerView.heightAnchor.constraint(equalToConstant: 160),
+                    countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11),
+                ])
+            } else {
+                NSLayoutConstraint.activate([
+                    countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor),
+                    countryPickerView.heightAnchor.constraint(equalToConstant: 160),
+                    countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11),
+                ])
+            }
         }
 
         countryPickerView.alpha = 0

@@ -2,9 +2,9 @@ import UIKit
 
 final class CountryPickerView: UIView {
     
-    var onCountrySelected: ((PhoneCountry) -> Void)?
+    var onCountrySelected: ((CountryCodeModel) -> Void)?
     
-    private let phoneCountries = PhoneCountry.allCountries
+    private let phoneCountries = CountryCodeModel.countryCodes
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
