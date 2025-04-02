@@ -19,7 +19,7 @@ final class OnboardingViewController: UIViewController {
             self?.currentPageNumber = pageNumber
         }
         view.onNextButtonTap = { [weak self] in
-            self?.handleNextButton()
+            self?.switchToNextPage()
         }
         view.onSkipButtonTap = { [weak self] in
             self?.finishOnboarding()
@@ -36,7 +36,7 @@ final class OnboardingViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
-    private func handleNextButton() {
+    private func switchToNextPage() {
         if currentPageNumber < pages.count - 1 {
             currentPageNumber += 1
             onboardingView.changePage(on: currentPageNumber)

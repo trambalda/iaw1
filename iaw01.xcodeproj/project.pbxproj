@@ -267,12 +267,28 @@
 		D59B589F2D8DB2350049A3F9 /* OnboardingScene */ = {
 			isa = PBXGroup;
 			children = (
-				D5DC6E202D931B100063FC7A /* OnboardingPageView.swift */,
-				D59B58A22D8DCCCF0049A3F9 /* OnboardingPageModel.swift */,
-				D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */,
 				D59B589E2D8DB2350049A3F9 /* OnboardingViewController.swift */,
+				D5C579C72D9D9389002AC9F7 /* Views */,
+				D5C579C82D9D93A0002AC9F7 /* Models */,
 			);
 			path = OnboardingScene;
+			sourceTree = "<group>";
+		};
+		D5C579C72D9D9389002AC9F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D59B589D2D8DB2350049A3F9 /* OnboardingView.swift */,
+				D5DC6E202D931B100063FC7A /* OnboardingPageView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D5C579C82D9D93A0002AC9F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D59B58A22D8DCCCF0049A3F9 /* OnboardingPageModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

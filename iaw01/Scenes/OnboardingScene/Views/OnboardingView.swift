@@ -9,20 +9,22 @@ final class OnboardingView: UIView {
     var pages: [OnboardingPageModel] = [] {
         didSet {
             pageViews.forEach { $0.removeFromSuperview() }
-            pageViews.removeAll()
             createPageViews()
+            setupConstraints()
             changePage(on: 0)
         }
     }
     private var pageViews: [OnboardingPageView] = []
     
-    private let scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
         scrollView.bounces = false
         scrollView.isDirectionalLockEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.delegate = self
+        
         return scrollView
     }()
     
@@ -44,7 +46,7 @@ final class OnboardingView: UIView {
     
     private lazy var skipButton: CornersButton = {
         let button = CornersButton(style: .skipButton)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        //button.translatesAutoresizingMaskIntoConstraints = false
         button.onTap = { [weak self] in
             self?.onSkipButtonTap?()
         }
@@ -62,12 +64,18 @@ final class OnboardingView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayout()
-        setupConstraints()
+        configure()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        backgroundColor = .white
+        setupLayout()
+        setupConstraints()
     }
 
     func changePage(on pageNumber: Int) {
@@ -79,9 +87,6 @@ final class OnboardingView: UIView {
     }
 
     private func setupLayout() {
-        backgroundColor = .white
-        scrollView.delegate = self
-        
         addSubview(scrollView)
         scrollView.addSubview(contentStackView)
         addSubview(buttonsStackView)
@@ -109,6 +114,18 @@ final class OnboardingView: UIView {
             
             nextButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.55)
         ])
+        
+        // Настройка ограничений для страниц
+        pageViews.forEach { pageView in
+            pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        }
+        
+        if !pages.isEmpty {
+            contentStackView.widthAnchor.constraint(
+                equalTo: scrollView.widthAnchor,
+                multiplier: CGFloat(pages.count)
+            ).isActive = true
+        }
     }
     
     private func createPageViews() {
@@ -121,14 +138,7 @@ final class OnboardingView: UIView {
             
             pageViews.append(pageView)
             contentStackView.addArrangedSubview(pageView)
-            
-            pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         }
-
-        contentStackView.widthAnchor.constraint(
-            equalTo: scrollView.widthAnchor,
-            multiplier: CGFloat(pages.count)
-        ).isActive = true
     }
 }
 
