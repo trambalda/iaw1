@@ -11,6 +11,7 @@ class VerifyPhoneNumberView: UIView {
     
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
     private var keyboardPadding: CGFloat = 16
+    private var getNewCodeButton = LinkButton(style: .getNewCode)
     
     private var tabBarHeight: CGFloat {
         guard
@@ -32,15 +33,10 @@ class VerifyPhoneNumberView: UIView {
         return stack
     }()
     
-    private lazy var viewForGetNewCodeLabelAndButtonStackView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var getNewCodeLabelAndButtonStackView: UIStackView = {
+    private lazy var getNewCodeView: UIStackView = {
         let stack = UIStackView()
-        stack.spacing = 5
+        stack.spacing = 1
+        stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -48,6 +44,8 @@ class VerifyPhoneNumberView: UIView {
     private lazy var verifyHeaderLabel: UILabel = {
         let label = UILabel()
         label.attributedText = Font.heading4.compose("Verify Phone Number", color: nil)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -79,8 +77,6 @@ class VerifyPhoneNumberView: UIView {
         label.textColor = .dark80
         return label
     }()
-    
-    private var getNewCodeButton = LinkButton(style: .getNewCode)
     
     private lazy var verifyButton: UIButton = {
         let button = UIButton()
@@ -121,10 +117,9 @@ extension VerifyPhoneNumberView {
         mainStackView.addArrangedSubview(verifyDescLabel)
         mainStackView.addArrangedSubview(phoneNumberInputView)
         mainStackView.addArrangedSubview(pincodeInputView)
-        mainStackView.addArrangedSubview(viewForGetNewCodeLabelAndButtonStackView)
-        viewForGetNewCodeLabelAndButtonStackView.addSubview(getNewCodeLabelAndButtonStackView)
-        getNewCodeLabelAndButtonStackView.addArrangedSubview(getNewCodeLabel)
-        getNewCodeLabelAndButtonStackView.addArrangedSubview(getNewCodeButton)
+        mainStackView.addArrangedSubview(getNewCodeView)
+        getNewCodeView.addArrangedSubview(getNewCodeLabel)
+        getNewCodeView.addArrangedSubview(getNewCodeButton)
         addSubview(verifyButton)
         
         phoneNumberInputView.onVerifyButtonVisibilityChanged = { [weak self] isHidden in
@@ -145,8 +140,6 @@ extension VerifyPhoneNumberView {
             mainStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -21),
             
             pincodeInputView.heightAnchor.constraint(equalToConstant: 55),
-            
-            getNewCodeLabelAndButtonStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
             verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16)
