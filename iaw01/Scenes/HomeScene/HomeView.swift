@@ -17,27 +17,38 @@ class HomeView: UIView {
         stackView.alignment = .leading
         return stackView
     }()
+    var addressTitle: String? {
+        didSet {
+            homeAddressView.configureAddress(title: addressTitle ?? "")
+        }
+    }
+
+    var onAddressButtonTap: (() -> Void)? {
+        didSet {
+            homeAddressView.onAddressButtonTap = onAddressButtonTap
+        }
+    }
+
+    func dismissKeyboard() {
+        homeSearchView.homeSearchBar.resignFirstResponder()
+    }
     
     lazy var homeAddressView = HomeAddressView()
     lazy var homeSearchView = HomeSearchView()
     
-    var welcomeTitle: String = ""
+    private var attributedTitle: NSAttributedString?
         
     private lazy var helloLabel: UILabel = {
         let label = UILabel()
-        label.attributedText = createAttributedTitle()
         return label
     }()
-        
-    private func createAttributedTitle() -> NSAttributedString? {
-        return welcomeTitle.isEmpty
-            ? nil
-            : Font.heading5.compose(welcomeTitle, color: .dark100)
-    }
-        
-    func configure(with title: String) {
-        welcomeTitle = title
-        helloLabel.attributedText = createAttributedTitle()
+
+    var title: NSAttributedString? {
+        get { return attributedTitle }
+        set {
+            attributedTitle = newValue
+            helloLabel.attributedText = attributedTitle
+        }
     }
     
     override init(frame: CGRect) {
@@ -51,8 +62,7 @@ class HomeView: UIView {
     }
     
     private func configure() {
-        backgroundColor = UIColor(named: "light100")
-        setupViews()
+        backgroundColor = .light100
         setupLayout()
         setupConstraints()
     }
@@ -67,6 +77,9 @@ extension HomeView {
     }
     
     private func setupLayout() {
+        addSubview(scrollView)
+        scrollView.addSubview(stackView)
+        
         stackView.addArrangedSubview(homeAddressView)
         stackView.addArrangedSubview(helloLabel)
         stackView.addArrangedSubview(homeSearchView)

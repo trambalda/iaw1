@@ -4,6 +4,11 @@ class HomeViewController: UIViewController {
     
     lazy var homeView: HomeView = {
         let view = HomeView(frame: UIScreen.main.bounds)
+        view.title = Font.heading5.compose("Good Evening Luisa", color: .dark100)
+        view.addressTitle = "32, Kingston Ln."
+        view.onAddressButtonTap = { [weak self] in
+            self?.handleAddressButtonTap()
+        }
         return view
     }()
     
@@ -14,16 +19,11 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapGesture()
-        homeView.configure(with: "Good Evening Luisa")
-        homeView.homeAddressView.configureAddress(title: "32, Kingston Ln.")
-        homeView.homeAddressView.onAddressButtonTap = { [weak self] in
-            self?.handleAddressButtonTap()
-        }
     }
     
     private func handleAddressButtonTap() {
-            print("Address button tapped")
-        }
+        print("Address button tapped")
+    }
     
     private func setupTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -31,6 +31,6 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func handleTap() {
-        homeView.homeSearchView.homeSearchBar.resignFirstResponder()
+        homeView.dismissKeyboard()
     }
 }
