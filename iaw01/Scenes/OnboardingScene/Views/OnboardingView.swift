@@ -46,7 +46,6 @@ final class OnboardingView: UIView {
     
     private lazy var skipButton: CornersButton = {
         let button = CornersButton(style: .skipButton)
-        //button.translatesAutoresizingMaskIntoConstraints = false
         button.onTap = { [weak self] in
             self?.onSkipButtonTap?()
         }
@@ -115,7 +114,6 @@ final class OnboardingView: UIView {
             nextButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.55)
         ])
         
-        // Настройка ограничений для страниц
         pageViews.forEach { pageView in
             pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         }
