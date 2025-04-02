@@ -7,18 +7,21 @@
 import UIKit
 
 extension NotificationCenter {
-    static func registerKeyboardNotifications(_ observer: Any,selector: Selector,name: NSNotification.Name?) {
+    static func registerKeyboardNotifications(_ observer: Any, willShowSelector: Selector, willHideSelector: Selector) {
         NotificationCenter.default.addObserver(
             observer,
-            selector: selector,
-            name: name,
+            selector: willShowSelector,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        
+        NotificationCenter.default.addObserver(
+            observer, selector: willHideSelector,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
     
-    static func unregisterKeyboardNotifications(_ observer: Any,name: NSNotification.Name?) {
-        NotificationCenter.default.removeObserver(
-            observer,
-            name: /*UIResponder.keyboardWillHideNotification*/name,
-            object: nil)
+    static func unregisterKeyboardNotifications(_ observer: Any) {
+        NotificationCenter.default.removeObserver(observer, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(observer, name: UIResponder.keyboardDidHideNotification, object: nil)
     }
 }

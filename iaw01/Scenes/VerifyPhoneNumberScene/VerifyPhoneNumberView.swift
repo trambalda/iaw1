@@ -10,19 +10,7 @@ import UIKit
 class VerifyPhoneNumberView: UIView {
     
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
-    private var keyboardPadding: CGFloat = 22
-    
-    private var stackSpacing: CGFloat {
-        UIScreen.isSmallScreen ? 5 : 13
-    }
-    
-    private var customSpacingAfterPhoneInput: CGFloat {
-        UIScreen.isSmallScreen ? 10 : 43
-    }
-    
-    private var customSpacingAfterPincode: CGFloat {
-        UIScreen.isSmallScreen ? 10 : 40
-    }
+    private var keyboardPadding: CGFloat = 16
     
     private var tabBarHeight: CGFloat {
         guard
@@ -39,7 +27,7 @@ class VerifyPhoneNumberView: UIView {
     private lazy var mainStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = stackSpacing
+        stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -112,10 +100,9 @@ class VerifyPhoneNumberView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
+        setupLayout()
         setupConstraints()
         setupObservers()
-        setupStackView()
     }
     
     required init?(coder: NSCoder) {
@@ -123,13 +110,12 @@ class VerifyPhoneNumberView: UIView {
     }
     
     deinit {
-        NotificationCenter.unregisterKeyboardNotifications(self, name: UIResponder.keyboardWillShowNotification)
-        NotificationCenter.unregisterKeyboardNotifications(self, name: UIResponder.keyboardDidHideNotification)
+        NotificationCenter.unregisterKeyboardNotifications(self)
     }
 }
 
 extension VerifyPhoneNumberView {
-    private func setupViews() {
+    private func setupLayout() {
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(verifyHeaderLabel)
         mainStackView.addArrangedSubview(verifyDescLabel)
@@ -141,17 +127,20 @@ extension VerifyPhoneNumberView {
         getNewCodeLabelAndButtonStackView.addArrangedSubview(getNewCodeButton)
         addSubview(verifyButton)
         
-        phoneNumberInputView.onVerifyButtonVisibilityChanged = { [weak self] hide in
+        phoneNumberInputView.onVerifyButtonVisibilityChanged = { [weak self] isHidden in
             UIView.animate(withDuration: 0.3) {
-                self?.verifyButton.isHidden = hide
+                self?.verifyButton.isHidden = isHidden
                 self?.layoutIfNeeded()
             }
         }
+        
+        mainStackView.setCustomSpacing(Constans.isSE ? 20 : 40, after: phoneNumberInputView)
+        mainStackView.setCustomSpacing(Constans.isSE ? 20 : 40, after: pincodeInputView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 49),
+            mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 18),
             mainStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 21),
             mainStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -21),
             
@@ -159,16 +148,11 @@ extension VerifyPhoneNumberView {
             
             getNewCodeLabelAndButtonStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 21),
-            verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -21)
+            verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
+            verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16)
         ])
         verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(tabBarHeight + keyboardPadding))
         verifyButtonBottomConstraint.isActive = true
-    }
-    
-    private func setupStackView() {
-        mainStackView.setCustomSpacing(customSpacingAfterPhoneInput, after: phoneNumberInputView)
-        mainStackView.setCustomSpacing(customSpacingAfterPincode, after: pincodeInputView)
     }
 }
 
@@ -181,8 +165,7 @@ extension VerifyPhoneNumberView: UITextFieldDelegate{
 
 extension VerifyPhoneNumberView {
     private func setupObservers() {
-        NotificationCenter.registerKeyboardNotifications(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification)
-        NotificationCenter.registerKeyboardNotifications(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification)
+        NotificationCenter.registerKeyboardNotifications(self, willShowSelector: #selector(keyboardWillShow), willHideSelector: #selector(keyboardWillHide))
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {

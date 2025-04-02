@@ -31,7 +31,7 @@ class PhoneNumberInputView: UIView {
         return textField
     }()
     
-    private lazy var phoneEditButton: UIButton = { // +++
+    private lazy var phoneEditButton: UIButton = {
         let button = UIButton()
         let buttonWidth: CGFloat = 39
         button.setImage(.phoneEditButton, for: .normal)
@@ -72,7 +72,8 @@ class PhoneNumberInputView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViewAndConstraints()
+        setupLayout()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -81,11 +82,13 @@ class PhoneNumberInputView: UIView {
 }
 
 extension PhoneNumberInputView {
-    private func setupViewAndConstraints() {
+    private func setupLayout() {
         addSubview(phoneNumberTextFieldView)
         addSubview(phoneEditButton)
         phoneNumberTextFieldView.addSubview(phoneNumberTextField)
-        
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             phoneNumberTextFieldView.topAnchor.constraint(equalTo: topAnchor),
             phoneNumberTextFieldView.leadingAnchor.constraint(equalTo: leadingAnchor),
