@@ -50,23 +50,17 @@ class PhoneNumberInputView: UIView {
             phoneNumberTextField.isEnabled = true
             phoneNumberTextField.becomeFirstResponder()
             phoneEditButtonTrailingConstraint = phoneEditButton.trailingAnchor.constraint(equalTo: trailingAnchor)
-            phoneEditButtonTrailingConstraint.isActive = true
-            
-            UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
-            }
-            phoneNumberTextFieldIsActive = false
         } else {
             onVerifyButtonVisibilityChanged?(false)
             phoneNumberTextField.resignFirstResponder()
             phoneEditButton.setImage(.phoneEditButton, for: .normal)
             phoneNumberTextField.isEnabled = false
-            phoneEditButtonTrailingConstraint.isActive = false
-            
-            UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
-            }
-            phoneNumberTextFieldIsActive = true
+        }
+        phoneNumberTextFieldIsActive.toggle()
+        phoneEditButtonTrailingConstraint.isActive.toggle()
+        
+        UIView.animate(withDuration: 0.3) {
+            self.layoutIfNeeded()
         }
     }
     

@@ -13,17 +13,18 @@ class VerifyPhoneNumberView: UIView {
     private var keyboardPadding: CGFloat = 16
     private var getNewCodeButton = LinkButton(style: .getNewCode)
     
-    private var tabBarHeight: CGFloat {
-        guard
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let rootViewController = windowScene.windows.first?.rootViewController
-        else { return 0 }
-        
-        if let tabBarController = rootViewController as? UITabBarController {
-            return tabBarController.tabBar.frame.height
-        }
-        return rootViewController.view.safeAreaInsets.bottom
-    }
+    //TODO: подрефачить после создания таббара (строки 143, 173)
+//    private var tabBarHeight: CGFloat {
+//        guard
+//            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//            let rootViewController = windowScene.windows.first?.rootViewController
+//        else { return 0 }
+//        
+//        if let tabBarController = rootViewController as? UITabBarController {
+//            return tabBarController.tabBar.frame.height
+//        }
+//        return rootViewController.view.safeAreaInsets.bottom
+//    }
     
     private lazy var mainStackView: UIStackView = {
         let stack = UIStackView()
@@ -33,20 +34,11 @@ class VerifyPhoneNumberView: UIView {
         return stack
     }()
     
-    private lazy var getNewCodeView: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 1
-        stack.alignment = .center
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
     private lazy var verifyHeaderLabel: UILabel = {
         let label = UILabel()
         label.attributedText = Font.heading4.compose("Verify Phone Number", color: nil)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -55,19 +47,16 @@ class VerifyPhoneNumberView: UIView {
         label.attributedText = Font.body.compose("We have sent you a 6 digit code. Please enter here to Verify your Number.", color: nil)
         label.textColor = .dark80
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var phoneNumberInputView: PhoneNumberInputView = {
         let view = PhoneNumberInputView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var pincodeInputView: PincodeInputView = {
         let view = PincodeInputView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -112,14 +101,21 @@ class VerifyPhoneNumberView: UIView {
 
 extension VerifyPhoneNumberView {
     private func setupLayout() {
+        let newCodeOuterStackView = UIStackView()
+        newCodeOuterStackView.axis = .vertical
+        newCodeOuterStackView.alignment = .center
+        let newCodeInnerStackView = UIStackView()
+        newCodeInnerStackView.spacing = 5
+        
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(verifyHeaderLabel)
         mainStackView.addArrangedSubview(verifyDescLabel)
         mainStackView.addArrangedSubview(phoneNumberInputView)
         mainStackView.addArrangedSubview(pincodeInputView)
-        mainStackView.addArrangedSubview(getNewCodeView)
-        getNewCodeView.addArrangedSubview(getNewCodeLabel)
-        getNewCodeView.addArrangedSubview(getNewCodeButton)
+        mainStackView.addArrangedSubview(newCodeOuterStackView)
+        newCodeOuterStackView.addArrangedSubview(newCodeInnerStackView)
+        newCodeInnerStackView.addArrangedSubview(getNewCodeLabel)
+        newCodeInnerStackView.addArrangedSubview(getNewCodeButton)
         addSubview(verifyButton)
         
         phoneNumberInputView.onVerifyButtonVisibilityChanged = { [weak self] isHidden in
@@ -144,7 +140,7 @@ extension VerifyPhoneNumberView {
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
             verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16)
         ])
-        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(tabBarHeight + keyboardPadding))
+        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(Constans.isSE ? 49 : 83 + keyboardPadding))
         verifyButtonBottomConstraint.isActive = true
     }
 }
@@ -172,7 +168,7 @@ extension VerifyPhoneNumberView {
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        let bottomPadding: CGFloat = -(tabBarHeight + keyboardPadding)
+        let bottomPadding: CGFloat = -(Constans.isSE ? 49 : 83 + keyboardPadding)
         changeVerifyButtonPosition(notification: notification, bottomPadding: bottomPadding)
     }
     
