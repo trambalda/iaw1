@@ -44,32 +44,33 @@ final class RestaurantView: UIView {
     func setupLayoutAndConstraints() {
         backgroundColor = .light100
         
-        let headerWrapperStack = UIStackView(arrangedSubviews: [headerImageView])
-        headerWrapperStack.axis = .vertical
-        headerWrapperStack.translatesAutoresizingMaskIntoConstraints = false
-       
-        let headerStack = UIStackView(arrangedSubviews: [restaurantHeaderView, restaurantInfoView])
+        let headerStack = UIStackView(arrangedSubviews: [headerImageView])
         headerStack.axis = .vertical
-        headerStack.spacing = 22
-        headerStack.alignment = .center
+        headerStack.translatesAutoresizingMaskIntoConstraints = false
+       
+        let restaurantStack = UIStackView(arrangedSubviews: [restaurantHeaderView, restaurantInfoView])
+        restaurantStack.axis = .vertical
+        restaurantStack.spacing = 22
+        restaurantStack.alignment = .center
+        restaurantStack.translatesAutoresizingMaskIntoConstraints = false
         
         let filtersStack = UIStackView(arrangedSubviews: [menuTimeView, menuCategoryView])
         filtersStack.axis = .vertical
         filtersStack.spacing = 18
         filtersStack.alignment = .center
+        filtersStack.translatesAutoresizingMaskIntoConstraints = false
         
-        let mainStack = UIStackView(arrangedSubviews: [headerStack, filtersStack, menuItemListView])
-        mainStack.axis = .vertical
-        mainStack.setCustomSpacing(18, after: headerStack)
-        mainStack.setCustomSpacing(9, after: filtersStack)
-        mainStack.alignment = .center
-        mainStack.translatesAutoresizingMaskIntoConstraints = false
+        let itemListStack = UIStackView(arrangedSubviews: [menuItemListView])
+        itemListStack.axis = .vertical
+        itemListStack.translatesAutoresizingMaskIntoConstraints = false
         
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(scrollView)
-        scrollView.addSubview(headerWrapperStack)
-        scrollView.addSubview(mainStack)
+        scrollView.addSubview(headerStack)
+        scrollView.addSubview(restaurantStack)
+        scrollView.addSubview(filtersStack)
+        scrollView.addSubview(itemListStack)
         
         headerImageViewHeightConstraint = headerImageView.heightAnchor.constraint(equalToConstant: 164)
         restaurantInfoViewHeightConstraint = restaurantInfoView.heightAnchor.constraint(equalToConstant: 109)
@@ -80,16 +81,19 @@ final class RestaurantView: UIView {
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            headerWrapperStack.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            headerWrapperStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            headerWrapperStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            headerStack.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            headerStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            headerStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
            
-            mainStack.topAnchor.constraint(equalTo: headerWrapperStack.bottomAnchor, constant: 18),
-            mainStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 21),
-            mainStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -21),
-            mainStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            mainStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -21*2),
-            mainStack.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+            restaurantStack.topAnchor.constraint(equalTo: headerStack.bottomAnchor, constant: 18),
+            restaurantStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 21),
+            restaurantStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -21),
+            restaurantStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -21*2),
+            
+            filtersStack.topAnchor.constraint(equalTo: restaurantStack.bottomAnchor, constant: 18),
+            filtersStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            filtersStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            
         ])
     }
     

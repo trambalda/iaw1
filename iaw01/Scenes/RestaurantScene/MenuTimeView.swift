@@ -54,12 +54,12 @@ final class MenuTimeView: UIView {
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.heightAnchor.constraint(equalToConstant: 59),
-            scrollView.widthAnchor.constraint(equalTo: widthAnchor),
             
             segmentedControl.topAnchor.constraint(equalTo: scrollView.topAnchor),
             segmentedControl.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            segmentedControl.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            segmentedControl.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            segmentedControl.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            segmentedControl.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         ])
+        
     }
 }
