@@ -2,9 +2,11 @@ import UIKit
 
 final class Factory {
     
-    var appCoordinator: AppCoordinator?
+
+    let appCoordinator: AppCoordinator
     
-    init(appCoordinator: AppCoordinator? = nil) {
+    init(appCoordinator: AppCoordinator) {
+
         self.appCoordinator = appCoordinator
     }
     
@@ -26,6 +28,7 @@ final class Factory {
     
     func createChangeLocationScene() -> ChangeLocationViewController {
         let vc = ChangeLocationViewController()
+        vc.appCoordinator = appCoordinator
         return vc
     }
 }

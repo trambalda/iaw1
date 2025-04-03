@@ -37,10 +37,6 @@ class ChangeLocationViewController: UIViewController {
     private let useCurrentLocationButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("📍 Use Current Location", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor.systemBlue
-        button.layer.cornerRadius = 10
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -65,20 +61,15 @@ class ChangeLocationViewController: UIViewController {
     */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
-        
-        
-      
         
         // Hinzufügen der UI-Elemente
         view.addSubview(searchBar)
         view.addSubview(locationTableView)
         view.addSubview(useCurrentLocationButton)
         
-        
-        
         setupConstraints()
-        
         // Refresh the table if it does not load
         locationTableView.reloadData()
     }
@@ -106,10 +97,6 @@ class ChangeLocationViewController: UIViewController {
     }
     
 }
-
-
-
-
 
 
 

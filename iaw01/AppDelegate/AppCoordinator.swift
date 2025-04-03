@@ -4,13 +4,18 @@ final class AppCoordinator {
     
     private let window: UIWindow
     private let presenter: UINavigationController
-    private let factory: Factory 
+
+    private lazy var factory: Factory = {
+        Factory(appCoordinator: self)
+    }()
+
     
     
     init(window: UIWindow, factory: Factory) {
         self.window = window
-        self.factory = factory
-        self.presenter = UINavigationController()
+
+        presenter = UINavigationController()
+
         window.rootViewController = presenter
         window.makeKeyAndVisible()
     }
@@ -33,6 +38,11 @@ final class AppCoordinator {
             let vc = factory.createCornersButtonsScene()
             parent?.pushViewController(vc, animated: true)
         }
+        
+        func showChangeLocationScene(from parent: UINavigationController?) {
+            let vc = factory.createChangeLocationScene()
+            parent?.pushViewController(vc, animated: true)
+    }
     
-//
+        
 }
