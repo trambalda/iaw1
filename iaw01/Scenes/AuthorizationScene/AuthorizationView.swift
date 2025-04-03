@@ -95,12 +95,10 @@ class AuthorizationView: UIView {
             loginView.topAnchor.constraint(equalTo: containerView.topAnchor),
             loginView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             loginView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            loginView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             
             signupView.topAnchor.constraint(equalTo: containerView.topAnchor),
             signupView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             signupView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            signupView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
         ])
     }
 }

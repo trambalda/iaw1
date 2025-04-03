@@ -12,7 +12,9 @@ import UIKit
 
 class AuthorizationSignupView: UIStackView {
     
+    private let socialButtons = AuthorizationSocialButtonsView()
     private let nameTextField = StringTextField(with: .nameStyle)
+    private let createPasswordTextField = StringTextField(with: .createPasswordStyle)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,5 +33,11 @@ class AuthorizationSignupView: UIStackView {
     
     private func setupLayout() {
         addArrangedSubview(nameTextField)
+        addArrangedSubview(createPasswordTextField)
+        addArrangedSubview(socialButtons)
+        
+        setCustomSpacing(26, after: nameTextField)
+        setCustomSpacing(37, after: createPasswordTextField)
+        
     }
 }

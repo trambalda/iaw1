@@ -12,19 +12,20 @@ import UIKit
 
 class AuthorizationLoginView: UIStackView {
     
+    private let socialButtons = AuthorizationSocialButtonsView()
     private let emailTextField = StringTextField(with: .emailStyle)
     private let passwordTextField = StringTextField(with: .passwordStyle)
     
-    private let forgotLinkingButton: LinkButton = {
+    private let forgotPasswordButton: LinkButton = {
         let button = LinkButton(style: .forgotPassword)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private let forgotContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .trailing
+        return stackView
     }()
     
     override init(frame: CGRect) {
@@ -40,32 +41,21 @@ class AuthorizationLoginView: UIStackView {
     private func configure() {
         setupStackView()
         setupLayout()
-        setupConstraints()
     }
     
     private func setupStackView() {
         axis = .vertical
-        translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupLayout() {
         addArrangedSubview(emailTextField)
         addArrangedSubview(passwordTextField)
-        forgotContainerView.addSubview(forgotLinkingButton)
-        addArrangedSubview(forgotContainerView)
+        stackView.addArrangedSubview(forgotPasswordButton)
+        addArrangedSubview(stackView)
+        addArrangedSubview(socialButtons)
         
         setCustomSpacing(26, after: emailTextField)
         setCustomSpacing(15, after: passwordTextField)
-    }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            forgotLinkingButton.trailingAnchor.constraint(equalTo: forgotContainerView.trailingAnchor),
-            forgotLinkingButton.topAnchor.constraint(equalTo: forgotContainerView.topAnchor),
-            forgotLinkingButton.bottomAnchor.constraint(equalTo: forgotContainerView.bottomAnchor),
-            
-            forgotLinkingButton.leadingAnchor.constraint(greaterThanOrEqualTo: forgotContainerView.leadingAnchor),
-            forgotLinkingButton.heightAnchor.constraint(equalToConstant: 23),
-        ])
+        setCustomSpacing(38, after: stackView)
     }
 }
