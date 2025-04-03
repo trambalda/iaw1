@@ -9,8 +9,8 @@ final class RestaurantHeaderView: UIStackView {
         }
     }
     
-    ///private let restaurantLabel = UILabel()
-    ///private let locationLabel = UILabel()
+    //private let restaurantLabel = UILabel()
+    //private let locationLabel = UILabel()
     
     private let restaurantLabel: UILabel = {
         let label = UILabel()
@@ -96,18 +96,25 @@ final class RestaurantHeaderView: UIStackView {
         restaurantStack.spacing = 15
         restaurantStack.alignment = .center
         
-        addArrangedSubview(restaurantStack)
-        addArrangedSubview(favoriteButton)
+        let mainStack = UIStackView(arrangedSubviews: [restaurantStack, favoriteButton])
+        mainStack.distribution = .equalSpacing
+        mainStack.alignment = .top
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
         
+        addArrangedSubview(mainStack)
+                
         NSLayoutConstraint.activate([
+            mainStack.topAnchor.constraint(equalTo: topAnchor),
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
             restaurantImage.widthAnchor.constraint(equalToConstant: 64),
             restaurantImage.heightAnchor.constraint(equalToConstant: 64),
             
             locationImage.widthAnchor.constraint(equalToConstant: 19),
             locationImage.heightAnchor.constraint(equalToConstant: 19),
             
-            favoriteButton.topAnchor.constraint(equalTo: topAnchor),
-            favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             favoriteButton.heightAnchor.constraint(equalToConstant: 50),
             favoriteButton.widthAnchor.constraint(equalToConstant: 50)
         ])

@@ -9,9 +9,9 @@ final class RestaurantInfoView: UIView {
         }
     }
     
-    ///private let ratingLabel = UILabel()
-    ///private let timeLabel = UILabel()
-    ///private let typeOfFoodLabel = UILabel()
+    //private let ratingLabel = UILabel()
+    //private let timeLabel = UILabel()
+    //private let typeOfFoodLabel = UILabel()
     
     private let ratingLabel: UILabel = {
         let label = UILabel()
@@ -115,20 +115,17 @@ final class RestaurantInfoView: UIView {
         
         let mainStack = UIStackView(arrangedSubviews: [infoStack, infoButton])
         mainStack.spacing = 101
+        mainStack.distribution = .equalSpacing
         mainStack.alignment = .center
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(mainStack)
         
         NSLayoutConstraint.activate([
-            leadingAnchor.constraint(equalTo: leadingAnchor),
-            trailingAnchor.constraint(equalTo: trailingAnchor),
-            heightAnchor.constraint(equalToConstant: 109),
-            
             mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            mainStack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
             
             ratingImage.heightAnchor.constraint(equalToConstant: 20),
             ratingImage.widthAnchor.constraint(equalToConstant: 20),
