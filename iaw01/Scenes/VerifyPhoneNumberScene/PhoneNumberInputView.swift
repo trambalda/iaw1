@@ -8,7 +8,6 @@
 import UIKit
 
 class PhoneNumberInputView: UIView {
-    var onVerifyButtonVisibilityChanged: ((Bool) -> Void)?
     private var phoneNumberTextFieldIsActive = true
     private var phoneEditButtonTrailingConstraint: NSLayoutConstraint!
     
@@ -44,14 +43,12 @@ class PhoneNumberInputView: UIView {
     
     @objc private func editButtonDidTapped() {
         if phoneNumberTextFieldIsActive {
-            onVerifyButtonVisibilityChanged?(true)
             phoneEditButton.setImage(.checkmark, for: .normal)
             phoneEditButton.tintColor = .peach100
             phoneNumberTextField.isEnabled = true
             phoneNumberTextField.becomeFirstResponder()
             phoneEditButtonTrailingConstraint = phoneEditButton.trailingAnchor.constraint(equalTo: trailingAnchor)
         } else {
-            onVerifyButtonVisibilityChanged?(false)
             phoneNumberTextField.resignFirstResponder()
             phoneEditButton.setImage(.phoneEditButton, for: .normal)
             phoneNumberTextField.isEnabled = false

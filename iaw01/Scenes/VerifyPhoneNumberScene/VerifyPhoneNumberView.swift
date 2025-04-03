@@ -9,22 +9,10 @@ import UIKit
 
 class VerifyPhoneNumberView: UIView {
     
+    var onVerifyButtonTapped: (() -> Void)?
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
     private var keyboardPadding: CGFloat = 16
     private var getNewCodeButton = LinkButton(style: .getNewCode)
-    
-    //TODO: подрефачить после создания таббара (строки 143, 173)
-//    private var tabBarHeight: CGFloat {
-//        guard
-//            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//            let rootViewController = windowScene.windows.first?.rootViewController
-//        else { return 0 }
-//        
-//        if let tabBarController = rootViewController as? UITabBarController {
-//            return tabBarController.tabBar.frame.height
-//        }
-//        return rootViewController.view.safeAreaInsets.bottom
-//    }
     
     private lazy var mainStackView: UIStackView = {
         let stack = UIStackView()
@@ -81,6 +69,7 @@ class VerifyPhoneNumberView: UIView {
     
     @objc private func verifyButtonDidTapped() {
         phoneNumberInputView.resignFirstResponder()
+        onVerifyButtonTapped?()
     }
     
     override init(frame: CGRect) {
@@ -106,6 +95,7 @@ extension VerifyPhoneNumberView {
         newCodeOuterStackView.alignment = .center
         let newCodeInnerStackView = UIStackView()
         newCodeInnerStackView.spacing = 5
+        let spacing: CGFloat = Constans.isSE ? 20 : 40
         
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(verifyHeaderLabel)
@@ -118,15 +108,8 @@ extension VerifyPhoneNumberView {
         newCodeInnerStackView.addArrangedSubview(getNewCodeButton)
         addSubview(verifyButton)
         
-        phoneNumberInputView.onVerifyButtonVisibilityChanged = { [weak self] isHidden in
-            UIView.animate(withDuration: 0.3) {
-                self?.verifyButton.isHidden = isHidden
-                self?.layoutIfNeeded()
-            }
-        }
-        
-        mainStackView.setCustomSpacing(Constans.isSE ? 20 : 40, after: phoneNumberInputView)
-        mainStackView.setCustomSpacing(Constans.isSE ? 20 : 40, after: pincodeInputView)
+        mainStackView.setCustomSpacing(spacing, after: phoneNumberInputView)
+        mainStackView.setCustomSpacing(spacing, after: pincodeInputView)
     }
     
     private func setupConstraints() {
@@ -140,13 +123,20 @@ extension VerifyPhoneNumberView {
             verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
             verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16)
         ])
-        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(Constans.isSE ? 49 : 83 + keyboardPadding))
+        verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(
+            equalTo: bottomAnchor,
+            // TODO: подрефачить расчет высоты после создания таббара
+            constant: -(Constans.isSE ? 49 : 83 + keyboardPadding)
+        )
         verifyButtonBottomConstraint.isActive = true
     }
 }
 
 extension VerifyPhoneNumberView: UITextFieldDelegate{
-    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
     ) -> Bool {
         string.count <= 1
     }
@@ -154,7 +144,11 @@ extension VerifyPhoneNumberView: UITextFieldDelegate{
 
 extension VerifyPhoneNumberView {
     private func setupObservers() {
-        NotificationCenter.registerKeyboardNotifications(self, willShowSelector: #selector(keyboardWillShow), willHideSelector: #selector(keyboardWillHide))
+        NotificationCenter.registerKeyboardNotifications(
+            self,
+            willShowSelector: #selector(keyboardWillShow),
+            willHideSelector: #selector(keyboardWillHide)
+        )
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
