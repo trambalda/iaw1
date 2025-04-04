@@ -23,9 +23,9 @@ final class RootTabBarController: UITabBarController {
 
     private lazy var indicator: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .dark100
         view.layer.cornerRadius = 2.5
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -55,31 +55,6 @@ final class RootTabBarController: UITabBarController {
         view.addSubview(indicator)
     }
 
-    private func setupTabBarPages(pages: [RootTabBarItem]) {
-        for page in pages {
-            let isFirstPage = page == pages[0]
-            stack.addArrangedSubview(createOneTabItem(item: page, isFirst: isFirstPage))
-        }
-    }
-
-    private func createOneTabItem(item: RootTabBarItem, isFirst: Bool = false) -> UIView {
-        let tabView = RootTabBarView(tabItem: item, isActive: isFirst)
-        tabView.onTap = { [weak self] selectedItem in
-            guard let self else { return }
-
-            self.stack.arrangedSubviews.forEach {
-                guard let tabBarItem = $0 as? RootTabBarView else { return }
-                tabBarItem.isActive = false
-            }
-
-            selectedItem.isActive.toggle()
-            self.animateIndicator(to: selectedItem)
-            self.selectedIndex = RootTabBarItem.allCases.firstIndex(of: item) ?? 0
-        }
-
-        return tabView
-    }
-
     private func animateIndicator(to item: UIView) {
         let newConstraint = indicator.centerXAnchor.constraint(equalTo: item.centerXAnchor)
         indicatorCenterConstraint?.isActive = false
@@ -97,23 +72,47 @@ final class RootTabBarController: UITabBarController {
             }
     }
 
-    func setupViewControllers(factory: Factory) -> [UINavigationController] {
-         [
-            configureController(with: factory.createDummyScene()),
-            configureController(with: factory.createCornersButtonsScene()),
-            configureController(with: factory.createTextFieldsScene()),
-            configureController(with: factory.createDummyScene()),
-            configureController(with: factory.createDummyScene()),
+    private func setupViewControllers(factory: Factory) -> [UINavigationController] {
+        [
+            UINavigationController(rootViewController: factory.createDummyScene()),
+            UINavigationController(rootViewController: factory.createCornersButtonsScene()),
+            UINavigationController(rootViewController: factory.createTextFieldsScene()),
+            UINavigationController(rootViewController: factory.createDummyScene()),
+            UINavigationController(rootViewController: factory.createTextFieldsScene()),
         ]
     }
 
-    private func configureController(with vc: UIViewController) -> UINavigationController {
-        UINavigationController(rootViewController: factory.createDummyScene())
+    private func setupTabBarPages(pages: [RootTabBarItem]) {
+        for page in pages {
+            let isFirstPage = page == pages.first
+            stack.addArrangedSubview(setupTabBarItem(item: page, isFirst: isFirstPage))
+        }
+    }
+
+    private func setupTabBarItem(item: RootTabBarItem, isFirst: Bool = false) -> UIView {
+        let tabView = RootTabBarView(tabItem: item, isActive: isFirst)
+        tabView.onTap = { [weak self] selectedItem in
+            guard let self else { return }
+
+            self.stack.arrangedSubviews.forEach {
+                guard let tabBarItem = $0 as? RootTabBarView else { return }
+                tabBarItem.isActive = false
+            }
+
+            selectedItem.isActive.toggle()
+            self.animateIndicator(to: selectedItem)
+            self.selectedIndex = RootTabBarItem.allCases.firstIndex(of: item) ?? 0
+        }
+
+        return tabView
     }
 
     private func setupConstraints() {
-
         guard let firstItem = stack.arrangedSubviews.first else { return }
+
+        let tabBarHeight: CGFloat = UIScreen.main.bounds.height < 700 ? 85 : 120
+        let stackTopAnchor: CGFloat = UIScreen.main.bounds.height < 700 ? 11 : 16
+
         indicatorCenterConstraint = indicator.centerXAnchor.constraint(equalTo: firstItem.centerXAnchor)
         indicatorCenterConstraint?.isActive = true
 
@@ -121,21 +120,15 @@ final class RootTabBarController: UITabBarController {
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            backgroundView.heightAnchor.constraint(equalToConstant: 120),
-        ])
+            backgroundView.heightAnchor.constraint(equalToConstant: tabBarHeight),
 
-        NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 16),
+            stack.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: stackTopAnchor),
             stack.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 27),
-            stack.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -27)
-        ])
+            stack.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -27),
 
-        NSLayoutConstraint.activate([
             indicator.heightAnchor.constraint(equalToConstant: 5),
             indicator.widthAnchor.constraint(equalToConstant: 5),
-            indicator.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 3)
+            indicator.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 3),
         ])
     }
-
 }
-
