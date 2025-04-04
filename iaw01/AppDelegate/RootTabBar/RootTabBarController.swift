@@ -3,7 +3,6 @@ import UIKit
 final class RootTabBarController: UITabBarController {
 
     var factory: Factory
-    private let tabBarModel = TabBarViewModel()
     private var indicatorCenterConstraint: NSLayoutConstraint?
 
     private lazy var backgroundView: UIView = {
@@ -11,14 +10,12 @@ final class RootTabBarController: UITabBarController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .light80
         view.clipsToBounds = true
-        view.addSubview(stack)
         return view
     }()
 
     private lazy var stack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .horizontal
         stack.alignment = .center
         stack.distribution = .equalSpacing
         return stack
@@ -45,35 +42,33 @@ final class RootTabBarController: UITabBarController {
         super.viewDidLoad()
         tabBar.isHidden = true
 
-        setupTabBarPages(pages: tabBarModel.createTabItems())
-        setViewControllers(tabBarModel.setupViewControllers(factory: factory), animated: true)
+        setupTabBarPages(pages: RootTabBarItem.allCases)
+        setViewControllers(setupViewControllers(factory: factory), animated: true)
 
         setupLayout()
         setupConstraints()
     }
 
     private func setupLayout() {
+        backgroundView.addSubview(stack)
         view.addSubview(backgroundView)
         view.addSubview(indicator)
     }
 
     private func setupTabBarPages(pages: [RootTabBarItem]) {
-        stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        pages.enumerated().forEach {
-            if $0.offset == 0 {
-                stack.addArrangedSubview(createOneTabItem(item: $0.element, isFirst: true))
-            } else {
-                stack.addArrangedSubview(createOneTabItem(item: $0.element, isFirst: false))
-            }
+        for page in pages {
+            let isFirstPage = page == pages[0]
+            stack.addArrangedSubview(createOneTabItem(item: page, isFirst: isFirstPage))
         }
     }
 
     private func createOneTabItem(item: RootTabBarItem, isFirst: Bool = false) -> UIView {
-        return TabBarVIews(tabItem: item, isActive: isFirst) { [weak self] selectedItem in
-            guard let self = self else { return }
+        let tabView = RootTabBarView(tabItem: item, isActive: isFirst)
+        tabView.onTap = { [weak self] selectedItem in
+            guard let self else { return }
 
             self.stack.arrangedSubviews.forEach {
-                guard let tabBarItem = $0 as? TabBarVIews else { return }
+                guard let tabBarItem = $0 as? RootTabBarView else { return }
                 tabBarItem.isActive = false
             }
 
@@ -81,6 +76,8 @@ final class RootTabBarController: UITabBarController {
             self.animateIndicator(to: selectedItem)
             self.selectedIndex = RootTabBarItem.allCases.firstIndex(of: item) ?? 0
         }
+
+        return tabView
     }
 
     private func animateIndicator(to item: UIView) {
@@ -98,6 +95,20 @@ final class RootTabBarController: UITabBarController {
                 guard let self else { return }
                 self.view.layoutIfNeeded()
             }
+    }
+
+    func setupViewControllers(factory: Factory) -> [UINavigationController] {
+         [
+            configureController(with: factory.createDummyScene()),
+            configureController(with: factory.createCornersButtonsScene()),
+            configureController(with: factory.createTextFieldsScene()),
+            configureController(with: factory.createDummyScene()),
+            configureController(with: factory.createDummyScene()),
+        ]
+    }
+
+    private func configureController(with vc: UIViewController) -> UINavigationController {
+        UINavigationController(rootViewController: factory.createDummyScene())
     }
 
     private func setupConstraints() {

@@ -1,10 +1,10 @@
 
 import UIKit
 
-final class TabBarVIews: UIView {
+final class RootTabBarView: UIView {
 
     var item: RootTabBarItem
-    var isSelected: (TabBarVIews) -> Void
+    var onTap: ((RootTabBarView) -> Void)?
 
     var isActive: Bool {
         willSet {
@@ -33,7 +33,6 @@ final class TabBarVIews: UIView {
         let view = UIView()
         view.backgroundColor = .clear
         view.isUserInteractionEnabled = true
-        view.addSubviews(subviews: image, title)
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToTab)))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -57,13 +56,9 @@ final class TabBarVIews: UIView {
         return title
     }()
 
-    init(tabItem: RootTabBarItem, imageRightConstraints: NSLayoutConstraint? = nil, isActive: Bool,
-         isSelected: @escaping (TabBarVIews) -> Void) {
-
+    init(tabItem: RootTabBarItem, isActive: Bool) {
         self.item = tabItem
-        self.animationConstraint = imageRightConstraints
         self.isActive = isActive
-        self.isSelected = isSelected
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
 
@@ -77,10 +72,12 @@ final class TabBarVIews: UIView {
     }
 
     @objc func tapToTab() {
-        self.isSelected(self)
+        onTap?(self)
     }
 
     private func setupLayout() {
+        container.addSubview(image)
+        container.addSubview(title)
         addSubview(container)
     }
 
@@ -108,15 +105,5 @@ final class TabBarVIews: UIView {
             title.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -5),
             title.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -6),
         ])
-    }
-}
-
-    // Extension for UIView to add multiple subviews at once
-extension UIView {
-
-    func addSubviews(subviews: UIView...) {
-        subviews.forEach {
-            self.addSubview($0)
-        }
     }
 }

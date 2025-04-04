@@ -27,14 +27,4 @@ enum RootTabBarItem: CaseIterable {
         case .profile:   UIImage(resource: .profile)
         }
     }
-    
-    var selectedImage: UIImage {
-        switch self {
-        case .home:      UIImage(resource: .selectedHome)
-        case .discover:  UIImage(resource: .selectedDiscover)
-        case .drivethru: UIImage(resource: .selectedDrivethru)
-        case .orders:    UIImage(resource: .selectedOrders)
-        case .profile:   UIImage(resource: .profile)
-        }
-    }
 }
