@@ -2,9 +2,11 @@ import UIKit
 
 final class Factory {
     
+
     let appCoordinator: AppCoordinator
     
     init(appCoordinator: AppCoordinator) {
+
         self.appCoordinator = appCoordinator
     }
     
@@ -23,4 +25,12 @@ final class Factory {
         let vc = CornersButtonsViewController()
         return vc
     }
+    
+    func createChangeLocationScene() -> ChangeLocationViewController {
+        let vc = ChangeLocationViewController()
+        vc.appCoordinator = appCoordinator
+        return vc
+    }
 }
+//
+

@@ -17,7 +17,6 @@
 		2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2182AF972D8C694900B5BF26 /* SceneType.swift */; };
 		21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B502D8160E30086697C /* AppDelegate.swift */; };
 		21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B522D8160E30086697C /* SceneDelegate.swift */; };
-		21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B542D8160E30086697C /* DummyViewController.swift */; };
 		21AA4B5A2D8160E50086697C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B592D8160E50086697C /* Assets.xcassets */; };
 		21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B642D81627D0086697C /* AppCoordinator.swift */; };
 		21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B662D817C080086697C /* RootTabBarController.swift */; };
@@ -31,6 +30,29 @@
 		8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
 		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
 		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
+		C92BCA492D843CC800EE6904 /* ChangeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BCA482D843CC000EE6904 /* ChangeLocationViewController.swift */; };
+		C92BCA4B2D8472F500EE6904 /* ChangeLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BCA4A2D84728B00EE6904 /* ChangeLocationView.swift */; };
+		C92BCA4D2D84731200EE6904 /* ChangeLocationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92BCA4C2D8472FB00EE6904 /* ChangeLocationModels.swift */; };
+		C97D31872D9958DC00CB1FCA /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31852D9958DC00CB1FCA /* CornersButtonsViewController.swift */; };
+		C97D318A2D9958E400CB1FCA /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31882D9958E400CB1FCA /* TextFieldsViewController.swift */; };
+		C97D318C2D9959B900CB1FCA /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D318B2D9959B900CB1FCA /* Constans.swift */; };
+		C97D319F2D995A3300CB1FCA /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D319C2D995A3300CB1FCA /* TextFieldBaseStyle.swift */; };
+		C97D31A02D995A3300CB1FCA /* LinkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31912D995A3300CB1FCA /* LinkButtonStyle.swift */; };
+		C97D31A12D995A3300CB1FCA /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31972D995A3300CB1FCA /* RestaurantTableViewCell.swift */; };
+		C97D31A22D995A3300CB1FCA /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D318E2D995A3300CB1FCA /* CornersButtonStyle.swift */; };
+		C97D31A32D995A3300CB1FCA /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D318D2D995A3300CB1FCA /* CornersButton.swift */; };
+		C97D31A42D995A3300CB1FCA /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D319A2D995A3300CB1FCA /* StringTextField.swift */; };
+		C97D31A52D995A3300CB1FCA /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D319B2D995A3300CB1FCA /* StringTextFieldStyle.swift */; };
+		C97D31A62D995A3300CB1FCA /* RestaurantCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31962D995A3300CB1FCA /* RestaurantCellModel.swift */; };
+		C97D31A72D995A3300CB1FCA /* DishCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31932D995A3300CB1FCA /* DishCellModel.swift */; };
+		C97D31A82D995A3300CB1FCA /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31902D995A3300CB1FCA /* LinkButton.swift */; };
+		C97D31A92D995A3300CB1FCA /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31942D995A3300CB1FCA /* DishTableViewCell.swift */; };
+		C97D31B32D995BF000CB1FCA /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31AE2D995BF000CB1FCA /* DummyViewController.swift */; };
+		C97D31B42D995BF000CB1FCA /* SceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31AF2D995BF000CB1FCA /* SceneModel.swift */; };
+		C97D31B52D995BF000CB1FCA /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31AD2D995BF000CB1FCA /* DummyView.swift */; };
+		C97D31B62D995BF000CB1FCA /* ScenesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31B02D995BF000CB1FCA /* ScenesTableViewCell.swift */; };
+		C97D31B72D995BF000CB1FCA /* SceneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31B12D995BF000CB1FCA /* SceneType.swift */; };
+		C97D31B92D996FF100CB1FCA /* ChangeLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97D31B82D996FEE00CB1FCA /* ChangeLocationCell.swift */; };
 		CE02B8532D933581000C0557 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8502D933581000C0557 /* LinkButton.swift */; };
 		CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8512D933581000C0557 /* LinkButtonStyle.swift */; };
 		CE4D24C52D95C88E00325BAE /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constans.swift */; };
@@ -51,7 +73,6 @@
 		21AA4B4D2D8160E30086697C /* iaw01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iaw01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21AA4B502D8160E30086697C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21AA4B522D8160E30086697C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		21AA4B542D8160E30086697C /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		21AA4B592D8160E50086697C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21AA4B5E2D8160E50086697C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21AA4B642D81627D0086697C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -67,6 +88,29 @@
 		869875462D8860E600C7BA58 /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
 		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
 		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
+		C92BCA482D843CC000EE6904 /* ChangeLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationViewController.swift; sourceTree = "<group>"; };
+		C92BCA4A2D84728B00EE6904 /* ChangeLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationView.swift; sourceTree = "<group>"; };
+		C92BCA4C2D8472FB00EE6904 /* ChangeLocationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationModels.swift; sourceTree = "<group>"; };
+		C97D31852D9958DC00CB1FCA /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
+		C97D31882D9958E400CB1FCA /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
+		C97D318B2D9959B900CB1FCA /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		C97D318D2D995A3300CB1FCA /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
+		C97D318E2D995A3300CB1FCA /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
+		C97D31902D995A3300CB1FCA /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
+		C97D31912D995A3300CB1FCA /* LinkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonStyle.swift; sourceTree = "<group>"; };
+		C97D31932D995A3300CB1FCA /* DishCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCellModel.swift; sourceTree = "<group>"; };
+		C97D31942D995A3300CB1FCA /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
+		C97D31962D995A3300CB1FCA /* RestaurantCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellModel.swift; sourceTree = "<group>"; };
+		C97D31972D995A3300CB1FCA /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
+		C97D319A2D995A3300CB1FCA /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
+		C97D319B2D995A3300CB1FCA /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
+		C97D319C2D995A3300CB1FCA /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
+		C97D31AD2D995BF000CB1FCA /* DummyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyView.swift; sourceTree = "<group>"; };
+		C97D31AE2D995BF000CB1FCA /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
+		C97D31AF2D995BF000CB1FCA /* SceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneModel.swift; sourceTree = "<group>"; };
+		C97D31B02D995BF000CB1FCA /* ScenesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenesTableViewCell.swift; sourceTree = "<group>"; };
+		C97D31B12D995BF000CB1FCA /* SceneType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneType.swift; sourceTree = "<group>"; };
+		C97D31B82D996FEE00CB1FCA /* ChangeLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLocationCell.swift; sourceTree = "<group>"; };
 		CE02B8502D933581000C0557 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		CE02B8512D933581000C0557 /* LinkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonStyle.swift; sourceTree = "<group>"; };
 		CE4D24C42D95C88400325BAE /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
@@ -146,6 +190,7 @@
 			children = (
 				21AA4B6B2D817F990086697C /* Resources */,
 				21AA4B772D8186400086697C /* AppDelegate */,
+				C97D319E2D995A3300CB1FCA /* Components */,
 				21AA4B7A2D8187800086697C /* Scenes */,
 				1FCF129C2D8953B400386458 /* Components */,
 				21AA4B792D81872E0086697C /* Configuration */,
@@ -185,6 +230,7 @@
 		21AA4B772D8186400086697C /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				C97D318B2D9959B900CB1FCA /* Constans.swift */,
 				21AA4B502D8160E30086697C /* AppDelegate.swift */,
 				21AA4B522D8160E30086697C /* SceneDelegate.swift */,
 				21AA4B642D81627D0086697C /* AppCoordinator.swift */,
@@ -198,7 +244,6 @@
 		21AA4B782D81864F0086697C /* DummyScene */ = {
 			isa = PBXGroup;
 			children = (
-				21AA4B542D8160E30086697C /* DummyViewController.swift */,
 				2182AF912D8C594600B5BF26 /* DummyView.swift */,
 				2182AF932D8C690300B5BF26 /* ScenesTableViewCell.swift */,
 				2182AF972D8C694900B5BF26 /* SceneType.swift */,
@@ -218,6 +263,10 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C97D31862D9958DC00CB1FCA /* CornersButtonsScene */,
+				C92BCA472D84398B00EE6904 /* ChangeLocationScene */,
+				C97D31892D9958E400CB1FCA /* CornersButtonsScene */,
+				C97D31B22D995BF000CB1FCA /* DummyScene */,
 				D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 				869875442D8860DF00C7BA58 /* TextFieldsScene */,
@@ -241,6 +290,111 @@
 				869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */,
 			);
 			path = TextFields;
+			sourceTree = "<group>";
+		};
+		C92BCA472D84398B00EE6904 /* ChangeLocationScene */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31B82D996FEE00CB1FCA /* ChangeLocationCell.swift */,
+				C92BCA4C2D8472FB00EE6904 /* ChangeLocationModels.swift */,
+				C92BCA4A2D84728B00EE6904 /* ChangeLocationView.swift */,
+				C92BCA482D843CC000EE6904 /* ChangeLocationViewController.swift */,
+			);
+			path = ChangeLocationScene;
+			sourceTree = "<group>";
+		};
+		C97D31862D9958DC00CB1FCA /* CornersButtonsScene */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31852D9958DC00CB1FCA /* CornersButtonsViewController.swift */,
+			);
+			path = CornersButtonsScene;
+			sourceTree = "<group>";
+		};
+		C97D31892D9958E400CB1FCA /* CornersButtonsScene */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31882D9958E400CB1FCA /* TextFieldsViewController.swift */,
+			);
+			path = CornersButtonsScene;
+			sourceTree = "<group>";
+		};
+		C97D318F2D995A3300CB1FCA /* CornersButton */ = {
+			isa = PBXGroup;
+			children = (
+				C97D318D2D995A3300CB1FCA /* CornersButton.swift */,
+				C97D318E2D995A3300CB1FCA /* CornersButtonStyle.swift */,
+			);
+			path = CornersButton;
+			sourceTree = "<group>";
+		};
+		C97D31922D995A3300CB1FCA /* LinkButton */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31902D995A3300CB1FCA /* LinkButton.swift */,
+				C97D31912D995A3300CB1FCA /* LinkButtonStyle.swift */,
+			);
+			path = LinkButton;
+			sourceTree = "<group>";
+		};
+		C97D31952D995A3300CB1FCA /* DishTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31932D995A3300CB1FCA /* DishCellModel.swift */,
+				C97D31942D995A3300CB1FCA /* DishTableViewCell.swift */,
+			);
+			path = DishTableViewCell;
+			sourceTree = "<group>";
+		};
+		C97D31982D995A3300CB1FCA /* RestaurantTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31962D995A3300CB1FCA /* RestaurantCellModel.swift */,
+				C97D31972D995A3300CB1FCA /* RestaurantTableViewCell.swift */,
+			);
+			path = RestaurantTableViewCell;
+			sourceTree = "<group>";
+		};
+		C97D31992D995A3300CB1FCA /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31952D995A3300CB1FCA /* DishTableViewCell */,
+				C97D31982D995A3300CB1FCA /* RestaurantTableViewCell */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		C97D319D2D995A3300CB1FCA /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				C97D319A2D995A3300CB1FCA /* StringTextField.swift */,
+				C97D319B2D995A3300CB1FCA /* StringTextFieldStyle.swift */,
+				C97D319C2D995A3300CB1FCA /* TextFieldBaseStyle.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		C97D319E2D995A3300CB1FCA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C97D318F2D995A3300CB1FCA /* CornersButton */,
+				C97D31922D995A3300CB1FCA /* LinkButton */,
+				C97D31992D995A3300CB1FCA /* TableViewCells */,
+				C97D319D2D995A3300CB1FCA /* TextFields */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C97D31B22D995BF000CB1FCA /* DummyScene */ = {
+			isa = PBXGroup;
+			children = (
+				C97D31AD2D995BF000CB1FCA /* DummyView.swift */,
+				C97D31AE2D995BF000CB1FCA /* DummyViewController.swift */,
+				C97D31AF2D995BF000CB1FCA /* SceneModel.swift */,
+				C97D31B02D995BF000CB1FCA /* ScenesTableViewCell.swift */,
+				C97D31B12D995BF000CB1FCA /* SceneType.swift */,
+			);
+			path = DummyScene;
 			sourceTree = "<group>";
 		};
 		CE02B8522D933581000C0557 /* LinkButton */ = {
@@ -342,6 +496,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
+				C92BCA492D843CC800EE6904 /* ChangeLocationViewController.swift in Sources */,
+				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
+				C97D319F2D995A3300CB1FCA /* TextFieldBaseStyle.swift in Sources */,
+				C97D31A02D995A3300CB1FCA /* LinkButtonStyle.swift in Sources */,
+				C97D31A12D995A3300CB1FCA /* RestaurantTableViewCell.swift in Sources */,
+				C97D31A22D995A3300CB1FCA /* CornersButtonStyle.swift in Sources */,
+				C97D31A32D995A3300CB1FCA /* CornersButton.swift in Sources */,
+				C97D31A42D995A3300CB1FCA /* StringTextField.swift in Sources */,
+				C97D31A52D995A3300CB1FCA /* StringTextFieldStyle.swift in Sources */,
+				C97D31B92D996FF100CB1FCA /* ChangeLocationCell.swift in Sources */,
+				C97D31A62D995A3300CB1FCA /* RestaurantCellModel.swift in Sources */,
+				C97D31A72D995A3300CB1FCA /* DishCellModel.swift in Sources */,
+				C97D31A82D995A3300CB1FCA /* LinkButton.swift in Sources */,
+				C97D31A92D995A3300CB1FCA /* DishTableViewCell.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
@@ -357,7 +525,8 @@
 				CE02B8532D933581000C0557 /* LinkButton.swift in Sources */,
 				CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
-				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
+				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
+				C92BCA4D2D84731200EE6904 /* ChangeLocationModels.swift in Sources */,
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
@@ -367,6 +536,15 @@
 				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,
 				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
+				C92BCA4B2D8472F500EE6904 /* ChangeLocationView.swift in Sources */,
+				C97D318A2D9958E400CB1FCA /* TextFieldsViewController.swift in Sources */,
+				C97D318C2D9959B900CB1FCA /* Constans.swift in Sources */,
+				C97D31B32D995BF000CB1FCA /* DummyViewController.swift in Sources */,
+				C97D31B42D995BF000CB1FCA /* SceneModel.swift in Sources */,
+				C97D31B52D995BF000CB1FCA /* DummyView.swift in Sources */,
+				C97D31B62D995BF000CB1FCA /* ScenesTableViewCell.swift in Sources */,
+				C97D31B72D995BF000CB1FCA /* SceneType.swift in Sources */,
+				C97D31872D9958DC00CB1FCA /* CornersButtonsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

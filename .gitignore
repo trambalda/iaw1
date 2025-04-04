@@ -60,4 +60,8 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+
+# macOS system files
 .DS_Store
+>>>>>>> Stashed changes

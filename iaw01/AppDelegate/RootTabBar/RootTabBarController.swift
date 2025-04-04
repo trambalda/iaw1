@@ -23,7 +23,7 @@ final class RootTabBarController: UITabBarController {
         viewControllers = [
             configureController(with: factory.createDummyScene(), tabBarItem: .home),
             configureController(with: factory.createDummyScene(), tabBarItem: .discover),
-            configureController(with: factory.createDummyScene(), tabBarItem: .drivethru),
+            configureController(with: factory.createChangeLocationScene(), tabBarItem: .drivethru),
             configureController(with: factory.createDummyScene(), tabBarItem: .orders),
             configureController(with: factory.createDummyScene(), tabBarItem: .profile),
         ]
@@ -36,3 +36,5 @@ final class RootTabBarController: UITabBarController {
         return nc
     }
 }
+//
+
