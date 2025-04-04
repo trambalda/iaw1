@@ -58,7 +58,7 @@ final class TextFieldsViewController: UIViewController {
     }()
     
     private lazy var phoneTextField: PhoneTextField = {
-        let textField = PhoneTextField(with: .phoneNumberStyle, parent: self.view)
+        let textField = PhoneTextField(parent: self.view)
         textField.textFieldShouldReturn = {
             print("Phone Number: \(textField.phoneNumber.fullNumber ?? "")")
             textField.resignTextFieldFirstResponder()
@@ -72,6 +72,18 @@ final class TextFieldsViewController: UIViewController {
         
         setupLayout()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChange), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChange), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setupLayout() {
@@ -98,6 +110,20 @@ final class TextFieldsViewController: UIViewController {
             textFieldsStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             textFieldsStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32),
         ])
+    }
+    
+    @objc func keyboardChange(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardViewFrame = view.convert(keyboardValue.cgRectValue, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            scrollView.contentInset.bottom = 0
+            scrollView.verticalScrollIndicatorInsets.bottom = 0
+        } else {
+            scrollView.contentInset.bottom = keyboardViewFrame.height
+            scrollView.verticalScrollIndicatorInsets.bottom = keyboardViewFrame.height
+        }
     }
 }
 

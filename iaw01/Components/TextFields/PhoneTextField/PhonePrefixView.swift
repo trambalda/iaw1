@@ -35,8 +35,7 @@ final class PhonePrefixView: UIView {
         let textField = UITextField()
         textField.leftViewMode = .always
         textField.leftView = flagContainerView
-        textField.attributedText = Font.body.compose("+123", color: .dark100)
-        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.delegate = self
         textField.keyboardType = .numberPad
         return textField
@@ -63,6 +62,7 @@ final class PhonePrefixView: UIView {
         super.init(frame: .zero)
         setupLayout()
         setupConstraints()
+        setupDefaultCountry()
     }
     
     required init?(coder: NSCoder) {
@@ -73,7 +73,7 @@ final class PhonePrefixView: UIView {
         didSet {
             guard let country = selectedCountry else { return }
             flagLabel.text = country.flag
-            phonePrefixTextField.text = country.code
+            phonePrefixTextField.attributedText = Font.body.compose(country.code, color: .dark100)
         }
     }
     
@@ -109,6 +109,17 @@ final class PhonePrefixView: UIView {
         ])
     }
     
+    private func setupDefaultCountry() {
+        guard let regionCode = Locale.current.region?.identifier else { return }
+        
+        if let defaultCountry = CountryCodeModel.countryCodes.first(where: { $0.region == regionCode }) {
+            selectedCountry = defaultCountry
+            DispatchQueue.main.async {
+                self.parentView?.updatePhonePrefix(with: defaultCountry.code)
+            }
+        }
+    }
+
     @objc private func showPicker() {
         parentView?.toggleCountryPicker()
     }

@@ -28,7 +28,6 @@
 		21AA4B762D81828D0086697C /* aeonik-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B752D81828D0086697C /* aeonik-medium.otf */; };
 		21AA4B7C2D81880A0086697C /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B7B2D81880A0086697C /* Factory.swift */; };
 		860852232D9747BA0038A9EF /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860852222D9747BA0038A9EF /* PhoneTextField.swift */; };
-		860852272D9749650038A9EF /* PhoneTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860852262D9749650038A9EF /* PhoneTextFieldStyle.swift */; };
 		863929E72D9D2DAA00480459 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863929E62D9D2DAA00480459 /* PhoneNumber.swift */; };
 		868044992D94765400CBE1EC /* CountryCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868044982D94765300CBE1EC /* CountryCodeModel.swift */; };
 		8680452D2D94906B00CBE1EC /* CountryPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8680452C2D94906B00CBE1EC /* CountryPickerCell.swift */; };
@@ -71,7 +70,6 @@
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		860852222D9747BA0038A9EF /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
-		860852262D9749650038A9EF /* PhoneTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextFieldStyle.swift; sourceTree = "<group>"; };
 		863929E62D9D2DAA00480459 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		868044982D94765300CBE1EC /* CountryCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodeModel.swift; sourceTree = "<group>"; };
 		8680452C2D94906B00CBE1EC /* CountryPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryPickerCell.swift; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				860852222D9747BA0038A9EF /* PhoneTextField.swift */,
-				860852262D9749650038A9EF /* PhoneTextFieldStyle.swift */,
 				869878362D918ECD00C7BA58 /* PhonePrefixView.swift */,
 				8680452E2D94908D00CBE1EC /* CountryPickerView.swift */,
 				8680452C2D94906B00CBE1EC /* CountryPickerCell.swift */,
@@ -403,7 +400,6 @@
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
-				860852272D9749650038A9EF /* PhoneTextFieldStyle.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
 				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,

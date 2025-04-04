@@ -22,7 +22,6 @@ final class PhoneTextField: UIStackView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .dark100
         return label
     }()
     
@@ -55,13 +54,13 @@ final class PhoneTextField: UIStackView {
         return view
     }()
     
-    init(with style: PhoneTextFieldStyle, parent: UIView?) {
+    init(parent: UIView?) {
         self.parent = parent
         super.init(frame: .zero)
         setupStackViewProperties()
         setupLayout()
         setupConstraints()
-        configureField(with: style)
+        configureField(baseStyle: TextFieldBaseStyle())
     }
     
     required init(coder: NSCoder) {
@@ -90,7 +89,6 @@ final class PhoneTextField: UIStackView {
     
     func updatePhonePrefix(with code: String) {
         phonePrefix = code
-        textField.text = nil
         
         if let country = CountryCodeModel.countryCodes.first(where: { $0.code == code }) {
             currentMask = country.mask
@@ -129,32 +127,36 @@ final class PhoneTextField: UIStackView {
         ])
     }
     
-    private func configureField(with style: PhoneTextFieldStyle) {
-        let baseStyle = TextFieldBaseStyle()
+    private func configureField(baseStyle: TextFieldBaseStyle) {
         
         textField.autocapitalizationType = baseStyle.autocapitalizationType
         textField.textColor = baseStyle.textColor
         textField.backgroundColor = baseStyle.backgroundColor
         textField.font = baseStyle.fontFamily.font
-        textField.text = style.text
         textField.attributedPlaceholder = baseStyle.fontFamily.compose(
-            style.placeholder,
+            "000 000 0000",
             color: baseStyle.placeholderColor
         )
         
         titleLabel.attributedText = baseStyle.fontFamily.compose(
-            style.title ?? "",
+            "Phone Number",
             color: baseStyle.titleColor
         )
     }
     
     private func refreshPhoneField(for country: CountryCodeModel) {
         phonePrefix = country.code
-        textField.text = nil
         currentMask = country.mask
+        
+        if let text = textField.text {
+            let digitsOnly = text.filter { $0.isNumber }
+            textField.text = applyMask(for: digitsOnly, with: currentMask)
+        }
+        
+        textField.becomeFirstResponder()
     }
     
-    private func applyingMask(for text: String, with mask: String) -> String {
+    private func applyMask(for text: String, with mask: String) -> String {
         var result = ""
         var index = text.startIndex
         
@@ -203,7 +205,7 @@ final class PhoneTextField: UIStackView {
                 ])
             } else {
                 NSLayoutConstraint.activate([
-                    countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor),
+                    countryPickerView.topAnchor.constraint(equalTo: containerView.bottomAnchor),
                     countryPickerView.heightAnchor.constraint(equalToConstant: 160),
                     countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
                     countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11),
@@ -252,7 +254,7 @@ extension PhoneTextField: UITextFieldDelegate {
         
         updateTextFieldState(for: string)
         
-        let formattedText = applyingMask(for: digits, with: currentMask)
+        let formattedText = applyMask(for: digits, with: currentMask)
         textField.text = formattedText
         
         let maxPhoneLength = currentMask.filter { $0 == "#" }.count
