@@ -1,13 +1,13 @@
 import UIKit
 
-enum RootTabBarItem {
+enum RootTabBarItem: CaseIterable {
 
     case home
     case discover
     case drivethru
     case orders
     case profile
-    
+
     var title: String {
         switch self {
         case .home:      "Home"
