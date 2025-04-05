@@ -60,6 +60,5 @@ final class MenuTimeView: UIView {
             segmentedControl.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             segmentedControl.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         ])
-        
     }
 }

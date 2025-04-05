@@ -49,8 +49,16 @@ final class RestaurantViewController: UIViewController {
         shoppingBagButton.addTarget(self, action: #selector(shoppingBagButtonTapped), for: .touchUpInside)
         
         let rightStack = UIStackView(arrangedSubviews: [moreButton, searchButton, shoppingBagButton])
-        rightStack.spacing = 32
         rightStack.alignment = .center
+        
+        let screenHeight = UIScreen.main.bounds.height
+        if screenHeight < 670 {
+            rightStack.spacing = 16
+        } else if screenHeight < 800 {
+            rightStack.spacing = 24
+        } else {
+            rightStack.spacing = 32
+        }
         
         let rightBarButtonItem = UIBarButtonItem(customView: rightStack)
         navigationItem.rightBarButtonItem = rightBarButtonItem
@@ -80,15 +88,15 @@ extension RestaurantViewController: UIScrollViewDelegate {
         let newHeaderImageViewHeightConstraint = max(164 - offset, 0)
         let newRestaurantInfoViewHeightConstraint = max(109 - offset / 2, 0)
         
-        restaurantView.headerImageViewHeightConstraint.constant = newHeaderImageViewHeightConstraint
-        restaurantView.restaurantInfoViewHeightConstraint.constant = newRestaurantInfoViewHeightConstraint
+        restaurantView.headerView.headerImageViewHeightConstraint.constant = newHeaderImageViewHeightConstraint
+        restaurantView.headerView.restaurantInfoViewHeightConstraint.constant = newRestaurantInfoViewHeightConstraint
         
         if newHeaderImageViewHeightConstraint == 0 {
-            restaurantView.restaurantHeaderView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
+            restaurantView.headerView.restaurantHeaderView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
             restaurantView.menuTimeView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
             restaurantView.menuCategoryView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
         } else {
-            restaurantView.restaurantHeaderView.transform = .identity
+            restaurantView.headerView.restaurantHeaderView.transform = .identity
             restaurantView.menuTimeView.transform = .identity
             restaurantView.menuCategoryView.transform = .identity
         }
