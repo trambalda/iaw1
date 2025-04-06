@@ -23,4 +23,9 @@ final class Factory {
         let vc = CornersButtonsViewController()
         return vc
     }
+
+    func createKeyboardServiceScene() -> KeyboardServiceViewController {
+        let vc = KeyboardServiceViewController()
+        return vc
+    }
 }

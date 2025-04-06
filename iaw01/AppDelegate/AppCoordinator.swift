@@ -33,4 +33,9 @@ final class AppCoordinator {
         let vc = factory.createCornersButtonsScene()
         parent?.pushViewController(vc, animated: true)
     }
+
+    func showKeyboardServiceScene(from parent: UINavigationController?) {
+        let vc = factory.createKeyboardServiceScene()
+        parent?.pushViewController(vc, animated: true)
+    }
 }

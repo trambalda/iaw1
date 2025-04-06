@@ -1,18 +1,15 @@
 
 import UIKit
 
-final class KeyboardService {
+protocol KeyboardServiceProtocol: AnyObject {
+    func adjustView(for responder: UIResponder?)
+}
+
+final class KeyboardService: KeyboardServiceProtocol {
 
     private weak var viewController: UIViewController?
+    private var activeResponder: UIResponder?
     private var keyboardHeight: CGFloat = 0
-
-    private var isActive = false {
-        didSet {
-            guard let viewController = viewController else { return }
-            viewController.view.frame.origin.y = self.isActive ? -self.keyboardHeight : 0
-            viewController.view.layoutIfNeeded()
-        }
-    }
 
     init(viewController: UIViewController? = nil) {
         self.viewController = viewController
@@ -47,17 +44,77 @@ final class KeyboardService {
         viewController?.view.addGestureRecognizer(tap)
     }
 
+        //    func adjustView(for responder: UIResponder?) {
+        //        activeResponder = responder
+        //
+        //        guard let responder = responder as? UIView,
+        //              let viewController = viewController else { return }
+        //
+        //        let responderFrame = responder.convert(responder.bounds, to: viewController.view)
+        //        let bottomSpace = viewController.view.frame.height - responderFrame.maxY
+        //
+        //        if bottomSpace < keyboardHeight {
+        //            animateView(bottomSpace)
+        //        } else {
+        //            viewController.view.frame.origin.y = 0
+        //        }
+        //
+        //        viewController.view.layoutIfNeeded()
+        //    }
+
+    func adjustView(for responder: UIResponder?) {
+        activeResponder = responder
+        updateViewPosition()
+    }
+
+    private func updateViewPosition() {
+        guard let responder = activeResponder as? UIView,
+                     let vc = viewController
+               else { return }
+
+               // Обновляем layout, чтобы фреймы были актуальны
+               vc.view.layoutIfNeeded()
+
+               // Получаем фрейм активного текстового поля в координатах vc.view
+               let responderFrame = responder.convert(responder.bounds, to: vc.view)
+
+               // Берём нижний safe area inset (он учитывает вырезы и прочие особенности)
+               let safeAreaBottom = vc.view.safeAreaInsets.bottom
+               // Вычисляем видимую высоту: от начала вью до верхней границы клавиатуры
+               let visibleHeight = vc.view.bounds.height - keyboardHeight - safeAreaBottom
+               // Дополнительное пространство (запас, можно настроить)
+               let padding: CGFloat = 0
+
+               // Если нижняя граница текстового поля вместе с запасом выходит за пределы видимой области,
+               // вычисляем смещение, иначе view не сдвигается.
+               if responderFrame.maxY + padding > visibleHeight {
+                   let offset = (responderFrame.maxY + padding) - visibleHeight
+                   UIView.animate(withDuration: 0.3) {
+                       vc.view.frame.origin.y = -offset
+                   }
+               } else {
+                   // Если view уже сдвинуто, возвращаем её в исходное положение
+                   if vc.view.frame.origin.y != 0 {
+                       UIView.animate(withDuration: 0.3) {
+                           vc.view.frame.origin.y = 0
+                       }
+                   }
+               }
+    }
+
     @objc private func keyboardWillShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder
                 .keyboardFrameEndUserInfoKey] as? CGRect else { return }
 
         keyboardHeight = keyboardFrame.height
-        isActive = true
+        updateViewPosition()
     }
 
     @objc private func keyboardWillHide(_ notification: Notification) {
-        isActive = false
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.viewController?.view.frame.origin.y = 0
+        }
     }
 
     @objc private func dismissKeyboard() {

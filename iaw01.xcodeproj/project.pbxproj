@@ -34,6 +34,7 @@
 		CE02B8532D933581000C0557 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8502D933581000C0557 /* LinkButton.swift */; };
 		CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8512D933581000C0557 /* LinkButtonStyle.swift */; };
 		CE4D24C52D95C88E00325BAE /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constans.swift */; };
+		CE52149B2DA2C8360042D902 /* KeyboardServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52149A2DA2C8360042D902 /* KeyboardServiceViewController.swift */; };
 		CEEE9CB82DA1B8BE00DF1A35 /* KeyboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB72DA1B8AF00DF1A35 /* KeyboardService.swift */; };
 		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
 		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
@@ -71,6 +72,7 @@
 		CE02B8502D933581000C0557 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		CE02B8512D933581000C0557 /* LinkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonStyle.swift; sourceTree = "<group>"; };
 		CE4D24C42D95C88400325BAE /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		CE52149A2DA2C8360042D902 /* KeyboardServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardServiceViewController.swift; sourceTree = "<group>"; };
 		CEEE9CB72DA1B8AF00DF1A35 /* KeyboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardService.swift; sourceTree = "<group>"; };
 		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
 		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				CE5214992DA2C7FF0042D902 /* KeyboardServiceScene */,
 				D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 				869875442D8860DF00C7BA58 /* TextFieldsScene */,
@@ -253,6 +256,14 @@
 				CE02B8512D933581000C0557 /* LinkButtonStyle.swift */,
 			);
 			path = LinkButton;
+			sourceTree = "<group>";
+		};
+		CE5214992DA2C7FF0042D902 /* KeyboardServiceScene */ = {
+			isa = PBXGroup;
+			children = (
+				CE52149A2DA2C8360042D902 /* KeyboardServiceViewController.swift */,
+			);
+			path = KeyboardServiceScene;
 			sourceTree = "<group>";
 		};
 		D52040512D89B502009D0D1D /* CornersButton */ = {
@@ -355,6 +366,7 @@
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
+				CE52149B2DA2C8360042D902 /* KeyboardServiceViewController.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
 				CE02B8532D933581000C0557 /* LinkButton.swift in Sources */,
