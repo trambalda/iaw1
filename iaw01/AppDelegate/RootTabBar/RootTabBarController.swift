@@ -9,8 +9,6 @@ final class RootTabBarController: UITabBarController {
     var factory: Factory
 
     private var indicatorCenterConstraint: NSLayoutConstraint?
-    private var activeTab: RootTabBarView?
-
 
     private lazy var backgroundView: UIView = {
         let view = UIView()
@@ -62,23 +60,6 @@ final class RootTabBarController: UITabBarController {
         view.addSubview(indicatorView)
     }
 
-    private func animateIndicator(to item: UIView) {
-        let newConstraint = indicatorView.centerXAnchor.constraint(equalTo: item.centerXAnchor)
-        indicatorCenterConstraint?.isActive = false
-
-        indicatorCenterConstraint = newConstraint
-        indicatorCenterConstraint?.isActive = true
-
-        UIView.animate(
-            withDuration: 0.3,
-            delay: 0,
-            usingSpringWithDamping: 0.8,
-            initialSpringVelocity: 0.5, options: [.curveEaseInOut]) { [weak self] in
-                guard let self else { return }
-                self.view.layoutIfNeeded()
-            }
-    }
-
     private func setupViewControllers(factory: Factory) -> [UINavigationController] {
         [
             UINavigationController(rootViewController: factory.createDummyScene()),
@@ -99,30 +80,45 @@ final class RootTabBarController: UITabBarController {
     }
 
     private func createTabBarItem(item: RootTabBarItem, isFirst: Bool) -> UIView {
-        let tabView = RootTabBarView(tabItem: item)
+        let tabView = RootTabBarView(item: item)
 
         if isFirst {
-            tabView.isActive = isFirst
-            activeTab = tabView
+            tabView.verticalAnimation(isUp: true)
         }
 
         tabView.onTap = { [weak self] selectedItem in
             guard let self else { return }
 
-            activeTab?.isActive = false
-
-            selectedItem.isActive.toggle()
-            activeTab = selectedItem
+            self.stackView.arrangedSubviews.forEach {
+                guard let tabBarItem = $0 as? RootTabBarView else { return }
+                tabBarItem.verticalAnimation(isUp: tabBarItem == selectedItem)
+            }
 
             self.animateIndicator(to: selectedItem)
-            self.selectedIndex = RootTabBarItem.allCases.firstIndex(of: item) ?? 0
+            self.selectedIndex = RootTabBarItem.tabIndex(of: item)
         }
 
         return tabView
     }
 
+    private func animateIndicator(to item: UIView) {
+        let newConstraint = indicatorView.centerXAnchor.constraint(equalTo: item.centerXAnchor)
+        indicatorCenterConstraint?.isActive = false
+
+        indicatorCenterConstraint = newConstraint
+        indicatorCenterConstraint?.isActive = true
+
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            usingSpringWithDamping: 0.8,
+            initialSpringVelocity: 0.5, options: [.curveEaseInOut]) {
+                self.view.layoutIfNeeded()
+            }
+    }
+
     private func setupConstraints() {
-        guard let firstItem = stackView.arrangedSubviews.first else { return }
+        let firstItem = stackView.arrangedSubviews.first!
         let stackTopAnchor: CGFloat = Constans.isSE ? 11 : 16
 
         indicatorCenterConstraint = indicatorView.centerXAnchor.constraint(equalTo: firstItem.centerXAnchor)

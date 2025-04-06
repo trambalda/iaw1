@@ -6,26 +6,6 @@ final class RootTabBarView: UIView {
     var item: RootTabBarItem
     var onTap: ((RootTabBarView) -> Void)?
 
-    var isActive: Bool = false {
-        willSet {
-            let transform = newValue ? CGAffineTransform(translationX: 0, y: -3) : .identity
-
-            UIView.animate(
-                withDuration: 0.4,
-                delay: 0,
-                usingSpringWithDamping: 0.5,
-                initialSpringVelocity: 0.5,
-                options: [.curveEaseOut]
-            ) {
-                self.image.transform = transform
-                self.title.transform = transform
-                self.layoutIfNeeded()
-            }
-        }
-    }
-
-    private var animationConstraint: NSLayoutConstraint?
-
     private lazy var container: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -53,21 +33,33 @@ final class RootTabBarView: UIView {
         return title
     }()
 
-    init(tabItem: RootTabBarItem) {
-        self.item = tabItem
+    init(item: RootTabBarItem) {
+        self.item = item
         super.init(frame: .zero)
-        self.translatesAutoresizingMaskIntoConstraints = false
 
         setupLayout()
         setupConstraints()
-        setupIsActive()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func tapToTab() {
+    func verticalAnimation(isUp: Bool) {
+        let transform = isUp ? CGAffineTransform(translationX: 0, y: -4) : .identity
+
+        UIView.animate(
+            withDuration: 0.4,
+            delay: 0,
+            usingSpringWithDamping: 0.5,
+            initialSpringVelocity: 0.5,
+            options: [.curveEaseOut]
+        ) {
+            self.container.transform = transform
+        }
+    }
+
+    @objc private func tapToTab() {
         onTap?(self)
     }
 
@@ -75,13 +67,6 @@ final class RootTabBarView: UIView {
         container.addSubview(image)
         container.addSubview(title)
         addSubview(container)
-    }
-
-    private func setupIsActive() {
-        if isActive {
-            image.transform = CGAffineTransform(translationX: 0, y: -3)
-            title.transform = CGAffineTransform(translationX: 0, y: -3)
-        }
     }
 
     private func setupConstraints() {

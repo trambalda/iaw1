@@ -8,6 +8,10 @@ enum RootTabBarItem: CaseIterable {
     case orders
     case profile
 
+    static func tabIndex(of item: RootTabBarItem) -> Int {
+        allCases.firstIndex(of: item) ?? 0
+    }
+
     var title: String {
         switch self {
         case .home:      "Home"
