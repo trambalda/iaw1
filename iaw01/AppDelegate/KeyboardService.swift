@@ -1,14 +1,16 @@
 import UIKit
 
 protocol KeyboardServiceProtocol: AnyObject {
-    func adjustView(for responder: UIResponder?)
+    func adjustViewForKeyboard(_ view: UIView)
 }
 
 final class KeyboardService: KeyboardServiceProtocol {
+
     private weak var viewController: UIViewController?
-    private var activeResponder: UIResponder?
+    private weak var activeView: UIView?
+
     private var keyboardHeight: CGFloat = 0
-    private let keyboardOffset: CGFloat = 30// Отступ от клавиатуры
+    private var currentOffset: CGFloat = 0
 
     init(viewController: UIViewController? = nil) {
         self.viewController = viewController
@@ -16,61 +18,80 @@ final class KeyboardService: KeyboardServiceProtocol {
         hideKeyboardOnTapped()
     }
 
+    func adjustViewForKeyboard(_ view: UIView) {
+        guard view != activeView else { return }
+        activeView = view
+
+        if keyboardHeight > 0 {
+            moveToNewActiveView()
+        }
+    }
+
     private func setupKeyboardObservers() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardDidShow),
+            selector: #selector(keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
+            object: nil)
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
+            object: nil)
     }
 
     private func hideKeyboardOnTapped() {
         let tap = UITapGestureRecognizer(
             target: self,
-            action: #selector(dismissKeyboard)
-        )
+            action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         viewController?.view.addGestureRecognizer(tap)
     }
 
-    func adjustView(for responder: UIResponder?) {
-        activeResponder = responder
-        updateViewPosition()
-    }
+    private func moveToNewActiveView() {
+        guard let viewController = viewController,
+              let activeView = activeView,
+              let window = viewController.view.window else { return }
 
-    private func updateViewPosition() {
-        guard let responder = activeResponder as? UIView,
-              let vc = viewController else { return }
+        let viewBounds = activeView.convert(activeView.bounds, to: window)
+        let viewBottom = viewBounds.maxY
+        let keyboardTop = window.frame.height - keyboardHeight - 20
+        let newOffset = keyboardTop - viewBottom - 20
 
-        let responderFrame = responder.convert(responder.bounds, to: vc.view)
-        let keyboardTopY = vc.view.bounds.height - keyboardHeight
-        let desiredBottomY = keyboardTopY - keyboardOffset
-        let offset = responderFrame.maxY - desiredBottomY
+        guard newOffset != currentOffset else { return }
+        let newY = viewController.view.transform.ty + (newOffset - currentOffset)
 
-        UIView.animate(withDuration: 0.3) {
-            vc.view.frame.origin.y = -offset
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: [.curveEaseInOut]
+        ) {
+            viewController.view.transform = CGAffineTransform(translationX: 0, y: newY)
+            self.currentOffset = newOffset
         }
     }
 
-    @objc private func keyboardDidShow(_ notification: Notification) {
+    @objc private func keyboardWillShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 
         keyboardHeight = keyboardFrame.height
-        updateViewPosition()
+        currentOffset = 0
+
+        if activeView != nil {
+            moveToNewActiveView()
+        }
     }
 
     @objc private func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.viewController?.view.frame.origin.y = 0
+        guard let viewController = viewController else { return }
+
+        keyboardHeight = 0
+        currentOffset = 0
+
+        UIView.animate(withDuration: 0.25) {
+            viewController.view.transform = .identity
         }
     }
 
