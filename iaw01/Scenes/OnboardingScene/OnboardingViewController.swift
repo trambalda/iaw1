@@ -1,20 +1,14 @@
 import UIKit
 
-protocol OnboardingViewControllerDelegate: AnyObject {
-    func onboardingDidFinish()
-}
-
 final class OnboardingViewController: UIViewController {
 
-    weak var delegate: OnboardingViewControllerDelegate?
     var appCoordinator: AppCoordinator?
 
     private let pages = OnboardingPageModel.pages
     private var currentPageNumber = 0
 
     private lazy var onboardingView: OnboardingView = {
-        let view = OnboardingView()
-        view.pages = pages
+        let view = OnboardingView(pages: pages)
         view.onPageChanged = { [weak self] pageNumber in
             self?.currentPageNumber = pageNumber
         }

@@ -6,15 +6,23 @@ final class OnboardingView: UIView {
     var onSkipButtonTap: (() -> Void)?
     var onPageChanged: ((Int) -> Void)?
 
-    var pages: [OnboardingPageModel] = [] {
-        didSet {
-            pageViews.forEach { $0.removeFromSuperview() }
-            createPageViews()
-            setupConstraints()
-            changePage(on: 0)
+    private let pages: [OnboardingPageModel]
+    
+    private lazy var pageViews: [OnboardingPageView] = {
+        var views = [OnboardingPageView]()
+        
+        for index in 0..<pages.count {
+            let content = pages[index]
+            
+            let pageView = OnboardingPageView()
+            pageView.translatesAutoresizingMaskIntoConstraints = false
+            pageView.configure(with: content, allPages: pages, currentPage: index)
+            
+            views.append(pageView)
         }
-    }
-    private var pageViews: [OnboardingPageView] = []
+        
+        return views
+    }()
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -24,7 +32,6 @@ final class OnboardingView: UIView {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
-        
         return scrollView
     }()
     
@@ -55,27 +62,29 @@ final class OnboardingView: UIView {
 
     private let buttonsStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.distribution = .fill
         stackView.alignment = .center
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
-    override init(frame: CGRect) {
+    init(pages: [OnboardingPageModel], frame: CGRect = .zero) {
+        self.pages = pages
         super.init(frame: frame)
         configure()
     }
     
     required init?(coder: NSCoder) {
+        self.pages = []
         super.init(coder: coder)
         configure()
     }
     
     private func configure() {
-        backgroundColor = .white
+        backgroundColor = .light100
         setupLayout()
         setupConstraints()
+        changePage(on: 0)
     }
 
     func changePage(on pageNumber: Int) {
@@ -89,12 +98,20 @@ final class OnboardingView: UIView {
     private func setupLayout() {
         addSubview(scrollView)
         scrollView.addSubview(contentStackView)
+        
+        pageViews.forEach { pageView in
+            contentStackView.addArrangedSubview(pageView)
+        }
+        
         addSubview(buttonsStackView)
         buttonsStackView.addArrangedSubview(skipButton)
         buttonsStackView.addArrangedSubview(nextButton)
     }
     
     private func setupConstraints() {
+        contentStackView.arrangedSubviews.forEach { pageView in
+            pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        }
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
@@ -114,31 +131,6 @@ final class OnboardingView: UIView {
             
             nextButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.55)
         ])
-        
-        // Настройка ограничений для страниц
-        pageViews.forEach { pageView in
-            pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        }
-        
-        if !pages.isEmpty {
-            contentStackView.widthAnchor.constraint(
-                equalTo: scrollView.widthAnchor,
-                multiplier: CGFloat(pages.count)
-            ).isActive = true
-        }
-    }
-    
-    private func createPageViews() {
-        for index in 0..<pages.count {
-            let content = pages[index]
-            
-            let pageView = OnboardingPageView()
-            pageView.translatesAutoresizingMaskIntoConstraints = false
-            pageView.configure(with: content, allPages: pages, currentPage: index)
-            
-            pageViews.append(pageView)
-            contentStackView.addArrangedSubview(pageView)
-        }
     }
 }
 
