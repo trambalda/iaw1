@@ -58,12 +58,6 @@ final class RestaurantHeaderView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with model: RestaurantModel) {
-        restaurantImage.image = model.logo
-        restaurantLabel.text = model.title
-        locationLabel.text = model.location
-    }
-    
     /*
      RestaurantHeaderView
         restaurantStack
@@ -83,23 +77,31 @@ final class RestaurantHeaderView: UIStackView {
         distribution = .fill
         translatesAutoresizingMaskIntoConstraints = false
         
-        let locationStack = UIStackView(arrangedSubviews: [locationImage, locationLabel])
+        let locationStack = UIStackView()
         locationStack.spacing = 4
         locationStack.alignment = .leading
+        locationStack.addArrangedSubview(locationImage)
+        locationStack.addArrangedSubview(locationLabel)
         
-        let infoStack = UIStackView(arrangedSubviews: [restaurantLabel, locationStack])
+        let infoStack = UIStackView()
         infoStack.axis = .vertical
         infoStack.spacing = 2
         infoStack.alignment = .leading
+        infoStack.addArrangedSubview(restaurantLabel)
+        infoStack.addArrangedSubview(locationStack)
         
-        let restaurantStack = UIStackView(arrangedSubviews: [restaurantImage, infoStack])
+        let restaurantStack = UIStackView()
         restaurantStack.spacing = 15
         restaurantStack.alignment = .center
+        restaurantStack.addArrangedSubview(restaurantImage)
+        restaurantStack.addArrangedSubview(infoStack)
         
-        let mainStack = UIStackView(arrangedSubviews: [restaurantStack, favoriteButton])
+        let mainStack = UIStackView()
         mainStack.distribution = .equalSpacing
         mainStack.alignment = .top
         mainStack.translatesAutoresizingMaskIntoConstraints = false
+        mainStack.addArrangedSubview(restaurantStack)
+        mainStack.addArrangedSubview(favoriteButton)
         
         addArrangedSubview(mainStack)
                 

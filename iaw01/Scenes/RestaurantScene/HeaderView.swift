@@ -1,6 +1,14 @@
 import UIKit
 
 final class HeaderView: UIView {
+    var model: RestaurantModel = .empty {
+        didSet {
+            imageView.image = model.image
+            restaurantHeaderView.model = model
+            restaurantInfoView.model = model
+        }
+    }
+    
     let restaurantHeaderView = RestaurantHeaderView()
     let restaurantInfoView = RestaurantInfoView()
     
@@ -25,21 +33,18 @@ final class HeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with model: RestaurantModel) {
-        imageView.image = model.image
-        restaurantHeaderView.configure(with: model)
-        restaurantInfoView.configure(with: model)
-    }
-    
     func setupLayoutAndConstraints() {
-        let headerStack = UIStackView(arrangedSubviews: [imageView])
+        let headerStack = UIStackView()
         headerStack.translatesAutoresizingMaskIntoConstraints = false
+        headerStack.addArrangedSubview(imageView)
        
-        let restaurantStack = UIStackView(arrangedSubviews: [restaurantHeaderView, restaurantInfoView])
+        let restaurantStack = UIStackView()
         restaurantStack.axis = .vertical
         restaurantStack.spacing = 20
         restaurantStack.alignment = .center
         restaurantStack.translatesAutoresizingMaskIntoConstraints = false
+        restaurantStack.addArrangedSubview(restaurantHeaderView)
+        restaurantStack.addArrangedSubview(restaurantInfoView)
         
         addSubview(headerStack)
         addSubview(restaurantStack)

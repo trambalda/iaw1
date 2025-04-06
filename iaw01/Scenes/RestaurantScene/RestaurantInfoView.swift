@@ -70,12 +70,6 @@ final class RestaurantInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with model: RestaurantModel) {
-        ratingLabel.text = "Ratings: \(model.rating)"
-        timeLabel.text = "Delivers in \(model.time) min"
-        typeOfFoodLabel.text = model.typeOfFood
-    }
-    
     /*
      mainStack
         infoStack
@@ -96,28 +90,39 @@ final class RestaurantInfoView: UIView {
         layer.cornerRadius = 10
         translatesAutoresizingMaskIntoConstraints = false
         
-        let ratingStack = UIStackView(arrangedSubviews: [ratingImage, ratingLabel])
+        let ratingStack = UIStackView()
         ratingStack.spacing = 8
         ratingStack.alignment = .bottom
+        ratingStack.addArrangedSubview(ratingImage)
+        ratingStack.addArrangedSubview(ratingLabel)
         
-        let timeStack = UIStackView(arrangedSubviews: [timeImage, timeLabel])
+        let timeStack = UIStackView()
         timeStack.spacing = 8
         timeStack.alignment = .bottom
+        timeStack.addArrangedSubview(timeImage)
+        timeStack.addArrangedSubview(timeLabel)
         
-        let typeOfFoodStack = UIStackView(arrangedSubviews: [typeOfFoodImage, typeOfFoodLabel])
+        let typeOfFoodStack = UIStackView()
         typeOfFoodStack.spacing = 8
         typeOfFoodStack.alignment = .bottom
+        typeOfFoodStack.addArrangedSubview(typeOfFoodImage)
+        typeOfFoodStack.addArrangedSubview(typeOfFoodLabel)
         
-        let infoStack = UIStackView(arrangedSubviews: [ratingStack, timeStack, typeOfFoodStack])
+        let infoStack = UIStackView()
         infoStack.axis = .vertical
         infoStack.spacing = 10
         infoStack.alignment = .leading
+        infoStack.addArrangedSubview(ratingStack)
+        infoStack.addArrangedSubview(timeStack)
+        infoStack.addArrangedSubview(typeOfFoodStack)
         
-        let mainStack = UIStackView(arrangedSubviews: [infoStack, infoButton])
+        let mainStack = UIStackView()
         mainStack.spacing = 101
         mainStack.distribution = .equalSpacing
         mainStack.alignment = .center
         mainStack.translatesAutoresizingMaskIntoConstraints = false
+        mainStack.addArrangedSubview(infoStack)
+        mainStack.addArrangedSubview(infoButton)
         
         addSubview(mainStack)
         

@@ -1,24 +1,33 @@
 import UIKit
 
 final class RestaurantView: UIView {
+    var model: RestaurantModel = .mock {
+        didSet {
+            headerView.model = model
+            filtersView.model = model
+        }
+    }
+    
     let scrollView = UIScrollView()
     
     let headerView = HeaderView()
-    let menuTimeView = MenuTimeView()
-    let menuCategoryView = MenuCategoryView()
+    let filtersView = FiltersView()
     let menuItemListView = MenuItemListView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayoutAndConstraints()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with model: RestaurantModel) {
-        headerView.configure(with: model)
+    func configure() {
+        backgroundColor = .light100
+        setupLayoutAndConstraints()
     }
     
     /*
@@ -31,25 +40,16 @@ final class RestaurantView: UIView {
      */
     
     func setupLayoutAndConstraints() {
-        backgroundColor = .light100
-        
-        let filtersStack = UIStackView(arrangedSubviews: [menuTimeView, menuCategoryView])
-        filtersStack.axis = .vertical
-        filtersStack.spacing = 18
-        filtersStack.alignment = .center
-        
-        let itemListStack = UIStackView(arrangedSubviews: [menuItemListView])
-        itemListStack.axis = .vertical
-        
-        let contentStack = UIStackView(arrangedSubviews: [headerView, filtersStack, menuItemListView])
+        let contentStack = UIStackView()
         contentStack.axis = .vertical
         contentStack.spacing = 20
         contentStack.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(scrollView)
         scrollView.addSubview(contentStack)
+        contentStack.addArrangedSubview(headerView)
+        contentStack.addArrangedSubview(filtersView)
+        contentStack.addArrangedSubview(menuItemListView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),

@@ -46,6 +46,7 @@ extension Font {
     static let subtitle2 = Font(
         font: UIFont(name: Family.everettMedium.title, size: 19)!, // original 21, -1
         lettering: -0.5
+    )
     static let segment = Font(
         font: UIFont(name: Family.everettMedium.title, size: 17)!,
         lettering: -1

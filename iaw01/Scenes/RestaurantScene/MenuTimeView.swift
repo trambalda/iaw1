@@ -56,19 +56,20 @@ final class MenuTimeView: UIView {
             buttons.append(button)
         }
         
-        if let firstButton = buttons.first {
-            selectButton(firstButton)
+        if let secondButton = buttons.dropFirst().first {
+            selectButton(secondButton)
             
             underlineView.heightAnchor.constraint(equalToConstant: 3).isActive = true
             underlineView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
-            underlineView.widthAnchor.constraint(equalTo: firstButton.widthAnchor, constant: 6).isActive = true
-            underlineLeadingConstraint = underlineView.leadingAnchor.constraint(equalTo: firstButton.leadingAnchor)
+            underlineView.widthAnchor.constraint(equalTo: secondButton.widthAnchor, constant: 6).isActive = true
+            underlineLeadingConstraint = underlineView.leadingAnchor.constraint(equalTo: secondButton.leadingAnchor, constant: -3)
             underlineLeadingConstraint.isActive = true
+            underlineView.trailingAnchor.constraint(equalTo: secondButton.trailingAnchor, constant: 3).isActive = true
         }
     }
     
     func createButton(title: String) -> UIButton {
-        let button = UIButton(type: . system)
+        let button = UIButton(type: . custom)
         button.setTitle(title, for: .normal)
         button.setTitleColor(.dark100, for: .selected)
         button.setTitleColor(.dark60, for: .normal)
@@ -92,11 +93,13 @@ final class MenuTimeView: UIView {
         
         buttons.forEach { $0.setTitleColor(.dark60, for: .normal) }
         button.setTitleColor(.dark100, for: .normal)
-        
+        /*
+        self.layoutIfNeeded()
         UIView.animate(withDuration: 0.25) {
             self.underlineLeadingConstraint.constant = button.frame.origin.x - self.stackView.frame.origin.x
             self.layoutIfNeeded()
         }
+         */
     }
     
     func setupLayoutAndConstraints() {
@@ -116,7 +119,8 @@ final class MenuTimeView: UIView {
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+            stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+            stackView.widthAnchor.constraint(greaterThanOrEqualTo: scrollView.widthAnchor)
         ])
     }
 }

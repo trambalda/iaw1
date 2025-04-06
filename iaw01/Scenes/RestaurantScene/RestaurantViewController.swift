@@ -10,9 +10,9 @@ final class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        restaurantView.menuTimeView.delegate = self
+        restaurantView.filtersView.menuTimeView.delegate = self
         restaurantView.scrollView.delegate = self
-        restaurantView.configure(with: model)
+        restaurantView.model = model
         setupNavigationBar()
     }
     
@@ -94,12 +94,12 @@ extension RestaurantViewController: UIScrollViewDelegate {
         
         if newHeaderImageViewHeightConstraint == 0 {
             restaurantView.headerView.restaurantHeaderView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-            restaurantView.menuTimeView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-            restaurantView.menuCategoryView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
+            restaurantView.filtersView.menuTimeView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
+            restaurantView.filtersView.menuCategoryView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
         } else {
             restaurantView.headerView.restaurantHeaderView.transform = .identity
-            restaurantView.menuTimeView.transform = .identity
-            restaurantView.menuCategoryView.transform = .identity
+            restaurantView.filtersView.menuTimeView.transform = .identity
+            restaurantView.filtersView.menuCategoryView.transform = .identity
         }
     }
 }

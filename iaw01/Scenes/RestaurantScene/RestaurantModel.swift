@@ -8,8 +8,9 @@ struct RestaurantModel {
     let rating: String
     let time: String
     let typeOfFood: String
+    let menu: [MenuModel]
     
-    static let empty = RestaurantModel(image: nil, logo: nil, title: "", location: "", rating: "", time: "", typeOfFood: "")
+    static let empty = RestaurantModel(image: nil, logo: nil, title: "", location: "", rating: "", time: "", typeOfFood: "", menu: [])
 }
 
 extension RestaurantModel {
@@ -18,5 +19,6 @@ extension RestaurantModel {
                                       title: "McDonald's",
                                       location: "Bramlea & Sandalwood",
                                       rating: "4.5", time: "15-20",
-                                      typeOfFood: "Burgers")
+                                      typeOfFood: "Burgers",
+                                      menu: MenuModel.mock)
 }
