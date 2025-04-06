@@ -4,10 +4,6 @@ final class PhonePrefixView: UIView {
     
     private weak var parentView: PhoneTextField?
     
-    private lazy var maxCountryCodeLength: Int = {
-        CountryCodeModel.countryCodes.map { $0.code.count }.max() ?? 4
-    }()
-    
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -110,9 +106,11 @@ final class PhonePrefixView: UIView {
     }
     
     private func setupDefaultCountry() {
-        guard let regionCode = Locale.current.region?.identifier else { return }
+        let regionCode = Locale.current.region?.identifier
+        let defaultCountry = CountryCodeModel.countryCodes.first(where: { $0.region == regionCode }) ??
+        CountryCodeModel.countryCodes.first
         
-        if let defaultCountry = CountryCodeModel.countryCodes.first(where: { $0.region == regionCode }) {
+        if let defaultCountry {
             selectedCountry = defaultCountry
             DispatchQueue.main.async {
                 self.parentView?.updatePhonePrefix(with: defaultCountry.code)
@@ -143,9 +141,9 @@ extension PhonePrefixView: UITextFieldDelegate {
             return false
         }
         
-        let shouldChange = newText.count <= maxCountryCodeLength
+        let shouldChange = newText.count <= CountryCodeModel.maxCountryCodeLength
         
-        if newText.count == maxCountryCodeLength {
+        if newText.count == CountryCodeModel.maxCountryCodeLength {
             DispatchQueue.main.async {
                 textField.resignFirstResponder()
             }

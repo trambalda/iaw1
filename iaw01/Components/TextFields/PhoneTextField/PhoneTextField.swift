@@ -17,6 +17,10 @@ final class PhoneTextField: UIStackView {
     
     private var currentMask: String = ""
     
+    private var currentPlaceholder: String = ""
+    
+    private var currentConstraints: [NSLayoutConstraint] = []
+    
     private let titleContainerView = UIView()
 
     private let titleLabel: UILabel = {
@@ -92,11 +96,14 @@ final class PhoneTextField: UIStackView {
         
         if let country = CountryCodeModel.countryCodes.first(where: { $0.code == code }) {
             currentMask = country.mask
+            currentPlaceholder = country.placeholder
             phonePrefixView.selectedCountry = country
         } else {
             currentMask = CountryCodeModel.defaultMask
             phonePrefixView.selectedCountry = nil
         }
+        
+        updatePlaceholder()
     }
 
     private func setupStackViewProperties() {
@@ -133,20 +140,26 @@ final class PhoneTextField: UIStackView {
         textField.textColor = baseStyle.textColor
         textField.backgroundColor = baseStyle.backgroundColor
         textField.font = baseStyle.fontFamily.font
-        textField.attributedPlaceholder = baseStyle.fontFamily.compose(
-            "000 000 0000",
-            color: baseStyle.placeholderColor
-        )
-        
         titleLabel.attributedText = baseStyle.fontFamily.compose(
             "Phone Number",
             color: baseStyle.titleColor
         )
     }
     
+    private func updatePlaceholder() {
+        let baseStyle = TextFieldBaseStyle()
+        textField.attributedPlaceholder = baseStyle.fontFamily.compose(
+            currentPlaceholder,
+            color: baseStyle.placeholderColor
+        )
+    }
+    
     private func refreshPhoneField(for country: CountryCodeModel) {
         phonePrefix = country.code
         currentMask = country.mask
+        currentPlaceholder = country.placeholder
+        
+        updatePlaceholder()
         
         if let text = textField.text {
             let digitsOnly = text.filter { $0.isNumber }
@@ -175,13 +188,21 @@ final class PhoneTextField: UIStackView {
         return result
     }
     
-    private func updateTextFieldState(for string: String) {
-        if string.contains(where: { $0.isLetter }) {
-            titleLabel.attributedText = Font.body.compose("Введите только цифры", color: .systemRed120)
-            containerView.layer.borderColor = UIColor.systemRed120.cgColor
-        } else {
-            titleLabel.attributedText = Font.body.compose("Phone Number", color: .dark100)
-            containerView.layer.borderColor = UIColor.dark100.cgColor
+    private func animatePickerView(visible: Bool) {
+        if visible {
+            countryPickerView.alpha = 0
+            countryPickerView.transform = CGAffineTransform(translationX: 0, y: 20)
+            countryPickerView.isHidden = false
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.countryPickerView.alpha = visible ? 1 : 0
+            self.countryPickerView.transform = visible ? .identity : CGAffineTransform(translationX: 0, y: 20)
+        }) { _ in
+            if !visible {
+                self.countryPickerView.isHidden = true
+                self.countryPickerView.transform = .identity
+            }
         }
     }
     
@@ -195,42 +216,32 @@ final class PhoneTextField: UIStackView {
             if let scrollView = parentView as? UIScrollView {
                 visibleHeight += scrollView.contentOffset.y
             }
-            
-            if textFieldFrame.maxY + 200 > visibleHeight {
-                NSLayoutConstraint.activate([
-                    countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor),
-                    countryPickerView.heightAnchor.constraint(equalToConstant: 160),
-                    countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                    countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11),
-                ])
-            } else {
-                NSLayoutConstraint.activate([
-                    countryPickerView.topAnchor.constraint(equalTo: containerView.bottomAnchor),
-                    countryPickerView.heightAnchor.constraint(equalToConstant: 160),
-                    countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                    countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11),
-                ])
-            }
-        }
 
-        countryPickerView.alpha = 0
-        countryPickerView.transform = CGAffineTransform(translationX: 0, y: 20)
-        countryPickerView.isHidden = false
+            NSLayoutConstraint.deactivate(currentConstraints)
+            currentConstraints.removeAll()
+            
+            var constraints: [NSLayoutConstraint] = [
+                countryPickerView.heightAnchor.constraint(equalToConstant: 160),
+                countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11)
+            ]
+            
+            //думаю нужно не волшебное 200, а как-то сделать: нижняя точка текстфилда + высота таблицы и получать верзнюю точку таббара и хватает ли места
+            if textField.isFirstResponder || textFieldFrame.maxY + 200 > visibleHeight {
+                constraints.append(countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor))
+            } else {
+                constraints.append(countryPickerView.topAnchor.constraint(equalTo: containerView.bottomAnchor))
+            }
+            
+            currentConstraints = constraints
+            NSLayoutConstraint.activate(currentConstraints)
+        }
         
-        UIView.animate(withDuration: 0.3) {
-            self.countryPickerView.alpha = 1
-            self.countryPickerView.transform = .identity
-        }
+        animatePickerView(visible: true)
     }
-    
+
     private func hidePickerView() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.countryPickerView.transform = CGAffineTransform(translationX: 0, y: 20)
-            self.countryPickerView.alpha = 0
-        }) { _ in
-            self.countryPickerView.isHidden = true
-            self.countryPickerView.transform = .identity
-        }
+        animatePickerView(visible: false)
     }
 }
 
@@ -251,8 +262,6 @@ extension PhoneTextField: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let rawText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
         let digits = rawText.filter { $0.isNumber }
-        
-        updateTextFieldState(for: string)
         
         let formattedText = applyMask(for: digits, with: currentMask)
         textField.text = formattedText
