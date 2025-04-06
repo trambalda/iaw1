@@ -63,7 +63,6 @@ final class RestaurantInfoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        translatesAutoresizingMaskIntoConstraints = false
         setupLayoutAndConstraints()
     }
     
@@ -95,6 +94,7 @@ final class RestaurantInfoView: UIView {
     func setupLayoutAndConstraints() {
         backgroundColor = .light60
         layer.cornerRadius = 10
+        translatesAutoresizingMaskIntoConstraints = false
         
         let ratingStack = UIStackView(arrangedSubviews: [ratingImage, ratingLabel])
         ratingStack.spacing = 8

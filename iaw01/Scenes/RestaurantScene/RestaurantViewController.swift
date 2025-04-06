@@ -10,6 +10,7 @@ final class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        restaurantView.menuTimeView.delegate = self
         restaurantView.scrollView.delegate = self
         restaurantView.configure(with: model)
         setupNavigationBar()
@@ -100,5 +101,11 @@ extension RestaurantViewController: UIScrollViewDelegate {
             restaurantView.menuTimeView.transform = .identity
             restaurantView.menuCategoryView.transform = .identity
         }
+    }
+}
+
+extension RestaurantViewController: MenuTimeViewDelegate {
+    func didSelectMenu(_ menu: MenuModel) {
+            
     }
 }

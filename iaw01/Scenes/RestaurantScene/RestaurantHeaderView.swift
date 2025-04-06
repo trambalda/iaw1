@@ -51,7 +51,6 @@ final class RestaurantHeaderView: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        translatesAutoresizingMaskIntoConstraints = false
         setupLayoutAndConstraints()
     }
     
@@ -82,6 +81,7 @@ final class RestaurantHeaderView: UIStackView {
         spacing = 22
         alignment = .top
         distribution = .fill
+        translatesAutoresizingMaskIntoConstraints = false
         
         let locationStack = UIStackView(arrangedSubviews: [locationImage, locationLabel])
         locationStack.spacing = 4
