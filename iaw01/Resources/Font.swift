@@ -1,4 +1,3 @@
-
 import UIKit
 
 struct Font {
@@ -29,37 +28,24 @@ extension Font {
             switch self {
             case .everettMedium:  "TWKEverett-Medium"
             case .everettRegular: "TWKEverett-Regular"
-            case .aeonikMedium:  "Aeonik-Medium"
+            case .aeonikMedium:   "Aeonik-Medium"
             }
         }
     }
 }
 
 extension Font {
-    static let heading1 = Font(
-        font: UIFont(name: Family.everettMedium.title, size: 96)!,
-        lettering: -3
-    )
-    static let heading2 = Font(
-        font: UIFont(name: Family.everettMedium.title, size: 60)!,
-        lettering: -1.5
-    )
-    static let heading3 = Font(
-        font: UIFont(name: Family.everettMedium.title, size: 48)!,
-        lettering: -1
-    )
     static let heading4 = Font(
-        font: UIFont(name: Family.everettMedium.title, size: 36)!,
-        lettering: -2
+        font: UIFont(name: Family.everettMedium.title, size: 33)!, // original 36, -2
+        lettering: -4
     )
     static let subtitle1 = Font(
-        font: UIFont(name: Family.everettMedium.title, size: 24)!,
-        lettering: -0
-    )
-    static let subtitle2 = Font(
-        font: UIFont(name: Family.everettMedium.title, size: 21)!,
+        font: UIFont(name: Family.everettMedium.title, size: 22)!, // original 24, 0
         lettering: -1
     )
+    static let subtitle2 = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 19)!, // original 21, -1
+        lettering: -0.5
     static let segment = Font(
         font: UIFont(name: Family.everettMedium.title, size: 17)!,
         lettering: -1
@@ -69,7 +55,7 @@ extension Font {
         lettering: -5
     )
     static let body = Font(
-        font: UIFont(name: Family.everettRegular.title, size: 17)!,
+        font: UIFont(name: Family.everettRegular.title, size: 15.4)!, // original 17, -1
         lettering: -1
     )
     static let info = Font(
@@ -77,7 +63,7 @@ extension Font {
         lettering: -1
     )
     static let note = Font(
-        font: UIFont(name: Family.everettRegular.title, size: 13)!,
+        font: UIFont(name: Family.everettRegular.title, size: 12)!, // original 13, -1
         lettering: -1
     )
     static let backButton = Font(
@@ -85,11 +71,11 @@ extension Font {
         lettering: 0
     )
     static let caption = Font(
-        font: UIFont(name: Family.everettMedium.title, size: 12)!,
-        lettering: 2
+        font: UIFont(name: Family.everettMedium.title, size: 10.9)!, // original 12, 2
+        lettering: 0.5
     )
     static let button = Font(
-        font: UIFont(name: Family.aeonikMedium.title, size: 18)!,
+        font: UIFont(name: Family.aeonikMedium.title, size: 18)!, // original the same
         lettering: 0
     )
 }
