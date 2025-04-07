@@ -86,8 +86,8 @@ extension PhoneNumberInputView {
             phoneNumberTextFieldView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             phoneNumberTextField.topAnchor.constraint(equalTo: phoneNumberTextFieldView.topAnchor),
-            phoneNumberTextField.leadingAnchor.constraint(equalTo: phoneNumberTextFieldView.leadingAnchor, constant: 15),
-            phoneNumberTextField.trailingAnchor.constraint(equalTo: phoneNumberTextFieldView.trailingAnchor, constant: -15),
+            phoneNumberTextField.leadingAnchor.constraint(equalTo: phoneNumberTextFieldView.layoutMarginsGuide.leadingAnchor),
+            phoneNumberTextField.trailingAnchor.constraint(equalTo: phoneNumberTextFieldView.layoutMarginsGuide.trailingAnchor),
             phoneNumberTextField.bottomAnchor.constraint(equalTo: phoneNumberTextFieldView.bottomAnchor),
             phoneNumberTextField.heightAnchor.constraint(equalToConstant: 39),
             

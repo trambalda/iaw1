@@ -10,9 +10,16 @@ import UIKit
 class VerifyPhoneNumberView: UIView {
     
     var onVerifyButtonTapped: (() -> Void)?
+    
+    var onGetNewCodeButtonTapped: (() -> Void)?
+    
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
+    
     private var keyboardPadding: CGFloat = 16
-    private var getNewCodeButton = LinkButton(style: .getNewCode)
+    
+    private var phoneNumberInputView = PhoneNumberInputView()
+    
+    private var pincodeInputView = PincodeInputView()
     
     private lazy var mainStackView: UIStackView = {
         let stack = UIStackView()
@@ -38,14 +45,10 @@ class VerifyPhoneNumberView: UIView {
         return label
     }()
     
-    private lazy var phoneNumberInputView: PhoneNumberInputView = {
-        let view = PhoneNumberInputView()
-        return view
-    }()
-    
-    private lazy var pincodeInputView: PincodeInputView = {
-        let view = PincodeInputView()
-        return view
+    private lazy var getNewCodeButton: LinkButton = {
+        let button = LinkButton(style: .getNewCode)
+        button.addTarget(self, action: #selector(getNewCodeDidTapped), for: .touchUpInside)
+        return button
     }()
     
     private lazy var getNewCodeLabel: UILabel = {
@@ -55,9 +58,8 @@ class VerifyPhoneNumberView: UIView {
         return label
     }()
     
-    private lazy var verifyButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.verifyContinueButton, for: .normal)
+    private lazy var verifyButton: CornersButton = {
+        let button = CornersButton(style: .verifyButton)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(verifyButtonDidTapped), for: .touchUpInside)
         return button
@@ -70,6 +72,10 @@ class VerifyPhoneNumberView: UIView {
     @objc private func verifyButtonDidTapped() {
         phoneNumberInputView.resignFirstResponder()
         onVerifyButtonTapped?()
+    }
+    
+    @objc private func getNewCodeDidTapped() {
+        onGetNewCodeButtonTapped?()
     }
     
     override init(frame: CGRect) {
@@ -114,14 +120,14 @@ extension VerifyPhoneNumberView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 18),
-            mainStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 21),
-            mainStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -21),
+            mainStackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             
             pincodeInputView.heightAnchor.constraint(equalToConstant: 55),
             
-            verifyButton.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
-            verifyButton.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16)
+            verifyButton.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            verifyButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
         ])
         verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(
             equalTo: bottomAnchor,

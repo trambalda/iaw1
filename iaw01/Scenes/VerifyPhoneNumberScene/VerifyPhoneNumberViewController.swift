@@ -21,23 +21,12 @@ class VerifyPhoneNumberViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .light100
-        setupVerifyButtonHandler()
+        verifyPhoneNumberView.onVerifyButtonTapped = { print("Verify button tapped") }
+        verifyPhoneNumberView.onGetNewCodeButtonTapped = { print("\"Get a new one\" button tapped") }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         verifyPhoneNumberView.activatePincodeInput()
-    }
-}
-
-extension VerifyPhoneNumberViewController {
-    func setupVerifyButtonHandler() {
-        verifyPhoneNumberView.onVerifyButtonTapped = { [weak self] in
-            self?.handleVerifyButtonTap()
-        }
-    }
-    
-    private func handleVerifyButtonTap() {
-        print("Verify button tapped")
     }
 }
