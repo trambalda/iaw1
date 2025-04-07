@@ -9,9 +9,6 @@ final class RestaurantHeaderView: UIStackView {
         }
     }
     
-    //private let restaurantLabel = UILabel()
-    //private let locationLabel = UILabel()
-    
     private let restaurantLabel: UILabel = {
         let label = UILabel()
         label.font = Font.name.font
@@ -49,13 +46,32 @@ final class RestaurantHeaderView: UIStackView {
         return button
     }()
     
+    private let mainStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .top
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayoutAndConstraints()
+        configure()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        axis = .horizontal
+        spacing = 22
+        alignment = .top
+        distribution = .fill
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        setupLayout()
+        setupConstraints()
     }
     
     /*
@@ -70,13 +86,7 @@ final class RestaurantHeaderView: UIStackView {
         favoriteButton
      */
     
-    func  setupLayoutAndConstraints() {
-        axis = .horizontal
-        spacing = 22
-        alignment = .top
-        distribution = .fill
-        translatesAutoresizingMaskIntoConstraints = false
-        
+    private func setupLayout() {
         let locationStack = UIStackView()
         locationStack.spacing = 4
         locationStack.alignment = .leading
@@ -96,15 +106,13 @@ final class RestaurantHeaderView: UIStackView {
         restaurantStack.addArrangedSubview(restaurantImage)
         restaurantStack.addArrangedSubview(infoStack)
         
-        let mainStack = UIStackView()
-        mainStack.distribution = .equalSpacing
-        mainStack.alignment = .top
-        mainStack.translatesAutoresizingMaskIntoConstraints = false
         mainStack.addArrangedSubview(restaurantStack)
         mainStack.addArrangedSubview(favoriteButton)
         
         addArrangedSubview(mainStack)
-                
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             mainStack.topAnchor.constraint(equalTo: topAnchor),
             mainStack.leadingAnchor.constraint(equalTo: leadingAnchor),

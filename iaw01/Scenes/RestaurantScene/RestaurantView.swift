@@ -8,16 +8,27 @@ final class RestaurantView: UIView {
         }
     }
     
-    let scrollView = UIScrollView()
-    
     let headerView = HeaderView()
     let filtersView = FiltersView()
     let menuItemListView = MenuItemListView()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private let contentStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configure()
     }
     
@@ -25,32 +36,21 @@ final class RestaurantView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    private func configure() {
         backgroundColor = .light100
-        setupLayoutAndConstraints()
+        setupLayout()
+        setupConstraints()
     }
     
-    /*
-    headerStack
-        headerView
-    filtersStack
-        menuTimeView
-        menuCategoryView
-    menuItemListView
-     */
-    
-    func setupLayoutAndConstraints() {
-        let contentStack = UIStackView()
-        contentStack.axis = .vertical
-        contentStack.spacing = 20
-        contentStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        addSubview(scrollView)
-        scrollView.addSubview(contentStack)
+    private func setupLayout() {
         contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(filtersView)
         contentStack.addArrangedSubview(menuItemListView)
-        
+        scrollView.addSubview(contentStack)
+        addSubview(scrollView)
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),

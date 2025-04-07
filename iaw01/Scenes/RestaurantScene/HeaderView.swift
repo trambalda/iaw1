@@ -12,7 +12,10 @@ final class HeaderView: UIView {
     let restaurantHeaderView = RestaurantHeaderView()
     let restaurantInfoView = RestaurantInfoView()
     
-    var imageView: UIImageView = {
+    var headerImageViewHeightConstraint: NSLayoutConstraint!
+    var restaurantInfoViewHeightConstraint: NSLayoutConstraint!
+    
+    private var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -20,12 +23,32 @@ final class HeaderView: UIView {
         return imageView
     }()
     
-    var headerImageViewHeightConstraint: NSLayoutConstraint!
-    var restaurantInfoViewHeightConstraint: NSLayoutConstraint!
+    private let restaurantStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let mainStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let viewContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayoutAndConstraints()
+        configure()
         adjustForSmallScreens()
     }
     
@@ -33,46 +56,57 @@ final class HeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupLayoutAndConstraints() {
-        let headerStack = UIStackView()
-        headerStack.translatesAutoresizingMaskIntoConstraints = false
-        headerStack.addArrangedSubview(imageView)
-       
-        let restaurantStack = UIStackView()
-        restaurantStack.axis = .vertical
-        restaurantStack.spacing = 20
-        restaurantStack.alignment = .center
-        restaurantStack.translatesAutoresizingMaskIntoConstraints = false
+    private func configure() {
+        setupLayout()
+        setupConstraints()
+    }
+    
+    private func setupLayout() {
         restaurantStack.addArrangedSubview(restaurantHeaderView)
         restaurantStack.addArrangedSubview(restaurantInfoView)
+    
+        viewContainer.addSubview(restaurantStack)
+    
+        mainStack.addArrangedSubview(imageView)
+        mainStack.addArrangedSubview(viewContainer)
         
-        addSubview(headerStack)
-        addSubview(restaurantStack)
-        
+        addSubview(mainStack)
+    }
+    
+    private func setupConstraints() {
         headerImageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 164)
         restaurantInfoViewHeightConstraint = restaurantInfoView.heightAnchor.constraint(equalToConstant: 109)
         
         NSLayoutConstraint.activate([
-            headerStack.topAnchor.constraint(equalTo: topAnchor),
-            headerStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            headerStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            mainStack.topAnchor.constraint(equalTo: topAnchor),
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            restaurantStack.topAnchor.constraint(equalTo: headerStack.bottomAnchor, constant: 20),
-            restaurantStack.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
-            restaurantStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            restaurantStack.bottomAnchor.constraint(equalTo: bottomAnchor),
+            viewContainer.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor),
+            viewContainer.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor),
+            viewContainer.bottomAnchor.constraint(equalTo: mainStack.bottomAnchor),
+            
+            restaurantStack.topAnchor.constraint(equalTo: viewContainer.topAnchor),
+            restaurantStack.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor,constant: 16),
+            restaurantStack.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -16),
+            restaurantStack.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor),
             
             headerImageViewHeightConstraint,
             restaurantInfoViewHeightConstraint
         ])
     }
     
-    func adjustForSmallScreens() {
+    private func adjustForSmallScreens() {
         if UIScreen.main.bounds.height < 670 {
             imageView.isHidden = true
             restaurantInfoView.isHidden = true
             headerImageViewHeightConstraint.constant = 0
             restaurantInfoViewHeightConstraint.constant = 0
+            
+            UIView.animate(withDuration: 0.3) {
+                self.layoutIfNeeded()
+            }
         }
     }
 }

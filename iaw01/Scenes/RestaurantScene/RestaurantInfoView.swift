@@ -9,10 +9,6 @@ final class RestaurantInfoView: UIView {
         }
     }
     
-    //private let ratingLabel = UILabel()
-    //private let timeLabel = UILabel()
-    //private let typeOfFoodLabel = UILabel()
-    
     private let ratingLabel: UILabel = {
         let label = UILabel()
         label.font = Font.info.font
@@ -61,13 +57,30 @@ final class RestaurantInfoView: UIView {
         return button
     }()
     
+    private let mainStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 101
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayoutAndConstraints()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        backgroundColor = .light60
+        layer.cornerRadius = 10
+        translatesAutoresizingMaskIntoConstraints = false
+        setupLayout()
+        setupConstraints()
     }
     
     /*
@@ -85,11 +98,7 @@ final class RestaurantInfoView: UIView {
         infoButton
      */
     
-    func setupLayoutAndConstraints() {
-        backgroundColor = .light60
-        layer.cornerRadius = 10
-        translatesAutoresizingMaskIntoConstraints = false
-        
+    private func setupLayout() {
         let ratingStack = UIStackView()
         ratingStack.spacing = 8
         ratingStack.alignment = .bottom
@@ -116,16 +125,13 @@ final class RestaurantInfoView: UIView {
         infoStack.addArrangedSubview(timeStack)
         infoStack.addArrangedSubview(typeOfFoodStack)
         
-        let mainStack = UIStackView()
-        mainStack.spacing = 101
-        mainStack.distribution = .equalSpacing
-        mainStack.alignment = .center
-        mainStack.translatesAutoresizingMaskIntoConstraints = false
         mainStack.addArrangedSubview(infoStack)
         mainStack.addArrangedSubview(infoButton)
         
         addSubview(mainStack)
-        
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
