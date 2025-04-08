@@ -14,6 +14,5 @@ class MealViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .light100
     }
 }
