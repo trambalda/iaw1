@@ -1,10 +1,3 @@
-//
-//  VerifyPhoneNumberView.swift
-//  iaw01
-//
-//  Created by Dinar Mukhlisov on 13.03.2025.
-//
-
 import UIKit
 
 class VerifyPhoneNumberView: UIView {
@@ -172,9 +165,9 @@ extension VerifyPhoneNumberView {
     
     private func changeVerifyButtonPosition(notification: Notification, bottomPadding: CGFloat) {
         let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.3
+        verifyButtonBottomConstraint.constant = bottomPadding
         
         UIView.animate(withDuration: animationDuration) {
-            self.verifyButtonBottomConstraint.constant = bottomPadding
             self.layoutIfNeeded()
         }
     }

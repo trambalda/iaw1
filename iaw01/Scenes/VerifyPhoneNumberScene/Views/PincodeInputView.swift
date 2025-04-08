@@ -1,10 +1,3 @@
-//
-//  CodeInputView.swift
-//  iaw01
-//
-//  Created by Dinar Mukhlisov on 18.03.2025.
-//
-
 import UIKit
 
 class PincodeInputView: UIView {

@@ -1,9 +1,3 @@
-//
-//  NotificationCenter.swift
-//  iaw01
-//
-//  Created by Dinar Mukhlisov on 31.03.2025.
-//
 import UIKit
 
 extension NotificationCenter {
