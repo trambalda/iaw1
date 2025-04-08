@@ -1,0 +1,29 @@
+import UIKit
+
+class VerifyPhoneNumberViewController: UIViewController {
+    
+    private lazy var verifyPhoneNumberView: VerifyPhoneNumberView = {
+        let view = VerifyPhoneNumberView(frame: UIScreen.main.bounds)
+        view.onVerifyButtonTapped = {
+            print("Verify button tapped")
+        }
+        view.onGetNewCodeButtonTapped = {
+            print("\"Get a new one\" button tapped")
+        }
+        return view
+    }()
+    
+    override func loadView() {
+        view = verifyPhoneNumberView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .light100
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        verifyPhoneNumberView.activatePincodeInput()
+    }
+}

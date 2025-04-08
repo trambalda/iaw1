@@ -23,4 +23,9 @@ final class Factory {
         let vc = CornersButtonsViewController()
         return vc
     }
+    
+    func createVerifyPhoneNumberScene() -> VerifyPhoneNumberViewController {
+        let vc = VerifyPhoneNumberViewController()
+        return vc
+    }
 }

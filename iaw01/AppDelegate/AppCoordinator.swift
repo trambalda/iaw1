@@ -33,4 +33,9 @@ final class AppCoordinator {
         let vc = factory.createCornersButtonsScene()
         parent?.pushViewController(vc, animated: true)
     }
+    
+    func showVerifyPhoneNumberScene(from parent: UINavigationController?) {
+        let vc = factory.createVerifyPhoneNumberScene()
+        parent?.pushViewController(vc, animated: true)
+    }
 }
