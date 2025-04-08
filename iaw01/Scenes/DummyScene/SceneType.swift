@@ -2,13 +2,13 @@ enum SceneType {
     
     case textFiedsScene
     case cornersButtonsScene
-    case onboardingScene
+    case verifyPhoneNumberScene
     
     var title: String {
         switch self {
         case .textFiedsScene: "TextFieds Scene"
         case .cornersButtonsScene: "CornersButtons Scene"
-        case .onboardingScene: "Onboarding Scene"
+        case .verifyPhoneNumberScene: "VerifyPhoneNumber Scene"
         }
     }
 }
@@ -18,7 +18,7 @@ extension SceneType: CaseIterable {
         [
             .textFiedsScene,
             .cornersButtonsScene,
-            .onboardingScene,
+            .verifyPhoneNumberScene,
         ]
     }
 }

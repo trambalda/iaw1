@@ -38,10 +38,9 @@ final class AppCoordinator {
         let vc = factory.createCornersButtonsScene()
         parent?.pushViewController(vc, animated: true)
     }
-
-    func showOnboardingScene(from parent: UINavigationController? = nil) {
-        let vc = factory.createOnboardingScene()
-        let navigationController = UINavigationController(rootViewController: vc)
-        window.rootViewController = navigationController
+    
+    func showVerifyPhoneNumberScene(from parent: UINavigationController?) {
+        let vc = factory.createVerifyPhoneNumberScene()
+        parent?.pushViewController(vc, animated: true)
     }
 }
