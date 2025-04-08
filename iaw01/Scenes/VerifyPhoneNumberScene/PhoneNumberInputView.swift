@@ -8,7 +8,9 @@
 import UIKit
 
 class PhoneNumberInputView: UIView {
+    
     private var phoneNumberTextFieldIsActive = true
+    
     private var phoneEditButtonTrailingConstraint: NSLayoutConstraint!
     
     private lazy var phoneNumberTextFieldView: UIView = {
@@ -19,6 +21,7 @@ class PhoneNumberInputView: UIView {
         return view
     }()
     
+    // TODO: переделать после того как появится текстфилд с вводом номера телефона
     private lazy var phoneNumberTextField: UITextField = {
         let textField = UITextField()
         textField.isEnabled = false
@@ -70,9 +73,7 @@ class PhoneNumberInputView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension PhoneNumberInputView {
+    
     private func setupLayout() {
         addSubview(phoneNumberTextFieldView)
         addSubview(phoneEditButton)

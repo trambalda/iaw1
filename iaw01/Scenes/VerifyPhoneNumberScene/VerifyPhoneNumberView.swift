@@ -92,9 +92,7 @@ class VerifyPhoneNumberView: UIView {
     deinit {
         NotificationCenter.unregisterKeyboardNotifications(self)
     }
-}
-
-extension VerifyPhoneNumberView {
+    
     private func setupLayout() {
         let newCodeOuterStackView = UIStackView()
         newCodeOuterStackView.axis = .vertical

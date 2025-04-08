@@ -11,6 +11,8 @@ class VerifyPhoneNumberViewController: UIViewController {
     
     private lazy var verifyPhoneNumberView: VerifyPhoneNumberView = {
         let view = VerifyPhoneNumberView(frame: UIScreen.main.bounds)
+        view.onVerifyButtonTapped = { print("Verify button tapped") }
+        view.onGetNewCodeButtonTapped = { print("\"Get a new one\" button tapped") }
         return view
     }()
     
@@ -21,8 +23,6 @@ class VerifyPhoneNumberViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .light100
-        verifyPhoneNumberView.onVerifyButtonTapped = { print("Verify button tapped") }
-        verifyPhoneNumberView.onGetNewCodeButtonTapped = { print("\"Get a new one\" button tapped") }
     }
     
     override func viewDidAppear(_ animated: Bool) {

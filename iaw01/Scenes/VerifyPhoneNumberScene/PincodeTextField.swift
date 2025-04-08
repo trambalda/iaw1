@@ -8,6 +8,7 @@
 import UIKit
 
 class PincodeTextField: UITextField {
+    
     weak var previousTextField: UITextField?
     
     override func deleteBackward() {

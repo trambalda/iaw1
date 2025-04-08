@@ -8,6 +8,7 @@
 import UIKit
 
 class PincodeInputView: UIView {
+    
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 15
@@ -51,6 +52,10 @@ class PincodeInputView: UIView {
             .allSatisfy { $0.text.notNilNotEmpty }
     }
     
+    func firstTextFieldBecomeFirstResponder() {
+        (stackView.arrangedSubviews.first as? PincodeTextField)?.becomeFirstResponder()
+    }
+    
     private func setupLayoutAndConstraints() {
         addSubview(stackView)
         
@@ -60,10 +65,6 @@ class PincodeInputView: UIView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-    }
-    
-    func firstTextFieldBecomeFirstResponder() {
-        (stackView.arrangedSubviews.first as? PincodeTextField)?.becomeFirstResponder()
     }
     
     private func addTapGestureForStartPincodeInput() {
@@ -79,7 +80,6 @@ class PincodeInputView: UIView {
     
     private func resetPincode() {
         guard isPincodeFilled else {
-            firstTextFieldBecomeFirstResponder()
             return
         }
         
@@ -107,13 +107,10 @@ extension PincodeInputView: UITextFieldDelegate {
         replacementString string: String
     ) -> Bool {
         
-        let currentText = textField.text ?? ""
-        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        
-        if newText.isEmpty {
+        if string.isEmpty {
             textField.text = ""
         } else {
-            textField.text = newText
+            textField.text = string
             if let nextTextField = findTextField(with: textField.tag + 1) {
                 nextTextField.isUserInteractionEnabled = true
                 nextTextField.becomeFirstResponder()
