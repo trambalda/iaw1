@@ -10,7 +10,14 @@ struct RestaurantModel {
     let typeOfFood: String
     let menu: [MenuModel]
     
-    static let empty = RestaurantModel(image: nil, logo: nil, title: "", location: "", rating: "", time: "", typeOfFood: "", menu: [])
+    static let empty = RestaurantModel(image: UIImage(systemName: "photo"),
+                                       logo: UIImage(systemName: "photo"),
+                                       title: "Название ресторана",
+                                       location: "Адрес ресторана",
+                                       rating: "Нет данных",
+                                       time: "Нет данных",
+                                       typeOfFood: "Нет данных",
+                                       menu: [])
 }
 
 extension RestaurantModel {

@@ -27,7 +27,7 @@ final class HeaderView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 20
-        stackView.alignment = .center
+        stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -98,7 +98,7 @@ final class HeaderView: UIView {
     }
     
     private func adjustForSmallScreens() {
-        if UIScreen.main.bounds.height < 670 {
+        if Constans.isSE {
             imageView.isHidden = true
             restaurantInfoView.isHidden = true
             headerImageViewHeightConstraint.constant = 0

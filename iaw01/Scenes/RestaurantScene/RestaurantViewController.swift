@@ -16,7 +16,7 @@ final class RestaurantViewController: UIViewController {
         setupNavigationBar()
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         let backButton = UIButton(type: .system)
         var backButtonConfig = UIButton.Configuration.plain()
         backButtonConfig.image = .arrowLeft
