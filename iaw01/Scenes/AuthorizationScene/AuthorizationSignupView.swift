@@ -1,20 +1,11 @@
-//
-//  AuthorizationSignupView.swift
-//  iaw01
-//
-//  Created by Дария Акатова on 29.03.2025.
-//
-
 import UIKit
-
-//Во второй будут текстфилды name, номер телефона, создать пароль, вью регистрации через соцсети.
-//То есть это отдельные вью, которые тут просто инитятся и добавляются в containerView, и переключаются через альфу.
 
 class AuthorizationSignupView: UIStackView {
     
-    private let socialButtons = AuthorizationSocialButtonsView()
     private let nameTextField = StringTextField(with: .nameStyle)
+    private let phoneNumberTextField = StringTextField(with: .phoneNumberStyle)
     private let createPasswordTextField = StringTextField(with: .createPasswordStyle)
+    private let socialButtons = AuthorizationSocialButtonsView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,11 +24,19 @@ class AuthorizationSignupView: UIStackView {
     
     private func setupLayout() {
         addArrangedSubview(nameTextField)
+        addArrangedSubview(phoneNumberTextField)
         addArrangedSubview(createPasswordTextField)
         addArrangedSubview(socialButtons)
         
         setCustomSpacing(26, after: nameTextField)
+        setCustomSpacing(26, after: phoneNumberTextField)
         setCustomSpacing(37, after: createPasswordTextField)
-        
     }
+}
+
+extension StringTextFieldStyle {
+    static let phoneNumberStyle = StringTextFieldStyle(
+        title: "Phone Number",
+        placeholder: "+1  |  000 000 0000",
+        behavior: .string)
 }

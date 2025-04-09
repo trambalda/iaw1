@@ -1,10 +1,3 @@
-//
-//  AuthorizationSocialNetworkButtonsView.swift
-//  iaw01
-//
-//  Created by Дария Акатова on 19.03.2025.
-//
-
 import UIKit
 
 class AuthorizationSocialButtonsView: UIStackView {
@@ -31,11 +24,6 @@ class AuthorizationSocialButtonsView: UIStackView {
     
     private func createButton(imageName: String) -> UIButton {
         let button = UIButton(type: .custom)
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 35.5
-        button.layer.borderWidth = 1.5
-        button.layer.borderColor = UIColor.light60.cgColor
-        button.clipsToBounds = true
         let image = UIImage(named: imageName)
         button.setImage(image, for: .normal)
         return button
@@ -83,7 +71,8 @@ class AuthorizationSocialButtonsView: UIStackView {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             separatorLineView.heightAnchor.constraint(equalToConstant: 1),
-            separatorLineView.widthAnchor.constraint(equalToConstant: 219),
+            separatorStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            separatorStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             googleButton.widthAnchor.constraint(equalToConstant: 71),
             googleButton.heightAnchor.constraint(equalToConstant: 71),
             appleButton.widthAnchor.constraint(equalToConstant: 71),
@@ -91,4 +80,3 @@ class AuthorizationSocialButtonsView: UIStackView {
         ])
     }
 }
-

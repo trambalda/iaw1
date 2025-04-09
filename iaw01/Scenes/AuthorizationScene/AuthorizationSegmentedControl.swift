@@ -1,10 +1,3 @@
-//
-//  AuthorizationSegmentedControl.swift
-//  iaw01
-//
-//  Created by Дария Акатова on 19.03.2025.
-//
-
 import UIKit
 
 class AuthorizationSegmentedControl: UIView {

@@ -1,13 +1,14 @@
-//
-//  AuthorizationView.swift
-//  iaw01
-//
-//  Created by Дария Акатова on 14.03.2025.
-//
-
 import UIKit
 
 class AuthorizationView: UIView {
+    
+    public let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.showsHorizontalScrollIndicator = false
+        return scroll
+    }()
+    
     private let titleView = AuthorizationTitleView()
     
     private lazy var segmentedControl: AuthorizationSegmentedControl = {
@@ -17,6 +18,15 @@ class AuthorizationView: UIView {
         }
         return control
     }()
+    
+    private let contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let containerView = UIView()
     
     private let loginView: AuthorizationLoginView = {
         let view = AuthorizationLoginView()
@@ -28,15 +38,6 @@ class AuthorizationView: UIView {
         let view = AuthorizationSignupView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    private let containerView = UIView()
-    
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
     }()
     
     override init(frame: CGRect) {
@@ -75,26 +76,35 @@ class AuthorizationView: UIView {
     }
     
     private func setupLayout() {
-        addSubview(stackView)
-        stackView.addArrangedSubview(titleView)
-        stackView.addArrangedSubview(segmentedControl)
-        stackView.addArrangedSubview(containerView)
+        addSubview(scrollView)
+        scrollView.addSubview(contentStackView)
+        contentStackView.addArrangedSubview(titleView)
+        contentStackView.addArrangedSubview(segmentedControl)
+        contentStackView.addArrangedSubview(containerView)
         containerView.addSubview(loginView)
         containerView.addSubview(signupView)
         
-        stackView.setCustomSpacing(21, after: titleView)
-        stackView.setCustomSpacing(24, after: segmentedControl)
+        contentStackView.setCustomSpacing(21, after: titleView)
+        contentStackView.setCustomSpacing(24, after: segmentedControl)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
+            scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+            
+            contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             loginView.topAnchor.constraint(equalTo: containerView.topAnchor),
             loginView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             loginView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            loginView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             
             signupView.topAnchor.constraint(equalTo: containerView.topAnchor),
             signupView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),

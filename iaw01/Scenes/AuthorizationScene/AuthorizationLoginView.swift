@@ -1,25 +1,11 @@
-//
-//  AuthorizationLoginView.swift
-//  iaw01
-//
-//  Created by Дария Акатова on 29.03.2025.
-//
-
 import UIKit
-
-//В первой будут текстфилды емайл, пароль, кнока забыл пароль, вью авторизации через соцсети.
-//То есть это отдельные вью, которые тут просто инитятся и добавляются в containerView, и переключаются через альфу.
 
 class AuthorizationLoginView: UIStackView {
     
     private let socialButtons = AuthorizationSocialButtonsView()
     private let emailTextField = StringTextField(with: .emailStyle)
     private let passwordTextField = StringTextField(with: .passwordStyle)
-    
-    private let forgotPasswordButton: LinkButton = {
-        let button = LinkButton(style: .forgotPassword)
-        return button
-    }()
+    private let forgotPasswordButton = LinkButton(style: .forgotPassword)
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -58,4 +44,5 @@ class AuthorizationLoginView: UIStackView {
         setCustomSpacing(15, after: passwordTextField)
         setCustomSpacing(38, after: stackView)
     }
+
 }
