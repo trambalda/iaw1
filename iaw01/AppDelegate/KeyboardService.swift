@@ -55,18 +55,12 @@ final class KeyboardService: KeyboardServiceProtocol {
               let window = viewController.view.window else { return }
 
         let viewBounds = activeView.convert(activeView.bounds, to: window)
-        let viewBottom = viewBounds.maxY
-        let keyboardTop = window.frame.height - keyboardHeight - 20
-        let newOffset = keyboardTop - viewBottom - 20
+        let viewBottom = viewBounds.midY
+        let keyboardTop = window.frame.height - keyboardHeight
+        let newOffset = keyboardTop - viewBottom - 120
+        let newY = viewController.view.transform.ty + newOffset
 
-        guard newOffset != currentOffset else { return }
-        let newY = viewController.view.transform.ty + (newOffset - currentOffset)
-
-        UIView.animate(
-            withDuration: 0.3,
-            delay: 0,
-            options: [.curveEaseInOut]
-        ) {
+        UIView.animate(withDuration: 0.3) {
             viewController.view.transform = CGAffineTransform(translationX: 0, y: newY)
             self.currentOffset = newOffset
         }

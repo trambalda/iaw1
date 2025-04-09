@@ -10,7 +10,7 @@ extension SceneModel {
         [
             SceneModel(sceneType: .textFiedsScene, parameters: [:]),
             SceneModel(sceneType: .cornersButtonsScene, parameters: [:]),
-            SceneModel(sceneType: .keyboardScene, parameters: [:])
+            SceneModel(sceneType: .keyboardScene, parameters: [:]),
             SceneModel(sceneType: .verifyPhoneNumberScene, parameters: [:]),
         ]
     }
