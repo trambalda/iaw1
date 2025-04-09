@@ -34,6 +34,8 @@ final class AppCoordinator {
         parent?.pushViewController(vc, animated: true)
     }
     
+    func showVerifyPhoneNumberScene(from parent: UINavigationController?) {
+        let vc = factory.createVerifyPhoneNumberScene()
     func showRestaurantViewController(from parent: UINavigationController?) {
         let vc = factory.createRestaurantScene()
         parent?.pushViewController(vc, animated: true)

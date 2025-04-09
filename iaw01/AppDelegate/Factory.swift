@@ -24,6 +24,8 @@ final class Factory {
         return vc
     }
     
+    func createVerifyPhoneNumberScene() -> VerifyPhoneNumberViewController {
+        let vc = VerifyPhoneNumberViewController()
     func createRestaurantScene() -> RestaurantViewController {
         let vc = RestaurantViewController()
         return vc
