@@ -17,11 +17,6 @@ enum SceneType {
 
 extension SceneType: CaseIterable {
     static var allCases: [SceneType] {
-        [
-            .textFiedsScene,
-            .cornersButtonsScene,
-            .verifyPhoneNumberScene,
-        ]
-        return [.textFiedsScene, .cornersButtonsScene, .restaurantScene]
+        return [.textFiedsScene, .cornersButtonsScene, .verifyPhoneNumberScene, .restaurantScene]
     }
 }
