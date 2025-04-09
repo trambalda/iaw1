@@ -6,28 +6,25 @@ final class RootTabBarView: UIView {
     var item: RootTabBarItem
     var onTap: ((RootTabBarView) -> Void)?
 
-    private lazy var container: UIView = {
+    private let container: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         view.isUserInteractionEnabled = true
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToTab)))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private lazy var image: UIImageView = {
+    private let image: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        image.image = item.image
         image.tintColor = .black
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
 
-    private lazy var title: UILabel = {
+    private let title: UILabel = {
         let title = UILabel()
         title.textColor = .dark100
-        title.text = item.title
         title.font = UIFont(name: Font.Family.everettRegular.title, size: 12)
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
@@ -37,6 +34,7 @@ final class RootTabBarView: UIView {
         self.item = item
         super.init(frame: .zero)
 
+        setupUI()
         setupLayout()
         setupConstraints()
     }
@@ -63,10 +61,19 @@ final class RootTabBarView: UIView {
         onTap?(self)
     }
 
+    private func setupUI() {
+        container.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(tapToTab))
+        )
+
+        image.image = item.image
+        title.text = item.title
+    }
+
     private func setupLayout() {
+        addSubview(container)
         container.addSubview(image)
         container.addSubview(title)
-        addSubview(container)
     }
 
     private func setupConstraints() {

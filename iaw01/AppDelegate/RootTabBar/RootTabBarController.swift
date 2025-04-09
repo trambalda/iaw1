@@ -8,16 +8,16 @@ final class RootTabBarController: UITabBarController {
 
     var factory: Factory
 
-    private var indicatorCenterConstraint: NSLayoutConstraint?
+    private var indicatorViewCenterXConstraint: NSLayoutConstraint?
     private lazy var tabBarControllers: [UINavigationController] = [
         UINavigationController(rootViewController: factory.createDummyScene()),
-        UINavigationController(rootViewController: factory.createCornersButtonsScene()),
-        UINavigationController(rootViewController: factory.createTextFieldsScene()),
         UINavigationController(rootViewController: factory.createDummyScene()),
-        UINavigationController(rootViewController: factory.createTextFieldsScene()),
+        UINavigationController(rootViewController: factory.createDummyScene()),
+        UINavigationController(rootViewController: factory.createDummyScene()),
+        UINavigationController(rootViewController: factory.createDummyScene()),
     ]
 
-    private lazy var backgroundView: UIView = {
+    private let backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .light80
@@ -25,7 +25,7 @@ final class RootTabBarController: UITabBarController {
         return view
     }()
 
-    private lazy var stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.alignment = .center
@@ -33,7 +33,7 @@ final class RootTabBarController: UITabBarController {
         return stack
     }()
 
-    private lazy var indicatorView: UIView = {
+    private let indicatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .dark100
@@ -69,23 +69,18 @@ final class RootTabBarController: UITabBarController {
 
     private func setupTabBarPages(pages: [RootTabBarItem]) {
         for page in pages {
-            let isFirstPage = page == pages.first
             let tabBarItem = createTabBarItem(item: page)
 
             stackView.addArrangedSubview(tabBarItem)
-            let tabView = RootTabBarView(item: page)
-            tabView.verticalAnimation(isUp: true)
         }
 
-
+        if let firstPage = stackView.arrangedSubviews.first as? RootTabBarView {
+            firstPage.verticalAnimation(isUp: true)
+        }
     }
 
-    private func createTabBarItem(item: RootTabBarItem) -> UIView {
+    private func createTabBarItem(item: RootTabBarItem) -> RootTabBarView {
         let tabView = RootTabBarView(item: item)
-
-//        if isFirst {
-//            tabView.verticalAnimation(isUp: true)
-//        }
 
         tabView.onTap = { [weak self] selectedItem in
             guard let self else { return }
@@ -103,27 +98,29 @@ final class RootTabBarController: UITabBarController {
     }
 
     private func animateIndicator(to item: UIView) {
-        let newConstraint = indicatorView.centerXAnchor.constraint(equalTo: item.centerXAnchor)
-        indicatorCenterConstraint?.isActive = false
-
-        indicatorCenterConstraint = newConstraint
-        indicatorCenterConstraint?.isActive = true
+        indicatorViewCenterXConstraint?.isActive = false
+        indicatorViewCenterXConstraint = indicatorView.centerXAnchor.constraint(equalTo: item.centerXAnchor)
+        indicatorViewCenterXConstraint?.isActive = true
 
         UIView.animate(
             withDuration: 0.3,
             delay: 0,
             usingSpringWithDamping: 0.8,
-            initialSpringVelocity: 0.5, options: [.curveEaseInOut]) {
-                self.view.layoutIfNeeded()
-            }
+            initialSpringVelocity: 0.5,
+            options: [.curveEaseInOut]
+        ){
+            self.view.layoutIfNeeded()
+        }
     }
 
     private func setupConstraints() {
-        let firstItem = stackView.arrangedSubviews.first!
         let stackTopAnchor: CGFloat = Constans.isSE ? 11 : 16
 
-        indicatorCenterConstraint = indicatorView.centerXAnchor.constraint(equalTo: firstItem.centerXAnchor)
-        indicatorCenterConstraint?.isActive = true
+        indicatorViewCenterXConstraint = indicatorView.centerXAnchor.constraint(
+            equalTo: stackView.arrangedSubviews.first!.centerXAnchor
+        )
+
+        indicatorViewCenterXConstraint?.isActive = true
 
         NSLayoutConstraint.activate([
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
