@@ -9,6 +9,13 @@ final class RootTabBarController: UITabBarController {
     var factory: Factory
 
     private var indicatorCenterConstraint: NSLayoutConstraint?
+    private lazy var tabBarControllers: [UINavigationController] = [
+        UINavigationController(rootViewController: factory.createDummyScene()),
+        UINavigationController(rootViewController: factory.createCornersButtonsScene()),
+        UINavigationController(rootViewController: factory.createTextFieldsScene()),
+        UINavigationController(rootViewController: factory.createDummyScene()),
+        UINavigationController(rootViewController: factory.createTextFieldsScene()),
+    ]
 
     private lazy var backgroundView: UIView = {
         let view = UIView()
@@ -48,7 +55,7 @@ final class RootTabBarController: UITabBarController {
         tabBar.isHidden = true
 
         setupTabBarPages(pages: RootTabBarItem.allCases)
-        setViewControllers(setupViewControllers(factory: factory), animated: true)
+        setViewControllers(tabBarControllers, animated: true)
 
         setupLayout()
         setupConstraints()
@@ -60,31 +67,25 @@ final class RootTabBarController: UITabBarController {
         view.addSubview(indicatorView)
     }
 
-    private func setupViewControllers(factory: Factory) -> [UINavigationController] {
-        [
-            UINavigationController(rootViewController: factory.createDummyScene()),
-            UINavigationController(rootViewController: factory.createCornersButtonsScene()),
-            UINavigationController(rootViewController: factory.createTextFieldsScene()),
-            UINavigationController(rootViewController: factory.createDummyScene()),
-            UINavigationController(rootViewController: factory.createTextFieldsScene()),
-        ]
-    }
-
     private func setupTabBarPages(pages: [RootTabBarItem]) {
         for page in pages {
             let isFirstPage = page == pages.first
-            let tabBarItem = createTabBarItem(item: page, isFirst: isFirstPage)
+            let tabBarItem = createTabBarItem(item: page)
 
             stackView.addArrangedSubview(tabBarItem)
-        }
-    }
-
-    private func createTabBarItem(item: RootTabBarItem, isFirst: Bool) -> UIView {
-        let tabView = RootTabBarView(item: item)
-
-        if isFirst {
+            let tabView = RootTabBarView(item: page)
             tabView.verticalAnimation(isUp: true)
         }
+
+
+    }
+
+    private func createTabBarItem(item: RootTabBarItem) -> UIView {
+        let tabView = RootTabBarView(item: item)
+
+//        if isFirst {
+//            tabView.verticalAnimation(isUp: true)
+//        }
 
         tabView.onTap = { [weak self] selectedItem in
             guard let self else { return }
