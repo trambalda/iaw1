@@ -9,17 +9,8 @@ final class RestaurantHeaderView: UIStackView {
         }
     }
     
-    private let restaurantLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.name.font
-        return label
-    }()
-    
-    private let locationLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.body.font
-        return label
-    }()
+    private let restaurantLabel = UILabel()
+    private let locationLabel = UILabel()
     
     private let restaurantImage: UIImageView = {
         let image = UIImageView()

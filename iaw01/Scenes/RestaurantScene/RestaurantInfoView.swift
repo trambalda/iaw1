@@ -9,23 +9,9 @@ final class RestaurantInfoView: UIView {
         }
     }
     
-    private let ratingLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.info.font
-        return label
-    }()
-    
-    private let timeLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.info.font
-        return label
-    }()
-    
-    private let typeOfFoodLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.info.font
-        return label
-    }()
+    private let ratingLabel = UILabel()
+    private let timeLabel = UILabel()
+    private let typeOfFoodLabel = UILabel()
     
     private let ratingImage: UIImageView = {
         let image = UIImageView(image: .star)

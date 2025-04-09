@@ -13,7 +13,14 @@ final class RestaurantViewController: UIViewController {
         restaurantView.filtersView.menuTimeView.delegate = self
         restaurantView.scrollView.delegate = self
         restaurantView.model = model
+        setupTableView()
         setupNavigationBar()
+    }
+    
+    private func setupTableView() {
+        restaurantView.tableView.delegate = self
+        restaurantView.tableView.dataSource = self
+        restaurantView.tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: ItemTableViewCell.identifier)
     }
     
     private func setupNavigationBar() {
@@ -108,4 +115,18 @@ extension RestaurantViewController: MenuTimeViewDelegate {
     func didSelectMenu(_ menu: MenuModel) {
             
     }
+}
+
+extension RestaurantViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.menu.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.identifier, for: indexPath) as? ItemTableViewCell else { return UITableViewCell() }
+        
+        //cell.model = model.menu[indexPath.row]
+        return cell
+    }
+    
 }

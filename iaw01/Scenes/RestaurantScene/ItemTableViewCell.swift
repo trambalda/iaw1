@@ -1,12 +1,14 @@
 import UIKit
 
 final class ItemTableViewCell: UITableViewCell {
+    static let identifier = "ItemTableViewCell"
+    
     var model: MenuItemListModel = .empty {
         didSet {
-            foodImage.image = model.foodImage ?? UIImage(systemName: "photo")
-            nameLabel.text = model.foodTitle ?? "No title"
-            oldPriceLabel.text = model.oldPrice ?? ""
-            newPriceLabel.text = model.newPrice ?? "No price"
+            foodImage.image = model.foodImage
+            nameLabel.attributedText = Font.body.compose(model.foodTitle)
+            oldPriceLabel.attributedText = Font.body.compose(model.oldPrice)    //change font
+            newPriceLabel.attributedText = Font.body.compose(model.newPrice)    //change font
         }
     }
     
@@ -26,25 +28,9 @@ final class ItemTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.body.font
-        return label
-    }()
-    
-    // Исправить потом шрифт
-    private let oldPriceLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.body.font
-        return label
-    }()
-    
-    // Исправить потом шрифт
-    private let newPriceLabel: UILabel = {
-        let label = UILabel()
-        label.font = Font.body.font
-        return label
-    }()
+    private let nameLabel = UILabel()
+    private let oldPriceLabel = UILabel()
+    private let newPriceLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

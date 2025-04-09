@@ -10,7 +10,13 @@ final class RestaurantView: UIView {
     
     let headerView = HeaderView()
     let filtersView = FiltersView()
-    let menuItemListView = MenuItemListView()
+    //let menuItemListView = MenuItemListView()
+    
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -45,7 +51,7 @@ final class RestaurantView: UIView {
     private func setupLayout() {
         contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(filtersView)
-        contentStack.addArrangedSubview(menuItemListView)
+        contentStack.addArrangedSubview(tableView)
         scrollView.addSubview(contentStack)
         addSubview(scrollView)
     }
