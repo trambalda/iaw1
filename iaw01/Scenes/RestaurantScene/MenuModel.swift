@@ -1,6 +1,7 @@
 import UIKit
 
 struct MenuModel {
+    
     let title: String
     let categories: [String]
     
@@ -8,6 +9,7 @@ struct MenuModel {
 }
 
 extension MenuModel {
+    
     static let mock : [MenuModel] = [
         MenuModel(title: "Breakfast Menu",
                   categories: ["Pancakes", "Omelettes", "Coffee", "Juices"]),

@@ -1,10 +1,12 @@
 import UIKit
 
 protocol MenuTimeViewDelegate: AnyObject {
+    
     func didSelectMenu(_ menu: MenuModel)
 }
 
 final class MenuTimeView: UIView {
+    
     weak var delegate: MenuTimeViewDelegate?
     
     private let scrollView: UIScrollView = {

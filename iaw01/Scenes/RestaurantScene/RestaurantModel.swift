@@ -1,6 +1,7 @@
 import UIKit
 
 struct RestaurantModel {
+    
     let image: UIImage?
     let logo: UIImage?
     let title: String
@@ -21,6 +22,7 @@ struct RestaurantModel {
 }
 
 extension RestaurantModel {
+    
     static let mock = RestaurantModel(image: .restaurant,
                                       logo: .logo,
                                       title: "McDonald's",

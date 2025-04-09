@@ -1,6 +1,7 @@
 import UIKit
 
 struct MenuItemListModel {
+    
     let foodImage: UIImage?
     let foodTitle: String
     let oldPrice: String
@@ -13,6 +14,7 @@ struct MenuItemListModel {
 }
 
 extension MenuItemListModel {
+    
     static let mock = MenuItemListModel(foodImage: .burgersmall,
                                         foodTitle: "Classic Cheese Hamburger (400 Cals)",
                                         oldPrice: "5.80",

@@ -1,6 +1,7 @@
 import UIKit
 
 final class HeaderView: UIView {
+    
     var model: RestaurantModel = .empty {
         didSet {
             imageView.image = model.image
@@ -15,7 +16,7 @@ final class HeaderView: UIView {
     var headerImageViewHeightConstraint: NSLayoutConstraint!
     var restaurantInfoViewHeightConstraint: NSLayoutConstraint!
     
-    private var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -27,7 +28,6 @@ final class HeaderView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 20
-        stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -62,15 +62,15 @@ final class HeaderView: UIView {
     }
     
     private func setupLayout() {
-        restaurantStack.addArrangedSubview(restaurantHeaderView)
-        restaurantStack.addArrangedSubview(restaurantInfoView)
-    
-        viewContainer.addSubview(restaurantStack)
-    
+        addSubview(mainStack)
+        
         mainStack.addArrangedSubview(imageView)
         mainStack.addArrangedSubview(viewContainer)
         
-        addSubview(mainStack)
+        viewContainer.addSubview(restaurantStack)
+        
+        restaurantStack.addArrangedSubview(restaurantHeaderView)
+        restaurantStack.addArrangedSubview(restaurantInfoView)
     }
     
     private func setupConstraints() {
@@ -98,15 +98,35 @@ final class HeaderView: UIView {
     }
     
     private func adjustForSmallScreens() {
-        if Constans.isSE {
+        guard !Constans.isSE else {
             imageView.isHidden = true
             restaurantInfoView.isHidden = true
-            headerImageViewHeightConstraint.constant = 0
-            restaurantInfoViewHeightConstraint.constant = 0
-            
-            UIView.animate(withDuration: 0.3) {
-                self.layoutIfNeeded()
-            }
+            return
         }
     }
 }
+
+/* РЕАЛИЗОВАТЬ ПОЗЖЕ ВО ВЬЮ
+ 
+ extension RestaurantViewController: UIScrollViewDelegate {
+     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+         let offset = scrollView.contentOffset.y
+         
+         let newHeaderImageViewHeightConstraint = max(164 - offset, 0)
+         let newRestaurantInfoViewHeightConstraint = max(109 - offset / 2, 0)
+         
+         restaurantView.headerView.headerImageViewHeightConstraint.constant = newHeaderImageViewHeightConstraint
+         restaurantView.headerView.restaurantInfoViewHeightConstraint.constant = newRestaurantInfoViewHeightConstraint
+         
+         if newHeaderImageViewHeightConstraint == 0 {
+             restaurantView.headerView.restaurantHeaderView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
+             restaurantView.filtersView.menuTimeView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
+             restaurantView.filtersView.menuCategoryView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
+         } else {
+             restaurantView.headerView.restaurantHeaderView.transform = .identity
+             restaurantView.filtersView.menuTimeView.transform = .identity
+             restaurantView.filtersView.menuCategoryView.transform = .identity
+         }
+     }
+ }
+ */

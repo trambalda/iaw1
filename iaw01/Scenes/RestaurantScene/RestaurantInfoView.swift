@@ -1,6 +1,7 @@
 import UIKit
 
 final class RestaurantInfoView: UIView {
+    
     var model: RestaurantModel = .empty {
         didSet {
             ratingLabel.attributedText = Font.info.compose("Ratings: \(model.rating)")
@@ -64,7 +65,6 @@ final class RestaurantInfoView: UIView {
     private func configure() {
         backgroundColor = .light60
         layer.cornerRadius = 10
-        translatesAutoresizingMaskIntoConstraints = false
         setupLayout()
         setupConstraints()
     }
@@ -88,20 +88,14 @@ final class RestaurantInfoView: UIView {
         let ratingStack = UIStackView()
         ratingStack.spacing = 8
         ratingStack.alignment = .bottom
-        ratingStack.addArrangedSubview(ratingImage)
-        ratingStack.addArrangedSubview(ratingLabel)
         
         let timeStack = UIStackView()
         timeStack.spacing = 8
         timeStack.alignment = .bottom
-        timeStack.addArrangedSubview(timeImage)
-        timeStack.addArrangedSubview(timeLabel)
         
         let typeOfFoodStack = UIStackView()
         typeOfFoodStack.spacing = 8
         typeOfFoodStack.alignment = .bottom
-        typeOfFoodStack.addArrangedSubview(typeOfFoodImage)
-        typeOfFoodStack.addArrangedSubview(typeOfFoodLabel)
         
         let infoStack = UIStackView()
         infoStack.axis = .vertical
@@ -111,10 +105,18 @@ final class RestaurantInfoView: UIView {
         infoStack.addArrangedSubview(timeStack)
         infoStack.addArrangedSubview(typeOfFoodStack)
         
-        mainStack.addArrangedSubview(infoStack)
-        mainStack.addArrangedSubview(infoButton)
-        
         addSubview(mainStack)
+        mainStack.addArrangedSubview(infoStack)
+        infoStack.addArrangedSubview(ratingStack)
+        ratingStack.addArrangedSubview(ratingImage)
+        ratingStack.addArrangedSubview(ratingLabel)
+        infoStack.addArrangedSubview(timeStack)
+        timeStack.addArrangedSubview(timeImage)
+        timeStack.addArrangedSubview(timeLabel)
+        infoStack.addArrangedSubview(typeOfFoodStack)
+        typeOfFoodStack.addArrangedSubview(typeOfFoodImage)
+        typeOfFoodStack.addArrangedSubview(typeOfFoodLabel)
+        mainStack.addArrangedSubview(infoButton)
     }
     
     private func setupConstraints() {

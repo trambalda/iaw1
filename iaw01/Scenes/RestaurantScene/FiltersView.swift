@@ -1,6 +1,7 @@
 import UIKit
 
 final class FiltersView: UIView {
+    
     var model: RestaurantModel = .empty {
         didSet {
             menuTimeView.configure(with: model.menu)
@@ -24,10 +25,11 @@ final class FiltersView: UIView {
         filtersStack.axis = .vertical
         filtersStack.spacing = 18
         filtersStack.translatesAutoresizingMaskIntoConstraints = false
-        filtersStack.addArrangedSubview(menuTimeView)
-        filtersStack.addArrangedSubview(menuCategoryView)
         
         addSubview(filtersStack)
+        
+        filtersStack.addArrangedSubview(menuTimeView)
+        filtersStack.addArrangedSubview(menuCategoryView)
         
         NSLayoutConstraint.activate([
             filtersStack.topAnchor.constraint(equalTo: topAnchor),

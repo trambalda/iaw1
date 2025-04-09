@@ -1,6 +1,7 @@
 import UIKit
 
 final class ItemTableViewCell: UITableViewCell {
+    
     static let identifier = "ItemTableViewCell"
     
     var model: MenuItemListModel = .empty {
@@ -41,24 +42,44 @@ final class ItemTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /*
+     mainStack
+        itemStack
+            foodImage
+            infoStack
+                nameLabel
+                priceStack
+                    oldPriceLabel
+                    newPriceLabel
+        arrowImage
+     */
+    
     private func setupLayoutAndConstraints() {
-        let priceStack = UIStackView(arrangedSubviews: [oldPriceLabel, newPriceLabel])
+        let priceStack = UIStackView()
         priceStack.spacing = 9
         
-        let infoStack = UIStackView(arrangedSubviews: [nameLabel, priceStack])
+        let infoStack = UIStackView()
         infoStack.axis = .vertical
         infoStack.alignment = .leading
         infoStack.spacing = 1
         
-        let itemStack = UIStackView(arrangedSubviews: [foodImage, infoStack])
+        let itemStack = UIStackView()
         itemStack.spacing = 10
         
-        let mainStack = UIStackView(arrangedSubviews: [itemStack, arrowImage])
+        let mainStack = UIStackView()
         mainStack.distribution = .equalSpacing
         mainStack.alignment = .center
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(mainStack)
+        mainStack.addArrangedSubview(itemStack)
+        itemStack.addArrangedSubview(foodImage)
+        itemStack.addArrangedSubview(infoStack)
+        infoStack.addArrangedSubview(nameLabel)
+        infoStack.addArrangedSubview(priceStack)
+        priceStack.addArrangedSubview(oldPriceLabel)
+        priceStack.addArrangedSubview(newPriceLabel)
+        mainStack.addArrangedSubview(arrowImage)
         
         NSLayoutConstraint.activate([
             mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

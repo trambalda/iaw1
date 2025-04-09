@@ -1,18 +1,20 @@
 import UIKit
 
 final class RestaurantViewController: UIViewController {
+    
     private let restaurantView = RestaurantView()
     private let model = RestaurantModel.mock
     
     override func loadView() {
         view = restaurantView
+        restaurantView.filtersView.menuTimeView.delegate = self
+        restaurantView.scrollView.delegate = self
+        restaurantView.model = model
+        self.view = view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        restaurantView.filtersView.menuTimeView.delegate = self
-        restaurantView.scrollView.delegate = self
-        restaurantView.model = model
         setupTableView()
         setupNavigationBar()
     }
@@ -58,15 +60,18 @@ final class RestaurantViewController: UIViewController {
         
         let rightStack = UIStackView(arrangedSubviews: [moreButton, searchButton, shoppingBagButton])
         rightStack.alignment = .center
+        rightStack.spacing = 28
         
-        let screenHeight = UIScreen.main.bounds.height
-        if screenHeight < 670 {
+        /* РЕАЛИЗОВАТЬ ПОЗЖЕ
+         
+        if Constans.isSE {
             rightStack.spacing = 16
         } else if screenHeight < 800 {
             rightStack.spacing = 24
         } else {
             rightStack.spacing = 32
         }
+        */
         
         let rightBarButtonItem = UIBarButtonItem(customView: rightStack)
         navigationItem.rightBarButtonItem = rightBarButtonItem
@@ -86,28 +91,6 @@ final class RestaurantViewController: UIViewController {
     
     @objc private func shoppingBagButtonTapped() {
         
-    }
-}
-
-extension RestaurantViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-        
-        let newHeaderImageViewHeightConstraint = max(164 - offset, 0)
-        let newRestaurantInfoViewHeightConstraint = max(109 - offset / 2, 0)
-        
-        restaurantView.headerView.headerImageViewHeightConstraint.constant = newHeaderImageViewHeightConstraint
-        restaurantView.headerView.restaurantInfoViewHeightConstraint.constant = newRestaurantInfoViewHeightConstraint
-        
-        if newHeaderImageViewHeightConstraint == 0 {
-            restaurantView.headerView.restaurantHeaderView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-            restaurantView.filtersView.menuTimeView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-            restaurantView.filtersView.menuCategoryView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-        } else {
-            restaurantView.headerView.restaurantHeaderView.transform = .identity
-            restaurantView.filtersView.menuTimeView.transform = .identity
-            restaurantView.filtersView.menuCategoryView.transform = .identity
-        }
     }
 }
 

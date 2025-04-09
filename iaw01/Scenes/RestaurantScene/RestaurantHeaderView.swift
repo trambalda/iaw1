@@ -1,6 +1,7 @@
 import UIKit
 
 final class RestaurantHeaderView: UIStackView {
+    
     var model: RestaurantModel = .empty {
         didSet {
             restaurantImage.image = model.logo
@@ -55,18 +56,15 @@ final class RestaurantHeaderView: UIStackView {
     }
     
     private func configure() {
-        axis = .horizontal
         spacing = 22
         alignment = .top
-        distribution = .fill
-        translatesAutoresizingMaskIntoConstraints = false
         
         setupLayout()
         setupConstraints()
     }
     
     /*
-     RestaurantHeaderView
+     mainStack
         restaurantStack
             restaurantImage
             infoStack
@@ -81,26 +79,25 @@ final class RestaurantHeaderView: UIStackView {
         let locationStack = UIStackView()
         locationStack.spacing = 4
         locationStack.alignment = .leading
-        locationStack.addArrangedSubview(locationImage)
-        locationStack.addArrangedSubview(locationLabel)
         
         let infoStack = UIStackView()
         infoStack.axis = .vertical
         infoStack.spacing = 2
         infoStack.alignment = .leading
-        infoStack.addArrangedSubview(restaurantLabel)
-        infoStack.addArrangedSubview(locationStack)
         
         let restaurantStack = UIStackView()
         restaurantStack.spacing = 15
         restaurantStack.alignment = .center
+       
+        addArrangedSubview(mainStack)
+        mainStack.addArrangedSubview(restaurantStack)
         restaurantStack.addArrangedSubview(restaurantImage)
         restaurantStack.addArrangedSubview(infoStack)
-        
-        mainStack.addArrangedSubview(restaurantStack)
+        infoStack.addArrangedSubview(restaurantLabel)
+        infoStack.addArrangedSubview(locationStack)
+        locationStack.addArrangedSubview(locationImage)
+        locationStack.addArrangedSubview(locationLabel)
         mainStack.addArrangedSubview(favoriteButton)
-        
-        addArrangedSubview(mainStack)
     }
     
     private func setupConstraints() {

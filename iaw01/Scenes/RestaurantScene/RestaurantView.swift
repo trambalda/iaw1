@@ -1,6 +1,7 @@
 import UIKit
 
 final class RestaurantView: UIView {
+    
     var model: RestaurantModel = .mock {
         didSet {
             headerView.model = model
@@ -49,11 +50,11 @@ final class RestaurantView: UIView {
     }
     
     private func setupLayout() {
+        addSubview(scrollView)
+        scrollView.addSubview(contentStack)
         contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(filtersView)
         contentStack.addArrangedSubview(tableView)
-        scrollView.addSubview(contentStack)
-        addSubview(scrollView)
     }
     
     private func setupConstraints() {
