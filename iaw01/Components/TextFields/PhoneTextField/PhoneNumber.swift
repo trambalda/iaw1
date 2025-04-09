@@ -5,8 +5,13 @@ struct PhoneNumber {
     let countryCode: String?
     
     var fullNumber: String? {
-        guard let number = number, let countryCode = countryCode else { return nil }
-        return countryCode + number
+        guard let number = number else { return "" }
+        
+        if let countryCode = countryCode {
+            return countryCode + number
+        } else {
+            return number
+        }
     }
 }
 

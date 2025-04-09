@@ -2,7 +2,17 @@ import UIKit
 
 final class PhonePrefixView: UIView {
     
-    private weak var parentView: PhoneTextField?
+    var onCountryPickerToggle: (() -> Void)?
+    
+    var onCountryCodeChanged: ((String) -> Void)?
+    
+    var countryCode: CountryCodeModel? {
+        didSet {
+            guard let countryCode = countryCode else { return }
+            flagLabel.text = countryCode.flag
+            phonePrefixTextField.attributedText = Font.body.compose(countryCode.code, color: .dark100)
+        }
+    }
     
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
@@ -53,8 +63,7 @@ final class PhonePrefixView: UIView {
         return view
     }()
 
-    init(parent: PhoneTextField?) {
-        self.parentView = parent
+    init() {
         super.init(frame: .zero)
         setupLayout()
         setupConstraints()
@@ -63,14 +72,6 @@ final class PhonePrefixView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    var selectedCountry: CountryCodeModel? {
-        didSet {
-            guard let country = selectedCountry else { return }
-            flagLabel.text = country.flag
-            phonePrefixTextField.attributedText = Font.body.compose(country.code, color: .dark100)
-        }
     }
     
     private func setupLayout() {
@@ -111,20 +112,26 @@ final class PhonePrefixView: UIView {
         CountryCodeModel.countryCodes.first
         
         if let defaultCountry {
-            selectedCountry = defaultCountry
+            countryCode = defaultCountry
             DispatchQueue.main.async {
-                self.parentView?.updatePhonePrefix(with: defaultCountry.code)
+                self.onCountryCodeChanged?(defaultCountry.code)
             }
         }
     }
-
+    
     @objc private func showPicker() {
-        parentView?.toggleCountryPicker()
+        onCountryPickerToggle?()
     }
-
+    
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text, !text.isEmpty else { return }
-        parentView?.updatePhonePrefix(with: text)
+        
+        if let country = CountryCodeModel.countryCodes.first(where: { $0.code == text }) {
+            countryCode = country
+        } else {
+            countryCode = .makeUnmappedCode(code: text)
+        }
+        onCountryCodeChanged?(text)
     }
 }
 
@@ -141,9 +148,9 @@ extension PhonePrefixView: UITextFieldDelegate {
             return false
         }
         
-        let shouldChange = newText.count <= CountryCodeModel.maxCountryCodeLength
+        let shouldChange = newText.count <= CountryCodeModel.maxLength
         
-        if newText.count == CountryCodeModel.maxCountryCodeLength {
+        if newText.count == CountryCodeModel.maxLength {
             DispatchQueue.main.async {
                 textField.resignFirstResponder()
             }

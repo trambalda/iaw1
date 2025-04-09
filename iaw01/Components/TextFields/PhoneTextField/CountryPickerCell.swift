@@ -2,6 +2,16 @@ import UIKit
 
 final class CountryPickerCell: UITableViewCell {
     
+    static let cellIdentifier = "CountryPickerCell"
+    
+    var country: CountryCodeModel? {
+        didSet {
+            guard let country = country else { return }
+            countryFlagLabel.text = country.flag
+            countryCodeLable.text = country.code
+        }
+    }
+    
     private let flagAndCodeStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -9,10 +19,7 @@ final class CountryPickerCell: UITableViewCell {
         return stack
     }()
     
-    private let countryFlagLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    private let countryFlagLabel = UILabel()
     
     private let countryCodeLable: UILabel = {
         let label = UILabel()
@@ -39,10 +46,5 @@ final class CountryPickerCell: UITableViewCell {
             flagAndCodeStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             flagAndCodeStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13),
         ])
-    }
-    
-    func configure(with country: CountryCodeModel) {
-        countryFlagLabel.text = country.flag
-        countryCodeLable.text = country.code
     }
 }

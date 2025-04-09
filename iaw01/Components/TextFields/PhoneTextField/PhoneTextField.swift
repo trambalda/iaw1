@@ -9,15 +9,13 @@ final class PhoneTextField: UIStackView {
         set { textField.text = newValue }
     }
     
+    var phoneNumber: PhoneNumber {
+        PhoneNumber(number: textField.text, countryCode: phonePrefixView.countryCode?.code)
+    }
+    
     private weak var parent: UIView?
     
-    private lazy var phonePrefixView = PhonePrefixView(parent: self)
-    
-    private var phonePrefix: String = ""
-    
-    private var currentMask: String = ""
-    
-    private var currentPlaceholder: String = ""
+    private lazy var phonePrefixView = PhonePrefixView()
     
     private var currentConstraints: [NSLayoutConstraint] = []
     
@@ -51,10 +49,6 @@ final class PhoneTextField: UIStackView {
         let view = CountryPickerView()
         view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.onCountrySelected = { [weak self] country in
-            self?.phonePrefixView.selectedCountry = country
-            self?.refreshPhoneField(for: country)
-        }
         return view
     }()
     
@@ -65,6 +59,7 @@ final class PhoneTextField: UIStackView {
         setupLayout()
         setupConstraints()
         configureField(baseStyle: TextFieldBaseStyle())
+        setupCallbacks()
     }
     
     required init(coder: NSCoder) {
@@ -79,31 +74,12 @@ final class PhoneTextField: UIStackView {
         textField.resignFirstResponder()
     }
     
-    var phoneNumber: PhoneNumber {
-        PhoneNumber(number: textField.text, countryCode: phonePrefix)
-    }
-    
     func toggleCountryPicker() {
         if countryPickerView.isHidden {
             showPickerView()
         } else {
             hidePickerView()
         }
-    }
-    
-    func updatePhonePrefix(with code: String) {
-        phonePrefix = code
-        
-        if let country = CountryCodeModel.countryCodes.first(where: { $0.code == code }) {
-            currentMask = country.mask
-            currentPlaceholder = country.placeholder
-            phonePrefixView.selectedCountry = country
-        } else {
-            currentMask = CountryCodeModel.defaultMask
-            phonePrefixView.selectedCountry = nil
-        }
-        
-        updatePlaceholder()
     }
 
     private func setupStackViewProperties() {
@@ -135,7 +111,6 @@ final class PhoneTextField: UIStackView {
     }
     
     private func configureField(baseStyle: TextFieldBaseStyle) {
-        
         textField.autocapitalizationType = baseStyle.autocapitalizationType
         textField.textColor = baseStyle.textColor
         textField.backgroundColor = baseStyle.backgroundColor
@@ -146,26 +121,39 @@ final class PhoneTextField: UIStackView {
         )
     }
     
+    private func setupCallbacks() {
+        countryPickerView.onCountrySelected = { [weak self] country in
+            self?.phonePrefixView.countryCode = country
+            self?.refreshPhoneField(for: country)
+            self?.updatePlaceholder()
+        }
+        
+        phonePrefixView.onCountryPickerToggle = { [weak self] in
+            self?.toggleCountryPicker()
+        }
+        
+        phonePrefixView.onCountryCodeChanged = { [weak self] prefix in
+            self?.updatePlaceholder()
+        }
+    }
+    
     private func updatePlaceholder() {
         let baseStyle = TextFieldBaseStyle()
         textField.attributedPlaceholder = baseStyle.fontFamily.compose(
-            currentPlaceholder,
+            phonePrefixView.countryCode?.placeholder ?? "",
             color: baseStyle.placeholderColor
         )
     }
     
     private func refreshPhoneField(for country: CountryCodeModel) {
-        phonePrefix = country.code
-        currentMask = country.mask
-        currentPlaceholder = country.placeholder
-        
-        updatePlaceholder()
-        
+        phonePrefixView.countryCode = country
+
         if let text = textField.text {
             let digitsOnly = text.filter { $0.isNumber }
-            textField.text = applyMask(for: digitsOnly, with: currentMask)
+            textField.text = applyMask(for: digitsOnly, with: country.mask)
         }
-        
+
+        updatePlaceholder()
         textField.becomeFirstResponder()
     }
     
@@ -195,10 +183,10 @@ final class PhoneTextField: UIStackView {
             countryPickerView.isHidden = false
         }
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3) {
             self.countryPickerView.alpha = visible ? 1 : 0
             self.countryPickerView.transform = visible ? .identity : CGAffineTransform(translationX: 0, y: 20)
-        }) { _ in
+        } completion: { _ in
             if !visible {
                 self.countryPickerView.isHidden = true
                 self.countryPickerView.transform = .identity
@@ -226,7 +214,6 @@ final class PhoneTextField: UIStackView {
                 countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11)
             ]
             
-            //думаю нужно не волшебное 200, а как-то сделать: нижняя точка текстфилда + высота таблицы и получать верзнюю точку таббара и хватает ли места
             if textField.isFirstResponder || textFieldFrame.maxY + 200 > visibleHeight {
                 constraints.append(countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor))
             } else {
@@ -262,15 +249,16 @@ extension PhoneTextField: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let rawText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
         let digits = rawText.filter { $0.isNumber }
-        
-        let formattedText = applyMask(for: digits, with: currentMask)
+
+        let formattedText = applyMask(for: digits, with: phonePrefixView.countryCode?.mask ?? "")
         textField.text = formattedText
-        
-        let maxPhoneLength = currentMask.filter { $0 == "#" }.count
-        
-        if digits.count >= maxPhoneLength {
-            textFieldShouldReturn?()
+
+        if let maxPhoneLength = phonePrefixView.countryCode?.mask.filter({ $0 == "#" }).count {
+            if digits.count >= maxPhoneLength {
+                textFieldShouldReturn?()
+            }
         }
+
         return false
     }
 }

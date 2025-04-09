@@ -1,53 +1,32 @@
 import UIKit
 
-final class CountryPickerView: UIView {
+final class CountryPickerView: UITableView {
     
     var onCountrySelected: ((CountryCodeModel) -> Void)?
     
     private let phoneCountries = CountryCodeModel.countryCodes
     
-    private lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.register(CountryPickerCell.self, forCellReuseIdentifier: "CountryPickerCell")
-        table.rowHeight = 40
-        table.backgroundColor = .light80
-        table.showsVerticalScrollIndicator = false
-        table.dataSource = self
-        table.delegate = self
-        return table
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupLayout()
-        setupConstraints()
-        configureView()
+    init() {
+        super.init(frame: .zero, style: .plain)
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func setupLayout() {
-        addSubview(tableView)
-    }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-        ])
-    }
-    
-    private func configureView() {
+
+    private func configure() {
+        translatesAutoresizingMaskIntoConstraints = false
+        rowHeight = 40
+        backgroundColor = .light80
+        showsVerticalScrollIndicator = false
+        dataSource = self
+        delegate = self
         layer.cornerRadius = 16
         layer.borderColor = UIColor.light60.cgColor
         layer.borderWidth = 1
         layer.masksToBounds = true
+        register(CountryPickerCell.self, forCellReuseIdentifier: CountryPickerCell.cellIdentifier)
     }
 }
 
@@ -57,13 +36,12 @@ extension CountryPickerView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CountryPickerCell", for: indexPath) as? CountryPickerCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryPickerCell.cellIdentifier, for: indexPath) as? CountryPickerCell
         else {
             return UITableViewCell()
         }
         
-        let country = phoneCountries[indexPath.row]
-        cell.configure(with: country)
+        cell.country = phoneCountries[indexPath.row]
         return cell
     }
 }
@@ -71,10 +49,10 @@ extension CountryPickerView: UITableViewDataSource {
 extension CountryPickerView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         onCountrySelected?(phoneCountries[indexPath.row])
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3) {
             self.transform = CGAffineTransform(translationX: 0, y: 20)
             self.alpha = 0
-        }) { _ in
+        } completion: { _ in
             self.isHidden = true
             self.transform = .identity
             self.alpha = 1

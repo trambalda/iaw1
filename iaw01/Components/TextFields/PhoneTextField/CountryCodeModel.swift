@@ -7,16 +7,31 @@ struct CountryCodeModel {
     let mask: String
     let placeholder: String
     
-    static var maxCountryCodeLength = CountryCodeModel.countryCodes.map { $0.code.count }.max()!
+    static var maxLength = CountryCodeModel.countryCodes.map { $0.code.count }.max()!
     
-    static let defaultMask = "(##)##-##-##"
+    static func makeUnmappedCode(code: String) -> CountryCodeModel {
+        return CountryCodeModel(
+            region: "",
+            flag: "",
+            code: code,
+            mask: "(###)###-####",
+            placeholder: "(000)000-0000"
+        )
+    }
     
     static let countryCodes: [CountryCodeModel] = [
         CountryCodeModel(region: "US", flag: "🇺🇸", code: "+1", mask: "(###)###-####", placeholder: "(000)000-0000"),
         CountryCodeModel(region: "RU", flag: "🇷🇺", code: "+7", mask: "(###)###-##-##", placeholder: "(000)000-00-00"),
         CountryCodeModel(region: "BY", flag: "🇧🇾", code: "+375", mask: "(##)###-##-##", placeholder: "(00)000-00-00"),
-        CountryCodeModel(region: "US", flag: "🇺🇸", code: "+1", mask: "(###)###-####", placeholder: "(000)000-0000"),
-        CountryCodeModel(region: "RU", flag: "🇷🇺", code: "+7", mask: "(###)###-##-##", placeholder: "(000)000-00-00"),
-        CountryCodeModel(region: "BY", flag: "🇧🇾", code: "+375", mask: "(##)###-##-##", placeholder: "(00)000-00-00"),
+        CountryCodeModel(region: "GB", flag: "🇬🇧", code: "+44", mask: "#### ### ####", placeholder: "0000 000 0000"),
+        CountryCodeModel(region: "DE", flag: "🇩🇪", code: "+49", mask: "#### ########", placeholder: "0000 00000000"),
+        CountryCodeModel(region: "FR", flag: "🇫🇷", code: "+33", mask: "# ## ## ## ##", placeholder: "0 00 00 00 00"),
+        CountryCodeModel(region: "IT", flag: "🇮🇹", code: "+39", mask: "### #######", placeholder: "000 0000000"),
+        CountryCodeModel(region: "ES", flag: "🇪🇸", code: "+34", mask: "### ### ###", placeholder: "000 000 000"),
+        CountryCodeModel(region: "CN", flag: "🇨🇳", code: "+86", mask: "### #### ####", placeholder: "000 0000 0000"),
+        CountryCodeModel(region: "IN", flag: "🇮🇳", code: "+91", mask: "#####-#####", placeholder: "00000-00000"),
+        CountryCodeModel(region: "JP", flag: "🇯🇵", code: "+81", mask: "##-####-####", placeholder: "00-0000-0000"),
+        CountryCodeModel(region: "BR", flag: "🇧🇷", code: "+55", mask: "(##)#####-####", placeholder: "(00)00000-0000"),
+        CountryCodeModel(region: "AU", flag: "🇦🇺", code: "+61", mask: "#### ### ###", placeholder: "0000 000 000")
     ]
 }
