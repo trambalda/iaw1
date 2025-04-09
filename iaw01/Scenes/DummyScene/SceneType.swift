@@ -4,11 +4,14 @@ enum SceneType {
     case cornersButtonsScene
     case keyboardScene
 
+    case verifyPhoneNumberScene
+    
     var title: String {
         switch self {
         case .textFiedsScene: "TextFieds Scene"
         case .cornersButtonsScene: "CornersButtons Scene"
         case .keyboardScene: "Keyboard Scene"
+        case .verifyPhoneNumberScene: "VerifyPhoneNumber Scene"
         }
     }
 }
@@ -16,5 +19,10 @@ enum SceneType {
 extension SceneType: CaseIterable {
     static var allCases: [SceneType] {
         return [.textFiedsScene, .cornersButtonsScene, .keyboardScene]
+        [
+            .textFiedsScene,
+            .cornersButtonsScene,
+            .verifyPhoneNumberScene,
+        ]
     }
 }

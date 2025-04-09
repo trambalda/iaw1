@@ -26,6 +26,9 @@ final class Factory {
 
     func createKeyboardServiceScene() -> KeyboardServiceViewController {
         let vc = KeyboardServiceViewController()
+    
+    func createVerifyPhoneNumberScene() -> VerifyPhoneNumberViewController {
+        let vc = VerifyPhoneNumberViewController()
         return vc
     }
 }

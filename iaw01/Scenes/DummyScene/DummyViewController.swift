@@ -34,6 +34,8 @@ final class DummyViewController: UIViewController {
             appCoordinator?.showCornersButtonsScene(from: navigationController)
         case .keyboardScene:
             appCoordinator?.showKeyboardServiceScene(from: navigationController)
+        case .verifyPhoneNumberScene:
+            appCoordinator?.showVerifyPhoneNumberScene(from: navigationController)
         }
     }
 }

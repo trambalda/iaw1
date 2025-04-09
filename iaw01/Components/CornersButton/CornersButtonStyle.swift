@@ -35,8 +35,8 @@ extension CornersButtonStyle {
         textColor: .light100,
         iconPosition: .left,
         title: "Verify and Continue",
-        icon: UIImage(named: "tickCircle")
-    )    
+        icon: UIImage(named: "transpCircle")
+    )
 
     static let locationButton = CornersButtonStyle(
         backgroundColor: .blue100,
