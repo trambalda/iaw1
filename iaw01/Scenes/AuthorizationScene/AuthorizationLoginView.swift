@@ -2,9 +2,13 @@ import UIKit
 
 class AuthorizationLoginView: UIStackView {
     
+    var loginTextFields: [StringTextField] {
+        return [emailTextField, passwordTextField]
+    }
+    
     private let socialButtons = AuthorizationSocialButtonsView()
     private let emailTextField = StringTextField(with: .emailStyle)
-    private let passwordTextField = StringTextField(with: .passwordStyle)
+    private let passwordTextField = StringTextField(with: .passwordStyle, isLastField: true)
     private let forgotPasswordButton = LinkButton(style: .forgotPassword)
     
     private let stackView: UIStackView = {
@@ -25,14 +29,10 @@ class AuthorizationLoginView: UIStackView {
     }
     
     private func configure() {
-        setupStackView()
+        axis = .vertical
         setupLayout()
     }
-    
-    private func setupStackView() {
-        axis = .vertical
-    }
-    
+
     private func setupLayout() {
         addArrangedSubview(emailTextField)
         addArrangedSubview(passwordTextField)
@@ -44,5 +44,15 @@ class AuthorizationLoginView: UIStackView {
         setCustomSpacing(15, after: passwordTextField)
         setCustomSpacing(38, after: stackView)
     }
+}
 
+extension AuthorizationLoginView {
+    func getModel() -> AuthorizationModel {
+        return AuthorizationModel(
+            email: emailTextField.text ?? "",
+            password: passwordTextField.text ?? "",
+            name: nil,
+            phone: nil
+        )
+    }
 }

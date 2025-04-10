@@ -3,6 +3,7 @@ import UIKit
 final class StringTextField: UIStackView {
     
     var textFieldShouldReturn: (() -> Void)?
+    var onTextChanged: ((String) -> Void)?
     
     var text: String? {
         get { textField.text }
@@ -49,12 +50,12 @@ final class StringTextField: UIStackView {
         return button
     }()
     
-    init(with style: StringTextFieldStyle) {
+    init(with style: StringTextFieldStyle, isLastField: Bool = false) {
         super.init(frame: .zero)
         setupStackViewProperties()
         setupLayout()
         setupConstraints()
-        configureField(with: style)
+        configureField(with: style, isLastField: isLastField)
     }
     
     required init(coder: NSCoder) {
@@ -97,7 +98,7 @@ final class StringTextField: UIStackView {
         ])
     }
     
-    private func configureField(with style: StringTextFieldStyle) {
+    private func configureField(with style: StringTextFieldStyle, isLastField: Bool) {
         let baseStyle = TextFieldBaseStyle()
 
         textField.autocapitalizationType = baseStyle.autocapitalizationType
@@ -118,13 +119,16 @@ final class StringTextField: UIStackView {
         textField.isSecureTextEntry = style.behavior.isSecure
         textField.keyboardType = style.behavior.keyboardType
         textField.rightViewMode = .whileEditing
-        
+        textField.returnKeyType = isLastField ? .go : .next
+
         switch style.behavior {
         case .password:
             textField.rightView = showPassword
         case .string, .email:
             textField.rightView = clearButton
         }
+        
+        textField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
     }
 
     @objc private func clearButtonTapped() {
@@ -135,6 +139,10 @@ final class StringTextField: UIStackView {
         textField.isSecureTextEntry.toggle()
         let image: UIImage = textField.isSecureTextEntry ? .eye : .closedEye
         showPassword.setImage(image, for: .normal)
+    }
+    
+    @objc private func textFieldEditingChanged(_ sender: UITextField) {
+        onTextChanged?(sender.text ?? "")
     }
 }
 

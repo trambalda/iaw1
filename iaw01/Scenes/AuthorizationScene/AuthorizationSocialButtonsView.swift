@@ -55,6 +55,7 @@ class AuthorizationSocialButtonsView: UIStackView {
         distribution = .equalSpacing
         setupLayout()
         setupConstraints()
+        setupActions()
     }
     
     private func setupLayout() {
@@ -66,6 +67,23 @@ class AuthorizationSocialButtonsView: UIStackView {
         addArrangedSubview(socialButtonStackView)
         
         setCustomSpacing(28, after: separatorStackView)
+    }
+    
+    private func setupActions() {
+        googleButton.addTarget(self, action: #selector(didTapGoogleButton), for: .touchUpInside)
+        appleButton.addTarget(self, action: #selector(didTapAppleButton), for: .touchUpInside)
+    }
+    
+    @objc private func didTapGoogleButton() {
+        if let url = URL(string: "https://accounts.google.com/InteractiveLogin") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    @objc private func didTapAppleButton() {
+        if let url = URL(string: "https://account.apple.com") {
+            UIApplication.shared.open(url)
+        }
     }
     
     private func setupConstraints() {

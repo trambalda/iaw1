@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02101C0D2DA84EA600ADF6A5 /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02101C0C2DA84EA600ADF6A5 /* AuthorizationModel.swift */; };
 		029039C82D999414008973F2 /* AuthorizationLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029039C72D999414008973F2 /* AuthorizationLoginView.swift */; };
 		029039CA2D999429008973F2 /* AuthorizationSignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029039C92D999429008973F2 /* AuthorizationSignupView.swift */; };
 		02B31D3F2D8C4DE800EC9031 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D3D2D8C4DE800EC9031 /* AuthorizationViewController.swift */; };
@@ -34,6 +35,13 @@
 		21AA4B742D8180A80086697C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B732D8180A80086697C /* Font.swift */; };
 		21AA4B762D81828D0086697C /* aeonik-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B752D81828D0086697C /* aeonik-medium.otf */; };
 		21AA4B7C2D81880A0086697C /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B7B2D81880A0086697C /* Factory.swift */; };
+		3F45F97D2D8A15BF005BD993 /* PincodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F45F97C2D8A15BF005BD993 /* PincodeInputView.swift */; };
+		3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */; };
+		3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */; };
+		3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */; };
+		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
+		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
+		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
 		869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
 		8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
 		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
@@ -47,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02101C0C2DA84EA600ADF6A5 /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
 		029039C72D999414008973F2 /* AuthorizationLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationLoginView.swift; sourceTree = "<group>"; };
 		029039C92D999429008973F2 /* AuthorizationSignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignupView.swift; sourceTree = "<group>"; };
 		02B31D3C2D8C4DE800EC9031 /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
@@ -77,6 +86,13 @@
 		21AA4B752D81828D0086697C /* aeonik-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "aeonik-medium.otf"; sourceTree = "<group>"; };
 		21AA4B7B2D81880A0086697C /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		21AA4B7D2D818F380086697C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3F45F97C2D8A15BF005BD993 /* PincodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PincodeInputView.swift; sourceTree = "<group>"; };
+		3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PincodeTextField.swift; sourceTree = "<group>"; };
+		3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberViewController.swift; sourceTree = "<group>"; };
+		3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
+		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
+		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
+		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
 		869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
 		869875462D8860E600C7BA58 /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
 		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
@@ -110,6 +126,7 @@
 				029039C72D999414008973F2 /* AuthorizationLoginView.swift */,
 				029039C92D999429008973F2 /* AuthorizationSignupView.swift */,
 				02B31D472D8C797C00EC9031 /* AuthorizationSocialButtonsView.swift */,
+				02101C0C2DA84EA600ADF6A5 /* AuthorizationModel.swift */,
 			);
 			path = AuthorizationScene;
 			sourceTree = "<group>";
@@ -176,6 +193,7 @@
 				21AA4B772D8186400086697C /* AppDelegate */,
 				21AA4B7A2D8187800086697C /* Scenes */,
 				1FCF129C2D8953B400386458 /* Components */,
+				3F9CC6012D9193AE0079DA39 /* Extensions */,
 				21AA4B792D81872E0086697C /* Configuration */,
 			);
 			path = iaw01;
@@ -247,11 +265,41 @@
 			isa = PBXGroup;
 			children = (
 				02B31D3E2D8C4DE800EC9031 /* AuthorizationScene */,
+				3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */,
 				D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 				869875442D8860DF00C7BA58 /* TextFieldsScene */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */ = {
+			isa = PBXGroup;
+			children = (
+				3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */,
+				3F93A85A2DA565B300118948 /* Views */,
+			);
+			path = VerifyPhoneNumberScene;
+			sourceTree = "<group>";
+		};
+		3F93A85A2DA565B300118948 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */,
+				3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */,
+				3F45F97C2D8A15BF005BD993 /* PincodeInputView.swift */,
+				3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3F9CC6012D9193AE0079DA39 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
+				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		869875442D8860DF00C7BA58 /* TextFieldsScene */ = {
@@ -371,7 +419,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
+				3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
+				3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				029039C82D999414008973F2 /* AuthorizationLoginView.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
@@ -381,14 +431,19 @@
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				02B31D422D8C78AD00EC9031 /* AuthorizationTitleView.swift in Sources */,
 				02B31D442D8C793300EC9031 /* AuthorizationSegmentedControl.swift in Sources */,
+				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
+				3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
+				3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */,
 				CE02B8532D933581000C0557 /* LinkButton.swift in Sources */,
 				CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */,
 				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
+				3F45F97D2D8A15BF005BD993 /* PincodeInputView.swift in Sources */,
+				3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
 				02B31D3F2D8C4DE800EC9031 /* AuthorizationViewController.swift in Sources */,
 				02B31D402D8C4DE800EC9031 /* AuthorizationView.swift in Sources */,
@@ -402,6 +457,7 @@
 				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
 				029039CA2D999429008973F2 /* AuthorizationSignupView.swift in Sources */,
+				02101C0D2DA84EA600ADF6A5 /* AuthorizationModel.swift in Sources */,
 				02B31D482D8C797C00EC9031 /* AuthorizationSocialButtonsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
