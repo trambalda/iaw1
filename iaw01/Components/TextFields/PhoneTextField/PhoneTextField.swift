@@ -4,13 +4,21 @@ final class PhoneTextField: UIStackView {
     
     var textFieldShouldReturn: (() -> Void)?
     
-    var text: String? {
-        get { textField.text }
-        set { textField.text = newValue }
-    }
-    
     var phoneNumber: PhoneNumber {
-        PhoneNumber(number: textField.text, countryCode: phonePrefixView.countryCode?.code)
+        get {
+            PhoneNumber(number: textField.text, countryCode: phonePrefixView.countryCode)
+        }
+        set {
+            textField.text = newValue.number
+            
+            if let country = newValue.countryCode {
+                phonePrefixView.countryCode = country
+            } else {
+                phonePrefixView.countryCode = .default
+            }
+            
+            updatePlaceholder()
+        }
     }
     
     private weak var parent: UIView?
@@ -76,6 +84,7 @@ final class PhoneTextField: UIStackView {
     
     func toggleCountryPicker() {
         if countryPickerView.isHidden {
+            becomeTextFieldFirstResponder()
             showPickerView()
         } else {
             hidePickerView()
@@ -197,32 +206,28 @@ final class PhoneTextField: UIStackView {
     private func showPickerView() {
         parent?.addSubview(countryPickerView)
         
-        if let parentView = parent {
-            let textFieldFrame = convert(bounds, to: nil)
-            var visibleHeight = parentView.bounds.height
-            
-            if let scrollView = parentView as? UIScrollView {
-                visibleHeight += scrollView.contentOffset.y
-            }
-
-            NSLayoutConstraint.deactivate(currentConstraints)
-            currentConstraints.removeAll()
-            
-            var constraints: [NSLayoutConstraint] = [
-                countryPickerView.heightAnchor.constraint(equalToConstant: 160),
-                countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11)
-            ]
-            
-            if textField.isFirstResponder || textFieldFrame.maxY + 200 > visibleHeight {
-                constraints.append(countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor))
-            } else {
-                constraints.append(countryPickerView.topAnchor.constraint(equalTo: containerView.bottomAnchor))
-            }
-            
-            currentConstraints = constraints
-            NSLayoutConstraint.activate(currentConstraints)
+        let textFieldFrame = convert(bounds, to: nil)
+        
+        let pickerHeight: CGFloat = 160
+        
+        NSLayoutConstraint.deactivate(currentConstraints)
+        currentConstraints.removeAll()
+        
+        var constraints: [NSLayoutConstraint] = [
+            countryPickerView.heightAnchor.constraint(equalToConstant: pickerHeight),
+            countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11)
+        ]
+        
+        let spaceAbove = textFieldFrame.minY
+        if spaceAbove >= pickerHeight + 20 {
+            constraints.append(countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor))
+        } else {
+            constraints.append(countryPickerView.topAnchor.constraint(equalTo: containerView.bottomAnchor))
         }
+        
+        currentConstraints = constraints
+        NSLayoutConstraint.activate(currentConstraints)
         
         animatePickerView(visible: true)
     }

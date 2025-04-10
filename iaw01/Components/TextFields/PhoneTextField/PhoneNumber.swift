@@ -2,17 +2,18 @@ import Foundation
 
 struct PhoneNumber {
     let number: String?
-    let countryCode: String?
+    let countryCode: CountryCodeModel?
     
-    var fullNumber: String? {
+    var fullNumber: String {
         guard let number = number else { return "" }
-        
-        if let countryCode = countryCode {
-            return countryCode + number
+        if let code = countryCode?.code {
+            return code + number
         } else {
             return number
         }
     }
+    
+    static let `default` = PhoneNumber(number: nil, countryCode: .default)
 }
 
 

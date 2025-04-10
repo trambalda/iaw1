@@ -19,7 +19,6 @@ final class CountryPickerView: UITableView {
         translatesAutoresizingMaskIntoConstraints = false
         rowHeight = 40
         backgroundColor = .light80
-        showsVerticalScrollIndicator = false
         dataSource = self
         delegate = self
         layer.cornerRadius = 16

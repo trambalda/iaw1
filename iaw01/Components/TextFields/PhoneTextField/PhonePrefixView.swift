@@ -6,9 +6,9 @@ final class PhonePrefixView: UIView {
     
     var onCountryCodeChanged: ((String) -> Void)?
     
-    var countryCode: CountryCodeModel? {
+    var countryCode: CountryCodeModel? = .default {
         didSet {
-            guard let countryCode = countryCode else { return }
+            guard let countryCode else { return }
             flagLabel.text = countryCode.flag
             phonePrefixTextField.attributedText = Font.body.compose(countryCode.code, color: .dark100)
         }
@@ -67,7 +67,6 @@ final class PhonePrefixView: UIView {
         super.init(frame: .zero)
         setupLayout()
         setupConstraints()
-        setupDefaultCountry()
     }
     
     required init?(coder: NSCoder) {
@@ -106,19 +105,6 @@ final class PhonePrefixView: UIView {
         ])
     }
     
-    private func setupDefaultCountry() {
-        let regionCode = Locale.current.region?.identifier
-        let defaultCountry = CountryCodeModel.countryCodes.first(where: { $0.region == regionCode }) ??
-        CountryCodeModel.countryCodes.first
-        
-        if let defaultCountry {
-            countryCode = defaultCountry
-            DispatchQueue.main.async {
-                self.onCountryCodeChanged?(defaultCountry.code)
-            }
-        }
-    }
-    
     @objc private func showPicker() {
         onCountryPickerToggle?()
     }
@@ -129,7 +115,7 @@ final class PhonePrefixView: UIView {
         if let country = CountryCodeModel.countryCodes.first(where: { $0.code == text }) {
             countryCode = country
         } else {
-            countryCode = .makeUnmappedCode(code: text)
+            countryCode = CountryCodeModel(code: text)
         }
         onCountryCodeChanged?(text)
     }

@@ -59,8 +59,9 @@ final class TextFieldsViewController: UIViewController {
     
     private lazy var phoneTextField: PhoneTextField = {
         let textField = PhoneTextField(parent: self.view)
+        textField.phoneNumber = .default
         textField.textFieldShouldReturn = {
-            print("Phone Number: \(textField.phoneNumber.fullNumber ?? "")")
+            print("Phone Number: \(textField.phoneNumber.fullNumber)")
             textField.resignTextFieldFirstResponder()
         }
         return textField
