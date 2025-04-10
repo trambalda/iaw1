@@ -1,34 +1,11 @@
 import UIKit
 
 class MealImageView: UIView {
-
-    private lazy var mealImageStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 1
-        stack.alignment = .center
-        stack.distribution = .equalSpacing
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
     
-    private lazy var burgherImage: UIImageView = {
-        let image = UIImageView(image: UIImage(resource: .burgher))
+    private lazy var mealImage: UIImageView = {
+        let image = UIImageView(image: UIImage(resource: .meal))
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        image.layer.zPosition = 2
-        return image
-    }()
-    
-    private lazy var friesImage: UIImageView = {
-        let image = UIImageView(image: UIImage(resource: .frenchFries))
-        image.contentMode = .scaleAspectFit
-        image.layer.zPosition = 1
-        return image
-    }()
-    
-    private lazy var drinkImage: UIImageView = {
-        let image = UIImageView(image: UIImage(resource: .drink))
-        image.contentMode = .scaleAspectFit
-        image.layer.zPosition = 3
         return image
     }()
     
@@ -43,24 +20,16 @@ class MealImageView: UIView {
     }
     
     private func setupLayout() {
-        addSubview(mealImageStackView)
-        mealImageStackView.addArrangedSubview(burgherImage)
-        mealImageStackView.addArrangedSubview(friesImage)
-        mealImageStackView.addArrangedSubview(drinkImage)
-        
-        mealImageStackView.setCustomSpacing(-20, after: burgherImage)
-        mealImageStackView.setCustomSpacing(-20, after: friesImage)
-        
+        addSubview(mealImage)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mealImageStackView.heightAnchor.constraint(equalToConstant: 198),
-            mealImageStackView.widthAnchor.constraint(equalToConstant: 438),
-            mealImageStackView.topAnchor.constraint(equalTo: topAnchor),
-            mealImageStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            mealImageStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            mealImageStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            heightAnchor.constraint(equalToConstant: 198),
+            widthAnchor.constraint(equalToConstant: 428),
+            
+            mealImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mealImage.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }

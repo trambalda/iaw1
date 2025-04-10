@@ -2,18 +2,14 @@ import UIKit
 
 class MealDescriptionView: UIView {
     
+    private lazy var mealImageView = MealImageView()
+    
     private lazy var mealStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 6
-        stack.distribution = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
-    }()
-    
-    private lazy var mealImageView: MealImageView = {
-        let view = MealImageView()
-        return view
     }()
     
     private lazy var mealNameLabel: UILabel = {
@@ -25,10 +21,21 @@ class MealDescriptionView: UIView {
         return label
     }()
     
+    private var mealCaloriesStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 4
+        return stack
+    }()
+    
     private lazy var mealCaloriesLabel: UILabel = {
         let label = UILabel()
         label.attributedText = Font.note.compose("340-400 Cals", color: .dark60)
         return label
+    }()
+    
+    private lazy var mealCaloriesImage: UIImageView = {
+        let image = UIImageView(image: UIImage(resource: .infoCircle))
+        return image
     }()
     
     override init(frame: CGRect) {
@@ -42,9 +49,18 @@ class MealDescriptionView: UIView {
     }
     
     private func setupLayout() {
+        let newCodeOuterStackView = UIStackView()
+        newCodeOuterStackView.axis = .vertical
+        newCodeOuterStackView.alignment = .leading
+        
+        mealCaloriesStackView.addArrangedSubview(mealCaloriesLabel)
+        mealCaloriesStackView.addArrangedSubview(mealCaloriesImage)
+        
         mealStackView.addArrangedSubview(mealImageView)
         mealStackView.addArrangedSubview(mealNameLabel)
-        mealStackView.addArrangedSubview(mealCaloriesLabel)
+        mealStackView.addArrangedSubview(newCodeOuterStackView)
+        newCodeOuterStackView.addArrangedSubview(mealCaloriesStackView)
+        
         addSubview(mealStackView)
     }
     

@@ -14,6 +14,13 @@ class MealView: UIView {
         return view
     }()
     
+    private lazy var mealTableView: MealTableView = {
+        let tableView = MealTableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .blue100
+        return tableView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupScrollView()
@@ -26,6 +33,7 @@ class MealView: UIView {
     private func setupScrollView() {
         addSubview(scrollView)
         scrollView.addSubview(mealDescriptionView)
+        scrollView.addSubview(mealTableView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -35,7 +43,13 @@ class MealView: UIView {
             
             mealDescriptionView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             mealDescriptionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            mealDescriptionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
+            mealDescriptionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            mealDescriptionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            mealTableView.topAnchor.constraint(equalTo: mealDescriptionView.bottomAnchor, constant: 20),
+            mealTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mealTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            mealTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
         
     }

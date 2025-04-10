@@ -2,14 +2,14 @@ import UIKit
 
 class MealViewController: UIViewController {
     
-    private lazy var dishView: MealView = {
+    private lazy var mealView: MealView = {
         let view = MealView(frame: UIScreen.main.bounds)
 
         return view
     }()
     
     override func loadView() {
-        view = dishView
+        view = mealView
     }
 
     override func viewDidLoad() {
