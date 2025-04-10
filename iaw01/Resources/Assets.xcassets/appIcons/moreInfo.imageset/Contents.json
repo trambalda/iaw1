@@ -1,12 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Frame 130.pdf",
+      "filename" : "More Info.pdf",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }

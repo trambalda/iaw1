@@ -1,6 +1,6 @@
 import UIKit
 
-final class RestaurantViewController: UIViewController {
+final class RestaurantViewController: UIViewController, UIScrollViewDelegate {
     
     private let restaurantView = RestaurantView()
     private let model = RestaurantModel.mock
@@ -15,14 +15,7 @@ final class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
         setupNavigationBar()
-    }
-    
-    private func setupTableView() {
-        restaurantView.tableView.delegate = self
-        restaurantView.tableView.dataSource = self
-        restaurantView.tableView.register(ItemTableViewCell.self, forCellReuseIdentifier: ItemTableViewCell.identifier)
     }
     
     private func setupNavigationBar() {
@@ -95,21 +88,8 @@ final class RestaurantViewController: UIViewController {
 }
 
 extension RestaurantViewController: MenuTimeViewDelegate {
+    
     func didSelectMenu(_ menu: MenuModel) {
             
     }
-}
-
-extension RestaurantViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.menu.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.identifier, for: indexPath) as? ItemTableViewCell else { return UITableViewCell() }
-        
-        //cell.model = model.menu[indexPath.row]
-        return cell
-    }
-    
 }

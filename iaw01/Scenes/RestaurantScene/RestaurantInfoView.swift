@@ -37,10 +37,7 @@ final class RestaurantInfoView: UIView {
     
     private let infoButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .light100
-        button.layer.cornerRadius = 25
-        button.setImage(.arrowRight, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(.moreInfo.withRenderingMode(.alwaysOriginal), for: .normal)
         return button
     }()
     
@@ -63,7 +60,7 @@ final class RestaurantInfoView: UIView {
     }
     
     private func configure() {
-        backgroundColor = .light60
+        backgroundColor = .light80
         layer.cornerRadius = 10
         setupLayout()
         setupConstraints()
@@ -101,9 +98,6 @@ final class RestaurantInfoView: UIView {
         infoStack.axis = .vertical
         infoStack.spacing = 10
         infoStack.alignment = .leading
-        infoStack.addArrangedSubview(ratingStack)
-        infoStack.addArrangedSubview(timeStack)
-        infoStack.addArrangedSubview(typeOfFoodStack)
         
         addSubview(mainStack)
         mainStack.addArrangedSubview(infoStack)
@@ -121,22 +115,10 @@ final class RestaurantInfoView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
-            
-            ratingImage.heightAnchor.constraint(equalToConstant: 20),
-            ratingImage.widthAnchor.constraint(equalToConstant: 20),
-            
-            timeImage.heightAnchor.constraint(equalToConstant: 18),
-            timeImage.widthAnchor.constraint(equalToConstant: 18),
-            
-            typeOfFoodImage.heightAnchor.constraint(equalToConstant: 16),
-            typeOfFoodImage.widthAnchor.constraint(equalToConstant: 16),
-            
-            infoButton.widthAnchor.constraint(equalToConstant: 50),
-            infoButton.heightAnchor.constraint(equalToConstant: 50)
+            mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
 }

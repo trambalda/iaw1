@@ -9,15 +9,15 @@ final class RestaurantView: UIView {
         }
     }
     
+    var menuItemModels: [MenuItemListModel] = [] {
+        didSet {
+            menuItemListView.models = menuItemModels
+        }
+    }
+    
     let headerView = HeaderView()
     let filtersView = FiltersView()
-    //let menuItemListView = MenuItemListView()
-    
-    let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
+    let menuItemListView = MenuItemListView()
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -54,7 +54,7 @@ final class RestaurantView: UIView {
         scrollView.addSubview(contentStack)
         contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(filtersView)
-        contentStack.addArrangedSubview(tableView)
+        contentStack.addArrangedSubview(menuItemListView)
     }
     
     private func setupConstraints() {
