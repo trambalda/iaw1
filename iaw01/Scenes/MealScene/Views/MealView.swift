@@ -39,8 +39,8 @@ class MealView: UIView {
         return view
     }()
     
-    private lazy var editCheeseBurgerView: EditCheeseBurgerView = {
-        let view = EditCheeseBurgerView()
+    private lazy var editCheeseBurgerView: EditCheeseburgerView = {
+        let view = EditCheeseburgerView()
         return view
     }()
     
