@@ -31,8 +31,10 @@
 		3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */; };
 		3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */; };
 		3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */; };
-		3F8E6A3E2DA691DC00B95D72 /* MealTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E6A3D2DA691DC00B95D72 /* MealTableView.swift */; };
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
+		3F934DF22DA91BC200919403 /* SideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DF12DA91BC200919403 /* SideItemView.swift */; };
+		3F934DF42DA91BD600919403 /* DrinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DF32DA91BD600919403 /* DrinksView.swift */; };
+		3F934DF62DA91BE400919403 /* EditCheeseBurgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DF52DA91BE400919403 /* EditCheeseBurgerView.swift */; };
 		3F93A85D2DA5A18600118948 /* MealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A85C2DA5A18600118948 /* MealViewController.swift */; };
 		3F93A8602DA5A1F300118948 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A85F2DA5A1F300118948 /* MealView.swift */; };
 		3F93A8632DA5BA8300118948 /* MealDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A8622DA5BA8300118948 /* MealDescriptionView.swift */; };
@@ -79,8 +81,10 @@
 		3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PincodeTextField.swift; sourceTree = "<group>"; };
 		3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
-		3F8E6A3D2DA691DC00B95D72 /* MealTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableView.swift; sourceTree = "<group>"; };
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
+		3F934DF12DA91BC200919403 /* SideItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideItemView.swift; sourceTree = "<group>"; };
+		3F934DF32DA91BD600919403 /* DrinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksView.swift; sourceTree = "<group>"; };
+		3F934DF52DA91BE400919403 /* EditCheeseBurgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCheeseBurgerView.swift; sourceTree = "<group>"; };
 		3F93A85C2DA5A18600118948 /* MealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewController.swift; sourceTree = "<group>"; };
 		3F93A85F2DA5A1F300118948 /* MealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
 		3F93A8622DA5BA8300118948 /* MealDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDescriptionView.swift; sourceTree = "<group>"; };
@@ -261,6 +265,13 @@
 			path = VerifyPhoneNumberScene;
 			sourceTree = "<group>";
 		};
+		3F934DEC2DA7CC2200919403 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		3F93A85A2DA565B300118948 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +288,7 @@
 			children = (
 				3F93A85C2DA5A18600118948 /* MealViewController.swift */,
 				3F93A85E2DA5A1DC00118948 /* Views */,
+				3F934DEC2DA7CC2200919403 /* Models */,
 			);
 			path = MealScene;
 			sourceTree = "<group>";
@@ -287,7 +299,9 @@
 				3F93A85F2DA5A1F300118948 /* MealView.swift */,
 				3F93A8622DA5BA8300118948 /* MealDescriptionView.swift */,
 				3F93A8642DA5BD1700118948 /* MealImageView.swift */,
-				3F8E6A3D2DA691DC00B95D72 /* MealTableView.swift */,
+				3F934DF12DA91BC200919403 /* SideItemView.swift */,
+				3F934DF32DA91BD600919403 /* DrinksView.swift */,
+				3F934DF52DA91BE400919403 /* EditCheeseBurgerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -418,10 +432,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
+				3F934DF42DA91BD600919403 /* DrinksView.swift in Sources */,
 				3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
 				3F93A8652DA5BD1700118948 /* MealImageView.swift in Sources */,
 				3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */,
+				3F934DF62DA91BE400919403 /* EditCheeseBurgerView.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
@@ -444,10 +460,10 @@
 				3F45F97D2D8A15BF005BD993 /* PincodeInputView.swift in Sources */,
 				3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
+				3F934DF22DA91BC200919403 /* SideItemView.swift in Sources */,
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				3F93A8602DA5A1F300118948 /* MealView.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
-				3F8E6A3E2DA691DC00B95D72 /* MealTableView.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,

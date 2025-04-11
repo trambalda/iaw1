@@ -1,16 +1,8 @@
 import UIKit
 
-class MealDescriptionView: UIView {
+class MealDescriptionView: UIStackView {
     
     private lazy var mealImageView = MealImageView()
-    
-    private lazy var mealStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 6
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
     
     private lazy var mealNameLabel: UILabel = {
         let label = UILabel()
@@ -40,11 +32,14 @@ class MealDescriptionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.axis = .vertical
+        self.spacing = 6
+        self.translatesAutoresizingMaskIntoConstraints = false
         setupLayout()
         setupConstraints()
     }
     
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -53,22 +48,23 @@ class MealDescriptionView: UIView {
         newCodeOuterStackView.axis = .vertical
         newCodeOuterStackView.alignment = .leading
         
+        addArrangedSubview(mealImageView)
+        newCodeOuterStackView.addArrangedSubview(mealNameLabel)
+        newCodeOuterStackView.addArrangedSubview(mealCaloriesStackView)
+        
         mealCaloriesStackView.addArrangedSubview(mealCaloriesLabel)
         mealCaloriesStackView.addArrangedSubview(mealCaloriesImage)
         
-        mealStackView.addArrangedSubview(mealImageView)
-        mealStackView.addArrangedSubview(mealNameLabel)
-        mealStackView.addArrangedSubview(newCodeOuterStackView)
-        newCodeOuterStackView.addArrangedSubview(mealCaloriesStackView)
-        
-        addSubview(mealStackView)
+        addArrangedSubview(newCodeOuterStackView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mealStackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            mealStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            mealStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
+            topAnchor.constraint(equalTo: topAnchor),
+            leadingAnchor.constraint(equalTo: leadingAnchor),
+            trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            mealCaloriesStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21)
         ])
     }
 }
