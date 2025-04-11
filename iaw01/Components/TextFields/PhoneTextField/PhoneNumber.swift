@@ -5,12 +5,7 @@ struct PhoneNumber {
     let countryCode: CountryCodeModel?
     
     var fullNumber: String {
-        guard let number = number else { return "" }
-        if let code = countryCode?.code {
-            return code + number
-        } else {
-            return number
-        }
+        [countryCode?.code, number].compactMap { $0 }.joined()
     }
     
     static let `default` = PhoneNumber(number: nil, countryCode: .default)

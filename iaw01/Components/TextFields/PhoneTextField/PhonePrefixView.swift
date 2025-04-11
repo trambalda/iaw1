@@ -4,7 +4,11 @@ final class PhonePrefixView: UIView {
     
     var onCountryPickerToggle: (() -> Void)?
     
-    var onCountryCodeChanged: ((String) -> Void)?
+    var onCountryCodeChanged: (() -> Void)?
+    
+    var onBeginEditing: (() -> Void)?
+    
+    var onEndEditing: (() -> Void)?
     
     var countryCode: CountryCodeModel? = .default {
         didSet {
@@ -117,7 +121,7 @@ final class PhonePrefixView: UIView {
         } else {
             countryCode = CountryCodeModel(code: text)
         }
-        onCountryCodeChanged?(text)
+        onCountryCodeChanged?()
     }
 }
 
@@ -125,6 +129,14 @@ extension PhonePrefixView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        onBeginEditing?()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        onEndEditing?()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

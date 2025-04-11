@@ -6,9 +6,8 @@ final class CountryPickerCell: UITableViewCell {
     
     var country: CountryCodeModel? {
         didSet {
-            guard let country = country else { return }
-            countryFlagLabel.text = country.flag
-            countryCodeLable.text = country.code
+            countryFlagLabel.text = country?.flag
+            countryCodeLabel.text = country?.code
         }
     }
     
@@ -21,7 +20,7 @@ final class CountryPickerCell: UITableViewCell {
     
     private let countryFlagLabel = UILabel()
     
-    private let countryCodeLable: UILabel = {
+    private let countryCodeLabel: UILabel = {
         let label = UILabel()
         label.font = Font.body.font
         return label
@@ -39,7 +38,7 @@ final class CountryPickerCell: UITableViewCell {
     private func setupLayoutAndConstraints() {
         contentView.addSubview(flagAndCodeStackView)
         flagAndCodeStackView.addArrangedSubview(countryFlagLabel)
-        flagAndCodeStackView.addArrangedSubview(countryCodeLable)
+        flagAndCodeStackView.addArrangedSubview(countryCodeLabel)
         
         NSLayoutConstraint.activate([
             flagAndCodeStackView.topAnchor.constraint(equalTo: topAnchor),
