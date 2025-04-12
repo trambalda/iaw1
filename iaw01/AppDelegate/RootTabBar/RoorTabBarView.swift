@@ -1,18 +1,8 @@
-
 import UIKit
 
 final class RootTabBarView: UIView {
 
-    var item: RootTabBarItem
     var onTap: ((RootTabBarView) -> Void)?
-
-    private let container: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        view.isUserInteractionEnabled = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
 
     private let image: UIImageView = {
         let image = UIImageView()
@@ -30,11 +20,22 @@ final class RootTabBarView: UIView {
         return title
     }()
 
+    private let stack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+
     init(item: RootTabBarItem) {
-        self.item = item
         super.init(frame: .zero)
 
-        setupUI()
+        image.image = item.image
+        title.text = item.title
+
+        configure()
         setupLayout()
         setupConstraints()
     }
@@ -53,7 +54,7 @@ final class RootTabBarView: UIView {
             initialSpringVelocity: 0.5,
             options: [.curveEaseOut]
         ) {
-            self.container.transform = transform
+            self.stack.transform = transform
         }
     }
 
@@ -61,37 +62,26 @@ final class RootTabBarView: UIView {
         onTap?(self)
     }
 
-    private func setupUI() {
-        container.addGestureRecognizer(
+    private func configure() {
+        stack.addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(tapToTab))
         )
-
-        image.image = item.image
-        title.text = item.title
     }
 
     private func setupLayout() {
-        addSubview(container)
-        container.addSubview(image)
-        container.addSubview(title)
+        stack.addArrangedSubview(image)
+        stack.addArrangedSubview(title)
+        addSubview(stack)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: topAnchor),
-            container.bottomAnchor.constraint(equalTo: bottomAnchor),
-            container.leadingAnchor.constraint(equalTo: leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stack.topAnchor.constraint(equalTo: topAnchor),
+            stack.bottomAnchor.constraint(equalTo: bottomAnchor),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor),
 
-            image.topAnchor.constraint(equalTo: container.topAnchor, constant: 5),
-            image.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            image.heightAnchor.constraint(equalToConstant: 25),
-            image.widthAnchor.constraint(equalToConstant: 25),
-
-            title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 4),
-            title.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 5),
-            title.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -5),
-            title.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -6),
+            title.heightAnchor.constraint(equalToConstant: 25),
         ])
     }
 }

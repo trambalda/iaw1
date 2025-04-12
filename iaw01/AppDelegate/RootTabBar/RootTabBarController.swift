@@ -9,6 +9,7 @@ final class RootTabBarController: UITabBarController {
     var factory: Factory
 
     private var indicatorViewCenterXConstraint: NSLayoutConstraint?
+    
     private lazy var tabBarControllers: [UINavigationController] = [
         UINavigationController(rootViewController: factory.createDummyScene()),
         UINavigationController(rootViewController: factory.createDummyScene()),
@@ -33,11 +34,10 @@ final class RootTabBarController: UITabBarController {
         return stack
     }()
 
-    private let indicatorView: UIView = {
-        let view = UIView()
+    private let indicatorView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(resource: .indicatorView)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .dark100
-        view.layer.cornerRadius = 2.5
         return view
     }()
 
@@ -63,8 +63,8 @@ final class RootTabBarController: UITabBarController {
 
     private func setupLayout() {
         backgroundView.addSubview(stackView)
+        backgroundView.addSubview(indicatorView)
         view.addSubview(backgroundView)
-        view.addSubview(indicatorView)
     }
 
     private func setupTabBarPages(pages: [RootTabBarItem]) {
@@ -108,7 +108,7 @@ final class RootTabBarController: UITabBarController {
             usingSpringWithDamping: 0.8,
             initialSpringVelocity: 0.5,
             options: [.curveEaseInOut]
-        ){
+        ) {
             self.view.layoutIfNeeded()
         }
     }
@@ -132,9 +132,7 @@ final class RootTabBarController: UITabBarController {
             stackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 27),
             stackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -27),
 
-            indicatorView.heightAnchor.constraint(equalToConstant: 5),
-            indicatorView.widthAnchor.constraint(equalToConstant: 5),
-            indicatorView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 3),
+            indicatorView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 2),
         ])
     }
 }
