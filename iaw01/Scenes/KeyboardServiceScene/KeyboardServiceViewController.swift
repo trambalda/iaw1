@@ -14,17 +14,17 @@ final class KeyboardServiceViewController: UIViewController {
         return stack
     }()
 
-    private lazy var emailTextField: StringTextField = {
+    private let emailTextField: StringTextField = {
         let textField = StringTextField(with: .emailStyle)
         return textField
     }()
 
-    private lazy var nameTextField: StringTextField = {
+    private let nameTextField: StringTextField = {
         let textField = StringTextField(with: .nameStyle)
         return textField
     }()
 
-    private lazy var passwordTextField: StringTextField = {
+    private let passwordTextField: StringTextField = {
         let textField = StringTextField(with: .passwordStyle)
         return textField
     }()
@@ -41,23 +41,26 @@ final class KeyboardServiceViewController: UIViewController {
 
     private func textfieldDelegate() {
         NotificationCenter.default
-            .addObserver(self, selector: #selector(textFieldDidBeginEditingNotification(_:)),
-                         name: UITextField.textDidBeginEditingNotification,
-                         object: nil)
+            .addObserver(
+                self,
+                selector: #selector(textFieldDidBeginEditingNotification(_:)),
+                name: UITextField.textDidBeginEditingNotification,
+                object: nil
+            )
     }
 
     private func setupLayout() {
-        view.addSubview(textFieldsStack)
         textFieldsStack.addArrangedSubview(emailTextField)
         textFieldsStack.addArrangedSubview(passwordTextField)
         textFieldsStack.addArrangedSubview(nameTextField)
+        view.addSubview(textFieldsStack)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            textFieldsStack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            textFieldsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
         ])
     }
 

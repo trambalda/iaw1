@@ -11,6 +11,7 @@ final class KeyboardService: KeyboardServiceProtocol {
 
     private var keyboardHeight: CGFloat = 0
     private var currentOffset: CGFloat = 0
+    private lazy var keyboardTop = UIScreen.main.bounds.height - keyboardHeight
 
     init(viewController: UIViewController? = nil) {
         self.viewController = viewController
@@ -55,14 +56,14 @@ final class KeyboardService: KeyboardServiceProtocol {
               let window = viewController.view.window else { return }
 
         let viewBounds = activeView.convert(activeView.bounds, to: window)
-        let viewBottom = viewBounds.midY
-        let keyboardTop = window.frame.height - keyboardHeight
-        let newOffset = keyboardTop - viewBottom - 120
-        let newY = viewController.view.transform.ty + newOffset
+        let viewBottom = viewBounds.maxY
+        let newOffset = keyboardTop - viewBottom
 
-        UIView.animate(withDuration: 0.3) {
-            viewController.view.transform = CGAffineTransform(translationX: 0, y: newY)
+        let newY = viewController.view.frame.origin.y + newOffset
+
+        UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseInOut]) {
             self.currentOffset = newOffset
+            viewController.view.transform = CGAffineTransform(translationX: 0, y: newY)
         }
     }
 
@@ -70,8 +71,7 @@ final class KeyboardService: KeyboardServiceProtocol {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 
-        keyboardHeight = keyboardFrame.height
-        currentOffset = 0
+        keyboardHeight = Constans.isSE ? keyboardFrame.height + 90 : keyboardFrame.height + 130
 
         if activeView != nil {
             moveToNewActiveView()
