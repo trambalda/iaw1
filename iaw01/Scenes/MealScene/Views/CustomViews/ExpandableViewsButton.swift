@@ -1,13 +1,6 @@
-//
-//  expandedViewButton.swift
-//  iaw01
-//
-//  Created by Dinar Mukhlisov on 11.04.2025.
-//
-
 import UIKit
 
-class ExpandedButton: UIButton {
+class ExpandableViewsButton: UIButton {
     
     var onTap: (() -> ())?
     
@@ -30,7 +23,7 @@ class ExpandedButton: UIButton {
     
     private func configureExpandButton() {
         addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        setImage(UIImage(named: "addButton"), for: .normal)
+        setImage(UIImage(resource: .addButton), for: .normal)
     }
     
     @objc private func buttonAction() {
