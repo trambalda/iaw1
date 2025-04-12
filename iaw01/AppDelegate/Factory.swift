@@ -28,4 +28,10 @@ final class Factory {
         let vc = VerifyPhoneNumberViewController()
         return vc
     }
+    
+    func createOnboardingScene() -> OnboardingViewController {
+        let pages = OnboardingPageModel.pages
+        let vc = OnboardingViewController(pages: pages, coordinator: appCoordinator)
+        return vc
+    }
 }

@@ -121,8 +121,8 @@ final class OnboardingView: UIView {
         }
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: -16),
+            scrollView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: 16),
             scrollView.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -16),
             
             contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),

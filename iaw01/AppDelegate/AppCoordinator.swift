@@ -43,4 +43,22 @@ final class AppCoordinator {
         let vc = factory.createVerifyPhoneNumberScene()
         parent?.pushViewController(vc, animated: true)
     }
+    
+    func showOnboardingScene() {
+        let vc = factory.createOnboardingScene()
+        window.rootViewController = vc
+    }
+    
+    // Overload for DummyViewController compatibility
+    func showOnboardingScene(from parent: UINavigationController?) {
+        showOnboardingScene()
+    }
+    
+}
+
+extension AppCoordinator: OnboardingCoordinator {
+    func finishOnboarding() {
+        UserDefaults.standard.set(true, forKey: Constants.isOnboardingCompletedKey)
+        showMainViewController()
+    }
 }

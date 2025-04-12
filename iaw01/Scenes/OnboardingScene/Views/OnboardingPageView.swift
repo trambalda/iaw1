@@ -5,7 +5,7 @@ final class OnboardingPageView: UIView {
     private let illustrationContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .light80
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 16
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -44,7 +44,7 @@ final class OnboardingPageView: UIView {
     private var verticalStackView: UIStackView {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = 16
         stackView.alignment = .leading
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -75,9 +75,9 @@ final class OnboardingPageView: UIView {
         let illustrationHeight: CGFloat = Constants.isIPhoneSE ? 250 : 367
         
         NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
             
             illustrationContainer.heightAnchor.constraint(equalToConstant: illustrationHeight),
