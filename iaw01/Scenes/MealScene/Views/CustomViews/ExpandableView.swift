@@ -8,27 +8,21 @@ class ExpandableView: UIView {
     
     private var isRequiredLabelNeeded: Bool!
     
-    private lazy var expandedButton: ExpandableViewsButton = {
+    private lazy var expandButton: ExpandableViewsButton = {
         let button = ExpandableViewsButton()
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        button.onTap = { [ weak self ] in
-            guard let self = self else { return }
-            self.isExpanded
-                ? button.setImage(UIImage(resource: .addButton), for: .normal)
-                : button.setImage(UIImage(resource: .removeButton), for: .normal)
-        }
         return button
     }()
     
     @objc private func buttonTapped() {
         if isExpanded {
             if let expandedSubview = expandedSubview {
-                removeFromSuperView(expandedSubview)
+                self.removeFromSuperView(expandedSubview)
             }
         } else {
             expandedSubview = createExpandedSubview()
             if let expandedSubview = expandedSubview {
-                addExpandedSubviewToParent(expandedSubview)
+                self.addExpandedSubviewToParent(expandedSubview)
                 
                 NSLayoutConstraint.activate([
                     expandedSubview.topAnchor.constraint(equalTo: bottomAnchor, constant: 5),
@@ -41,9 +35,22 @@ class ExpandableView: UIView {
         isExpanded.toggle()
     }
     
+    func addExpandedViewWith(image: UIImageView, productName: String, extraPayment: String?, type: AdditionalType) -> UIView {
+//        let view = UIView()
+//        let stackView = UIStackView()
+        
+//        let image = image
+//        let label = UILabel()
+//        label.text = productName
+//        let price = UILabel()
+//        price.text = extraPayment
+//        let type = AdditionalType.Type
+        return UIView()
+    }
+    
     private func createExpandedSubview() -> UIView{
         let view = UIView()
-        view.backgroundColor = .blue60
+        view.backgroundColor = .light100
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
@@ -93,7 +100,7 @@ class ExpandableView: UIView {
         addSubview(stackView)
         stackView.addArrangedSubview(expandedViewLabel)
         isRequiredLabelNeeded ? stackView.addArrangedSubview(expandedViewRequiredLabel) : nil
-        stackView.addArrangedSubview(expandedButton)
+        stackView.addArrangedSubview(expandButton)
         isRequiredLabelNeeded ? stackView.setCustomSpacing(12, after: expandedViewRequiredLabel) : nil
     }
     

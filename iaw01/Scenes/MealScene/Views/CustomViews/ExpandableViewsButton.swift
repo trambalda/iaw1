@@ -1,14 +1,20 @@
 import UIKit
 
-class ExpandableViewsButton: UIButton {
+class ExpandableViewsButton: CustomCircleButton {
     
-    var onTap: (() -> ())?
+    private var isViewExpandeded = false
     
-    override var isHighlighted: Bool {
-        didSet {
-            UIView.animate(withDuration: 0.1) {
-                self.alpha = self.isHighlighted ? 0.7 : 1.0
-            }
+    private func configureExpandButton() {
+        let addButtonImage = UIImage(resource: .addButton)
+        let removeButtonImage = UIImage(resource: .removeButton)
+        
+        configureButtonWith(
+            image: UIImage(resource: .addButton),
+            shouldHighlight: true
+        ) { [weak self] in
+            guard let self = self else { return }
+            self.setImage(self.isViewExpandeded ? addButtonImage : removeButtonImage, for: .normal)
+            self.isViewExpandeded.toggle()
         }
     }
     
@@ -19,14 +25,5 @@ class ExpandableViewsButton: UIButton {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureExpandButton() {
-        addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        setImage(UIImage(resource: .addButton), for: .normal)
-    }
-    
-    @objc private func buttonAction() {
-        onTap?()
     }
 }

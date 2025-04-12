@@ -32,18 +32,19 @@
 		3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */; };
 		3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */; };
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
-		3F934DF22DA91BC200919403 /* SideItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DF12DA91BC200919403 /* SideItemView.swift */; };
 		3F934DF92DA9469600919403 /* ExpandableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DF82DA9469600919403 /* ExpandableView.swift */; };
 		3F934DFB2DA96AF400919403 /* AdditionalsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFA2DA96AF400919403 /* AdditionalsModel.swift */; };
-		3F934DFD2DA9722200919403 /* SelectFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFC2DA9722200919403 /* SelectFlag.swift */; };
+		3F934DFD2DA9722200919403 /* SelectCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFC2DA9722200919403 /* SelectCheckBox.swift */; };
 		3F934DFF2DA97F9600919403 /* ExpandableViewsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFE2DA97F9600919403 /* ExpandableViewsButton.swift */; };
-		3F934E072DA993F700919403 /* SideItemExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934E062DA993F700919403 /* SideItemExpandedView.swift */; };
 		3F93A85D2DA5A18600118948 /* MealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A85C2DA5A18600118948 /* MealViewController.swift */; };
 		3F93A8602DA5A1F300118948 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A85F2DA5A1F300118948 /* MealView.swift */; };
 		3F93A8632DA5BA8300118948 /* MealDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A8622DA5BA8300118948 /* MealDescriptionView.swift */; };
 		3F93A8652DA5BD1700118948 /* MealImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A8642DA5BD1700118948 /* MealImageView.swift */; };
 		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
 		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
+		3FA1EB642DAAFAE000A43D16 /* QuantityCalcButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1EB632DAAFAE000A43D16 /* QuantityCalcButtons.swift */; };
+		3FA1EB672DAAFBEC00A43D16 /* CustomCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1EB662DAAFBEC00A43D16 /* CustomCircleButton.swift */; };
+		3FA1EB6B2DAB14BE00A43D16 /* QuantityCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1EB6A2DAB14BE00A43D16 /* QuantityCalculator.swift */; };
 		869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
 		8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
 		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
@@ -85,18 +86,19 @@
 		3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
-		3F934DF12DA91BC200919403 /* SideItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideItemView.swift; sourceTree = "<group>"; };
 		3F934DF82DA9469600919403 /* ExpandableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableView.swift; sourceTree = "<group>"; };
 		3F934DFA2DA96AF400919403 /* AdditionalsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalsModel.swift; sourceTree = "<group>"; };
-		3F934DFC2DA9722200919403 /* SelectFlag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFlag.swift; sourceTree = "<group>"; };
+		3F934DFC2DA9722200919403 /* SelectCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCheckBox.swift; sourceTree = "<group>"; };
 		3F934DFE2DA97F9600919403 /* ExpandableViewsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableViewsButton.swift; sourceTree = "<group>"; };
-		3F934E062DA993F700919403 /* SideItemExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideItemExpandedView.swift; sourceTree = "<group>"; };
 		3F93A85C2DA5A18600118948 /* MealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewController.swift; sourceTree = "<group>"; };
 		3F93A85F2DA5A1F300118948 /* MealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
 		3F93A8622DA5BA8300118948 /* MealDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDescriptionView.swift; sourceTree = "<group>"; };
 		3F93A8642DA5BD1700118948 /* MealImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealImageView.swift; sourceTree = "<group>"; };
 		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
+		3FA1EB632DAAFAE000A43D16 /* QuantityCalcButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityCalcButtons.swift; sourceTree = "<group>"; };
+		3FA1EB662DAAFBEC00A43D16 /* CustomCircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCircleButton.swift; sourceTree = "<group>"; };
+		3FA1EB6A2DAB14BE00A43D16 /* QuantityCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityCalculator.swift; sourceTree = "<group>"; };
 		869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
 		869875462D8860E600C7BA58 /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
 		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				3F934DFA2DA96AF400919403 /* AdditionalsModel.swift */,
+				3FA1EB6A2DAB14BE00A43D16 /* QuantityCalculator.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -284,18 +287,10 @@
 			children = (
 				3F934DF82DA9469600919403 /* ExpandableView.swift */,
 				3F934DFE2DA97F9600919403 /* ExpandableViewsButton.swift */,
-				3F934DFC2DA9722200919403 /* SelectFlag.swift */,
+				3FA1EB632DAAFAE000A43D16 /* QuantityCalcButtons.swift */,
+				3F934DFC2DA9722200919403 /* SelectCheckBox.swift */,
 			);
 			path = CustomViews;
-			sourceTree = "<group>";
-		};
-		3F934E022DA993A700919403 /* SideItemRowView */ = {
-			isa = PBXGroup;
-			children = (
-				3F934DF12DA91BC200919403 /* SideItemView.swift */,
-				3F934E062DA993F700919403 /* SideItemExpandedView.swift */,
-			);
-			path = SideItemRowView;
 			sourceTree = "<group>";
 		};
 		3F93A85A2DA565B300118948 /* Views */ = {
@@ -324,8 +319,8 @@
 				3F93A85F2DA5A1F300118948 /* MealView.swift */,
 				3F93A8622DA5BA8300118948 /* MealDescriptionView.swift */,
 				3F93A8642DA5BD1700118948 /* MealImageView.swift */,
-				3F934E022DA993A700919403 /* SideItemRowView */,
 				3F934DF72DA9466F00919403 /* CustomViews */,
+				3FA1EB652DAAFBA600A43D16 /* CustomCircleButton */,
 				3F934DEC2DA7CC2200919403 /* Models */,
 			);
 			path = Views;
@@ -338,6 +333,14 @@
 				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3FA1EB652DAAFBA600A43D16 /* CustomCircleButton */ = {
+			isa = PBXGroup;
+			children = (
+				3FA1EB662DAAFBEC00A43D16 /* CustomCircleButton.swift */,
+			);
+			path = CustomCircleButton;
 			sourceTree = "<group>";
 		};
 		869875442D8860DF00C7BA58 /* TextFieldsScene */ = {
@@ -459,12 +462,14 @@
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
+				3FA1EB642DAAFAE000A43D16 /* QuantityCalcButtons.swift in Sources */,
 				3F93A8652DA5BD1700118948 /* MealImageView.swift in Sources */,
 				3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */,
+				3FA1EB672DAAFBEC00A43D16 /* CustomCircleButton.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
-				3F934E072DA993F700919403 /* SideItemExpandedView.swift in Sources */,
+				3FA1EB6B2DAB14BE00A43D16 /* QuantityCalculator.swift in Sources */,
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				3F934DFF2DA97F9600919403 /* ExpandableViewsButton.swift in Sources */,
 				CE4D24C52D95C88E00325BAE /* Constans.swift in Sources */,
@@ -478,7 +483,7 @@
 				3F93A8632DA5BA8300118948 /* MealDescriptionView.swift in Sources */,
 				3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
-				3F934DFD2DA9722200919403 /* SelectFlag.swift in Sources */,
+				3F934DFD2DA9722200919403 /* SelectCheckBox.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
 				3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */,
@@ -488,7 +493,6 @@
 				3F45F97D2D8A15BF005BD993 /* PincodeInputView.swift in Sources */,
 				3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
-				3F934DF22DA91BC200919403 /* SideItemView.swift in Sources */,
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				3F93A8602DA5A1F300118948 /* MealView.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
