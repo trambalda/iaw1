@@ -2,11 +2,10 @@ import UIKit
 
 final class OnboardingView: UIView {
 
-    var onNextButtonTap: (() -> Void)?
-    var onSkipButtonTap: (() -> Void)?
-    var onPageChanged: ((Int) -> Void)?
-
+    var onFinish: (() -> Void)?
+    
     private let pages: [OnboardingPageModel]
+    private var currentPageNumber: Int = 0
     
     private lazy var pageViews: [OnboardingPageView] = {
         var views = [OnboardingPageView]()
@@ -46,7 +45,7 @@ final class OnboardingView: UIView {
         let button = CornersButton(style: .nextButton)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.onTap = { [weak self] in
-            self?.onNextButtonTap?()
+            self?.switchToNextPage()
         }
         return button
     }()
@@ -54,7 +53,7 @@ final class OnboardingView: UIView {
     private lazy var skipButton: CornersButton = {
         let button = CornersButton(style: .skipButton)
         button.onTap = { [weak self] in
-            self?.onSkipButtonTap?()
+            self?.onFinish?()
         }
         return button
     }()
@@ -67,16 +66,15 @@ final class OnboardingView: UIView {
         return stackView
     }()
 
-    init(pages: [OnboardingPageModel], frame: CGRect = .zero) {
+    init?(pages: [OnboardingPageModel], frame: CGRect = .zero) {
+        guard !pages.isEmpty else { return nil }
         self.pages = pages
         super.init(frame: frame)
         configure()
     }
     
     required init?(coder: NSCoder) {
-        self.pages = []
-        super.init(coder: coder)
-        configure()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configure() {
@@ -87,11 +85,21 @@ final class OnboardingView: UIView {
     }
 
     func changePage(on pageNumber: Int) {
+        currentPageNumber = pageNumber
         let isLastPage = pageNumber == pages.count - 1
         nextButton.setTitle(isLastPage ? "Continue" : "Next")
         
         let contentOffset = CGPoint(x: scrollView.bounds.width * CGFloat(pageNumber), y: 0)
         scrollView.setContentOffset(contentOffset, animated: true)
+    }
+
+    private func switchToNextPage() {
+        if currentPageNumber < pages.count - 1 {
+            currentPageNumber += 1
+            changePage(on: currentPageNumber)
+        } else {
+            onFinish?()
+        }
     }
 
     private func setupLayout() {
@@ -112,10 +120,10 @@ final class OnboardingView: UIView {
             pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         }
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -20),
+            scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -16),
             
             contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -123,9 +131,9 @@ final class OnboardingView: UIView {
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
-            buttonsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            buttonsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            buttonsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            buttonsStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            buttonsStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            buttonsStackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
             buttonsStackView.heightAnchor.constraint(equalToConstant: 64),
             
             nextButton.widthAnchor.constraint(equalTo: buttonsStackView.widthAnchor, multiplier: 0.55)
@@ -137,6 +145,5 @@ extension OnboardingView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageNumber = Int(scrollView.contentOffset.x / scrollView.bounds.width)
         changePage(on: pageNumber)
-        onPageChanged?(pageNumber)
     }
 } 

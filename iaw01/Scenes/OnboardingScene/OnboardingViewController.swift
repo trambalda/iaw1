@@ -1,46 +1,38 @@
 import UIKit
 
 final class OnboardingViewController: UIViewController {
-
-    var appCoordinator: AppCoordinator?
-
-    private let pages = OnboardingPageModel.pages
-    private var currentPageNumber = 0
-
-    private lazy var onboardingView: OnboardingView = {
+    
+    private let pages: [OnboardingPageModel]
+    private let coordinator: OnboardingCoordinator
+    
+    private lazy var onboardingView: OnboardingView? = {
         let view = OnboardingView(pages: pages)
-        view.onPageChanged = { [weak self] pageNumber in
-            self?.currentPageNumber = pageNumber
-        }
-        view.onNextButtonTap = { [weak self] in
-            self?.switchToNextPage()
-        }
-        view.onSkipButtonTap = { [weak self] in
+        view?.translatesAutoresizingMaskIntoConstraints = false
+        view?.onFinish = { [weak self] in
             self?.finishOnboarding()
         }
         return view
     }()
     
-    override func loadView() {
-        view = onboardingView
+    init(pages: [OnboardingPageModel], coordinator: OnboardingCoordinator) {
+        self.pages = pages
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: false)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
-    private func switchToNextPage() {
-        if currentPageNumber < pages.count - 1 {
-            currentPageNumber += 1
-            onboardingView.changePage(on: currentPageNumber)
+    
+    override func loadView() {
+        if let onboardingView = onboardingView {
+            view = onboardingView
         } else {
             finishOnboarding()
         }
     }
     
     private func finishOnboarding() {
-        UserDefaults.standard.set(true, forKey: Constants.isOnboardingCompletedKey)
-        appCoordinator?.start()
+        coordinator.finishOnboarding()
     }
 } 
