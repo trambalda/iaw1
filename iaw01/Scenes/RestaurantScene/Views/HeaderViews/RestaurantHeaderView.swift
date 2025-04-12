@@ -22,16 +22,17 @@ final class RestaurantHeaderView: UIStackView {
     
     private let locationImage: UIImageView = {
         let image = UIImageView(image: .location)
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
-    private let favoriteButton: UIButton = {
+    private let favoriteButtonSize: CGFloat = 50
+    
+    private lazy var favoriteButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .light80
-        button.layer.cornerRadius = 25
-        button.setImage(.heart.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.layer.cornerRadius = favoriteButtonSize / 2
+        button.setImage(.heart, for: .normal)
         return button
     }()
     
@@ -86,10 +87,9 @@ final class RestaurantHeaderView: UIStackView {
             logoImageView.heightAnchor.constraint(equalToConstant: 64),
             
             locationImage.widthAnchor.constraint(equalToConstant: 20),
-            locationImage.heightAnchor.constraint(equalToConstant: 20),
             
-            favoriteButton.heightAnchor.constraint(equalToConstant: 50),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 50)
+            favoriteButton.heightAnchor.constraint(equalToConstant: favoriteButtonSize),
+            favoriteButton.widthAnchor.constraint(equalToConstant: favoriteButtonSize)
         ])
     }
 }

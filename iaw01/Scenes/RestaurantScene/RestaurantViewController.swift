@@ -1,21 +1,23 @@
 import UIKit
 
-final class RestaurantViewController: UIViewController, UIScrollViewDelegate {
+final class RestaurantViewController: UIViewController {
     
     private let restaurantView = RestaurantView()
     private let model = RestaurantModel.mock
     
     override func loadView() {
         view = restaurantView
-        restaurantView.filtersView.menuTimeView.delegate = self
-        restaurantView.scrollView.delegate = self
-        restaurantView.model = model
-        self.view = view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRestaurantView()
         setupNavigationBar()
+    }
+    
+    private func setupRestaurantView() {
+        restaurantView.filtersView.menuTimeView.delegate = self
+        restaurantView.model = model
     }
     
     private func setupNavigationBar() {

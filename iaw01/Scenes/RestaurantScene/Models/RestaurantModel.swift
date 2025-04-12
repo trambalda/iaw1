@@ -10,16 +10,18 @@ struct RestaurantModel {
     let time: String
     let typeOfFood: String
     let menu: [MenuModel]
+    let menuItemList: [MenuItemListModel]
     
     static let empty = RestaurantModel(
-        image: UIImage(systemName: "photo"),
-        logo: UIImage(systemName: "photo"),
-        title: "Название ресторана",
-        location: "Адрес ресторана",
-        rating: "Нет данных",
-        time: "Нет данных",
-        typeOfFood: "Нет данных",
-        menu: []
+        image: nil,
+        logo: nil,
+        title: "",
+        location: "",
+        rating: "",
+        time: "",
+        typeOfFood: "",
+        menu: [],
+        menuItemList: []
     )
 }
 
@@ -32,6 +34,7 @@ extension RestaurantModel {
         location: "Bramlea & Sandalwood",
         rating: "4.5", time: "15-20",
         typeOfFood: "Burgers",
-        menu: MenuModel.mock
+        menu: MenuModel.mock,
+        menuItemList: MenuItemListModel.mockArray
     )
 }

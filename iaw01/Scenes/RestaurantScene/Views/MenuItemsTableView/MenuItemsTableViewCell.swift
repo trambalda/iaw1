@@ -1,17 +1,23 @@
 import UIKit
 
-final class ItemTableViewCell: UITableViewCell {
+final class MenuItemsTableViewCell: UITableViewCell {
     
-    static let identifier = "ItemTableViewCell"
+    static let identifier = "MenuItemsTableViewCell"
     
     var model: MenuItemListModel = .empty {
         didSet {
             foodImage.image = model.foodImage
             nameLabel.attributedText = Font.body.compose(model.foodTitle)
-            oldPriceLabel.attributedText = Font.body.compose(model.oldPrice)    //change font
-            newPriceLabel.attributedText = Font.body.compose(model.newPrice)    //change font
+            oldPriceLabel.attributedText = Font.body.compose("$\(model.oldPrice)")    //change font
+            newPriceLabel.attributedText = Font.body.compose("$\(model.newPrice)")    //change font
         }
     }
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 2
+        return label
+    }()
     
     private let foodImage: UIImageView = {
         let imageView = UIImageView()
@@ -29,7 +35,7 @@ final class ItemTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let nameLabel = UILabel()
+    //private let nameLabel = UILabel()
     private let oldPriceLabel = UILabel()
     private let newPriceLabel = UILabel()
     
@@ -82,8 +88,8 @@ final class ItemTableViewCell: UITableViewCell {
         mainStack.addArrangedSubview(arrowImage)
         
         NSLayoutConstraint.activate([
-            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             mainStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
             foodImage.widthAnchor.constraint(equalToConstant: 98),

@@ -37,7 +37,7 @@ final class RestaurantInfoView: UIView {
     
     private let infoButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(.moreInfo.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(.moreInfo, for: .normal)
         return button
     }()
     

@@ -2,22 +2,17 @@ import UIKit
 
 final class RestaurantView: UIView {
     
-    var model: RestaurantModel = .mock {
+    var model: RestaurantModel = .empty {
         didSet {
             headerView.model = model
             filtersView.model = model
-        }
-    }
-    
-    var menuItemModels: [MenuItemListModel] = [] {
-        didSet {
-            menuItemListView.models = menuItemModels
+            menuItemListView.models = model.menuItemList
         }
     }
     
     let headerView = HeaderView()
     let filtersView = FiltersView()
-    let menuItemListView = MenuItemListView()
+    let menuItemListView = MenuItemsTableView()
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -36,6 +31,7 @@ final class RestaurantView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        scrollView.delegate = self
         configure()
     }
     
@@ -68,7 +64,13 @@ final class RestaurantView: UIView {
             contentStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+            contentStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            menuItemListView.heightAnchor.constraint(equalToConstant: 500)
         ])
     }
+}
+
+extension RestaurantView: UIScrollViewDelegate {
+    
 }

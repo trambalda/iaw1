@@ -71,17 +71,29 @@ final class MenuTimeView: UIView {
     }
     
     func createButton(title: String) -> UIButton {
-        let button = UIButton(type: . custom)
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(.dark100, for: .selected)
-        button.setTitleColor(.dark60, for: .normal)
-        button.setTitleFont(Font.segment.font, for: .selected)
-        button.setTitleFont(Font.body.font, for: .normal)
-        button.titleLabel?.font = Font.body.font
+        var config = UIButton.Configuration.plain()
+        
+        config.baseForegroundColor = .dark60
+        config.background.backgroundColor = .clear
+        config.attributedTitle = AttributedString(title, attributes: AttributeContainer().font(Font.body.font))
+       
+        let button = UIButton(configuration: config)
+        
+        button.configurationUpdateHandler = { btn in
+            var newConfig = btn.configuration
+            newConfig?.baseForegroundColor = btn.isSelected ? .dark100 : .dark60
+            newConfig?.attributedTitle = AttributedString(
+                title,
+                attributes: AttributeContainer().font(btn.isSelected ? Font.segment.font : Font.body.font)
+            )
+            btn.configuration = newConfig
+        }
+        
         button.addTarget(self, action: #selector(menuTapped(_:)), for: .touchUpInside)
+        
         return button
     }
-    
+
     @objc func menuTapped(_ sender: UIButton) {
         guard let index = buttons.firstIndex(of: sender) else { return }
         selectButton(sender)

@@ -34,7 +34,8 @@ final class FiltersView: UIView {
         NSLayoutConstraint.activate([
             filtersStack.topAnchor.constraint(equalTo: topAnchor),
             filtersStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            filtersStack.trailingAnchor.constraint(equalTo: trailingAnchor)
+            filtersStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            filtersStack.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
