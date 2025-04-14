@@ -43,7 +43,7 @@
 		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
 		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
 		3FA1EB642DAAFAE000A43D16 /* QuantityCalcButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1EB632DAAFAE000A43D16 /* QuantityCalcButtons.swift */; };
-		3FA1EB672DAAFBEC00A43D16 /* CustomCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1EB662DAAFBEC00A43D16 /* CustomCircleButton.swift */; };
+		3FA1EB672DAAFBEC00A43D16 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1EB662DAAFBEC00A43D16 /* CircleButton.swift */; };
 		3FA1EB6B2DAB14BE00A43D16 /* QuantityCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA1EB6A2DAB14BE00A43D16 /* QuantityCalculator.swift */; };
 		869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
 		8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
@@ -97,7 +97,7 @@
 		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
 		3FA1EB632DAAFAE000A43D16 /* QuantityCalcButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityCalcButtons.swift; sourceTree = "<group>"; };
-		3FA1EB662DAAFBEC00A43D16 /* CustomCircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCircleButton.swift; sourceTree = "<group>"; };
+		3FA1EB662DAAFBEC00A43D16 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		3FA1EB6A2DAB14BE00A43D16 /* QuantityCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityCalculator.swift; sourceTree = "<group>"; };
 		869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
 		869875462D8860E600C7BA58 /* StringTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextField.swift; sourceTree = "<group>"; };
@@ -320,7 +320,7 @@
 				3F93A8622DA5BA8300118948 /* MealDescriptionView.swift */,
 				3F93A8642DA5BD1700118948 /* MealImageView.swift */,
 				3F934DF72DA9466F00919403 /* CustomViews */,
-				3FA1EB652DAAFBA600A43D16 /* CustomCircleButton */,
+				3FA1EB652DAAFBA600A43D16 /* CircleButton */,
 				3F934DEC2DA7CC2200919403 /* Models */,
 			);
 			path = Views;
@@ -335,12 +335,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		3FA1EB652DAAFBA600A43D16 /* CustomCircleButton */ = {
+		3FA1EB652DAAFBA600A43D16 /* CircleButton */ = {
 			isa = PBXGroup;
 			children = (
-				3FA1EB662DAAFBEC00A43D16 /* CustomCircleButton.swift */,
+				3FA1EB662DAAFBEC00A43D16 /* CircleButton.swift */,
 			);
-			path = CustomCircleButton;
+			path = CircleButton;
 			sourceTree = "<group>";
 		};
 		869875442D8860DF00C7BA58 /* TextFieldsScene */ = {
@@ -465,7 +465,7 @@
 				3FA1EB642DAAFAE000A43D16 /* QuantityCalcButtons.swift in Sources */,
 				3F93A8652DA5BD1700118948 /* MealImageView.swift in Sources */,
 				3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */,
-				3FA1EB672DAAFBEC00A43D16 /* CustomCircleButton.swift in Sources */,
+				3FA1EB672DAAFBEC00A43D16 /* CircleButton.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,

@@ -13,8 +13,8 @@ class QuantityCalcButtons: UIView {
         return stack
     }()
     
-    private lazy var minusButton: CustomCircleButton = {
-        let button = CustomCircleButton()
+    private lazy var minusButton: CircleButton = {
+        let button = CircleButton()
         button.configureButtonWith(image: UIImage(resource: .minusButton), shouldHighlight: true) { [weak self] in
             guard let self = self else { return }
             
@@ -23,8 +23,8 @@ class QuantityCalcButtons: UIView {
         return button
     }()
     
-    private lazy var plusButton: CustomCircleButton = {
-        let button = CustomCircleButton()
+    private lazy var plusButton: CircleButton = {
+        let button = CircleButton()
         button.configureButtonWith(image: UIImage(resource: .plusButton), shouldHighlight: true) { [weak self] in
             guard let self = self else { return }
             

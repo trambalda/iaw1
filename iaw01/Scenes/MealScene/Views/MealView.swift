@@ -20,7 +20,7 @@ class MealView: UIView {
         return view
     }()
     
-    private lazy var additionalItemsStackView: UIStackView = {
+    private lazy var expandableViewsStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.backgroundColor = .light100
@@ -58,10 +58,10 @@ class MealView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(containerView)
         containerView.addSubview(mealDescriptionView)
-        containerView.addSubview(additionalItemsStackView)
-        additionalItemsStackView.addArrangedSubview(sideItemView)
-        additionalItemsStackView.addArrangedSubview(drinksView)
-        additionalItemsStackView.addArrangedSubview(editCheeseBurgerView)
+        containerView.addSubview(expandableViewsStackView)
+        expandableViewsStackView.addArrangedSubview(sideItemView)
+        expandableViewsStackView.addArrangedSubview(drinksView)
+        expandableViewsStackView.addArrangedSubview(editCheeseBurgerView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
@@ -79,10 +79,10 @@ class MealView: UIView {
             mealDescriptionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             mealDescriptionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             
-            additionalItemsStackView.topAnchor.constraint(equalTo: mealDescriptionView.bottomAnchor, constant: 25),
-            additionalItemsStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            additionalItemsStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            additionalItemsStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            expandableViewsStackView.topAnchor.constraint(equalTo: mealDescriptionView.bottomAnchor, constant: 25),
+            expandableViewsStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            expandableViewsStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            expandableViewsStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
         
     }

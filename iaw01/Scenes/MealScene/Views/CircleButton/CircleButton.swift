@@ -1,6 +1,6 @@
 import UIKit
 
-class CustomCircleButton: UIButton {
+class CircleButton: UIButton {
     
     override var isHighlighted: Bool {
         didSet {

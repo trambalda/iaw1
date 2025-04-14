@@ -1,6 +1,6 @@
 import UIKit
 
-class SelectCheckBox: CustomCircleButton {
+class SelectCheckBox: CircleButton {
     
     private var isCheckBoxSelected = false
     

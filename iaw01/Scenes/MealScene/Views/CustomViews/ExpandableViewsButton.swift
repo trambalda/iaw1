@@ -1,6 +1,6 @@
 import UIKit
 
-class ExpandableViewsButton: CustomCircleButton {
+class ExpandableViewsButton: CircleButton {
     
     private var isViewExpandeded = false
     
@@ -9,7 +9,7 @@ class ExpandableViewsButton: CustomCircleButton {
         let removeButtonImage = UIImage(resource: .removeButton)
         
         configureButtonWith(
-            image: UIImage(resource: .addButton),
+            image: addButtonImage,
             shouldHighlight: true
         ) { [weak self] in
             guard let self = self else { return }
