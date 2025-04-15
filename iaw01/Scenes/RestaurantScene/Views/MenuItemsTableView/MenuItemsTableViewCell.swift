@@ -8,8 +8,17 @@ final class MenuItemsTableViewCell: UITableViewCell {
         didSet {
             foodImage.image = model.foodImage
             nameLabel.attributedText = Font.body.compose(model.foodTitle)
-            oldPriceLabel.attributedText = Font.body.compose("$\(model.oldPrice)")    //change font
-            newPriceLabel.attributedText = Font.body.compose("$\(model.newPrice)")    //change font
+            
+            let attributedString = NSAttributedString(
+                string: "$\(model.oldPrice)",
+                attributes: [
+                    .strikethroughStyle: NSUnderlineStyle.single.rawValue,
+                    .font: Font.body.font
+                ]
+            )
+            
+            oldPriceLabel.attributedText = attributedString  //change font
+            newPriceLabel.attributedText = Font.body.compose("$\(model.newPrice)", color: .blue100)    //change font
         }
     }
     
@@ -21,7 +30,7 @@ final class MenuItemsTableViewCell: UITableViewCell {
     
     private let foodImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -46,6 +55,11 @@ final class MenuItemsTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        separatorInset = .zero
     }
     
     /*
