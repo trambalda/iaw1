@@ -132,7 +132,7 @@ final class RootTabBarController: UITabBarController {
             stackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 27),
             stackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -27),
 
-            indicatorView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 2),
+            indicatorView.topAnchor.constraint(equalTo: stackView.bottomAnchor),
         ])
     }
 }
