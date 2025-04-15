@@ -23,6 +23,22 @@ final class PhoneTextField: UIStackView {
     
     private weak var parent: UIView?
     
+    private var isBorderShown: Bool = false {
+        didSet {
+            containerView.layer.borderWidth = isBorderShown ? 1.2 : 0
+        }
+    }
+    
+    private let pickerHeight: CGFloat = 180
+    
+    private let selfHeight: CGFloat = 80
+    
+    private let textFieldHeight: CGFloat = 23
+    
+    private var countryPickerBottomConstraint: NSLayoutConstraint?
+    
+    private var countryPickerStaticConstraints: [NSLayoutConstraint] = []
+    
     private lazy var phonePrefixView: PhonePrefixView = {
         let view = PhonePrefixView()
         view.onCountryPickerToggle = { [weak self] in
@@ -32,10 +48,10 @@ final class PhoneTextField: UIStackView {
             self?.updatePlaceholder()
         }
         view.onBeginEditing = { [weak self] in
-            self?.containerView.layer.borderWidth = 1.2
+            self?.isBorderShown = true
         }
         view.onEndEditing = { [weak self] in
-            self?.containerView.layer.borderWidth = 0
+            self?.isBorderShown = false
         }
         return view
     }()
@@ -63,6 +79,7 @@ final class PhoneTextField: UIStackView {
         textField.leftViewMode = .always
         textField.leftView = phonePrefixView
         textField.delegate = self
+        textField.inputAccessoryView = toolBar
         return textField
     }()
     
@@ -78,7 +95,18 @@ final class PhoneTextField: UIStackView {
         return view
     }()
     
-    init(parent: UIView?) {
+    private lazy var toolBar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneTapped))
+
+        toolbar.setItems([flexibleSpace, doneButton], animated: false)
+        return toolbar
+    }()
+    
+    init(parent: UIView) {
         self.parent = parent
         super.init(frame: .zero)
         setupStackViewProperties()
@@ -117,11 +145,12 @@ final class PhoneTextField: UIStackView {
         titleContainerView.addSubview(titleLabel)
         addArrangedSubview(containerView)
         containerView.addSubview(textField)
+        parent?.addSubview(countryPickerView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 80),
+            heightAnchor.constraint(equalToConstant: selfHeight),
             
             titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor, constant: 13),
             titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor),
@@ -131,7 +160,7 @@ final class PhoneTextField: UIStackView {
             textField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 13),
             textField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -13),
             textField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 23),
+            textField.heightAnchor.constraint(equalToConstant: textFieldHeight),
         ])
     }
     
@@ -204,27 +233,29 @@ final class PhoneTextField: UIStackView {
     }
     
     private func showPickerView() {
-        parent?.addSubview(countryPickerView)
-        
-        containerView.layer.borderWidth = 1.2
+        isBorderShown = true
         
         let textFieldFrame = convert(bounds, to: nil)
+
+        NSLayoutConstraint.deactivate(countryPickerStaticConstraints)
+        countryPickerBottomConstraint?.isActive = false
         
-        let pickerHeight: CGFloat = 180
+        let leading = countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor)
+        let trailing = countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11)
+        let height = countryPickerView.heightAnchor.constraint(equalToConstant: pickerHeight)
         
-        NSLayoutConstraint.activate([
-            countryPickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            countryPickerView.trailingAnchor.constraint(equalTo: phonePrefixView.trailingAnchor, constant: -11),
-            countryPickerView.heightAnchor.constraint(equalToConstant: pickerHeight),
-            {
-                let spaceAbove = textFieldFrame.minY
-                if spaceAbove >= pickerHeight + 15 {
-                    return countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor)
-                } else {
-                    return countryPickerView.topAnchor.constraint(equalTo: containerView.bottomAnchor)
-                }
-            }()
-        ])
+        countryPickerStaticConstraints = [leading, trailing, height]
+        NSLayoutConstraint.activate(countryPickerStaticConstraints)
+        
+        let bottomConstraint = countryPickerView.bottomAnchor.constraint(equalTo: containerView.topAnchor)
+        bottomConstraint.isActive = true
+        countryPickerBottomConstraint = bottomConstraint
+        
+        if textFieldFrame.minY >= pickerHeight {
+            bottomConstraint.constant = 0
+        } else {
+            bottomConstraint.constant = pickerHeight + selfHeight - textFieldHeight
+        }
         
         animatePickerView(visible: true)
     }
@@ -233,7 +264,15 @@ final class PhoneTextField: UIStackView {
         animatePickerView(visible: false)
         
         if !textField.isFirstResponder {
-            containerView.layer.borderWidth = 0
+            isBorderShown = false
+        }
+    }
+    
+    @objc private func doneTapped() {
+        if phonePrefixView.isPrefixFieldFirstResponder == true {
+            phonePrefixView.resignTextFieldFirstResponder()
+        } else {
+            textFieldShouldReturn?()
         }
     }
 }
@@ -245,11 +284,11 @@ extension PhoneTextField: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        containerView.layer.borderWidth = 1.2
+        isBorderShown = true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        containerView.layer.borderWidth = 0
+        isBorderShown = false
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -258,12 +297,7 @@ extension PhoneTextField: UITextFieldDelegate {
 
         let formattedText = applyMask(for: digits, with: phonePrefixView.countryCode?.mask ?? "")
         textField.text = formattedText
-
-        if let maxPhoneLength = phonePrefixView.countryCode?.mask.filter({ $0 == "#" }).count {
-            if digits.count >= maxPhoneLength {
-                textFieldShouldReturn?()
-            }
-        }
+        
         return false
     }
 }

@@ -18,6 +18,10 @@ final class PhonePrefixView: UIView {
         }
     }
     
+    var isPrefixFieldFirstResponder: Bool {
+        return phonePrefixTextField.isFirstResponder
+    }
+    
     private let containerStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -77,6 +81,10 @@ final class PhonePrefixView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func resignTextFieldFirstResponder() {
+        phonePrefixTextField.resignFirstResponder()
+    }
+    
     private func setupLayout() {
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(phonePrefixStackView)
@@ -126,11 +134,6 @@ final class PhonePrefixView: UIView {
 }
 
 extension PhonePrefixView: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         onBeginEditing?()
     }
@@ -148,11 +151,6 @@ extension PhonePrefixView: UITextFieldDelegate {
         
         let shouldChange = newText.count <= CountryCodeModel.maxLength
         
-        if newText.count == CountryCodeModel.maxLength {
-            DispatchQueue.main.async {
-                textField.resignFirstResponder()
-            }
-        }
         return shouldChange
     }
 }
