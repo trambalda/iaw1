@@ -77,13 +77,6 @@ final class OnboardingView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configure() {
-        backgroundColor = .light100
-        setupLayout()
-        setupConstraints()
-        changePage(on: 0)
-    }
-
     func changePage(on pageNumber: Int) {
         currentPageNumber = pageNumber
         let isLastPage = pageNumber == pages.count - 1
@@ -91,6 +84,13 @@ final class OnboardingView: UIView {
         
         let contentOffset = CGPoint(x: scrollView.bounds.width * CGFloat(pageNumber), y: 0)
         scrollView.setContentOffset(contentOffset, animated: true)
+    }
+    
+    private func configure() {
+        backgroundColor = .light100
+        setupLayout()
+        setupConstraints()
+        changePage(on: 0)
     }
 
     private func switchToNextPage() {

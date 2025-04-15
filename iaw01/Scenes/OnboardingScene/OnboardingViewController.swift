@@ -6,7 +6,7 @@ final class OnboardingViewController: UIViewController {
     private let coordinator: OnboardingCoordinator
     
     private lazy var onboardingView: OnboardingView? = {
-        let view = OnboardingView(pages: pages)
+        let view = OnboardingView(pages: OnboardingPageModel.pages)
         view?.translatesAutoresizingMaskIntoConstraints = false
         view?.onFinish = { [weak self] in
             self?.finishOnboarding()

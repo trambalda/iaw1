@@ -61,6 +61,16 @@ final class OnboardingPageView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configure(with content: OnboardingPageModel, allPages: [OnboardingPageModel], currentPage: Int = 0) {
+        pageControl.numberOfPages = allPages.count
+        pageControl.currentPage = currentPage
+        
+        titleLabel.attributedText = Font.heading4.compose(content.title, color: .dark100)
+        descriptionLabel.attributedText = Font.body.compose(content.description, color: .dark80)
+        imageView.image = content.image ?? UIImage(systemName: "photo")
+        imageView.tintColor = .lightGray
+    }
 
     private func setupLayout() {
         addSubview(contentStackView)
@@ -89,23 +99,5 @@ final class OnboardingPageView: UIView {
             
             pageControl.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor)
         ])
-    }
-
-    func configure(with content: OnboardingPageModel, allPages: [OnboardingPageModel], currentPage: Int = 0) {
-        pageControl.numberOfPages = allPages.count
-        pageControl.currentPage = currentPage
-        
-        titleLabel.attributedText = Font.heading4.compose(content.title, color: .dark100)
-        descriptionLabel.attributedText = Font.body.compose(content.description, color: .dark80)
-        imageView.image = content.image ?? UIImage(systemName: "photo")
-        imageView.tintColor = .lightGray
-    }
-    
-    func configure(with pages: [OnboardingPageModel]) {
-        pageControl.numberOfPages = pages.count
-    }
-    
-    func updateCurrentPage(_ page: Int) {
-        pageControl.currentPage = page
     }
 } 
