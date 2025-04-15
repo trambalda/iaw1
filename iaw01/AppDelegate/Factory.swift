@@ -28,4 +28,11 @@ final class Factory {
         return vc
     }
     
+<<<<<<< HEAD
+=======
+    func createVerifyPhoneNumberScene() -> VerifyPhoneNumberViewController {
+        let vc = VerifyPhoneNumberViewController()
+        return vc
+    }
+>>>>>>> c4e83f9eee1745018c595de318460b552e727ca7
 }
