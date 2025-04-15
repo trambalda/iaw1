@@ -1,6 +1,6 @@
 import UIKit
 
-class AuthorizationTitleView: UIStackView {
+final class AuthorizationTitleView: UIStackView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()

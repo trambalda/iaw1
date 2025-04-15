@@ -22,7 +22,6 @@ extension SceneType: CaseIterable {
             .cornersButtonsScene,
             .authorizationScene,
             .textFiedsScene,
-            .cornersButtonsScene,
             .verifyPhoneNumberScene,
         ]
     }

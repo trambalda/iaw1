@@ -1,9 +1,9 @@
 import UIKit
 
-class AuthorizationView: UIView {
+final class AuthorizationView: UIView {
     
-    public var onLoginTap: ((AuthorizationModel) -> Void)?
-    public var onSignupTap: ((AuthorizationModel) -> Void)?
+    var onLoginTap: ((AuthorizationModel) -> Void)?
+    var onSignupTap: ((AuthorizationModel) -> Void)?
     
     public let scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -15,24 +15,10 @@ class AuthorizationView: UIView {
     public let bottomButton: CornersButton = {
         let button = CornersButton(style: .loginButton)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = false
+        button.alpha = 0.5
         return button
     }()
-    
-    public let loginView: AuthorizationLoginView = {
-        let view = AuthorizationLoginView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    public let signupView: AuthorizationSignupView = {
-        let view = AuthorizationSignupView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private var currentSelection: AuthorizationSegmentedControl.Selection = .login
-    
-    private let titleView = AuthorizationTitleView()
     
     private lazy var segmentedControl: AuthorizationSegmentedControl = {
         let control = AuthorizationSegmentedControl()
@@ -42,6 +28,8 @@ class AuthorizationView: UIView {
         return control
     }()
     
+    private let titleView = AuthorizationTitleView()
+
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -50,6 +38,20 @@ class AuthorizationView: UIView {
     }()
     
     private let containerView = UIView()
+    
+    private let loginView: AuthorizationLoginView = {
+        let view = AuthorizationLoginView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let signupView: AuthorizationSignupView = {
+        let view = AuthorizationSignupView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var currentSelection: AuthorizationSegmentedControl.Selection = .login
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,8 +67,9 @@ class AuthorizationView: UIView {
         backgroundColor = .light100
         setupLayout()
         setupConstraints()
+        setupActions()
+        setupViewChangeCallbacks()
         switchView(to: .login)
-        setupBottomButtonAction()
     }
     
     private func setupLayout() {
@@ -81,52 +84,6 @@ class AuthorizationView: UIView {
         
         contentStackView.setCustomSpacing(21, after: titleView)
         contentStackView.setCustomSpacing(24, after: segmentedControl)
-    }
-    
-    private func switchView(to selection: AuthorizationSegmentedControl.Selection) {
-        let fromView: UIView
-        let toView: UIView
-        
-        switch selection {
-        case .login:
-            fromView = signupView
-            toView = loginView
-            bottomButton.setTitle("Login")
-        case .signUp:
-            fromView = loginView
-            toView = signupView
-            bottomButton.setTitle("Next")
-            
-            signupView.onFieldsChange = { [weak self] allFilled in
-                guard let self = self else { return }
-                
-                if allFilled {
-                    self.bottomButton.setTitle("Login")
-                } else {
-                    self.bottomButton.setTitle("Next")
-                }
-            }
-        }
-        
-        UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve) {
-            fromView.alpha = 0
-            toView.alpha = 1
-        }
-    }
-    
-    private func setupBottomButtonAction() {
-        bottomButton.onTap = { [weak self] in
-            guard let self = self else { return }
-            
-            switch self.currentSelection {
-            case .login:
-                let model = self.loginView.getModel()
-                self.onLoginTap?(model)
-            case .signUp:
-                let model = self.signupView.getModel()
-                self.onLoginTap?(model)
-            }
-        }
     }
     
     private func setupConstraints() {
@@ -154,7 +111,71 @@ class AuthorizationView: UIView {
             bottomButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             bottomButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             bottomButton.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
-            
         ])
+    }
+    
+    private func setupActions() {
+        bottomButton.addTarget(self, action: #selector(bottomButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupViewChangeCallbacks() {
+        loginView.viewChanged = { [weak self] model in
+            self?.updateButtonState(model: model)
+        }
+        signupView.viewChanged = { [weak self] model in
+            self?.updateButtonState(model: model)
+        }
+    }
+
+    private func updateButtonState(model: AuthorizationModel?) {
+        let shouldEnable: Bool
+
+        switch currentSelection {
+        case .login:
+            shouldEnable = loginView.model != nil
+        case .signUp:
+            shouldEnable = signupView.model != nil
+        }
+
+        bottomButton.isEnabled = shouldEnable
+        bottomButton.alpha = shouldEnable ? 1.0 : 0.5
+    }
+    
+    @objc private func bottomButtonTapped() {
+        let model: AuthorizationModel?
+        
+        switch currentSelection {
+        case .login:
+            model = loginView.model
+            if let model = model {
+                onLoginTap?(model)
+            }
+        case .signUp:
+            model = signupView.model
+            if let model = model {
+                onLoginTap?(model)
+            }
+        }
+    }
+    
+    private func switchView(to selection: AuthorizationSegmentedControl.Selection) {
+        currentSelection = selection
+        
+        let fromView: UIView
+        let toView: UIView
+        
+        switch selection {
+        case .login:
+            fromView = signupView
+            toView = loginView
+        case .signUp:
+            fromView = loginView
+            toView = signupView
+        }
+        
+        UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve) {
+            fromView.alpha = 0
+            toView.alpha = 1
+        }
     }
 }

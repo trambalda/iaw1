@@ -1,9 +1,18 @@
 import UIKit
 
-class AuthorizationViewController: UIViewController {
+final class AuthorizationViewController: UIViewController {
     
     private lazy var authorizationView: AuthorizationView = {
         let view = AuthorizationView(frame: UIScreen.main.bounds)
+        
+        view.onLoginTap = { model in
+            print("Login нажат и выводит \(model)")
+        }
+        
+        view.onSignupTap = { model in
+            print("Sign up нажат и выводит \(model) ")
+        }
+        
         return view
     }()
     
@@ -13,23 +22,15 @@ class AuthorizationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDismissKeyboardGesture()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.registerKeyboardNotifications(
             self,
             willShowSelector: #selector(keyboardWillShow),
             willHideSelector: #selector(keyboardWillHide)
         )
-        
-        authorizationView.onLoginTap = { model in
-            print("Login нажат и выводит \(model)")
-        }
-        
-        authorizationView.onSignupTap = { model in
-            print("Sign up нажат и выводит \(model) ")
-        }
-        
-        setupDismissKeyboardGesture()
-        configureTextFieldsReturnKey()
-        configureSignupTextFieldsReturnKey()
     }
     
     deinit {
@@ -48,36 +49,6 @@ class AuthorizationViewController: UIViewController {
         
         UIView.animate(withDuration: 0.3) {
             self.authorizationView.bottomButton.transform = CGAffineTransform(translationX: 0, y: -translationY)
-        }
-    }
-    
-    private func configureTextFieldsReturnKey() {
-        let textFields = authorizationView.loginView.loginTextFields
-        
-        for (index, field) in textFields.enumerated() {
-            field.textFieldShouldReturn = { [weak self] in
-                guard self != nil else { return }
-                if index < textFields.count - 1 {
-                    textFields[index + 1].becomeTextFieldFirstResponder()
-                } else {
-                    field.resignTextFieldFirstResponder()
-                }
-            }
-        }
-    }
-    
-    private func configureSignupTextFieldsReturnKey() {
-        let textFields = authorizationView.signupView.signupTextFields
-        
-        for (index, field) in textFields.enumerated() {
-            field.textFieldShouldReturn = { [weak self] in
-                guard self != nil else { return }
-                if index < textFields.count - 1 {
-                    textFields[index + 1].becomeTextFieldFirstResponder()
-                } else {
-                    field.resignTextFieldFirstResponder()
-                }
-            }
         }
     }
     

@@ -1,16 +1,12 @@
 import UIKit
 
-class AuthorizationSignupView: UIStackView {
+final class AuthorizationSignupView: UIStackView {
     
-    var onFieldsChange: ((Bool) -> Void)?
-    
-    var signupTextFields: [StringTextField] {
-        return [nameTextField, phoneNumberTextField, createPasswordTextField]
-    }
+    var viewChanged: ((AuthorizationModel?) -> Void)?
     
     private let nameTextField = StringTextField(with: .nameStyle)
     private let phoneNumberTextField = StringTextField(with: .phoneNumberStyle)
-    private let createPasswordTextField = StringTextField(with: .createPasswordStyle, isLastField: true)
+    private let createPasswordTextField = StringTextField(with: .createPasswordStyle)
     private let socialButtons = AuthorizationSocialButtonsView()
     
     override init(frame: CGRect) {
@@ -23,10 +19,16 @@ class AuthorizationSignupView: UIStackView {
         configure()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func configure() {
         axis = .vertical
         setupLayout()
-        observeTextFields()
+        setupReturnActions()
+        setupTextObservers()
+        viewChanged?(model)
     }
     
     private func setupLayout() {
@@ -40,17 +42,29 @@ class AuthorizationSignupView: UIStackView {
         setCustomSpacing(37, after: createPasswordTextField)
     }
     
-    private func observeTextFields() {
-        nameTextField.onTextChanged = { [weak self] _ in self?.checkFormFilled() }
-        phoneNumberTextField.onTextChanged = { [weak self] _ in self?.checkFormFilled() }
-        createPasswordTextField.onTextChanged = { [weak self] _ in self?.checkFormFilled() }
+    private func setupReturnActions() {
+        nameTextField.textFieldShouldReturn = { [weak self] in
+            self?.phoneNumberTextField.becomeTextFieldFirstResponder()
+        }
+        phoneNumberTextField.textFieldShouldReturn = { [weak self] in
+            self?.createPasswordTextField.becomeTextFieldFirstResponder()
+        }
+        createPasswordTextField.textFieldShouldReturn = { [weak self] in
+            self?.createPasswordTextField.resignTextFieldFirstResponder()
+        }
     }
     
-    private func checkFormFilled() {
-        let allFilled = !(nameTextField.text ?? "").isEmpty &&
-                        !(phoneNumberTextField.text ?? "").isEmpty &&
-                        !(createPasswordTextField.text ?? "").isEmpty
-        onFieldsChange?(allFilled)
+    private func setupTextObservers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(textFieldDidChange),
+            name: UITextField.textDidChangeNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func textFieldDidChange(notification: Notification) {
+        viewChanged?(model)
     }
 }
 
@@ -62,12 +76,21 @@ extension StringTextFieldStyle {
 }
 
 extension AuthorizationSignupView {
-    func getModel() -> AuthorizationModel {
-        return AuthorizationModel(
-            email: nil,
-            password: createPasswordTextField.text ?? "",
-            name: nameTextField.text ?? "",
-            phone: phoneNumberTextField.text ?? ""
-        )
+    var model: AuthorizationModel? {
+        get {
+            guard
+                let name = nameTextField.text, !name.isEmpty,
+                let phone = phoneNumberTextField.text, !phone.isEmpty,
+                let password = createPasswordTextField.text, !password.isEmpty
+            else {
+                return nil
+            }
+            return AuthorizationModel(email: nil, password: password, name: name, phone: phone)
+        }
+        set {
+            nameTextField.text = newValue?.name
+            phoneNumberTextField.text = newValue?.phone
+            createPasswordTextField.text = newValue?.password
+        }
     }
 }

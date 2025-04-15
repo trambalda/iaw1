@@ -1,6 +1,6 @@
 import UIKit
 
-class AuthorizationSocialButtonsView: UIStackView {
+final class AuthorizationSocialButtonsView: UIStackView {
     
     private let separatorLabel: UILabel = {
         let label = UILabel()
