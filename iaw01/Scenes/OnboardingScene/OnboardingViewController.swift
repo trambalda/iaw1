@@ -3,7 +3,7 @@ import UIKit
 final class OnboardingViewController: UIViewController {
     
     private let pages: [OnboardingPageModel]
-    private let coordinator: OnboardingCoordinator
+    var appCoordinator: AppCoordinator?
     
     private lazy var onboardingView: OnboardingView? = {
         let view = OnboardingView(pages: OnboardingPageModel.pages)
@@ -14,9 +14,8 @@ final class OnboardingViewController: UIViewController {
         return view
     }()
     
-    init(pages: [OnboardingPageModel], coordinator: OnboardingCoordinator) {
+    init(pages: [OnboardingPageModel]) {
         self.pages = pages
-        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,6 +32,6 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func finishOnboarding() {
-        coordinator.finishOnboarding()
+        appCoordinator?.finishOnboarding()
     }
 } 
