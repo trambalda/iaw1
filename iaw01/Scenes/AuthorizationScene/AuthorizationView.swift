@@ -12,11 +12,12 @@ final class AuthorizationView: UIView {
         return scroll
     }()
     
-    public let bottomButton: CornersButton = {
+    public lazy var bottomButton: CornersButton = {
         let button = CornersButton(style: .loginButton)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isEnabled = false
         button.alpha = 0.5
+        button.addTarget(self, action: #selector(bottomButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -73,7 +74,6 @@ final class AuthorizationView: UIView {
         backgroundColor = .light100
         setupLayout()
         setupConstraints()
-        setupActions()
         switchView(to: .login)
     }
     
@@ -117,10 +117,6 @@ final class AuthorizationView: UIView {
             bottomButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             bottomButton.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
         ])
-    }
-    
-    private func setupActions() {
-        bottomButton.addTarget(self, action: #selector(bottomButtonTapped), for: .touchUpInside)
     }
     
     private func updateButtonState() {
@@ -180,5 +176,7 @@ final class AuthorizationView: UIView {
             fromView.alpha = 0
             toView.alpha = 1
         }
+        
+       updateButtonState()
     }
 }
