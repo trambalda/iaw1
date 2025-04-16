@@ -16,6 +16,21 @@ final class AuthorizationLoginView: UIStackView {
         return stackView
     }()
     
+    var model: AuthorizationModel {
+        get {
+            AuthorizationModel(
+                email: emailTextField.text,
+                password: passwordTextField.text,
+                name: nil,
+                phone: nil
+            )
+        }
+        set {
+            emailTextField.text = newValue.email
+            passwordTextField.text = newValue.password
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -70,23 +85,5 @@ final class AuthorizationLoginView: UIStackView {
     
     @objc private func textFieldDidChange(notification: Notification) {
         viewChanged?(model)
-    }
-}
-
-extension AuthorizationLoginView {
-    var model: AuthorizationModel? {
-        get {
-            guard
-                let email = emailTextField.text, !email.isEmpty,
-                let password = passwordTextField.text, !password.isEmpty
-            else {
-                return nil
-            }
-            return AuthorizationModel(email: email, password: password, name: nil, phone: nil)
-        }
-        set {
-            emailTextField.text = newValue?.email
-            passwordTextField.text = newValue?.password
-        }
     }
 }

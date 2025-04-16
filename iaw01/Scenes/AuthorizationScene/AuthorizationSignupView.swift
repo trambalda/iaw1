@@ -9,6 +9,22 @@ final class AuthorizationSignupView: UIStackView {
     private let createPasswordTextField = StringTextField(with: .createPasswordStyle)
     private let socialButtons = AuthorizationSocialButtonsView()
     
+    var model: AuthorizationModel {
+        get {
+            AuthorizationModel(
+                email: nil,
+                password: createPasswordTextField.text,
+                name: nameTextField.text,
+                phone: phoneNumberTextField.text
+            )
+        }
+        set {
+            nameTextField.text = newValue.name
+            phoneNumberTextField.text = newValue.phone
+            createPasswordTextField.text = newValue.password
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -73,24 +89,4 @@ extension StringTextFieldStyle {
         title: "Phone Number",
         placeholder: "+1  |  000 000 0000",
         behavior: .string)
-}
-
-extension AuthorizationSignupView {
-    var model: AuthorizationModel? {
-        get {
-            guard
-                let name = nameTextField.text, !name.isEmpty,
-                let phone = phoneNumberTextField.text, !phone.isEmpty,
-                let password = createPasswordTextField.text, !password.isEmpty
-            else {
-                return nil
-            }
-            return AuthorizationModel(email: nil, password: password, name: name, phone: phone)
-        }
-        set {
-            nameTextField.text = newValue?.name
-            phoneNumberTextField.text = newValue?.phone
-            createPasswordTextField.text = newValue?.password
-        }
-    }
 }

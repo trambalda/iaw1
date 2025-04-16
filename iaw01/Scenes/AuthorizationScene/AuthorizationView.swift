@@ -29,7 +29,7 @@ final class AuthorizationView: UIView {
     }()
     
     private let titleView = AuthorizationTitleView()
-
+    
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -39,19 +39,25 @@ final class AuthorizationView: UIView {
     
     private let containerView = UIView()
     
-    private let loginView: AuthorizationLoginView = {
+    private var currentSelection: AuthorizationSegmentedControl.Selection = .login
+    
+    private lazy var loginView: AuthorizationLoginView = {
         let view = AuthorizationLoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.viewChanged = { [weak self] model in
+            self?.updateButtonState()
+        }
         return view
     }()
     
-    private let signupView: AuthorizationSignupView = {
+    private lazy var signupView: AuthorizationSignupView = {
         let view = AuthorizationSignupView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.viewChanged = { [weak self] model in
+            self?.updateButtonState()
+        }
         return view
     }()
-    
-    private var currentSelection: AuthorizationSegmentedControl.Selection = .login
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,7 +74,6 @@ final class AuthorizationView: UIView {
         setupLayout()
         setupConstraints()
         setupActions()
-        setupViewChangeCallbacks()
         switchView(to: .login)
     }
     
@@ -118,43 +123,41 @@ final class AuthorizationView: UIView {
         bottomButton.addTarget(self, action: #selector(bottomButtonTapped), for: .touchUpInside)
     }
     
-    private func setupViewChangeCallbacks() {
-        loginView.viewChanged = { [weak self] model in
-            self?.updateButtonState(model: model)
-        }
-        signupView.viewChanged = { [weak self] model in
-            self?.updateButtonState(model: model)
-        }
-    }
-
-    private func updateButtonState(model: AuthorizationModel?) {
-        let shouldEnable: Bool
-
-        switch currentSelection {
-        case .login:
-            shouldEnable = loginView.model != nil
-        case .signUp:
-            shouldEnable = signupView.model != nil
-        }
-
-        bottomButton.isEnabled = shouldEnable
-        bottomButton.alpha = shouldEnable ? 1.0 : 0.5
-    }
-    
-    @objc private func bottomButtonTapped() {
-        let model: AuthorizationModel?
+    private func updateButtonState() {
+        let isFilled: Bool
         
         switch currentSelection {
         case .login:
-            model = loginView.model
-            if let model = model {
-                onLoginTap?(model)
-            }
+            let model = loginView.model
+            isFilled = !(model.email?.isEmpty ?? true)
+            && !(model.password?.isEmpty ?? true)
         case .signUp:
-            model = signupView.model
-            if let model = model {
-                onLoginTap?(model)
+            let model = signupView.model
+            isFilled = !(model.name?.isEmpty ?? true)
+            && !(model.phone?.isEmpty ?? true)
+            && !(model.password?.isEmpty ?? true)
+        }
+        
+        bottomButton.isEnabled = isFilled
+        bottomButton.alpha = isFilled ? 1.0 : 0.5
+    }
+    
+    
+    @objc private func bottomButtonTapped() {
+        
+        let model: AuthorizationModel = {
+            switch currentSelection {
+            case .login:
+                return loginView.model
+            case .signUp:
+                return signupView.model
             }
+        }()
+        
+        if currentSelection == .login {
+            onLoginTap?(model)
+        } else if currentSelection == .signUp {
+            onSignupTap?(model)
         }
     }
     
