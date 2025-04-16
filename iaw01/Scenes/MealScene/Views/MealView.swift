@@ -29,18 +29,18 @@ class MealView: UIView {
         return stack
     }()
     
-    private lazy var sideItemView: ExpandableView = {
-        let view = ExpandableView(labelName: "Side Item", isRequiredLabel: true)
+    private lazy var sideItemView: ExpandedView = {
+        let view = ExpandedView(title: "Side Item", isRequiredLabelNeeded: true)
         return view
     }()
     
-    private lazy var drinksView: ExpandableView = {
-        let view = ExpandableView(labelName: "Drinks", isRequiredLabel: true)
+    private lazy var drinksView: ExpandedView = {
+        let view = ExpandedView(title: "Drinks", isRequiredLabelNeeded: true)
         return view
     }()
     
-    private lazy var editCheeseBurgerView: ExpandableView = {
-        let view = ExpandableView(labelName: "Edit Cheeseburger", isRequiredLabel: true)
+    private lazy var editCheeseBurgerView: ExpandedView = {
+        let view = ExpandedView(title: "Edit Cheeseburger", isRequiredLabelNeeded: false)
         return view
     }()
     

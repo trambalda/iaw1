@@ -1,6 +1,6 @@
 import UIKit
 
-class ExpandableViewsButton: CircleButton {
+class ExpandButton: CircleButton {
     
     private var isViewExpandeded = false
     

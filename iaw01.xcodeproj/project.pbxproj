@@ -29,11 +29,11 @@
 		3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */; };
 		3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */; };
 		3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */; };
+		3F8A0DAB2DAFB9980019DA09 /* ExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A0DAA2DAFB9980019DA09 /* ExpandedView.swift */; };
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
-		3F934DF92DA9469600919403 /* ExpandableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DF82DA9469600919403 /* ExpandableView.swift */; };
 		3F934DFB2DA96AF400919403 /* AdditionalsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFA2DA96AF400919403 /* AdditionalsModel.swift */; };
 		3F934DFD2DA9722200919403 /* SelectCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFC2DA9722200919403 /* SelectCheckBox.swift */; };
-		3F934DFF2DA97F9600919403 /* ExpandableViewsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFE2DA97F9600919403 /* ExpandableViewsButton.swift */; };
+		3F934DFF2DA97F9600919403 /* ExpandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFE2DA97F9600919403 /* ExpandButton.swift */; };
 		3F93A85D2DA5A18600118948 /* MealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A85C2DA5A18600118948 /* MealViewController.swift */; };
 		3F93A8602DA5A1F300118948 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A85F2DA5A1F300118948 /* MealView.swift */; };
 		3F93A8632DA5BA8300118948 /* MealDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A8622DA5BA8300118948 /* MealDescriptionView.swift */; };
@@ -84,11 +84,11 @@
 		3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PincodeTextField.swift; sourceTree = "<group>"; };
 		3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
+		3F8A0DAA2DAFB9980019DA09 /* ExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedView.swift; sourceTree = "<group>"; };
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
-		3F934DF82DA9469600919403 /* ExpandableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableView.swift; sourceTree = "<group>"; };
 		3F934DFA2DA96AF400919403 /* AdditionalsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalsModel.swift; sourceTree = "<group>"; };
 		3F934DFC2DA9722200919403 /* SelectCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCheckBox.swift; sourceTree = "<group>"; };
-		3F934DFE2DA97F9600919403 /* ExpandableViewsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableViewsButton.swift; sourceTree = "<group>"; };
+		3F934DFE2DA97F9600919403 /* ExpandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandButton.swift; sourceTree = "<group>"; };
 		3F93A85C2DA5A18600118948 /* MealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewController.swift; sourceTree = "<group>"; };
 		3F93A85F2DA5A1F300118948 /* MealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
 		3F93A8622DA5BA8300118948 /* MealDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDescriptionView.swift; sourceTree = "<group>"; };
@@ -288,8 +288,8 @@
 		3F934DF72DA9466F00919403 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				3F934DF82DA9469600919403 /* ExpandableView.swift */,
-				3F934DFE2DA97F9600919403 /* ExpandableViewsButton.swift */,
+				3F8A0DAA2DAFB9980019DA09 /* ExpandedView.swift */,
+				3F934DFE2DA97F9600919403 /* ExpandButton.swift */,
 				3FA1EB632DAAFAE000A43D16 /* QuantityCalcButtons.swift */,
 				3F934DFC2DA9722200919403 /* SelectCheckBox.swift */,
 			);
@@ -463,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
+				3F8A0DAB2DAFB9980019DA09 /* ExpandedView.swift in Sources */,
 				3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
 				3FA1EB642DAAFAE000A43D16 /* QuantityCalcButtons.swift in Sources */,
@@ -474,15 +475,11 @@
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
 				3FA1EB6B2DAB14BE00A43D16 /* QuantityCalculator.swift in Sources */,
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
-
-				3F934DFF2DA97F9600919403 /* ExpandableViewsButton.swift in Sources */,
+				3F934DFF2DA97F9600919403 /* ExpandButton.swift in Sources */,
 				CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */,
 				3F934DFB2DA96AF400919403 /* AdditionalsModel.swift in Sources */,
-				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				3F93A85D2DA5A18600118948 /* MealViewController.swift in Sources */,
-
 				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
-				3F934DF92DA9469600919403 /* ExpandableView.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
 				3F93A8632DA5BA8300118948 /* MealDescriptionView.swift in Sources */,
