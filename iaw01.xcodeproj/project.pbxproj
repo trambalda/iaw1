@@ -31,7 +31,7 @@
 		3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */; };
 		3F8A0DAB2DAFB9980019DA09 /* ExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A0DAA2DAFB9980019DA09 /* ExpandedView.swift */; };
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
-		3F934DFB2DA96AF400919403 /* AdditionalsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFA2DA96AF400919403 /* AdditionalsModel.swift */; };
+		3F934DFB2DA96AF400919403 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFA2DA96AF400919403 /* Content.swift */; };
 		3F934DFD2DA9722200919403 /* SelectCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFC2DA9722200919403 /* SelectCheckBox.swift */; };
 		3F934DFF2DA97F9600919403 /* ExpandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F934DFE2DA97F9600919403 /* ExpandButton.swift */; };
 		3F93A85D2DA5A18600118948 /* MealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93A85C2DA5A18600118948 /* MealViewController.swift */; };
@@ -86,7 +86,7 @@
 		3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
 		3F8A0DAA2DAFB9980019DA09 /* ExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedView.swift; sourceTree = "<group>"; };
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
-		3F934DFA2DA96AF400919403 /* AdditionalsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalsModel.swift; sourceTree = "<group>"; };
+		3F934DFA2DA96AF400919403 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		3F934DFC2DA9722200919403 /* SelectCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCheckBox.swift; sourceTree = "<group>"; };
 		3F934DFE2DA97F9600919403 /* ExpandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandButton.swift; sourceTree = "<group>"; };
 		3F93A85C2DA5A18600118948 /* MealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewController.swift; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 		3F934DEC2DA7CC2200919403 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3F934DFA2DA96AF400919403 /* AdditionalsModel.swift */,
+				3F934DFA2DA96AF400919403 /* Content.swift */,
 				3FA1EB6A2DAB14BE00A43D16 /* QuantityCalculator.swift */,
 			);
 			path = Models;
@@ -477,7 +477,7 @@
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				3F934DFF2DA97F9600919403 /* ExpandButton.swift in Sources */,
 				CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */,
-				3F934DFB2DA96AF400919403 /* AdditionalsModel.swift in Sources */,
+				3F934DFB2DA96AF400919403 /* Content.swift in Sources */,
 				3F93A85D2DA5A18600118948 /* MealViewController.swift in Sources */,
 				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,

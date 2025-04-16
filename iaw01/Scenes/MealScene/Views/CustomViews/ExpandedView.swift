@@ -2,6 +2,8 @@ import UIKit
 
 class ExpandedView: UIView {
     
+    private var isExpanded = false
+    
     private lazy var stack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -21,17 +23,12 @@ class ExpandedView: UIView {
         return label
     }()
     
-    private lazy var button: ExpandButton = {
-        let button = ExpandButton()
+    private lazy var button: UIButton = {
+        let button = UIButton()
+        button.setImage(.addButton, for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .light80
-        setupLayout()
-        setupConstraints()
-    }
     
     init(title: String, isRequiredLabelNeeded: Bool) {
         super.init(frame: .zero)
@@ -44,6 +41,11 @@ class ExpandedView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func buttonAction() {
+        isExpanded.toggle()
+        isExpanded ? button.setImage(.removeButton, for: .normal) : button.setImage(.addButton, for: .normal)
     }
     
     private func setupLayout() {
@@ -61,6 +63,11 @@ class ExpandedView: UIView {
             stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
             stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -17)
         ])
+    }
+    
+    private func populateWithContent(content: [Content]) {
+        
+        
     }
 
 }
