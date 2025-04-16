@@ -3,7 +3,7 @@ import UIKit
 final class RootTabBarController: UITabBarController {
 
     static var height: CGFloat {
-        Constans.isSE ? 85 : 120
+        Constants.isSE ? 76 : 100
     }
 
     var factory: Factory
@@ -114,7 +114,7 @@ final class RootTabBarController: UITabBarController {
     }
 
     private func setupConstraints() {
-        let stackTopAnchor: CGFloat = Constans.isSE ? 11 : 16
+        let stackTopAnchor: CGFloat = Constants.isSE ? 12 : 16
 
         indicatorViewCenterXConstraint = indicatorView.centerXAnchor.constraint(
             equalTo: stackView.arrangedSubviews.first!.centerXAnchor
