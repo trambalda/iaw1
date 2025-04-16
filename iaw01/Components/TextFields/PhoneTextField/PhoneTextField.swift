@@ -79,7 +79,7 @@ final class PhoneTextField: UIStackView {
         textField.leftViewMode = .always
         textField.leftView = phonePrefixView
         textField.delegate = self
-        textField.inputAccessoryView = toolBar
+        textField.inputAccessoryView = UIToolbar.doneToolbar(target: self, action: #selector(doneTapped))
         return textField
     }()
     
@@ -94,17 +94,7 @@ final class PhoneTextField: UIStackView {
         }
         return view
     }()
-    
-    private lazy var toolBar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
 
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneTapped))
-
-        toolbar.setItems([flexibleSpace, doneButton], animated: false)
-        return toolbar
-    }()
     
     init(parent: UIView) {
         self.parent = parent

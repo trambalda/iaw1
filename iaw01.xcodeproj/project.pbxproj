@@ -44,6 +44,7 @@
 		8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
 		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
 		869878372D918ECD00C7BA58 /* PhonePrefixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869878362D918ECD00C7BA58 /* PhonePrefixView.swift */; };
+		86F2456F2DAFA4F90037F33C /* UIToolBar + DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F2456E2DAFA4F90037F33C /* UIToolBar + DoneButton.swift */; };
 		CE02B8532D933581000C0557 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8502D933581000C0557 /* LinkButton.swift */; };
 		CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8512D933581000C0557 /* LinkButtonStyle.swift */; };
 		CE4D24C52D95C88E00325BAE /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constans.swift */; };
@@ -93,6 +94,7 @@
 		869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBaseStyle.swift; sourceTree = "<group>"; };
 		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
 		869878362D918ECD00C7BA58 /* PhonePrefixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonePrefixView.swift; sourceTree = "<group>"; };
+		86F2456E2DAFA4F90037F33C /* UIToolBar + DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIToolBar + DoneButton.swift"; sourceTree = "<group>"; };
 		CE02B8502D933581000C0557 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		CE02B8512D933581000C0557 /* LinkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonStyle.swift; sourceTree = "<group>"; };
 		CE4D24C42D95C88400325BAE /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 		3F9CC6012D9193AE0079DA39 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				86F2456E2DAFA4F90037F33C /* UIToolBar + DoneButton.swift */,
 				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
 				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
 			);
@@ -427,6 +430,7 @@
 				860852232D9747BA0038A9EF /* PhoneTextField.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				868044992D94765400CBE1EC /* CountryCodeModel.swift in Sources */,
+				86F2456F2DAFA4F90037F33C /* UIToolBar + DoneButton.swift in Sources */,
 				869878372D918ECD00C7BA58 /* PhonePrefixView.swift in Sources */,
 				8680452D2D94906B00CBE1EC /* CountryPickerCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
