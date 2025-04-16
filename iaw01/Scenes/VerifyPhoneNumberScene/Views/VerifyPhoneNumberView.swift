@@ -92,7 +92,7 @@ class VerifyPhoneNumberView: UIView {
         newCodeOuterStackView.alignment = .center
         let newCodeInnerStackView = UIStackView()
         newCodeInnerStackView.spacing = 5
-        let spacing: CGFloat = Constans.isSE ? 20 : 40
+        let spacing: CGFloat = Constants.isSE ? 20 : 40
         
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(verifyHeaderLabel)
@@ -123,7 +123,7 @@ class VerifyPhoneNumberView: UIView {
         verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(
             equalTo: bottomAnchor,
             // TODO: подрефачить расчет высоты после создания таббара
-            constant: -(Constans.isSE ? 49 : 83 + keyboardPadding)
+            constant: -(Constants.isSE ? 49 : 83 + keyboardPadding)
         )
         verifyButtonBottomConstraint.isActive = true
     }
@@ -159,7 +159,7 @@ extension VerifyPhoneNumberView {
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        let bottomPadding: CGFloat = -(Constans.isSE ? 49 : 83 + keyboardPadding)
+        let bottomPadding: CGFloat = -(Constants.isSE ? 49 : 83 + keyboardPadding)
         changeVerifyButtonPosition(notification: notification, bottomPadding: bottomPadding)
     }
     
