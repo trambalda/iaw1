@@ -42,6 +42,7 @@ final class MenuTimeView: UIView {
     private var buttons: [UIButton] = []
     private var selectedButton: UIButton?
     private var underlineLeadingConstraint: NSLayoutConstraint!
+    private var underlineWidthConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,15 +65,19 @@ final class MenuTimeView: UIView {
             buttons.append(button)
         }
         
-        if let secondButton = buttons.dropFirst().first {
-            selectButton(secondButton)
+        if let defaultButton = buttons.dropFirst().first {
+            scrollView.addSubview(underlineView)
             
             underlineView.heightAnchor.constraint(equalToConstant: 3).isActive = true
             underlineView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
-            underlineView.widthAnchor.constraint(equalTo: secondButton.widthAnchor, constant: 6).isActive = true
-            underlineLeadingConstraint = underlineView.leadingAnchor.constraint(equalTo: secondButton.leadingAnchor, constant: -3)
+            
+            underlineLeadingConstraint = underlineView.leadingAnchor.constraint(equalTo: defaultButton.leadingAnchor, constant: -3)
             underlineLeadingConstraint.isActive = true
-            underlineView.trailingAnchor.constraint(equalTo: secondButton.trailingAnchor, constant: 3).isActive = true
+            
+            underlineWidthConstraint = underlineView.widthAnchor.constraint(equalTo: defaultButton.widthAnchor, constant: 6)
+            underlineWidthConstraint.isActive = true
+            
+            selectButton(defaultButton)
         }
     }
     
@@ -113,13 +118,19 @@ final class MenuTimeView: UIView {
         
         buttons.forEach { $0.setTitleColor(.dark60, for: .normal) }
         button.setTitleColor(.dark100, for: .normal)
-        /*
-        self.layoutIfNeeded()
+        
+        underlineLeadingConstraint.isActive = false
+        underlineWidthConstraint.isActive = false
+        
+        underlineLeadingConstraint = underlineView.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: -3)
+        underlineLeadingConstraint.isActive = true
+        
+        underlineWidthConstraint = underlineView.widthAnchor.constraint(equalTo: button.widthAnchor, constant: 6)
+        underlineWidthConstraint.isActive = true
+        
         UIView.animate(withDuration: 0.25) {
-            self.underlineLeadingConstraint.constant = button.frame.origin.x - self.stackView.frame.origin.x
             self.layoutIfNeeded()
         }
-         */
     }
     
     func setupLayoutAndConstraints() {

@@ -17,7 +17,14 @@ final class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableViewInsets()
         setupNavigationBar()
+    }
+    
+    private func setupTableViewInsets() {
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
+        restaurantView.menuItemListView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: tabBarHeight, right: 0)
+        restaurantView.menuItemListView.scrollIndicatorInsets = restaurantView.menuItemListView.contentInset
     }
     
     private func setupNavigationBar() {
