@@ -2,8 +2,14 @@ import UIKit
 
 final class RestaurantViewController: UIViewController {
     
-    private let restaurantView = RestaurantView()
     private let model = RestaurantModel.mock
+    
+    private lazy var restaurantView: RestaurantView = {
+        let view = RestaurantView()
+        view.filterView.delegate = self
+        view.model = model
+        return view
+    }()
     
     override func loadView() {
         view = restaurantView
@@ -11,13 +17,7 @@ final class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRestaurantView()
         setupNavigationBar()
-    }
-    
-    private func setupRestaurantView() {
-        restaurantView.filtersView.menuTimeView.delegate = self
-        restaurantView.model = model
     }
     
     private func setupNavigationBar() {
@@ -59,7 +59,7 @@ final class RestaurantViewController: UIViewController {
         
         /* РЕАЛИЗОВАТЬ ПОЗЖЕ
          
-        if Constans.isSE {
+        if Constants.isSE {
             rightStack.spacing = 16
         } else if screenHeight < 800 {
             rightStack.spacing = 24

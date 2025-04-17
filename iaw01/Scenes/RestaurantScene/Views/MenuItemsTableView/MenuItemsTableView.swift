@@ -8,28 +8,26 @@ final class MenuItemsTableView: UITableView {
         }
     }
     
-    var cellHeight: CGFloat = 100 {
-        didSet {
-            reloadData()
-        }
-    }
-    
     override init(frame: CGRect, style: UITableView.Style = .plain) {
         super.init(frame: frame, style: style)
-        delegate = self
-        dataSource = self
-        register(MenuItemsTableViewCell.self, forCellReuseIdentifier: MenuItemsTableViewCell.identifier)
+        configure()
     }
    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configure() {
+        delegate = self
+        dataSource = self
+        register(MenuItemsTableViewCell.self, forCellReuseIdentifier: MenuItemsTableViewCell.identifier)
     }
 }
 
 extension MenuItemsTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return models.count
+        models.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,6 +43,6 @@ extension MenuItemsTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
+        MenuItemsTableViewCell.cellHeight
     }
 }

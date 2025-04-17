@@ -4,7 +4,7 @@ final class HeaderView: UIStackView {
     
     var model: RestaurantModel = .empty {
         didSet {
-            imageView.image = model.image
+            imageView.image = UIImage(named: model.image)
             restaurantHeaderView.model = model
             restaurantInfoView.model = model
         }
@@ -75,7 +75,7 @@ final class HeaderView: UIStackView {
     }
     
     private func adjustForSmallScreens() {
-        guard Constans.isSE else { return }
+        guard Constants.isSE else { return }
     }
 }
 

@@ -2,39 +2,43 @@ import UIKit
 
 struct RestaurantModel {
     
-    let image: UIImage?
-    let logo: UIImage?
-    let title: String
-    let location: String
-    let rating: String
-    let time: String
-    let typeOfFood: String
+    let id: Int
+    let logo: String
+    let name: String
+    let image: String
+    let rating: Float
+    let deliveryTime: String
+    let address: String
+    let cousines: [String]
     let menu: [MenuModel]
-    let menuItemList: [MenuItemListModel]
+    let dishes: [MenuItemListModel]
     
     static let empty = RestaurantModel(
-        image: nil,
-        logo: nil,
-        title: "",
-        location: "",
-        rating: "",
-        time: "",
-        typeOfFood: "",
+        id: 0,
+        logo: "",
+        name: "",
+        image: "",
+        rating: 0.0,
+        deliveryTime: "",
+        address: "",
+        cousines: [],
         menu: [],
-        menuItemList: []
+        dishes: []
     )
 }
 
 extension RestaurantModel {
     
     static let mock = RestaurantModel(
-        image: .restaurant,
-        logo: .logo,
-        title: "McDonald's",
-        location: "Bramlea & Sandalwood",
-        rating: "4.5", time: "15-20",
-        typeOfFood: "Burgers",
+        id: 0,
+        logo: "logo",
+        name: "McDonald's",
+        image: "restaurant",
+        rating: 4.5,
+        deliveryTime: "15-20",
+        address: "Bramlea & Sandalwood",
+        cousines: ["Burgers"],
         menu: MenuModel.mock,
-        menuItemList: MenuItemListModel.mockArray
+        dishes: MenuItemListModel.mockArray
     )
 }

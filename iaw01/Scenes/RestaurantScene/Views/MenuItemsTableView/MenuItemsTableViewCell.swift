@@ -3,22 +3,13 @@ import UIKit
 final class MenuItemsTableViewCell: UITableViewCell {
     
     static let identifier = "MenuItemsTableViewCell"
+    static let cellHeight: CGFloat = 100
     
     var model: MenuItemListModel = .empty {
         didSet {
-            foodImage.image = model.foodImage
-            nameLabel.attributedText = Font.body.compose(model.foodTitle)
-            
-            let attributedString = NSAttributedString(
-                string: "$\(model.oldPrice)",
-                attributes: [
-                    .strikethroughStyle: NSUnderlineStyle.single.rawValue,
-                    .font: Font.body.font
-                ]
-            )
-            
-            oldPriceLabel.attributedText = attributedString  //change font
-            newPriceLabel.attributedText = Font.body.compose("$\(model.newPrice)", color: .blue100)    //change font
+            foodImage.image = UIImage(named: model.image)
+            nameLabel.attributedText = Font.body.compose(model.name)
+            priceLabel.attributedText = Font.body.compose(String(format: "%.2f", model.price))
         }
     }
     
@@ -36,20 +27,12 @@ final class MenuItemsTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let arrowImage: UIImageView = {
-        let imageView = UIImageView(image: .arrowRight)
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    //private let nameLabel = UILabel()
-    private let oldPriceLabel = UILabel()
-    private let newPriceLabel = UILabel()
-    
+    private let priceLabel = UILabel()
+    private let arrowImage = UIImageView(image: .arrowRight)
+   
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configure()
         setupLayoutAndConstraints()
     }
     
@@ -57,8 +40,7 @@ final class MenuItemsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func configure() {
         separatorInset = .zero
     }
     
@@ -68,16 +50,11 @@ final class MenuItemsTableViewCell: UITableViewCell {
             foodImage
             infoStack
                 nameLabel
-                priceStack
-                    oldPriceLabel
-                    newPriceLabel
+                priceLabel
         arrowImage
      */
     
     private func setupLayoutAndConstraints() {
-        let priceStack = UIStackView()
-        priceStack.spacing = 9
-        
         let infoStack = UIStackView()
         infoStack.axis = .vertical
         infoStack.alignment = .leading
@@ -85,9 +62,10 @@ final class MenuItemsTableViewCell: UITableViewCell {
         
         let itemStack = UIStackView()
         itemStack.spacing = 10
+        itemStack.alignment = .center
         
         let mainStack = UIStackView()
-        mainStack.distribution = .equalSpacing
+        mainStack.spacing = 10
         mainStack.alignment = .center
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         
@@ -96,9 +74,8 @@ final class MenuItemsTableViewCell: UITableViewCell {
         itemStack.addArrangedSubview(foodImage)
         itemStack.addArrangedSubview(infoStack)
         infoStack.addArrangedSubview(nameLabel)
-        infoStack.addArrangedSubview(priceStack)
-        priceStack.addArrangedSubview(oldPriceLabel)
-        priceStack.addArrangedSubview(newPriceLabel)
+        infoStack.addArrangedSubview(priceLabel)
+        
         mainStack.addArrangedSubview(arrowImage)
         
         NSLayoutConstraint.activate([
@@ -106,11 +83,8 @@ final class MenuItemsTableViewCell: UITableViewCell {
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             mainStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            foodImage.widthAnchor.constraint(equalToConstant: 98),
-            foodImage.heightAnchor.constraint(equalToConstant: 41),
-            
-            arrowImage.widthAnchor.constraint(equalToConstant: 24),
-            arrowImage.heightAnchor.constraint(equalToConstant: 24)
+            foodImage.widthAnchor.constraint(equalToConstant: 96),
+            foodImage.heightAnchor.constraint(equalToConstant: 65)
         ])
     }
 }

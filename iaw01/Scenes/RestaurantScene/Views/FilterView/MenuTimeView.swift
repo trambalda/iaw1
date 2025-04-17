@@ -9,6 +9,12 @@ final class MenuTimeView: UIView {
     
     weak var delegate: MenuTimeViewDelegate?
     
+    var model: RestaurantModel = .empty {
+        didSet {
+            configure(with: model.menu)
+        }
+    }
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
@@ -53,7 +59,7 @@ final class MenuTimeView: UIView {
         buttons.removeAll()
         
         for menu in menus {
-            let button = createButton(title: menu.title)
+            let button = createButton(title: menu.name)
             stackView.addArrangedSubview(button)
             buttons.append(button)
         }

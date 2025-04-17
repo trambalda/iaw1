@@ -5,13 +5,17 @@ final class RestaurantView: UIView {
     var model: RestaurantModel = .empty {
         didSet {
             headerView.model = model
-            filtersView.model = model
-            menuItemListView.models = model.menuItemList
+            filterView.model = model
+            menuItemListView.models = model.dishes
+            
+            let cellHeight: CGFloat = MenuItemsTableViewCell.cellHeight
+            let totalHeight = CGFloat(model.dishes.count) * cellHeight
+            menuItemListViewHeightConstraint?.constant = totalHeight
         }
     }
     
     let headerView = HeaderView()
-    let filtersView = FiltersView()
+    let filterView = MenuTimeView()
     let menuItemListView = MenuItemsTableView()
     
     let scrollView: UIScrollView = {
@@ -28,6 +32,8 @@ final class RestaurantView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    private var menuItemListViewHeightConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,7 +55,7 @@ final class RestaurantView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentStack)
         contentStack.addArrangedSubview(headerView)
-        contentStack.addArrangedSubview(filtersView)
+        contentStack.addArrangedSubview(filterView)
         contentStack.addArrangedSubview(menuItemListView)
     }
     
@@ -65,9 +71,10 @@ final class RestaurantView: UIView {
             contentStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            
-            menuItemListView.heightAnchor.constraint(equalToConstant: 500)
         ])
+        
+        menuItemListViewHeightConstraint = menuItemListView.heightAnchor.constraint(equalToConstant: 0)
+        menuItemListViewHeightConstraint?.isActive = true
     }
 }
 

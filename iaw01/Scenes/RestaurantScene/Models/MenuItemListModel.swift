@@ -2,16 +2,18 @@ import UIKit
 
 struct MenuItemListModel {
     
-    let foodImage: UIImage?
-    let foodTitle: String
-    let oldPrice: String
-    let newPrice: String
+    let id: Int
+    let image: String
+    let name: String
+    let price: Float
+    let menuId: Int
     
     static let empty = MenuItemListModel(
-        foodImage: nil,
-        foodTitle: "",
-        oldPrice: "",
-        newPrice: ""
+        id: 0,
+        image: "",
+        name: "",
+        price: 0.0,
+        menuId: 0
     )
 }
 
@@ -19,34 +21,39 @@ extension MenuItemListModel {
     
     static let mockArray: [MenuItemListModel] = [
         MenuItemListModel(
-            foodImage: .burgersmall,
-            foodTitle: "Classic Cheese Hamburger (400 Cals)",
-            oldPrice: "5.80",
-            newPrice: "4.59"
+            id: 1,
+            image: "burgersmall",
+            name: "Classic Cheese Hamburger (400 Cals)",
+            price: 5.80,
+            menuId: 1
         ),
         MenuItemListModel(
-            foodImage: .burgersmall2,
-            foodTitle: "Simply Cheese with Sesame Seed buns",
-            oldPrice: "4.80",
-            newPrice: "3.59"
+            id: 2,
+            image: "burgersmall2",
+            name: "Simply Cheese with Sesame Seed buns",
+            price: 4.80,
+            menuId: 2
         ),
         MenuItemListModel(
-            foodImage: .sandwichsmall,
-            foodTitle: "Veggie & Bacon Hot Sauce Sandwich ",
-            oldPrice: "6.80",
-            newPrice: "5.59"
+            id: 3,
+            image: "sandwichsmall",
+            name: "Veggie & Bacon Hot Sauce Sandwich ",
+            price: 6.80,
+            menuId: 3
         ),
         MenuItemListModel(
-            foodImage: .burgersmall3,
-            foodTitle: "Western BBQ Cheeseburger",
-            oldPrice: "5.80",
-            newPrice: "4.59"
+            id: 4,
+            image: "burgersmall3",
+            name: "Western BBQ Cheeseburger",
+            price: 5.80,
+            menuId: 4
         ),
         MenuItemListModel(
-            foodImage: .saladsmall,
-            foodTitle: "Bacon and Veggies Salad",
-            oldPrice: "5.80",
-            newPrice: "4.59"
+            id: 5,
+            image: "saladsmall",
+            name: "Bacon and Veggies Salad",
+            price: 5.80,
+            menuId: 5
         )
     ]
 }

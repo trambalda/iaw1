@@ -4,9 +4,9 @@ final class RestaurantHeaderView: UIStackView {
     
     var model: RestaurantModel = .empty {
         didSet {
-            logoImageView.image = model.logo
-            titleLabel.attributedText = Font.name.compose(model.title)
-            locationLabel.attributedText = Font.body.compose(model.location)
+            logoImageView.image = UIImage(named: model.logo)
+            titleLabel.attributedText = Font.name.compose(model.name)
+            locationLabel.attributedText = Font.body.compose(model.address)
         }
     }
     

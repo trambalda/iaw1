@@ -2,20 +2,17 @@ import UIKit
 
 struct MenuModel {
     
-    let title: String
-    let categories: [String]
+    let id: Int
+    let name: String
     
-    static let empty = MenuModel(title: "", categories: [])
+    static let empty = MenuModel(id: 0, name: "")
 }
 
 extension MenuModel {
     
     static let mock : [MenuModel] = [
-        MenuModel(title: "Breakfast Menu",
-                  categories: ["Pancakes", "Omelettes", "Coffee", "Juices"]),
-        MenuModel(title: "Lunch & Dinner",
-                  categories: ["Today's Deals", "Burger Meals", "Chicken & Fish", "Salads"]),
-        MenuModel(title: "Overnight Menu",
-                  categories: ["Late Night Snacks", "Wraps", "Desserts", "Drinks"])
+        MenuModel(id: 1, name: "Breakfast Menu"),
+        MenuModel(id: 2, name: "Lunch & Dinner"),
+        MenuModel(id: 3, name: "Overnight Menu")
     ]
 }
