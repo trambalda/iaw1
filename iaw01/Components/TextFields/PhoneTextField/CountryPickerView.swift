@@ -16,7 +16,6 @@ final class CountryPickerView: UITableView {
     }
 
     private func configure() {
-        translatesAutoresizingMaskIntoConstraints = false
         rowHeight = 40
         backgroundColor = .light80
         dataSource = self

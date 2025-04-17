@@ -15,6 +15,7 @@ final class CountryPickerCell: UITableViewCell {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.spacing = 3
+        stack.alignment = .leading
         return stack
     }()
     
@@ -39,11 +40,13 @@ final class CountryPickerCell: UITableViewCell {
         contentView.addSubview(flagAndCodeStackView)
         flagAndCodeStackView.addArrangedSubview(countryFlagLabel)
         flagAndCodeStackView.addArrangedSubview(countryCodeLabel)
+        flagAndCodeStackView.addArrangedSubview(UIView())
         
         NSLayoutConstraint.activate([
             flagAndCodeStackView.topAnchor.constraint(equalTo: topAnchor),
             flagAndCodeStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             flagAndCodeStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13),
+            flagAndCodeStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -13),
         ])
     }
 }

@@ -12,14 +12,20 @@ final class PhonePrefixView: UIView {
     
     var countryCode: CountryCodeModel? = .default {
         didSet {
-            guard let countryCode else { return }
+            guard var countryCode else { return }
+
+            if countryCode.flag?.isEmpty != false,
+                let complete = CountryCodeModel.countryCodes.first(where: { $0.code == countryCode.code }) {
+                countryCode = complete
+            }
+
             flagLabel.text = countryCode.flag
             phonePrefixTextField.attributedText = Font.body.compose(countryCode.code, color: .dark100)
         }
     }
     
     var isPrefixFieldFirstResponder: Bool {
-        return phonePrefixTextField.isFirstResponder
+        phonePrefixTextField.isFirstResponder
     }
     
     private let containerStackView: UIStackView = {
@@ -37,13 +43,7 @@ final class PhonePrefixView: UIView {
         return label
     }()
 
-    private lazy var flagContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(flagLabel)
-        view.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        return view
-    }()
+    private lazy var flagContainerView = UIView() 
 
     private lazy var phonePrefixTextField: UITextField = {
         let textField = UITextField()
@@ -51,7 +51,7 @@ final class PhonePrefixView: UIView {
         textField.leftView = flagContainerView
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.delegate = self
-        textField.keyboardType = .numberPad
+        textField.keyboardType = .phonePad
         return textField
     }()
     
@@ -89,6 +89,7 @@ final class PhonePrefixView: UIView {
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(phonePrefixStackView)
         phonePrefixStackView.addArrangedSubview(phonePrefixTextField)
+        flagContainerView.addSubview(flagLabel)
         containerStackView.addArrangedSubview(showPickerButton)
         containerStackView.addArrangedSubview(lineContainerView)
         lineContainerView.addSubview(lineView)
@@ -102,6 +103,8 @@ final class PhonePrefixView: UIView {
             containerStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             phonePrefixStackView.widthAnchor.constraint(equalToConstant: 67),
+            
+            flagContainerView.widthAnchor.constraint(equalToConstant: 25),
             
             lineContainerView.widthAnchor.constraint(equalToConstant: 20),
             
@@ -122,7 +125,12 @@ final class PhonePrefixView: UIView {
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text, !text.isEmpty else { return }
+        guard var text = textField.text, !text.isEmpty else { return }
+        
+        if !text.hasPrefix("+") {
+            text = "+" + text
+            textField.text = text
+        }
         
         if let country = CountryCodeModel.countryCodes.first(where: { $0.code == text }) {
             countryCode = country

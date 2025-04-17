@@ -59,11 +59,15 @@ final class TextFieldsViewController: UIViewController {
     
     private lazy var phoneTextField: PhoneTextField = {
         let textField = PhoneTextField(parent: self.view)
-        textField.phoneNumber = .default
+
+        let countryCode = CountryCodeModel(code: "+7")
+        textField.phoneNumber = PhoneNumber(number: "2911122330", countryCode: countryCode)
+
         textField.textFieldShouldReturn = {
             print("Phone Number: \(textField.phoneNumber.fullNumber)")
             textField.resignTextFieldFirstResponder()
         }
+
         return textField
     }()
     

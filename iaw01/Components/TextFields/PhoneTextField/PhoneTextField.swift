@@ -17,6 +17,7 @@ final class PhoneTextField: UIStackView {
                 phonePrefixView.countryCode = .default
             }
             
+            refreshPhoneField(for: phonePrefixView.countryCode ?? .default)
             updatePlaceholder()
         }
     }
@@ -182,7 +183,6 @@ final class PhoneTextField: UIStackView {
         }
 
         updatePlaceholder()
-        textField.becomeFirstResponder()
     }
     
     private func applyMask(for text: String, with mask: String) -> String {

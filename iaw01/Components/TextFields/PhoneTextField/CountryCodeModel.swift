@@ -1,5 +1,3 @@
-import UIKit
-
 struct CountryCodeModel {
     let region: String?
     let flag: String?
@@ -24,7 +22,7 @@ struct CountryCodeModel {
         CountryCodeModel(region: "IN", flag: "🇮🇳", code: "+91", mask: " #####-#####", placeholder: "00000-00000"),
         CountryCodeModel(region: "JP", flag: "🇯🇵", code: "+81", mask: " ##-####-####", placeholder: "00-0000-0000"),
         CountryCodeModel(region: "BR", flag: "🇧🇷", code: "+55", mask: " (##) #####-####", placeholder: "(00) 00000-0000"),
-        CountryCodeModel(region: "AU", flag: "🇦🇺", code: "+61", mask: " #### ### ###", placeholder: "0000 000 000")
+        CountryCodeModel(region: "AU", flag: "🇦🇺", code: "+61", mask: " #### ### ###", placeholder: "0000 000 000"),
     ]
     
     init(region: String, flag: String, code: String, mask: String, placeholder: String) {
