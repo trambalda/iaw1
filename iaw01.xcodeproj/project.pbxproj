@@ -53,7 +53,7 @@
 		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
 		CE02B8532D933581000C0557 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8502D933581000C0557 /* LinkButton.swift */; };
 		CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8512D933581000C0557 /* LinkButtonStyle.swift */; };
-		CE4D24C52D95C88E00325BAE /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constans.swift */; };
+		CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constants.swift */; };
 		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
 		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
 		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
@@ -109,7 +109,7 @@
 		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
 		CE02B8502D933581000C0557 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		CE02B8512D933581000C0557 /* LinkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonStyle.swift; sourceTree = "<group>"; };
-		CE4D24C42D95C88400325BAE /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		CE4D24C42D95C88400325BAE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
 		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
 		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 				21AA4B522D8160E30086697C /* SceneDelegate.swift */,
 				21AA4B642D81627D0086697C /* AppCoordinator.swift */,
 				21AA4B7B2D81880A0086697C /* Factory.swift */,
-				CE4D24C42D95C88400325BAE /* Constans.swift */,
+				CE4D24C42D95C88400325BAE /* Constants.swift */,
 				21AA4B6A2D817C410086697C /* RootTabBar */,
 			);
 			path = AppDelegate;
@@ -484,7 +484,7 @@
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				1FBA9F902D9BEAA800C2B2E7 /* MenuItemsTableViewCell.swift in Sources */,
-				CE4D24C52D95C88E00325BAE /* Constans.swift in Sources */,
+				CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */,
 				1F3BB50A2D92F6AC004C52F9 /* MenuTimeView.swift in Sources */,
 				1F0F43B62D93F9DE00D87BBD /* RestaurantModel.swift in Sources */,
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
