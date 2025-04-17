@@ -72,7 +72,7 @@ final class KeyboardService: KeyboardServiceProtocol {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 
-        keyboardHeight = Constans.isSE ? keyboardFrame.height + 90 : keyboardFrame.height + 130
+        keyboardHeight = Constants.isSE ? keyboardFrame.height + 90 : keyboardFrame.height + 130
 
         if activeView != nil {
             moveToNewActiveView()
