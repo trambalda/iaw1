@@ -28,4 +28,9 @@ final class Factory {
         let vc = VerifyPhoneNumberViewController()
         return vc
     }
+    
+    func createProfileScene() -> ProfileViewController {
+        let vc = ProfileViewController()
+        return vc
+    }
 }

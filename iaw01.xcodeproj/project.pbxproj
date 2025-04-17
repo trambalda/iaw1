@@ -29,6 +29,13 @@
 		3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */; };
 		3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */; };
 		3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */; };
+		3F8980F22DB1655E00F670A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */; };
+		3F8980F52DB165FF00F670A9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F42DB165FF00F670A9 /* ProfileView.swift */; };
+		3F8980F72DB16B4600F670A9 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F62DB16B4600F670A9 /* AvatarView.swift */; };
+		3F8980F92DB1717600F670A9 /* SelectPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */; };
+		3F8980FB2DB17E8E00F670A9 /* FullNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */; };
+		3F8980FD2DB1897C00F670A9 /* PhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FC2DB1897C00F670A9 /* PhoneNumberView.swift */; };
+		3F8980FF2DB18AEC00F670A9 /* ApiKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */; };
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
 		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
 		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
@@ -73,6 +80,13 @@
 		3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PincodeTextField.swift; sourceTree = "<group>"; };
 		3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
+		3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3F8980F42DB165FF00F670A9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3F8980F62DB16B4600F670A9 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoButton.swift; sourceTree = "<group>"; };
+		3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullNameView.swift; sourceTree = "<group>"; };
+		3F8980FC2DB1897C00F670A9 /* PhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberView.swift; sourceTree = "<group>"; };
+		3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyView.swift; sourceTree = "<group>"; };
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
 		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
@@ -143,7 +157,6 @@
 		21AA4B442D8160E30086697C = {
 			isa = PBXGroup;
 			children = (
-				21AA4B7D2D818F380086697C /* README.md */,
 				21AA4B4F2D8160E30086697C /* iaw01 */,
 				21AA4B4E2D8160E30086697C /* Products */,
 			);
@@ -166,6 +179,7 @@
 				1FCF129C2D8953B400386458 /* Components */,
 				3F9CC6012D9193AE0079DA39 /* Extensions */,
 				21AA4B792D81872E0086697C /* Configuration */,
+				21AA4B7D2D818F380086697C /* README.md */,
 			);
 			path = iaw01;
 			sourceTree = "<group>";
@@ -236,6 +250,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				3F8980F02DB1653C00F670A9 /* Profile */,
 				3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */,
 				D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */,
 				21AA4B782D81864F0086697C /* DummyScene */,
@@ -251,6 +266,28 @@
 				3F93A85A2DA565B300118948 /* Views */,
 			);
 			path = VerifyPhoneNumberScene;
+			sourceTree = "<group>";
+		};
+		3F8980F02DB1653C00F670A9 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */,
+				3F8980F32DB165BA00F670A9 /* Views */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		3F8980F32DB165BA00F670A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F8980F42DB165FF00F670A9 /* ProfileView.swift */,
+				3F8980F62DB16B4600F670A9 /* AvatarView.swift */,
+				3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */,
+				3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */,
+				3F8980FC2DB1897C00F670A9 /* PhoneNumberView.swift */,
+				3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3F93A85A2DA565B300118948 /* Views */ = {
@@ -395,12 +432,15 @@
 				3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
+				3F8980FD2DB1897C00F670A9 /* PhoneNumberView.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */,
 				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
+				3F8980F72DB16B4600F670A9 /* AvatarView.swift in Sources */,
+				3F8980FF2DB18AEC00F670A9 /* ApiKeyView.swift in Sources */,
 				3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
@@ -417,11 +457,15 @@
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
+				3F8980F52DB165FF00F670A9 /* ProfileView.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
 				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,
 				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,
+				3F8980F22DB1655E00F670A9 /* ProfileViewController.swift in Sources */,
 				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
+				3F8980F92DB1717600F670A9 /* SelectPhotoButton.swift in Sources */,
+				3F8980FB2DB17E8E00F670A9 /* FullNameView.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
