@@ -31,12 +31,13 @@
 		3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */; };
 		3F8980F22DB1655E00F670A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */; };
 		3F8980F52DB165FF00F670A9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F42DB165FF00F670A9 /* ProfileView.swift */; };
-		3F8980F72DB16B4600F670A9 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F62DB16B4600F670A9 /* AvatarView.swift */; };
 		3F8980F92DB1717600F670A9 /* SelectPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */; };
 		3F8980FB2DB17E8E00F670A9 /* FullNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */; };
-		3F8980FD2DB1897C00F670A9 /* PhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FC2DB1897C00F670A9 /* PhoneNumberView.swift */; };
+		3F8980FD2DB1897C00F670A9 /* ProfilePhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FC2DB1897C00F670A9 /* ProfilePhoneNumberInputView.swift */; };
 		3F8980FF2DB18AEC00F670A9 /* ApiKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */; };
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
+		3F927F052DB2A6E300075040 /* CountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F927F042DB2A6E300075040 /* CountryCodes.swift */; };
+		3F927F072DB2B40400075040 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F927F062DB2B40400075040 /* InputView.swift */; };
 		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
 		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
 		869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
@@ -82,12 +83,13 @@
 		3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
 		3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3F8980F42DB165FF00F670A9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		3F8980F62DB16B4600F670A9 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoButton.swift; sourceTree = "<group>"; };
 		3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullNameView.swift; sourceTree = "<group>"; };
-		3F8980FC2DB1897C00F670A9 /* PhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberView.swift; sourceTree = "<group>"; };
+		3F8980FC2DB1897C00F670A9 /* ProfilePhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyView.swift; sourceTree = "<group>"; };
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
+		3F927F042DB2A6E300075040 /* CountryCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodes.swift; sourceTree = "<group>"; };
+		3F927F062DB2B40400075040 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
 		869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			children = (
 				3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */,
 				3F8980F32DB165BA00F670A9 /* Views */,
+				3F927F032DB2A6C300075040 /* Models */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -281,13 +284,21 @@
 			isa = PBXGroup;
 			children = (
 				3F8980F42DB165FF00F670A9 /* ProfileView.swift */,
-				3F8980F62DB16B4600F670A9 /* AvatarView.swift */,
 				3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */,
 				3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */,
-				3F8980FC2DB1897C00F670A9 /* PhoneNumberView.swift */,
+				3F927F062DB2B40400075040 /* InputView.swift */,
+				3F8980FC2DB1897C00F670A9 /* ProfilePhoneNumberInputView.swift */,
 				3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3F927F032DB2A6C300075040 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3F927F042DB2A6E300075040 /* CountryCodes.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		3F93A85A2DA565B300118948 /* Views */ = {
@@ -432,16 +443,16 @@
 				3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
-				3F8980FD2DB1897C00F670A9 /* PhoneNumberView.swift in Sources */,
+				3F8980FD2DB1897C00F670A9 /* ProfilePhoneNumberInputView.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */,
 				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
-				3F8980F72DB16B4600F670A9 /* AvatarView.swift in Sources */,
 				3F8980FF2DB18AEC00F670A9 /* ApiKeyView.swift in Sources */,
 				3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */,
+				3F927F072DB2B40400075040 /* InputView.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
@@ -467,6 +478,7 @@
 				3F8980F92DB1717600F670A9 /* SelectPhotoButton.swift in Sources */,
 				3F8980FB2DB17E8E00F670A9 /* FullNameView.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
+				3F927F052DB2A6E300075040 /* CountryCodes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

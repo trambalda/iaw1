@@ -26,11 +26,19 @@ class ApiKeyView: UIView {
     
     private lazy var apiTextField: UITextField = {
         let textField = UITextField()
-        textField.keyboardType = .numberPad
+        textField.returnKeyType = .done
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Enter your API"
         return textField
     }()
+    
+    weak var textFieldDelegate: UITextFieldDelegate? {
+        didSet {
+            apiTextField.delegate = textFieldDelegate
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,7 +67,9 @@ class ApiKeyView: UIView {
             apiTextField.topAnchor.constraint(equalTo: apiTextFieldView.topAnchor, constant: 14),
             apiTextField.leadingAnchor.constraint(equalTo: apiTextFieldView.leadingAnchor, constant: 13),
             apiTextField.trailingAnchor.constraint(equalTo: apiTextFieldView.trailingAnchor, constant: -13),
-            apiTextField.bottomAnchor.constraint(equalTo: apiTextFieldView.bottomAnchor, constant: -14)
+            apiTextField.bottomAnchor.constraint(equalTo: apiTextFieldView.bottomAnchor, constant: -14),
+            
+            apiTextFieldView.heightAnchor.constraint(equalToConstant: 51)
         ])
     }
 }

@@ -15,7 +15,7 @@ final class RootTabBarController: UITabBarController {
         UINavigationController(rootViewController: factory.createDummyScene()),
         UINavigationController(rootViewController: factory.createDummyScene()),
         UINavigationController(rootViewController: factory.createDummyScene()),
-        UINavigationController(rootViewController: factory.createDummyScene()),
+        UINavigationController(rootViewController: factory.createProfileScene()),
     ]
 
     private let backgroundView: UIView = {

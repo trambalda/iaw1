@@ -4,6 +4,9 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileView: ProfileView = {
         let view = ProfileView(frame: UIScreen.main.bounds)
+        view.onSafeButtonTapped = {
+            print("Safe button tapped")
+        }
         return view
     }()
 

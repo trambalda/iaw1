@@ -67,7 +67,9 @@ class FullNameView: UIView {
             textField.topAnchor.constraint(equalTo: textFieldView.topAnchor, constant: 14),
             textField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor, constant: 13),
             textField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor, constant: -13),
-            textField.bottomAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: -14)
+            textField.bottomAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: -14),
+            
+            textFieldView.heightAnchor.constraint(equalToConstant: 51)
         ])
     }
 }

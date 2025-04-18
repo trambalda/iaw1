@@ -2,71 +2,63 @@ import UIKit
 
 class ProfileView: UIView {
     
-    private var fullNameViewTopConstraint: NSLayoutConstraint!
+    var onSafeButtonTapped: (() -> Void)?
     
-    private var avatarImageViewTopConstraint: NSLayoutConstraint!
-    
-    private lazy var stackView: UIStackView = {
+    private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 5
+        stackView.spacing = 15
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    private lazy var avatarView: AvatarView = {
-        let image = AvatarView()
+    private lazy var avatarView: UIImageView = {
+        let image = UIImageView()
         image.contentMode = .scaleAspectFit
+        image.image = .avatar
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
     private lazy var selectAvatarButton: SelectPhotoButton = {
         let button = SelectPhotoButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var fullNameView: FullNameView = {
         let view = FullNameView()
         view.textFieldDelegate = self
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var phoneNumberView: PhoneNumberView = {
-        let view = PhoneNumberView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var phoneNumberView: InputView = {
+        let view = InputView()
         return view
     }()
     
     private lazy var apiKeyView: ApiKeyView = {
         let view = ApiKeyView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textFieldDelegate = self
         return view
     }()
     
-    private lazy var apiKeyLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-    
-    private lazy var apiKeyTextField: UITextField = {
-        let textField = UITextField()
-        return textField
-    }()
-    
-    private lazy var saveButton: UIButton = {
-        let button = UIButton()
+    private lazy var saveButton: CornersButton = {
+        let button = CornersButton(style: .saveDarkButton)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(saveButtonDidTapped), for: .touchUpInside)
         return button
     }()
+    
+    @objc private func saveButtonDidTapped() {
+        onSafeButtonTapped?()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
         setupConstraints()
         setupObservers()
-        addTapGestureRecognizer()
+        print("Original size:", avatarView.bounds.size)
     }
     
     required init?(coder: NSCoder) {
@@ -78,52 +70,39 @@ class ProfileView: UIView {
     }
     
     private func setupLayout() {
-        addSubview(avatarView)
-        addSubview(selectAvatarButton)
-        addSubview(fullNameView)
-        addSubview(phoneNumberView)
-        addSubview(apiKeyView)
+        addSubview(mainStackView)
+        let avatarHStack = UIStackView()
+        avatarHStack.alignment = .center
+        avatarHStack.addArrangedSubview(avatarView)
+        mainStackView.addArrangedSubview(avatarHStack)
+        let buttonVStack = UIStackView()
+        buttonVStack.axis = .vertical
+        buttonVStack.alignment = .center
+        buttonVStack.addArrangedSubview(selectAvatarButton)
+        mainStackView.addArrangedSubview(buttonVStack)
+        mainStackView.addArrangedSubview(fullNameView)
+        mainStackView.addArrangedSubview(phoneNumberView)
+        mainStackView.addArrangedSubview(apiKeyView)
+        mainStackView.addArrangedSubview(saveButton)
+        
+        mainStackView.setCustomSpacing(17, after: avatarView)
+        mainStackView.setCustomSpacing(16, after: selectAvatarButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            avatarView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 120),
-            avatarView.heightAnchor.constraint(equalToConstant: 150),
-            avatarView.widthAnchor.constraint(equalToConstant: 150),
+            mainStackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+           
+            fullNameView.heightAnchor.constraint(equalToConstant: 80),
+            phoneNumberView.heightAnchor.constraint(equalToConstant: 80),
+            apiKeyView.heightAnchor.constraint(equalToConstant: 80),
             
-            selectAvatarButton.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 17),
-            selectAvatarButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 125),
-            
-            fullNameView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
-            fullNameView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
-            
-            phoneNumberView.topAnchor.constraint(equalTo: fullNameView.bottomAnchor, constant: 15),
-            phoneNumberView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
-            phoneNumberView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
-            
-            apiKeyView.topAnchor.constraint(equalTo: phoneNumberView.bottomAnchor, constant: 15),
-            apiKeyView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
-            apiKeyView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
+            saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
+            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
+            saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100)
         ])
-        fullNameViewTopConstraint = fullNameView.topAnchor.constraint(equalTo: selectAvatarButton.bottomAnchor, constant: 16)
-        fullNameViewTopConstraint.isActive = true
-        
-        avatarImageViewTopConstraint = avatarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20)
-        avatarImageViewTopConstraint.isActive = true
-    }
-    
-    private func addTapGestureRecognizer() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGesture.cancelsTouchesInView = false
-        addGestureRecognizer(tapGesture)
-    }
-    
-    @objc private func handleTap() {
-        endEditing(true)
-    }
-    
-    private func keyBoardWillHideConfig() {
-        
     }
 }
 
@@ -137,53 +116,16 @@ extension ProfileView {
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
-        
         UIView.animate(withDuration: 0.3) {
-            self.selectAvatarButton.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-        } completion: { _ in
-            self.selectAvatarButton.isHidden = true
-        }
-        
-        avatarImageViewTopConstraint?.isActive = false
-        avatarImageViewTopConstraint = avatarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5)
-        avatarImageViewTopConstraint?.isActive = true
-        
-        UIView.animate(withDuration: 0.3) {
-            self.avatarView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        }
-        
-        fullNameViewTopConstraint?.isActive = false
-        fullNameViewTopConstraint = fullNameView.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 1)
-        fullNameViewTopConstraint?.isActive = true
-        
-        UIView.animate(withDuration: 0.3) {
-            self.layoutIfNeeded()
+            self.avatarView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            self.selectAvatarButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         }
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        let animator = UIViewPropertyAnimator(duration: 0.1, curve: .easeInOut) {
-            self.selectAvatarButton.transform = .identity
-        }
-        animator.addCompletion { _ in
-            self.selectAvatarButton.isHidden = false
-        }
-        animator.startAnimation()
-        
-        avatarImageViewTopConstraint?.isActive = false
-        avatarImageViewTopConstraint = avatarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20)
-        avatarImageViewTopConstraint?.isActive = true
-        
-        fullNameViewTopConstraint?.isActive = false
-        fullNameViewTopConstraint = fullNameView.topAnchor.constraint(equalTo: selectAvatarButton.bottomAnchor, constant: 16)
-        fullNameViewTopConstraint?.isActive = true
-        
-        UIView.animate(withDuration: 0.3) {
-            self.layoutIfNeeded()
-        }
-        
         UIView.animate(withDuration: 0.3) {
             self.avatarView.transform = .identity
+            self.selectAvatarButton.transform = .identity
         }
     }
 }
