@@ -2,17 +2,16 @@ import UIKit
 
 class ApiKeyView: UIView {
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 6
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    weak var textFieldDelegate: UITextFieldDelegate? {
+        didSet {
+            apiTextField.delegate = textFieldDelegate
+        }
+    }
 
     private lazy var label: UILabel = {
         let label = UILabel()
         label.attributedText = Font.body.compose("API Key")
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -34,12 +33,6 @@ class ApiKeyView: UIView {
         return textField
     }()
     
-    weak var textFieldDelegate: UITextFieldDelegate? {
-        didSet {
-            apiTextField.delegate = textFieldDelegate
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -51,25 +44,26 @@ class ApiKeyView: UIView {
     }
     
     private func setupLayout() {
-        addSubview(stackView)
-        stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(apiTextFieldView)
+        addSubview(label)
+        addSubview(apiTextFieldView)
         apiTextFieldView.addSubview(apiTextField)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            heightAnchor.constraint(equalToConstant: 80),
+            
+            label.topAnchor.constraint(equalTo: topAnchor),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13),
+            
+            apiTextFieldView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 6),
+            apiTextFieldView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            apiTextFieldView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             apiTextField.topAnchor.constraint(equalTo: apiTextFieldView.topAnchor, constant: 14),
             apiTextField.leadingAnchor.constraint(equalTo: apiTextFieldView.leadingAnchor, constant: 13),
             apiTextField.trailingAnchor.constraint(equalTo: apiTextFieldView.trailingAnchor, constant: -13),
             apiTextField.bottomAnchor.constraint(equalTo: apiTextFieldView.bottomAnchor, constant: -14),
-            
-            apiTextFieldView.heightAnchor.constraint(equalToConstant: 51)
         ])
     }
 }

@@ -2,17 +2,16 @@ import UIKit
 
 class FullNameView: UIView {
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 6
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    weak var textFieldDelegate: UITextFieldDelegate? {
+        didSet {
+            textField.delegate = textFieldDelegate
+        }
+    }
 
     private lazy var label: UILabel = {
         let label = UILabel()
         label.attributedText = Font.body.compose("Full Name")
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -34,12 +33,6 @@ class FullNameView: UIView {
         return textField
     }()
     
-    weak var textFieldDelegate: UITextFieldDelegate? {
-        didSet {
-            textField.delegate = textFieldDelegate
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -51,25 +44,26 @@ class FullNameView: UIView {
     }
     
     private func setupLayout() {
-        addSubview(stackView)
-        stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(textFieldView)
+        addSubview(label)
+        addSubview(textFieldView)
         textFieldView.addSubview(textField)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            heightAnchor.constraint(equalToConstant: 80),
+            
+            label.topAnchor.constraint(equalTo: topAnchor),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13),
+            
+            textFieldView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 6),
+            textFieldView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            textFieldView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             textField.topAnchor.constraint(equalTo: textFieldView.topAnchor, constant: 14),
             textField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor, constant: 13),
             textField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor, constant: -13),
             textField.bottomAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: -14),
-            
-            textFieldView.heightAnchor.constraint(equalToConstant: 51)
         ])
     }
 }

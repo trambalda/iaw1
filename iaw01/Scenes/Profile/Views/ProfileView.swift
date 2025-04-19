@@ -4,6 +4,19 @@ class ProfileView: UIView {
     
     var onSafeButtonTapped: (() -> Void)?
     
+    private lazy var avatarView: UIImageView = {
+        let image = UIImageView()
+        image.image = .avatar
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    private lazy var selectButton: SelectPhotoButton = {
+        let button = SelectPhotoButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -12,33 +25,23 @@ class ProfileView: UIView {
         return stackView
     }()
     
-    private lazy var avatarView: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        image.image = .avatar
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    private lazy var selectAvatarButton: SelectPhotoButton = {
-        let button = SelectPhotoButton()
-        return button
-    }()
-    
     private lazy var fullNameView: FullNameView = {
         let view = FullNameView()
         view.textFieldDelegate = self
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var phoneNumberView: InputView = {
         let view = InputView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var apiKeyView: ApiKeyView = {
         let view = ApiKeyView()
         view.textFieldDelegate = self
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -58,7 +61,6 @@ class ProfileView: UIView {
         setupLayout()
         setupConstraints()
         setupObservers()
-        print("Original size:", avatarView.bounds.size)
     }
     
     required init?(coder: NSCoder) {
@@ -70,34 +72,30 @@ class ProfileView: UIView {
     }
     
     private func setupLayout() {
+        addSubview(avatarView)
+        addSubview(selectButton)
         addSubview(mainStackView)
-        let avatarHStack = UIStackView()
-        avatarHStack.alignment = .center
-        avatarHStack.addArrangedSubview(avatarView)
-        mainStackView.addArrangedSubview(avatarHStack)
-        let buttonVStack = UIStackView()
-        buttonVStack.axis = .vertical
-        buttonVStack.alignment = .center
-        buttonVStack.addArrangedSubview(selectAvatarButton)
-        mainStackView.addArrangedSubview(buttonVStack)
         mainStackView.addArrangedSubview(fullNameView)
         mainStackView.addArrangedSubview(phoneNumberView)
         mainStackView.addArrangedSubview(apiKeyView)
         mainStackView.addArrangedSubview(saveButton)
         
-        mainStackView.setCustomSpacing(17, after: avatarView)
-        mainStackView.setCustomSpacing(16, after: selectAvatarButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            avatarView.topAnchor.constraint(equalTo: topAnchor, constant: 64),
+            avatarView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            avatarView.heightAnchor.constraint(equalToConstant: 150),
+            avatarView.widthAnchor.constraint(equalToConstant: 150),
+            
+            selectButton.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 17),
+            selectButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            selectButton.heightAnchor.constraint(equalToConstant: 48),
+            
+            mainStackView.topAnchor.constraint(equalTo: selectButton.bottomAnchor, constant: 16),
             mainStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             mainStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-           
-            fullNameView.heightAnchor.constraint(equalToConstant: 80),
-            phoneNumberView.heightAnchor.constraint(equalToConstant: 80),
-            apiKeyView.heightAnchor.constraint(equalToConstant: 80),
             
             saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
             saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
@@ -117,15 +115,15 @@ extension ProfileView {
     
     @objc private func keyboardWillShow(_ notification: Notification) {
         UIView.animate(withDuration: 0.3) {
-            self.avatarView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-            self.selectAvatarButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            self.avatarView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            self.selectButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         }
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
         UIView.animate(withDuration: 0.3) {
             self.avatarView.transform = .identity
-            self.selectAvatarButton.transform = .identity
+            self.selectButton.transform = .identity
         }
     }
 }
