@@ -36,7 +36,7 @@
 		3F8980FF2DB18AEC00F670A9 /* ApiKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */; };
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
 		3F927F052DB2A6E300075040 /* CountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F927F042DB2A6E300075040 /* CountryCodes.swift */; };
-		3F927F072DB2B40400075040 /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F927F062DB2B40400075040 /* PhoneNumberInputView.swift */; };
+		3F927F072DB2B40400075040 /* ProfilePhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F927F062DB2B40400075040 /* ProfilePhoneNumberInputView.swift */; };
 		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
 		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
 		869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
@@ -88,7 +88,7 @@
 		3F8A0CE72DB3EDCA006EDA29 /* iaw01.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iaw01.xcodeproj; sourceTree = SOURCE_ROOT; };
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
 		3F927F042DB2A6E300075040 /* CountryCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodes.swift; sourceTree = "<group>"; };
-		3F927F062DB2B40400075040 /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
+		3F927F062DB2B40400075040 /* ProfilePhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
 		869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
@@ -286,7 +286,7 @@
 				3F8980F42DB165FF00F670A9 /* ProfileView.swift */,
 				3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */,
 				3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */,
-				3F927F062DB2B40400075040 /* PhoneNumberInputView.swift */,
+				3F927F062DB2B40400075040 /* ProfilePhoneNumberInputView.swift */,
 				3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */,
 			);
 			path = Views;
@@ -318,6 +318,11 @@
 				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3FEC58A62DB4162700BE8BFF /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		869875442D8860DF00C7BA58 /* TextFieldsScene */ = {
@@ -410,6 +415,12 @@
 			mainGroup = 21AA4B442D8160E30086697C;
 			productRefGroup = 21AA4B4E2D8160E30086697C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3FEC58A62DB4162700BE8BFF /* Products */;
+					ProjectRef = 3F8A0CE72DB3EDCA006EDA29 /* iaw01.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				21AA4B4C2D8160E30086697C /* iaw01 */,
@@ -450,7 +461,7 @@
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
 				3F8980FF2DB18AEC00F670A9 /* ApiKeyView.swift in Sources */,
 				3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */,
-				3F927F072DB2B40400075040 /* PhoneNumberInputView.swift in Sources */,
+				3F927F072DB2B40400075040 /* ProfilePhoneNumberInputView.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,

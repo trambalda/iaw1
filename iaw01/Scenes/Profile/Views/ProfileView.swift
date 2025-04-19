@@ -41,8 +41,8 @@ class ProfileView: UIView {
         return view
     }()
     
-    private lazy var phoneNumberView: InputView = {
-        let view = InputView()
+    private lazy var phoneNumberView: ProfilePhoneNumberInputView = {
+        let view = ProfilePhoneNumberInputView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -94,17 +94,18 @@ class ProfileView: UIView {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             avatarView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            avatarView.widthAnchor.constraint(equalToConstant: 150),
+            avatarView.widthAnchor.constraint(equalToConstant: Constants.isSE ? 100 : 150),
+            avatarView.heightAnchor.constraint(equalToConstant: Constants.isSE ? 100 : 150),
             
             selectButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            mainStackView.topAnchor.constraint(equalTo: selectButton.bottomAnchor, constant: 16),
+            mainStackView.topAnchor.constraint(equalTo: selectButton.bottomAnchor, constant: Constants.isSE ? 6 : 16),
             mainStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             mainStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             
             saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
             saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
-            saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100)
+            saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -RootTabBarController.height)
         ])
         avatarTopConstraint = avatarView.topAnchor.constraint(equalTo: topAnchor, constant: 64)
         avatarTopConstraint.isActive = true
@@ -112,7 +113,7 @@ class ProfileView: UIView {
         avatarHeightConstraint = avatarView.heightAnchor.constraint(equalToConstant: 150)
         avatarHeightConstraint.isActive = true
         
-        selectButtonTopConstraint = selectButton.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 17)
+        selectButtonTopConstraint = selectButton.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: Constants.isSE ? 7 : 17)
         selectButtonTopConstraint.isActive = true
         
         selectButtonHeightConstraint = selectButton.heightAnchor.constraint(equalToConstant: 48)
@@ -135,9 +136,9 @@ extension ProfileView {
                        usingSpringWithDamping: 0.6,
                        initialSpringVelocity: 0.5,
                        options: [.curveEaseInOut]) {
-            self.avatarHeightConstraint.constant = 100
+            self.avatarHeightConstraint.constant = Constants.isSE ? 80 : 100
             self.avatarTopConstraint.constant = 59
-            self.selectButtonTopConstraint.constant = 5
+            self.selectButtonTopConstraint.constant = 7
             self.selectButtonHeightConstraint.constant = 35
             self.layoutIfNeeded()
         }
@@ -149,7 +150,7 @@ extension ProfileView {
                        usingSpringWithDamping: 0.6,
                        initialSpringVelocity: 0.5,
                        options: [.curveEaseInOut]) {
-            self.avatarHeightConstraint.constant = 150
+            self.avatarHeightConstraint.constant = Constants.isSE ? 100 : 150
             self.avatarTopConstraint.constant = 64
             self.selectButtonTopConstraint.constant = 17
             self.selectButtonHeightConstraint.constant = 48

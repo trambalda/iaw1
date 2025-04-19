@@ -1,6 +1,6 @@
 import UIKit
 
-class InputView: UIView {
+class ProfilePhoneNumberInputView: UIView {
     
     private var isCountryCodeButtonTapped = false
     
@@ -153,7 +153,7 @@ class InputView: UIView {
     }
 }
 
-extension InputView: UIPickerViewDataSource {
+extension ProfilePhoneNumberInputView: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         codes.count
@@ -164,7 +164,7 @@ extension InputView: UIPickerViewDataSource {
     }
 }
 
-extension InputView: UIPickerViewDelegate {
+extension ProfilePhoneNumberInputView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         var countryCode: [String] = []
         var countryFlag: [UIImage] = []
