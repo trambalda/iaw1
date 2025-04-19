@@ -12,6 +12,7 @@ class SelectPhotoButton: UIButton {
     }
     
     private func configureButton() {
+        self.imageView?.contentMode = .scaleAspectFit
         setImage(.selectAvatarButton, for: .normal)
         addTarget(self, action: #selector(onTap), for: .touchUpInside)
     }

@@ -4,8 +4,17 @@ class ProfileView: UIView {
     
     var onSafeButtonTapped: (() -> Void)?
     
+    private var avatarTopConstraint: NSLayoutConstraint!
+    
+    private var avatarHeightConstraint: NSLayoutConstraint!
+    
+    private var selectButtonTopConstraint: NSLayoutConstraint!
+    
+    private var selectButtonHeightConstraint: NSLayoutConstraint!
+    
     private lazy var avatarView: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFit
         image.image = .avatar
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -84,14 +93,10 @@ class ProfileView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            avatarView.topAnchor.constraint(equalTo: topAnchor, constant: 64),
             avatarView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            avatarView.heightAnchor.constraint(equalToConstant: 150),
             avatarView.widthAnchor.constraint(equalToConstant: 150),
             
-            selectButton.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 17),
             selectButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            selectButton.heightAnchor.constraint(equalToConstant: 48),
             
             mainStackView.topAnchor.constraint(equalTo: selectButton.bottomAnchor, constant: 16),
             mainStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
@@ -101,6 +106,17 @@ class ProfileView: UIView {
             saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
             saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100)
         ])
+        avatarTopConstraint = avatarView.topAnchor.constraint(equalTo: topAnchor, constant: 64)
+        avatarTopConstraint.isActive = true
+        
+        avatarHeightConstraint = avatarView.heightAnchor.constraint(equalToConstant: 150)
+        avatarHeightConstraint.isActive = true
+        
+        selectButtonTopConstraint = selectButton.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: 17)
+        selectButtonTopConstraint.isActive = true
+        
+        selectButtonHeightConstraint = selectButton.heightAnchor.constraint(equalToConstant: 48)
+        selectButtonHeightConstraint.isActive = true
     }
 }
 
@@ -114,16 +130,30 @@ extension ProfileView {
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.avatarView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            self.selectButton.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.5,
+                       options: [.curveEaseInOut]) {
+            self.avatarHeightConstraint.constant = 100
+            self.avatarTopConstraint.constant = 59
+            self.selectButtonTopConstraint.constant = 5
+            self.selectButtonHeightConstraint.constant = 35
+            self.layoutIfNeeded()
         }
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.avatarView.transform = .identity
-            self.selectButton.transform = .identity
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.5,
+                       options: [.curveEaseInOut]) {
+            self.avatarHeightConstraint.constant = 150
+            self.avatarTopConstraint.constant = 64
+            self.selectButtonTopConstraint.constant = 17
+            self.selectButtonHeightConstraint.constant = 48
+            self.layoutIfNeeded()
         }
     }
 }
