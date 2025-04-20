@@ -6,18 +6,8 @@ final class RootTabBarController: UITabBarController {
         Constants.isSE ? 76 : 100
     }
 
-    var factory: Factory
-
     private var indicatorViewCenterXConstraint: NSLayoutConstraint?
     
-    private lazy var tabBarControllers: [UINavigationController] = [
-        UINavigationController(rootViewController: factory.createDummyScene()),
-        UINavigationController(rootViewController: factory.createDummyScene()),
-        UINavigationController(rootViewController: factory.createDummyScene()),
-        UINavigationController(rootViewController: factory.createDummyScene()),
-        UINavigationController(rootViewController: factory.createDummyScene()),
-    ]
-
     private let backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -41,9 +31,9 @@ final class RootTabBarController: UITabBarController {
         return view
     }()
 
-    init(factory: Factory) {
-        self.factory = factory
+    init(with controllers: [UINavigationController]) {
         super.init(nibName: nil, bundle: nil)
+        setViewControllers(controllers, animated: true)
     }
 
     required init?(coder: NSCoder) {
@@ -52,10 +42,9 @@ final class RootTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tabBar.isHidden = true
-
         setupTabBarPages(pages: RootTabBarItem.allCases)
-        setViewControllers(tabBarControllers, animated: true)
 
         setupLayout()
         setupConstraints()
