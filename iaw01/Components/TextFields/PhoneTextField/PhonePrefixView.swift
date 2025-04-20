@@ -12,13 +12,7 @@ final class PhonePrefixView: UIView {
     
     var countryCode: CountryCodeModel? = .default {
         didSet {
-            guard var countryCode else { return }
-
-            if countryCode.flag?.isEmpty != false,
-                let complete = CountryCodeModel.countryCodes.first(where: { $0.code == countryCode.code }) {
-                countryCode = complete
-            }
-
+            guard let countryCode else { return }
             flagLabel.text = countryCode.flag
             phonePrefixTextField.attributedText = Font.body.compose(countryCode.code, color: .dark100)
         }
@@ -125,12 +119,7 @@ final class PhonePrefixView: UIView {
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard var text = textField.text, !text.isEmpty else { return }
-        
-        if !text.hasPrefix("+") {
-            text = "+" + text
-            textField.text = text
-        }
+        guard let text = textField.text, !text.isEmpty else { return }
         
         if let country = CountryCodeModel.countryCodes.first(where: { $0.code == text }) {
             countryCode = country

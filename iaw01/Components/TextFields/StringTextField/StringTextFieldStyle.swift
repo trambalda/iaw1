@@ -49,10 +49,4 @@ extension StringTextFieldStyle {
         placeholder: "Enter your Password",
         behavior: .password
     )
-    
-    static let phonePrefixStyle = StringTextFieldStyle(
-        title: nil,
-        placeholder: "+1",
-        behavior: .string
-    )
 }

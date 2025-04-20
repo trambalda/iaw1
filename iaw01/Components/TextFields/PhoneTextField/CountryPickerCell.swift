@@ -15,7 +15,6 @@ final class CountryPickerCell: UITableViewCell {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.spacing = 3
-        stack.alignment = .leading
         return stack
     }()
     

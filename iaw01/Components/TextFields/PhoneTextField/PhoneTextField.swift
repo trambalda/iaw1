@@ -6,18 +6,14 @@ final class PhoneTextField: UIStackView {
     
     var phoneNumber: PhoneNumber {
         get {
-            PhoneNumber(number: textField.text, countryCode: phonePrefixView.countryCode)
+            let code = phonePrefixView.countryCode?.code ?? ""
+            let number = textField.text ?? ""
+            return PhoneNumber(code: code, number: number) ?? .default
         }
         set {
             textField.text = newValue.number
-            
-            if let country = newValue.countryCode {
-                phonePrefixView.countryCode = country
-            } else {
-                phonePrefixView.countryCode = .default
-            }
-            
-            refreshPhoneField(for: phonePrefixView.countryCode ?? .default)
+            phonePrefixView.countryCode = newValue.countryCode ?? .default
+            refreshPhoneField(for: phonePrefixView.countryCode!)
             updatePlaceholder()
         }
     }

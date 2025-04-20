@@ -34,11 +34,21 @@ struct CountryCodeModel {
     }
     
     init?(code: String) {
-        self.region = nil
-        self.flag = nil
-        self.code = code
-        self.mask = CountryCodeModel.default.mask
-        self.placeholder = CountryCodeModel.default.placeholder
+        let digits = code.filter { $0.isNumber }
+        
+        guard !digits.isEmpty else { return nil }
+        
+        let formattedCode = "+" + digits
+        
+        if let matched = CountryCodeModel.countryCodes.first(where: { $0.code == formattedCode }) {
+            self = matched
+        } else {
+            self.region = nil
+            self.flag = nil
+            self.code = formattedCode
+            self.mask = CountryCodeModel.default.mask
+            self.placeholder = CountryCodeModel.default.placeholder
+        }
     }
 }
 
