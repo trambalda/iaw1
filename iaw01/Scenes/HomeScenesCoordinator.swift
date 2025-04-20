@@ -4,7 +4,7 @@ protocol HomeScenesCoordinatorProtocol {
     func showTextFieldScene()
     func showCornersButtonsScene()
     func showVerifyPhoneNumberScene()
-    func showKeyboradSrviceScene()
+    func showKeyboarddServiceScene()
 }
 
 final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorProtocol {
@@ -34,7 +34,7 @@ final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorPro
         rootViewController.pushViewController(vc, animated: true)
     }
 
-    func showKeyboradSrviceScene() {
+    func showKeyboarddServiceScene() {
         let vc = factory.createKeyboardServiceScene()
         rootViewController.pushViewController(vc, animated: true)
     }
