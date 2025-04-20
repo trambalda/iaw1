@@ -2,7 +2,7 @@ import UIKit
 
 final class DummyViewController: UIViewController {
     
-    var appCoordinator: AppCoordinator?
+    var coordinator: HomeScenesCoordinatorProtocol?
 
     private lazy var dummyView: DummyView = {
         let view = DummyView(frame: .zero)
@@ -29,13 +29,11 @@ final class DummyViewController: UIViewController {
     private func route(to sceneType: SceneType) {
         switch sceneType {
         case .textFiedsScene:
-            appCoordinator?.showTextFieldScene(from: navigationController)
+            coordinator?.showTextFieldScene()
         case .cornersButtonsScene:
-            appCoordinator?.showCornersButtonsScene(from: navigationController)
+            coordinator?.showCornersButtonsScene()
         case .verifyPhoneNumberScene:
-            appCoordinator?.showVerifyPhoneNumberScene(from: navigationController)
-        case .restaurantScene:
-            appCoordinator?.showRestaurantViewController(from: navigationController)
+            coordinator?.showVerifyPhoneNumberScene()
         }
     }
 }
