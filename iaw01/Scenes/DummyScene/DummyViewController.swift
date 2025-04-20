@@ -35,7 +35,7 @@ final class DummyViewController: UIViewController {
         case .verifyPhoneNumberScene:
             coordinator?.showVerifyPhoneNumberScene()
         case .keyboardScene:
-            coordinator?.showKeyboarddServiceScene()
+            coordinator?.showKeyboardServiceScene()
         }
     }
 }
