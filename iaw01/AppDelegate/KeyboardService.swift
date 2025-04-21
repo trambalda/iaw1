@@ -1,26 +1,30 @@
 import UIKit
 
 protocol KeyboardServiceProtocol: AnyObject {
-    func viewController(_ view: UIView)
+    var isEnabled: Bool { get set }
 }
 
 final class KeyboardService: KeyboardServiceProtocol {
 
-    weak var viewController: UIView?
-
-    private var originalY: CGFloat = 0
-    private let additionalOffset: CGFloat = 30
-
-    deinit {
-        NotificationCenter.unregisterKeyboardNotifications(self)
+    var isEnabled: Bool = true {
+        didSet {
+            isEnabled ? setupKeyboardObservers() : removeKeyboardObservers()
+        }
     }
 
-    func viewController(_ view: UIView) {
-        self.viewController = view
-        self.originalY = view.frame.origin.y
+    private var originY: CGFloat = 0
+    private let additionalOffset: CGFloat = 30
 
-        setupKeyboardObservers()
+    init() {
         setupGesture()
+
+        if isEnabled {
+            setupKeyboardObservers()
+        }
+    }
+
+    deinit {
+        removeKeyboardObservers()
     }
 
     private func setupKeyboardObservers() {
@@ -31,12 +35,36 @@ final class KeyboardService: KeyboardServiceProtocol {
         )
     }
 
+    private func removeKeyboardObservers() {
+        NotificationCenter.unregisterKeyboardNotifications(self)
+    }
+
     private func setupGesture() {
-        let tap = UITapGestureRecognizer(
-            target: self,
-            action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        viewController?.addGestureRecognizer(tap)
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first,
+              let window = windowScene.windows.first
+        else { return }
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        window.addGestureRecognizer(tapGesture)
+    }
+
+    private func getCurrentViewController() -> UIViewController? {
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first,
+              let window = windowScene.windows.first
+        else { return nil }
+
+        var currentViewController = window.rootViewController
+
+        while let presentedViewController = currentViewController?.presentedViewController {
+            currentViewController = presentedViewController
+        }
+
+        return currentViewController
     }
 
     private func findActiveResponder(in view: UIView) -> UIView? {
@@ -53,11 +81,13 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 
     private func animateFromView(duration: TimeInterval, keyboardHeight: CGFloat) {
-        guard let viewController = viewController,
-              let activeView = findActiveResponder(in: viewController) else { return }
-
-        let activeRect = activeView.convert(activeView.bounds, to: viewController)
-        let height = viewController.frame.height - keyboardHeight - additionalOffset
+        guard
+            let currentViewController = getCurrentViewController(),
+            let containerView = currentViewController.view,
+            let activeView = findActiveResponder(in: containerView)
+        else { return }
+        let activeRect = activeView.convert(activeView.bounds, to: containerView)
+        let height = containerView.frame.height - keyboardHeight - additionalOffset
         let offset = max(0, activeRect.maxY - height)
 
         UIView.animate(
@@ -66,36 +96,39 @@ final class KeyboardService: KeyboardServiceProtocol {
             usingSpringWithDamping: 0.8,
             initialSpringVelocity: 0.7,
             options: [.curveEaseInOut]
-        ) {
-            [weak self] in
+        ) { [weak self] in
             guard let self else { return }
 
-            viewController.frame.origin.y = self.originalY - offset
+            containerView.frame.origin.y = self.originY - offset
         }
     }
 
     @objc private func keyboardWillShow(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-              let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+        guard
+            let userInfo = notification.userInfo,
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+            let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
         else { return }
 
         animateFromView(duration: duration, keyboardHeight: keyboardFrame.height)
     }
 
     @objc private func keyboardWillHide(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
-              let viewController = viewController
+        guard
+            let userInfo = notification.userInfo,
+            let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let currentViewController = getCurrentViewController(),
+            let containerView = currentViewController.view
         else { return }
 
         UIView.animate(withDuration: duration) { [weak self] in
             guard let self else { return }
-            viewController.frame.origin.y = self.originalY
+            containerView.frame.origin.y = self.originY
         }
     }
 
     @objc private func dismissKeyboard() {
-        viewController?.endEditing(true)
+        guard let currentViewController = getCurrentViewController() else { return }
+        currentViewController.view.endEditing(true)
     }
 }

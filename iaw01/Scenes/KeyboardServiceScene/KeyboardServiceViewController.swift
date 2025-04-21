@@ -31,8 +31,7 @@ final class KeyboardServiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .light100
-
-        keyboardService?.viewController(self.view)
+        keyboardService?.isEnabled = true
 
         setupLayout()
         setupTextFieldResponders()
