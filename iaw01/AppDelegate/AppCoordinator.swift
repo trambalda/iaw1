@@ -29,6 +29,11 @@ final class AppCoordinator {
         }
     }
     
+    func finishOnboarding() {
+        state = .normal
+        showMainViewController()
+    }
+    
     private func showMainViewController() {
         let homeScenesCoordinator = HomeScenesCoordinator()
         let discoverCoordinator = HomeScenesCoordinator()
@@ -52,20 +57,5 @@ final class AppCoordinator {
 
         let rootTabBarController = RootTabBarController(with: tabBarControllers)
         window.rootViewController = rootTabBarController
-    }
-    
-    func showTextFieldScene(from parent: UINavigationController?) {
-        let vc = factory.createTextFieldsScene()
-        parent?.pushViewController(vc, animated: true)
-    }
-    
-    func showCornersButtonsScene(from parent: UINavigationController?) {
-        let vc = factory.createCornersButtonsScene()
-        parent?.pushViewController(vc, animated: true)
-    }
-    
-    func showVerifyPhoneNumberScene(from parent: UINavigationController?) {
-        let vc = factory.createVerifyPhoneNumberScene()
-        parent?.pushViewController(vc, animated: true)
     }
 }

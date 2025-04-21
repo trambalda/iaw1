@@ -77,20 +77,50 @@ final class OnboardingView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func changePage(on pageNumber: Int) {
-        currentPageNumber = pageNumber
-        let isLastPage = pageNumber == pages.count - 1
-        nextButton.setTitle(isLastPage ? "Continue" : "Next")
-        
-        let contentOffset = CGPoint(x: scrollView.bounds.width * CGFloat(pageNumber), y: 0)
-        scrollView.setContentOffset(contentOffset, animated: true)
-    }
-    
     private func configure() {
         backgroundColor = .light100
         setupLayout()
         setupConstraints()
         changePage(on: 0)
+    }
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        
+        if let superview = superview {
+            frame = superview.bounds
+        }
+    }
+    
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        
+        if let window = window {
+            frame = window.bounds
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updatePageViewWidths()
+    }
+    
+    private func updatePageViewWidths() {
+        let visibleWidth = UIScreen.main.bounds.width
+        
+        for pageView in pageViews {
+            var foundConstraint = false
+            
+            for constraint in pageView.constraints where constraint.firstAttribute == .width {
+                constraint.constant = visibleWidth
+                foundConstraint = true
+                break
+            }
+            
+            if !foundConstraint {
+                pageView.widthAnchor.constraint(equalToConstant: visibleWidth).isActive = true
+            }
+        }
     }
 
     private func switchToNextPage() {
@@ -100,6 +130,16 @@ final class OnboardingView: UIView {
         } else {
             onFinish?()
         }
+    }
+
+    func changePage(on pageNumber: Int) {
+        currentPageNumber = pageNumber
+        let isLastPage = pageNumber == pages.count - 1
+        nextButton.setTitle(isLastPage ? "Continue" : "Next")
+        
+        let pageWidth = UIScreen.main.bounds.width
+        let contentOffset = CGPoint(x: pageWidth * CGFloat(pageNumber), y: 0)
+        scrollView.setContentOffset(contentOffset, animated: true)
     }
 
     private func setupLayout() {
@@ -116,13 +156,10 @@ final class OnboardingView: UIView {
     }
     
     private func setupConstraints() {
-        contentStackView.arrangedSubviews.forEach { pageView in
-            pageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        }
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: -16),
-            scrollView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: 16),
+            scrollView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: buttonsStackView.topAnchor, constant: -16),
             
             contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -143,7 +180,8 @@ final class OnboardingView: UIView {
 
 extension OnboardingView: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let pageNumber = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+        let pageWidth = UIScreen.main.bounds.width
+        let pageNumber = Int(scrollView.contentOffset.x / pageWidth)
         changePage(on: pageNumber)
     }
 } 

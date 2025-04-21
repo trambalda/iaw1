@@ -1,9 +1,13 @@
-final class HomeScenesFactory: Factory {
+final class HomeScenesFactory {
     
     let coordinator: HomeScenesCoordinator
+    private var factory: Factory?
     
     init(coordinator: HomeScenesCoordinator) {
         self.coordinator = coordinator
+        if let appCoordinator = coordinator.appCoordinator {
+            self.factory = Factory(appCoordinator: appCoordinator)
+        }
     }
     
     func createDummyScene() -> DummyViewController {
@@ -25,5 +29,21 @@ final class HomeScenesFactory: Factory {
     func createVerifyPhoneNumberScene() -> VerifyPhoneNumberViewController {
         let vc = VerifyPhoneNumberViewController()
         return vc
+    }
+    
+    func createOnboardingScene() -> OnboardingViewController {
+        if let factory = factory {
+            let vc = factory.createOnboardingScene()
+            if vc.appCoordinator == nil, let appCoordinator = coordinator.appCoordinator {
+                vc.appCoordinator = appCoordinator
+            }
+            return vc
+        } else {
+            // Создаем OnboardingViewController напрямую, если Factory недоступен
+            let pages = OnboardingPageModel.pages
+            let vc = OnboardingViewController(pages: pages)
+            vc.appCoordinator = coordinator.appCoordinator
+            return vc
+        }
     }
 }

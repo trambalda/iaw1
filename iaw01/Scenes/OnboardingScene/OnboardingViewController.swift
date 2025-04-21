@@ -7,7 +7,6 @@ final class OnboardingViewController: UIViewController {
     
     private lazy var onboardingView: OnboardingView? = {
         let view = OnboardingView(pages: OnboardingPageModel.pages)
-        view?.translatesAutoresizingMaskIntoConstraints = false
         view?.onFinish = { [weak self] in
             self?.finishOnboarding()
         }
@@ -24,14 +23,34 @@ final class OnboardingViewController: UIViewController {
     }
     
     override func loadView() {
+        view = UIView() // Создаем пустой view
+        view.backgroundColor = .light100
+        
         if let onboardingView = onboardingView {
-            view = onboardingView
+            onboardingView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(onboardingView)
+            
+            NSLayoutConstraint.activate([
+                onboardingView.topAnchor.constraint(equalTo: view.topAnchor),
+                onboardingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                onboardingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                onboardingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
         } else {
             finishOnboarding()
         }
     }
     
     private func finishOnboarding() {
-        appCoordinator?.finishOnboarding()
+        if let appCoordinator = appCoordinator {
+            appCoordinator.finishOnboarding()
+        } else {
+            // Если appCoordinator отсутствует, просто возвращаемся назад
+            if let navigationController = navigationController {
+                navigationController.popViewController(animated: true)
+            } else {
+                dismiss(animated: true)
+            }
+        }
     }
 } 

@@ -4,15 +4,21 @@ protocol HomeScenesCoordinatorProtocol {
     func showTextFieldScene()
     func showCornersButtonsScene()
     func showVerifyPhoneNumberScene()
+    func showOnboardingScene()
 }
 
 final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorProtocol {
     
     private(set) var rootViewController = UINavigationController()
+    var appCoordinator: AppCoordinator?
     
     private lazy var factory: HomeScenesFactory = {
         HomeScenesFactory(coordinator: self)
     }()
+    
+    init(appCoordinator: AppCoordinator? = nil) {
+        self.appCoordinator = appCoordinator
+    }
     
     func start() {
         rootViewController.pushViewController(factory.createDummyScene(), animated: false)
@@ -30,6 +36,11 @@ final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorPro
     
     func showVerifyPhoneNumberScene() {
         let vc = factory.createVerifyPhoneNumberScene()
+        rootViewController.pushViewController(vc, animated: true)
+    }
+    
+    func showOnboardingScene() {
+        let vc = factory.createOnboardingScene()
         rootViewController.pushViewController(vc, animated: true)
     }
 }
