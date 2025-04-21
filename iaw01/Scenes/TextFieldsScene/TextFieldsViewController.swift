@@ -61,8 +61,7 @@ final class TextFieldsViewController: UIViewController {
         let textField = PhoneTextField(parent: self.view)
 
         //textField.phoneNumber = .default
-        //textField.phoneNumber = PhoneNumber("79998887766") ?? .default
-        textField.phoneNumber = PhoneNumber(code: "7", number: "(999)888-7766") ?? .default
+        textField.phoneNumber = PhoneNumber(fullString: "79998887766") ?? .default
         textField.textFieldShouldReturn = {
             print("Phone Number: \(textField.phoneNumber.fullNumber)")
             textField.resignTextFieldFirstResponder()

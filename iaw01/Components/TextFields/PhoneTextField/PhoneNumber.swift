@@ -8,24 +8,20 @@ struct PhoneNumber {
     
     static let `default` = PhoneNumber(number: nil, countryCode: .default)
     
-    init?(_ fullString: String) {
+    init(number: String?, countryCode: CountryCodeModel?) {
+        self.number = number
+        self.countryCode = countryCode
+    }
+    
+    init?(fullString: String) {
         let digitsOnly = fullString.filter { $0.isNumber }
         
-        guard digitsOnly.count >= 11 else {
-            return nil
-        }
-        
         let numberPart = String(digitsOnly.suffix(10))
-        let codePart = String(digitsOnly.prefix(digitsOnly.count - 10))
+        let codePart = String(digitsOnly.prefix(max(0, digitsOnly.count - 10)))
         
-        guard let code = CountryCodeModel(code: codePart) else {
-            return nil
-        }
-        
-        self.number = numberPart
-        self.countryCode = code
+        self.init(code: codePart, number: numberPart)
     }
-
+    
     init?(code: String, number: String) {
         let cleanedCode = code.filter { $0.isNumber }
         let cleanedNumber = number.filter { $0.isNumber }
@@ -38,13 +34,7 @@ struct PhoneNumber {
             return nil
         }
         
-        self.number = cleanedNumber
-        self.countryCode = countryCode
-    }
-    
-    private init(number: String?, countryCode: CountryCodeModel?) {
-        self.number = number
-        self.countryCode = countryCode
+        self.init(number: cleanedNumber, countryCode: countryCode)
     }
 }
 
