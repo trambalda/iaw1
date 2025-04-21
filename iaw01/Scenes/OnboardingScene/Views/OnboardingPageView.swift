@@ -83,12 +83,14 @@ final class OnboardingPageView: UIView {
     
     private func setupConstraints() {
         let illustrationHeight: CGFloat = Constants.isSE ? 250 : 367
+        let screenWidth = UIScreen.main.bounds.width
         
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
+            contentStackView.widthAnchor.constraint(equalToConstant: screenWidth - 16),
             
             illustrationContainer.heightAnchor.constraint(equalToConstant: illustrationHeight),
             

@@ -23,7 +23,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     override func loadView() {
-        view = UIView() // Создаем пустой view
+        view = UIView()
         view.backgroundColor = .light100
         
         if let onboardingView = onboardingView {
@@ -66,15 +66,6 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func finishOnboarding() {
-        if let appCoordinator = appCoordinator {
-            appCoordinator.finishOnboarding()
-        } else {
-            // Если appCoordinator отсутствует, просто возвращаемся назад
-            if let navigationController = navigationController {
-                navigationController.popViewController(animated: true)
-            } else {
-                dismiss(animated: true)
-            }
-        }
+        appCoordinator?.finishOnboarding()
     }
 } 

@@ -84,45 +84,6 @@ final class OnboardingView: UIView {
         changePage(on: 0)
     }
 
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        
-        if let superview = superview {
-            frame = superview.bounds
-        }
-    }
-    
-    override func didMoveToWindow() {
-        super.didMoveToWindow()
-        
-        if let window = window {
-            frame = window.bounds
-        }
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        updatePageViewWidths()
-    }
-    
-    private func updatePageViewWidths() {
-        let visibleWidth = UIScreen.main.bounds.width
-        
-        for pageView in pageViews {
-            var foundConstraint = false
-            
-            for constraint in pageView.constraints where constraint.firstAttribute == .width {
-                constraint.constant = visibleWidth
-                foundConstraint = true
-                break
-            }
-            
-            if !foundConstraint {
-                pageView.widthAnchor.constraint(equalToConstant: visibleWidth).isActive = true
-            }
-        }
-    }
-
     private func switchToNextPage() {
         if currentPageNumber < pages.count - 1 {
             currentPageNumber += 1
