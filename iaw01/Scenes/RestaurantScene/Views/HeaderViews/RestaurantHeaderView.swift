@@ -20,7 +20,7 @@ final class RestaurantHeaderView: UIStackView {
         return image
     }()
     
-    private let locationImage: UIImageView = {
+    private let locationImageView: UIImageView = {
         let image = UIImageView(image: .location)
         image.contentMode = .scaleAspectFit
         return image
@@ -64,20 +64,20 @@ final class RestaurantHeaderView: UIStackView {
      */
     
     private func setupLayout() {
-        let locationStack = UIStackView()
-        locationStack.spacing = 4
+        let locationStackView = UIStackView()
+        locationStackView.spacing = 4
         
-        let infoStack = UIStackView()
-        infoStack.axis = .vertical
-        infoStack.spacing = 0
+        let infoStackView = UIStackView()
+        infoStackView.axis = .vertical
+        infoStackView.spacing = 0
        
         addArrangedSubview(logoImageView)
         setCustomSpacing(16, after: logoImageView)
-        addArrangedSubview(infoStack)
-        infoStack.addArrangedSubview(titleLabel)
-        infoStack.addArrangedSubview(locationStack)
-        locationStack.addArrangedSubview(locationImage)
-        locationStack.addArrangedSubview(locationLabel)
+        addArrangedSubview(infoStackView)
+        infoStackView.addArrangedSubview(titleLabel)
+        infoStackView.addArrangedSubview(locationStackView)
+        locationStackView.addArrangedSubview(locationImageView)
+        locationStackView.addArrangedSubview(locationLabel)
         addArrangedSubview(favoriteButton)
     }
     
@@ -86,7 +86,7 @@ final class RestaurantHeaderView: UIStackView {
             logoImageView.widthAnchor.constraint(equalToConstant: 64),
             logoImageView.heightAnchor.constraint(equalToConstant: 64),
             
-            locationImage.widthAnchor.constraint(equalToConstant: 20),
+            locationImageView.widthAnchor.constraint(equalToConstant: 20),
             
             favoriteButton.heightAnchor.constraint(equalToConstant: favoriteButtonSize),
             favoriteButton.widthAnchor.constraint(equalToConstant: favoriteButtonSize)

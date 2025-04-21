@@ -1,6 +1,6 @@
 import UIKit
 
-struct MenuModel {
+struct MenuModel: Codable {
     
     let id: Int
     let name: String

@@ -1,12 +1,12 @@
 import UIKit
 
-struct MenuItemListModel {
+struct MenuItemListModel: Codable {
     
     let id: Int
     let image: String
     let name: String
     let price: Float
-    let menuId: Int
+    let menuId: Int?
     
     static let empty = MenuItemListModel(
         id: 0,

@@ -2,14 +2,25 @@ import UIKit
 
 final class RestaurantViewController: UIViewController {
     
-    private let model = RestaurantModel.mock
+    private let restaurantId: Int
+    private let restaurantService: RestaurantServiceProtocol
+    private var loadedRestaurant: RestaurantModel?
     
     private lazy var restaurantView: RestaurantView = {
         let view = RestaurantView()
         view.filterView.delegate = self
-        view.model = model
         return view
     }()
+    
+    init(id: Int, restaurantService: RestaurantServiceProtocol) {
+            self.restaurantId = id
+            self.restaurantService = restaurantService
+            super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = restaurantView
@@ -19,6 +30,7 @@ final class RestaurantViewController: UIViewController {
         super.viewDidLoad()
         setupTableViewInsets()
         setupNavigationBar()
+        loadRestaurant()
     }
     
     private func setupTableViewInsets() {
@@ -79,6 +91,22 @@ final class RestaurantViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
+    private func loadRestaurant() {
+        Task {
+            do {
+                guard let restaurant = try await restaurantService.fetchRestaurant(id: restaurantId) else {
+                    print("⚠️ Ресторан с id \(restaurantId) не найден")
+                    return
+                }
+                
+                self.loadedRestaurant = restaurant
+                print("🍽️ Загружен ресторан: \(restaurant.name)")
+            } catch {
+                print("❌ Ошибка загрузки ресторана: \(error)")
+            }
+        }
+    }
+   
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }

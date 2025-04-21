@@ -22,6 +22,7 @@ final class RestaurantView: UIView {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        //scrollView.delegate = self
         return scrollView
     }()
     

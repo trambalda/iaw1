@@ -5,30 +5,30 @@ final class RestaurantInfoView: UIView {
     var model: RestaurantModel = .empty {
         didSet {
             ratingLabel.attributedText = Font.info.compose("Ratings: \(model.rating)")
-            timeLabel.attributedText = Font.info.compose("Delivers in \(model.deliveryTime) min")
-            typeOfFoodLabel.attributedText = Font.info.compose(model.cousines.joined(separator: ", "))
+            deliveryTimeLabel.attributedText = Font.info.compose("Delivers in \(model.deliveryTime) min")
+            cousinesLabel.attributedText = Font.info.compose(model.cousines.joined(separator: ", "))
         }
     }
     
     private let ratingLabel = UILabel()
-    private let timeLabel = UILabel()
-    private let typeOfFoodLabel = UILabel()
+    private let deliveryTimeLabel = UILabel()
+    private let cousinesLabel = UILabel()
     
-    private let ratingImage: UIImageView = {
+    private let ratingImageView: UIImageView = {
         let image = UIImageView(image: .star)
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         return image
     }()
     
-    private let timeImage: UIImageView = {
+    private let deliveryTimeImageView: UIImageView = {
         let image = UIImageView(image: .boxTime)
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         return image
     }()
     
-    private let typeOfFoodImage: UIImageView = {
+    private let cousinesImageView: UIImageView = {
         let image = UIImageView(image: .element)
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
@@ -41,7 +41,7 @@ final class RestaurantInfoView: UIView {
         return button
     }()
     
-    private let mainStack: UIStackView = {
+    private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 101
         stackView.distribution = .equalSpacing
@@ -82,43 +82,43 @@ final class RestaurantInfoView: UIView {
      */
     
     private func setupLayout() {
-        let ratingStack = UIStackView()
-        ratingStack.spacing = 8
-        ratingStack.alignment = .bottom
+        let ratingStackView = UIStackView()
+        ratingStackView.spacing = 8
+        ratingStackView.alignment = .bottom
         
-        let timeStack = UIStackView()
-        timeStack.spacing = 8
-        timeStack.alignment = .bottom
+        let timeStackView = UIStackView()
+        timeStackView.spacing = 8
+        timeStackView.alignment = .bottom
         
-        let typeOfFoodStack = UIStackView()
-        typeOfFoodStack.spacing = 8
-        typeOfFoodStack.alignment = .bottom
+        let typeOfFoodStackView = UIStackView()
+        typeOfFoodStackView.spacing = 8
+        typeOfFoodStackView.alignment = .bottom
         
-        let infoStack = UIStackView()
-        infoStack.axis = .vertical
-        infoStack.spacing = 10
-        infoStack.alignment = .leading
+        let infoStackView = UIStackView()
+        infoStackView.axis = .vertical
+        infoStackView.spacing = 10
+        infoStackView.alignment = .leading
         
-        addSubview(mainStack)
-        mainStack.addArrangedSubview(infoStack)
-        infoStack.addArrangedSubview(ratingStack)
-        ratingStack.addArrangedSubview(ratingImage)
-        ratingStack.addArrangedSubview(ratingLabel)
-        infoStack.addArrangedSubview(timeStack)
-        timeStack.addArrangedSubview(timeImage)
-        timeStack.addArrangedSubview(timeLabel)
-        infoStack.addArrangedSubview(typeOfFoodStack)
-        typeOfFoodStack.addArrangedSubview(typeOfFoodImage)
-        typeOfFoodStack.addArrangedSubview(typeOfFoodLabel)
-        mainStack.addArrangedSubview(infoButton)
+        addSubview(mainStackView)
+        mainStackView.addArrangedSubview(infoStackView)
+        infoStackView.addArrangedSubview(ratingStackView)
+        ratingStackView.addArrangedSubview(ratingImageView)
+        ratingStackView.addArrangedSubview(ratingLabel)
+        infoStackView.addArrangedSubview(timeStackView)
+        timeStackView.addArrangedSubview(deliveryTimeImageView)
+        timeStackView.addArrangedSubview(deliveryTimeLabel)
+        infoStackView.addArrangedSubview(typeOfFoodStackView)
+        typeOfFoodStackView.addArrangedSubview(cousinesImageView)
+        typeOfFoodStackView.addArrangedSubview(cousinesLabel)
+        mainStackView.addArrangedSubview(infoButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mainStack.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
 }

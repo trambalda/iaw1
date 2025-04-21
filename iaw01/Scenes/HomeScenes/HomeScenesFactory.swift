@@ -7,7 +7,7 @@ final class HomeScenesFactory: Factory {
     }
     
     func createDummyScene() -> DummyViewController {
-        let vc = DummyViewController()
+        let vc = DummyViewController(restaurantService: restaurantService)
         vc.coordinator = coordinator
         return vc
     }
@@ -24,6 +24,11 @@ final class HomeScenesFactory: Factory {
     
     func createVerifyPhoneNumberScene() -> VerifyPhoneNumberViewController {
         let vc = VerifyPhoneNumberViewController()
+        return vc
+    }
+    
+    func createRestaurantScene(with id: Int) -> RestaurantViewController {
+        let vc = RestaurantViewController(id: id, restaurantService: restaurantService)
         return vc
     }
 }

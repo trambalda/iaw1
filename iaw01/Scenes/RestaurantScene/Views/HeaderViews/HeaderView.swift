@@ -21,7 +21,7 @@ final class HeaderView: UIStackView {
         return imageView
     }()
     
-    private let restaurantInfoStack: UIStackView = {
+    private let restaurantInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -59,18 +59,18 @@ final class HeaderView: UIStackView {
         addArrangedSubview(imageView)
         addArrangedSubview(restaurantInfoContainer)
         
-        restaurantInfoContainer.addSubview(restaurantInfoStack)
+        restaurantInfoContainer.addSubview(restaurantInfoStackView)
         
-        restaurantInfoStack.addArrangedSubview(restaurantHeaderView)
-        restaurantInfoStack.addArrangedSubview(restaurantInfoView)
+        restaurantInfoStackView.addArrangedSubview(restaurantHeaderView)
+        restaurantInfoStackView.addArrangedSubview(restaurantInfoView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            restaurantInfoStack.topAnchor.constraint(equalTo: restaurantInfoContainer.topAnchor, constant: 20),
-            restaurantInfoStack.leadingAnchor.constraint(equalTo: restaurantInfoContainer.leadingAnchor,constant: 16),
-            restaurantInfoStack.trailingAnchor.constraint(equalTo: restaurantInfoContainer.trailingAnchor, constant: -16),
-            restaurantInfoStack.bottomAnchor.constraint(equalTo: restaurantInfoContainer.bottomAnchor),
+            restaurantInfoStackView.topAnchor.constraint(equalTo: restaurantInfoContainer.topAnchor, constant: 20),
+            restaurantInfoStackView.leadingAnchor.constraint(equalTo: restaurantInfoContainer.leadingAnchor,constant: 16),
+            restaurantInfoStackView.trailingAnchor.constraint(equalTo: restaurantInfoContainer.trailingAnchor, constant: -16),
+            restaurantInfoStackView.bottomAnchor.constraint(equalTo: restaurantInfoContainer.bottomAnchor),
         ])
     }
     

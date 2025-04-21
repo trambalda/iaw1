@@ -1,6 +1,6 @@
 import UIKit
 
-struct RestaurantModel {
+struct RestaurantModel: Codable {
     
     let id: Int
     let logo: String

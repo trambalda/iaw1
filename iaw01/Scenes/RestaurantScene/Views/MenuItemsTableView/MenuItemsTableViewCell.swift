@@ -7,7 +7,7 @@ final class MenuItemsTableViewCell: UITableViewCell {
     
     var model: MenuItemListModel = .empty {
         didSet {
-            foodImage.image = UIImage(named: model.image)
+            foodImageView.image = UIImage(named: model.image)
             nameLabel.attributedText = Font.body.compose(model.name)
             priceLabel.attributedText = Font.body.compose(String(format: "%.2f", model.price))
         }
@@ -19,7 +19,7 @@ final class MenuItemsTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let foodImage: UIImageView = {
+    private let foodImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -28,7 +28,7 @@ final class MenuItemsTableViewCell: UITableViewCell {
     }()
     
     private let priceLabel = UILabel()
-    private let arrowImage = UIImageView(image: .arrowRight)
+    private let arrowImageView = UIImageView(image: .arrowRight)
    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,7 +40,7 @@ final class MenuItemsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    private func configure() {
         separatorInset = .zero
     }
     
@@ -55,36 +55,36 @@ final class MenuItemsTableViewCell: UITableViewCell {
      */
     
     private func setupLayoutAndConstraints() {
-        let infoStack = UIStackView()
-        infoStack.axis = .vertical
-        infoStack.alignment = .leading
-        infoStack.spacing = 1
+        let infoStackView = UIStackView()
+        infoStackView.axis = .vertical
+        infoStackView.alignment = .leading
+        infoStackView.spacing = 1
         
-        let itemStack = UIStackView()
-        itemStack.spacing = 10
-        itemStack.alignment = .center
+        let itemStackView = UIStackView()
+        itemStackView.spacing = 10
+        itemStackView.alignment = .center
         
-        let mainStack = UIStackView()
-        mainStack.spacing = 10
-        mainStack.alignment = .center
-        mainStack.translatesAutoresizingMaskIntoConstraints = false
+        let mainStackView = UIStackView()
+        mainStackView.spacing = 10
+        mainStackView.alignment = .center
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(mainStack)
-        mainStack.addArrangedSubview(itemStack)
-        itemStack.addArrangedSubview(foodImage)
-        itemStack.addArrangedSubview(infoStack)
-        infoStack.addArrangedSubview(nameLabel)
-        infoStack.addArrangedSubview(priceLabel)
+        contentView.addSubview(mainStackView)
+        mainStackView.addArrangedSubview(itemStackView)
+        itemStackView.addArrangedSubview(foodImageView)
+        itemStackView.addArrangedSubview(infoStackView)
+        infoStackView.addArrangedSubview(nameLabel)
+        infoStackView.addArrangedSubview(priceLabel)
         
-        mainStack.addArrangedSubview(arrowImage)
+        mainStackView.addArrangedSubview(arrowImageView)
         
         NSLayoutConstraint.activate([
-            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            mainStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            mainStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            foodImage.widthAnchor.constraint(equalToConstant: 96),
-            foodImage.heightAnchor.constraint(equalToConstant: 65)
+            foodImageView.widthAnchor.constraint(equalToConstant: 96),
+            foodImageView.heightAnchor.constraint(equalToConstant: 65)
         ])
     }
 }
