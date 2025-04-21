@@ -6,9 +6,7 @@ final class PhoneTextField: UIStackView {
     
     var phoneNumber: PhoneNumber {
         get {
-            let code = phonePrefixView.countryCode?.code ?? ""
-            let number = textField.text ?? ""
-            return PhoneNumber(code: code, number: number) ?? .default
+            PhoneNumber(number: textField.text, countryCode: phonePrefixView.countryCode)
         }
         set {
             textField.text = newValue.number

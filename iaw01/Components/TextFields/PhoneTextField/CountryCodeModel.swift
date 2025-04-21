@@ -33,12 +33,12 @@ struct CountryCodeModel {
         self.placeholder = placeholder
     }
     
-    init?(code: String) {
-        let digits = code.filter { $0.isNumber }
+    init?(code: String?) {
+        let digits = code?.filter { $0.isNumber }
         
-        guard !digits.isEmpty else { return nil }
+        guard digits.notNilNotEmpty else { return nil }
         
-        let formattedCode = "+" + digits
+        let formattedCode = "+" + digits!
         
         if let matched = CountryCodeModel.countryCodes.first(where: { $0.code == formattedCode }) {
             self = matched

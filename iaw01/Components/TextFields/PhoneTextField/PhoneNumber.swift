@@ -22,17 +22,14 @@ struct PhoneNumber {
         self.init(code: codePart, number: numberPart)
     }
     
-    init?(code: String, number: String) {
-        let cleanedCode = code.filter { $0.isNumber }
-        let cleanedNumber = number.filter { $0.isNumber }
+    init?(code: String?, number: String?) {
+        guard
+            number.notNilNotEmpty,
+            let code = code,
+            let countryCode = CountryCodeModel(code: code)
+        else { return nil }
         
-        guard !cleanedCode.isEmpty, !cleanedNumber.isEmpty else {
-            return nil
-        }
-        
-        guard let countryCode = CountryCodeModel(code: cleanedCode) else {
-            return nil
-        }
+        let cleanedNumber = number!.filter { $0.isNumber }
         
         self.init(number: cleanedNumber, countryCode: countryCode)
     }
