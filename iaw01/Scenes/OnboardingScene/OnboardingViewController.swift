@@ -58,8 +58,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func showTabBar() {
-        if let tabBarController = self.tabBarController as? RootTabBarController, 
-           navigationController?.viewControllers.last != self {
+        if let tabBarController = self.tabBarController as? RootTabBarController {
             tabBarController.customTabBarHidden = false
         }
     }

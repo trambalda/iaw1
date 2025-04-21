@@ -5,6 +5,20 @@ protocol CoordinatorProtocol: AnyObject {
     func start()
 }
 
+extension UserDefaults {
+    private enum Keys {
+        static let hasCompletedOnboarding = "hasCompletedOnboarding"
+    }
+    
+    var hasCompletedOnboarding: Bool {
+        get { bool(forKey: Keys.hasCompletedOnboarding) }
+        set { 
+            set(newValue, forKey: Keys.hasCompletedOnboarding)
+            synchronize()
+        }
+    }
+}
+
 final class AppCoordinator {
     
     enum State {
@@ -13,12 +27,8 @@ final class AppCoordinator {
         case auth
     }
     
-    private enum UserDefaultsKeys {
-        static let hasCompletedOnboarding = "hasCompletedOnboarding"
-    }
-    
     private var state: State {
-        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.hasCompletedOnboarding) {
+        if UserDefaults.standard.hasCompletedOnboarding {
             return .normal
         } else {
             return .onboarding
@@ -40,12 +50,11 @@ final class AppCoordinator {
     }
     
     func finishOnboarding() {
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.hasCompletedOnboarding)
-        UserDefaults.standard.synchronize()
+        UserDefaults.standard.hasCompletedOnboarding = true
         
         if let navigationController = window.rootViewController as? UINavigationController,
            navigationController.topViewController is OnboardingViewController {
-            showMainViewController()
+                showMainViewController()
         } else if let tabBarController = window.rootViewController as? RootTabBarController {
             tabBarController.customTabBarHidden = false
         }
@@ -60,25 +69,13 @@ final class AppCoordinator {
     }
     
     private func showMainViewController() {
-        let homeScenesCoordinator = HomeScenesCoordinator(appCoordinator: self)
-        let discoverCoordinator = HomeScenesCoordinator(appCoordinator: self)
-        let drivethruCoordinator = HomeScenesCoordinator(appCoordinator: self)
-        let ordersCoordinator = HomeScenesCoordinator(appCoordinator: self)
-        let profileCoordinator = HomeScenesCoordinator(appCoordinator: self)
+        let coordinators = (0..<5).map { _ in
+            HomeScenesCoordinator(appCoordinator: self)
+        }
         
-        homeScenesCoordinator.start()
-        discoverCoordinator.start()
-        drivethruCoordinator.start()
-        ordersCoordinator.start()
-        profileCoordinator.start()
+        coordinators.forEach { $0.start() }
         
-        let tabBarControllers = [
-            homeScenesCoordinator.rootViewController,
-            discoverCoordinator.rootViewController,
-            drivethruCoordinator.rootViewController,
-            ordersCoordinator.rootViewController,
-            profileCoordinator.rootViewController,
-        ]
+        let tabBarControllers = coordinators.map { $0.rootViewController }
 
         let rootTabBarController = RootTabBarController(with: tabBarControllers)
         window.rootViewController = rootTabBarController

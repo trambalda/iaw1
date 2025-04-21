@@ -54,7 +54,6 @@
 		D5952D8C2DAAC129003F3C90 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D892DAAC129003F3C90 /* OnboardingViewController.swift */; };
 		D5952D8D2DAAC129003F3C90 /* OnboardingPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D842DAAC129003F3C90 /* OnboardingPageModel.swift */; };
 		D5952D8E2DAAC129003F3C90 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D862DAAC129003F3C90 /* OnboardingPageView.swift */; };
-		D5952D902DAAC2D5003F3C90 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D8F2DAAC2D5003F3C90 /* OnboardingCoordinator.swift */; };
 		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
 		D5DC6E9A2D9442C70063FC7A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC6E992D9442C70063FC7A /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -110,7 +109,6 @@
 		D5952D862DAAC129003F3C90 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		D5952D872DAAC129003F3C90 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D5952D892DAAC129003F3C90 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		D5952D8F2DAAC2D5003F3C90 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
 		D5DC6E992D9442C70063FC7A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -376,7 +374,6 @@
 		D5952D852DAAC129003F3C90 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D5952D8F2DAAC2D5003F3C90 /* OnboardingCoordinator.swift */,
 				D5952D842DAAC129003F3C90 /* OnboardingPageModel.swift */,
 			);
 			path = Models;
@@ -497,7 +494,6 @@
 				3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
 				D5DC6E9A2D9442C70063FC7A /* Constants.swift in Sources */,
-				D5952D902DAAC2D5003F3C90 /* OnboardingCoordinator.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				D5952D8B2DAAC129003F3C90 /* OnboardingView.swift in Sources */,
 				D5952D8C2DAAC129003F3C90 /* OnboardingViewController.swift in Sources */,
