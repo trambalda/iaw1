@@ -5,13 +5,7 @@ final class OnboardingViewController: UIViewController {
     private let pages: [OnboardingPageModel]
     var appCoordinator: AppCoordinator?
     
-    private lazy var onboardingView: OnboardingView? = {
-        let view = OnboardingView(pages: OnboardingPageModel.pages)
-        view?.onFinish = { [weak self] in
-            self?.finishOnboarding()
-        }
-        return view
-    }()
+    private var onboardingView: OnboardingView?
     
     init(pages: [OnboardingPageModel]) {
         self.pages = pages
@@ -25,6 +19,11 @@ final class OnboardingViewController: UIViewController {
     override func loadView() {
         view = UIView()
         view.backgroundColor = .light100
+        
+        onboardingView = OnboardingView(pages: pages)
+        onboardingView?.onFinish = { [weak self] in
+            self?.finishOnboarding()
+        }
         
         if let onboardingView = onboardingView {
             onboardingView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,5 +66,9 @@ final class OnboardingViewController: UIViewController {
     
     private func finishOnboarding() {
         appCoordinator?.finishOnboarding()
+        
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            navigationController?.popViewController(animated: true)
+        }
     }
 } 

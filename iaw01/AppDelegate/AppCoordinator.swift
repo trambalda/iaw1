@@ -13,7 +13,17 @@ final class AppCoordinator {
         case auth
     }
     
-    private var state: State = .onboarding
+    private enum UserDefaultsKeys {
+        static let hasCompletedOnboarding = "hasCompletedOnboarding"
+    }
+    
+    private var state: State {
+        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.hasCompletedOnboarding) {
+            return .normal
+        } else {
+            return .onboarding
+        }
+    }
 
     private let window: UIWindow
     
@@ -30,15 +40,13 @@ final class AppCoordinator {
     }
     
     func finishOnboarding() {
-        state = .normal
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.hasCompletedOnboarding)
+        UserDefaults.standard.synchronize()
         
-        // Проверяем, является ли текущий контроллер OnboardingViewController
         if let navigationController = window.rootViewController as? UINavigationController,
            navigationController.topViewController is OnboardingViewController {
-            // Если это корневой экран онбординга, переключаемся на основной экран
             showMainViewController()
         } else if let tabBarController = window.rootViewController as? RootTabBarController {
-            // Если это табличный контроллер, показываем таб-бар
             tabBarController.customTabBarHidden = false
         }
     }
@@ -52,11 +60,11 @@ final class AppCoordinator {
     }
     
     private func showMainViewController() {
-        let homeScenesCoordinator = HomeScenesCoordinator()
-        let discoverCoordinator = HomeScenesCoordinator()
-        let drivethruCoordinator = HomeScenesCoordinator()
-        let ordersCoordinator = HomeScenesCoordinator()
-        let profileCoordinator = HomeScenesCoordinator()
+        let homeScenesCoordinator = HomeScenesCoordinator(appCoordinator: self)
+        let discoverCoordinator = HomeScenesCoordinator(appCoordinator: self)
+        let drivethruCoordinator = HomeScenesCoordinator(appCoordinator: self)
+        let ordersCoordinator = HomeScenesCoordinator(appCoordinator: self)
+        let profileCoordinator = HomeScenesCoordinator(appCoordinator: self)
         
         homeScenesCoordinator.start()
         discoverCoordinator.start()
