@@ -2,7 +2,7 @@ import UIKit
 
 final class KeyboardServiceViewController: UIViewController {
 
-    private var keyboardService: KeyboardServiceProtocol? = KeyboardService()
+    private var keyboardService: KeyboardServiceProtocol? = KeyboardService.shared
 
     private let textFieldsStack: UIStackView = {
         let stack = UIStackView()
@@ -63,7 +63,7 @@ final class KeyboardServiceViewController: UIViewController {
         NSLayoutConstraint.activate([
             textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            textFieldsStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100),
+            textFieldsStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
         ])
     }
 }
