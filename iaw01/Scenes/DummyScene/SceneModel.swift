@@ -11,7 +11,7 @@ extension SceneModel {
             SceneModel(sceneType: .textFiedsScene, parameters: [:]),
             SceneModel(sceneType: .cornersButtonsScene, parameters: [:]),
             SceneModel(sceneType: .verifyPhoneNumberScene, parameters: [:]),
-            SceneModel(sceneType: .onboardingScene, parameters: [:])
+            SceneModel(sceneType: .onboardingScene, parameters: [:]),
         ]
     }
 }

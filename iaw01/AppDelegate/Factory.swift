@@ -11,8 +11,7 @@ class Factory {
     }
     
     func createOnboardingScene() -> OnboardingViewController {
-        let pages = OnboardingPageModel.pages
-        let vc = OnboardingViewController(pages: pages)
+        let vc = OnboardingViewController()
         vc.appCoordinator = appCoordinator
         return vc
     }

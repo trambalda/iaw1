@@ -2,13 +2,11 @@ import UIKit
 
 final class OnboardingViewController: UIViewController {
     
-    private let pages: [OnboardingPageModel]
     var appCoordinator: AppCoordinator?
     
     private var onboardingView: OnboardingView?
     
-    init(pages: [OnboardingPageModel]) {
-        self.pages = pages
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -20,12 +18,12 @@ final class OnboardingViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .light100
         
-        onboardingView = OnboardingView(pages: pages)
+        onboardingView = OnboardingView(pages: OnboardingPageModel.pages)
         onboardingView?.onFinish = { [weak self] in
             self?.finishOnboarding()
         }
         
-        if let onboardingView = onboardingView {
+        if let onboardingView {
             onboardingView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(onboardingView)
             
