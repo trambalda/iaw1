@@ -13,7 +13,7 @@ final class AppCoordinator {
         case auth
     }
     
-    private var state: State = .normal
+    private var state: State = .onboarding
 
     private let window: UIWindow
     
@@ -24,14 +24,31 @@ final class AppCoordinator {
     func start() {
         switch state {
         case .normal:     showMainViewController()
-        case .onboarding: break
+        case .onboarding: showOnboardingViewController()
         case .auth:       break
         }
     }
     
     func finishOnboarding() {
         state = .normal
-        showMainViewController()
+        
+        // Проверяем, является ли текущий контроллер OnboardingViewController
+        if let navigationController = window.rootViewController as? UINavigationController,
+           navigationController.topViewController is OnboardingViewController {
+            // Если это корневой экран онбординга, переключаемся на основной экран
+            showMainViewController()
+        } else if let tabBarController = window.rootViewController as? RootTabBarController {
+            // Если это табличный контроллер, показываем таб-бар
+            tabBarController.customTabBarHidden = false
+        }
+    }
+    
+    func showOnboardingViewController() {
+        let factory = Factory(appCoordinator: self)
+        let onboardingVC = factory.createOnboardingScene()
+        let navigationController = UINavigationController(rootViewController: onboardingVC)
+        navigationController.isNavigationBarHidden = true
+        window.rootViewController = navigationController
     }
     
     private func showMainViewController() {

@@ -41,6 +41,30 @@ final class OnboardingViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        hideTabBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        showTabBar()
+    }
+    
+    private func hideTabBar() {
+        if let tabBarController = self.tabBarController as? RootTabBarController {
+            tabBarController.customTabBarHidden = true
+        }
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    private func showTabBar() {
+        if let tabBarController = self.tabBarController as? RootTabBarController, 
+           navigationController?.viewControllers.last != self {
+            tabBarController.customTabBarHidden = false
+        }
+    }
+    
     private func finishOnboarding() {
         if let appCoordinator = appCoordinator {
             appCoordinator.finishOnboarding()

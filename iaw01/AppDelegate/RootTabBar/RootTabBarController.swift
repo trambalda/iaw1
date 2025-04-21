@@ -6,6 +6,13 @@ final class RootTabBarController: UITabBarController {
         Constants.isSE ? 76 : 100
     }
 
+    var customTabBarHidden: Bool = false {
+        didSet {
+            backgroundView.isHidden = customTabBarHidden
+            updateTabBarVisibility()
+        }
+    }
+
     private var indicatorViewCenterXConstraint: NSLayoutConstraint?
     
     private let backgroundView: UIView = {
@@ -48,6 +55,20 @@ final class RootTabBarController: UITabBarController {
 
         setupLayout()
         setupConstraints()
+    }
+    
+    private func updateTabBarVisibility() {
+        // Обновляем отступы для текущего контроллера
+        if let selectedViewController = selectedViewController {
+            let additionalBottomInset: CGFloat = customTabBarHidden ? 0 : RootTabBarController.height
+            
+            if let navigationController = selectedViewController as? UINavigationController,
+               let topViewController = navigationController.topViewController {
+                var insets = topViewController.view.safeAreaInsets
+                insets.bottom = additionalBottomInset
+                topViewController.additionalSafeAreaInsets.bottom = additionalBottomInset - insets.bottom
+            }
+        }
     }
 
     private func setupLayout() {
