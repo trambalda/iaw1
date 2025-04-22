@@ -2,8 +2,6 @@ import UIKit
 
 final class KeyboardServiceViewController: UIViewController {
 
-    private var keyboardService: KeyboardServiceProtocol? = KeyboardService.shared
-
     private let textFieldsStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +29,6 @@ final class KeyboardServiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .light100
-        keyboardService?.isEnabled = true
 
         setupLayout()
         setupTextFieldResponders()

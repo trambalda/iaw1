@@ -6,9 +6,7 @@ protocol KeyboardServiceProtocol: AnyObject {
 
 final class KeyboardService: KeyboardServiceProtocol {
 
-    static let shared = KeyboardService()
-
-    var isEnabled: Bool = false {
+    var isEnabled: Bool = true {
         didSet {
             isEnabled ? setupKeyboardNotifications() : removeKeyboardNotifications()
         }
@@ -16,7 +14,7 @@ final class KeyboardService: KeyboardServiceProtocol {
 
     private let spacing: CGFloat = 16.0
 
-    private init() {
+    init() {
         setupGesture()
         if isEnabled {
             setupKeyboardNotifications()
