@@ -4,7 +4,7 @@ final class PhonePrefixView: UIView {
     
     var onCountryPickerToggle: (() -> Void)?
     
-    var onCountryCodeChanged: (() -> Void)?
+    var onCountryCodeChanged: ((CountryCodeModel?) -> Void)?
     
     var onBeginEditing: (() -> Void)?
     
@@ -126,7 +126,7 @@ final class PhonePrefixView: UIView {
         } else {
             countryCode = CountryCodeModel(code: text)
         }
-        onCountryCodeChanged?()
+        onCountryCodeChanged?(countryCode)
     }
 }
 

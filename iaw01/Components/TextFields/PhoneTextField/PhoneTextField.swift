@@ -39,8 +39,9 @@ final class PhoneTextField: UIStackView {
         view.onCountryPickerToggle = { [weak self] in
             self?.toggleCountryPicker()
         }
-        view.onCountryCodeChanged = { [weak self] in
-            self?.updatePlaceholder()
+        view.onCountryCodeChanged = { [weak self] newCode in
+            guard let self, let newCode else { return }
+            self.refreshPhoneField(for: newCode)
         }
         view.onBeginEditing = { [weak self] in
             self?.isBorderShown = true
@@ -90,7 +91,6 @@ final class PhoneTextField: UIStackView {
         return view
     }()
 
-    
     init(parent: UIView) {
         self.parent = parent
         super.init(frame: .zero)

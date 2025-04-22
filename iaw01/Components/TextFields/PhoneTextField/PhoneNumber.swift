@@ -1,4 +1,5 @@
 struct PhoneNumber {
+    
     let number: String?
     let countryCode: CountryCodeModel?
     
@@ -34,5 +35,3 @@ struct PhoneNumber {
         self.init(number: cleanedNumber, countryCode: countryCode)
     }
 }
-
-

@@ -1,4 +1,5 @@
 struct CountryCodeModel {
+    
     let region: String?
     let flag: String?
     let code: String
@@ -51,5 +52,3 @@ struct CountryCodeModel {
         }
     }
 }
-
-
