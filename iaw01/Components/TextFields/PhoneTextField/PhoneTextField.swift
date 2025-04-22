@@ -87,6 +87,7 @@ final class PhoneTextField: UIStackView {
             self?.phonePrefixView.countryCode = country
             self?.refreshPhoneField(for: country)
             self?.updatePlaceholder()
+            self?.becomeTextFieldFirstResponder()
         }
         return view
     }()
@@ -249,6 +250,10 @@ final class PhoneTextField: UIStackView {
         
         if !textField.isFirstResponder {
             isBorderShown = false
+        }
+        
+        if phonePrefixView.isPrefixFieldFirstResponder == true {
+            isBorderShown = true
         }
     }
     
