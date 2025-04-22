@@ -3,8 +3,9 @@ import UIKit
 final class RootTabBarController: UITabBarController {
 
     static var height: CGFloat {
-        guard let tabBarController = UIApplication.shared.windows.first?.rootViewController as? RootTabBarController, 
-              !tabBarController.isHidden else {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first?.rootViewController as? RootTabBarController,
+              !rootViewController.isHidden else {
             return 0
         }
         return Constants.isSE ? 76 : 100

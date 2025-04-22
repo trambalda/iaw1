@@ -88,9 +88,9 @@ final class OnboardingPageView: UIView {
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             contentStackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
-            contentStackView.widthAnchor.constraint(equalToConstant: screenWidth - 16),
+            contentStackView.widthAnchor.constraint(equalToConstant: screenWidth - 32),
             
             illustrationContainer.heightAnchor.constraint(equalToConstant: illustrationHeight),
             
