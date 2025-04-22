@@ -3,13 +3,16 @@ import UIKit
 final class RootTabBarController: UITabBarController {
 
     static var height: CGFloat {
-        Constants.isSE ? 76 : 100
+        guard let tabBarController = UIApplication.shared.windows.first?.rootViewController as? RootTabBarController, 
+              !tabBarController.isHidden else {
+            return 0
+        }
+        return Constants.isSE ? 76 : 100
     }
 
-    var customTabBarHidden: Bool = false {
+    var isHidden: Bool = false {
         didSet {
-            backgroundView.isHidden = customTabBarHidden
-            updateTabBarVisibility()
+            backgroundView.isHidden = isHidden
         }
     }
 
@@ -57,20 +60,6 @@ final class RootTabBarController: UITabBarController {
         setupConstraints()
     }
     
-    private func updateTabBarVisibility() {
-        // Обновляем отступы для текущего контроллера
-        if let selectedViewController = selectedViewController {
-            let additionalBottomInset: CGFloat = customTabBarHidden ? 0 : RootTabBarController.height
-            
-            if let navigationController = selectedViewController as? UINavigationController,
-               let topViewController = navigationController.topViewController {
-                var insets = topViewController.view.safeAreaInsets
-                insets.bottom = additionalBottomInset
-                topViewController.additionalSafeAreaInsets.bottom = additionalBottomInset - insets.bottom
-            }
-        }
-    }
-
     private func setupLayout() {
         backgroundView.addSubview(stackView)
         backgroundView.addSubview(indicatorView)

@@ -9,10 +9,4 @@ class Factory {
         self.networkService = NetworkService()
         self.appCoordinator = appCoordinator
     }
-    
-    func createOnboardingScene() -> OnboardingViewController {
-        let vc = OnboardingViewController()
-        vc.appCoordinator = appCoordinator
-        return vc
-    }
 }

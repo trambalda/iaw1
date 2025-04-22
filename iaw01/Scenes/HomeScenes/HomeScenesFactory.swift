@@ -32,6 +32,7 @@ final class HomeScenesFactory {
     }
     
     func createOnboardingScene() -> OnboardingViewController {
-        return factory!.createOnboardingScene()
+        let vc = OnboardingViewController()
+        return vc
     }
 }
