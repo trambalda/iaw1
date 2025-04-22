@@ -39,7 +39,6 @@
 		3F8980F22DB1655E00F670A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */; };
 		3F8980F52DB165FF00F670A9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F42DB165FF00F670A9 /* ProfileView.swift */; };
 		3F8980F92DB1717600F670A9 /* SelectPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */; };
-		3F8980FB2DB17E8E00F670A9 /* FullNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */; };
 		3F8980FF2DB18AEC00F670A9 /* ApiKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */; };
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
 		3F927F052DB2A6E300075040 /* CountryCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F927F042DB2A6E300075040 /* CountryCodes.swift */; };
@@ -97,7 +96,6 @@
 		3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3F8980F42DB165FF00F670A9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoButton.swift; sourceTree = "<group>"; };
-		3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullNameView.swift; sourceTree = "<group>"; };
 		3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyView.swift; sourceTree = "<group>"; };
 		3F8A0CE72DB3EDCA006EDA29 /* iaw01.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iaw01.xcodeproj; sourceTree = SOURCE_ROOT; };
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
@@ -304,7 +302,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				3F8980F02DB1653C00F670A9 /* Profile */,
+				3F8980F02DB1653C00F670A9 /* ProfileScene */,
 				21A606F52DB42397007BB17C /* HomeScenes */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 				3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */,
@@ -323,14 +321,14 @@
 			path = VerifyPhoneNumberScene;
 			sourceTree = "<group>";
 		};
-		3F8980F02DB1653C00F670A9 /* Profile */ = {
+		3F8980F02DB1653C00F670A9 /* ProfileScene */ = {
 			isa = PBXGroup;
 			children = (
 				3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */,
 				3F8980F32DB165BA00F670A9 /* Views */,
 				3F927F032DB2A6C300075040 /* Models */,
 			);
-			path = Profile;
+			path = ProfileScene;
 			sourceTree = "<group>";
 		};
 		3F8980F32DB165BA00F670A9 /* Views */ = {
@@ -338,7 +336,6 @@
 			children = (
 				3F8980F42DB165FF00F670A9 /* ProfileView.swift */,
 				3F8980F82DB1717600F670A9 /* SelectPhotoButton.swift */,
-				3F8980FA2DB17E8E00F670A9 /* FullNameView.swift */,
 				3F927F062DB2B40400075040 /* ProfilePhoneNumberInputView.swift */,
 				3F8980FE2DB18AEC00F670A9 /* ApiKeyView.swift */,
 			);
@@ -545,7 +542,6 @@
 				3F8980F22DB1655E00F670A9 /* ProfileViewController.swift in Sources */,
 				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
 				3F8980F92DB1717600F670A9 /* SelectPhotoButton.swift in Sources */,
-				3F8980FB2DB17E8E00F670A9 /* FullNameView.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
 				3F927F052DB2A6E300075040 /* CountryCodes.swift in Sources */,
 			);

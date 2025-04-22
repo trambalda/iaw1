@@ -4,14 +4,6 @@ class ProfileView: UIView {
     
     var onSafeButtonTapped: (() -> Void)?
     
-    private var avatarTopConstraint: NSLayoutConstraint!
-    
-    private var avatarHeightConstraint: NSLayoutConstraint!
-    
-    private var selectButtonTopConstraint: NSLayoutConstraint!
-    
-    private var selectButtonHeightConstraint: NSLayoutConstraint!
-    
     private lazy var avatarView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -34,9 +26,8 @@ class ProfileView: UIView {
         return stackView
     }()
     
-    private lazy var fullNameView: FullNameView = {
-        let view = FullNameView()
-        view.textFieldDelegate = self
+    private lazy var fullNameView: StringTextField = {
+        let view = StringTextField(with: .nameStyle)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -47,9 +38,8 @@ class ProfileView: UIView {
         return view
     }()
     
-    private lazy var apiKeyView: ApiKeyView = {
-        let view = ApiKeyView()
-        view.textFieldDelegate = self
+    private lazy var apiKeyView: StringTextField = {
+        let view = StringTextField(with: .nameStyle)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -69,7 +59,6 @@ class ProfileView: UIView {
         super.init(frame: frame)
         setupLayout()
         setupConstraints()
-        setupObservers()
     }
     
     required init?(coder: NSCoder) {
@@ -87,17 +76,20 @@ class ProfileView: UIView {
         mainStackView.addArrangedSubview(fullNameView)
         mainStackView.addArrangedSubview(phoneNumberView)
         mainStackView.addArrangedSubview(apiKeyView)
-        mainStackView.addArrangedSubview(saveButton)
+        addSubview(saveButton)
         
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            avatarView.topAnchor.constraint(equalTo: topAnchor, constant: 64),
             avatarView.centerXAnchor.constraint(equalTo: centerXAnchor),
             avatarView.widthAnchor.constraint(equalToConstant: Constants.isSE ? 100 : 150),
             avatarView.heightAnchor.constraint(equalToConstant: Constants.isSE ? 100 : 150),
             
+            selectButton.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: Constants.isSE ? 7 : 17),
             selectButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            selectButton.heightAnchor.constraint(equalToConstant: 48),
             
             mainStackView.topAnchor.constraint(equalTo: selectButton.bottomAnchor, constant: Constants.isSE ? 6 : 16),
             mainStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
@@ -107,61 +99,5 @@ class ProfileView: UIView {
             saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -21),
             saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -RootTabBarController.height)
         ])
-        avatarTopConstraint = avatarView.topAnchor.constraint(equalTo: topAnchor, constant: 64)
-        avatarTopConstraint.isActive = true
-        
-        avatarHeightConstraint = avatarView.heightAnchor.constraint(equalToConstant: 150)
-        avatarHeightConstraint.isActive = true
-        
-        selectButtonTopConstraint = selectButton.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: Constants.isSE ? 7 : 17)
-        selectButtonTopConstraint.isActive = true
-        
-        selectButtonHeightConstraint = selectButton.heightAnchor.constraint(equalToConstant: 48)
-        selectButtonHeightConstraint.isActive = true
-    }
-}
-
-extension ProfileView {
-    private func setupObservers() {
-        NotificationCenter.registerKeyboardNotifications(
-            self,
-            willShowSelector: #selector(keyboardWillShow),
-            willHideSelector: #selector(keyboardWillHide)
-        )
-    }
-    
-    @objc private func keyboardWillShow(_ notification: Notification) {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0,
-                       usingSpringWithDamping: 0.6,
-                       initialSpringVelocity: 0.5,
-                       options: [.curveEaseInOut]) {
-            self.avatarHeightConstraint.constant = Constants.isSE ? 80 : 100
-            self.avatarTopConstraint.constant = 59
-            self.selectButtonTopConstraint.constant = 7
-            self.selectButtonHeightConstraint.constant = 35
-            self.layoutIfNeeded()
-        }
-    }
-    
-    @objc private func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0,
-                       usingSpringWithDamping: 0.6,
-                       initialSpringVelocity: 0.5,
-                       options: [.curveEaseInOut]) {
-            self.avatarHeightConstraint.constant = Constants.isSE ? 100 : 150
-            self.avatarTopConstraint.constant = 64
-            self.selectButtonTopConstraint.constant = 17
-            self.selectButtonHeightConstraint.constant = 48
-            self.layoutIfNeeded()
-        }
-    }
-}
-
-extension ProfileView: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }
