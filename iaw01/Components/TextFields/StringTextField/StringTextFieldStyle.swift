@@ -1,6 +1,7 @@
 import UIKit
 
 struct StringTextFieldStyle {
+    
     enum Behavior {
         case string
         case email
