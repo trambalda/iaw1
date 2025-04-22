@@ -6,7 +6,7 @@ protocol KeyboardServiceProtocol: AnyObject {
 
 final class KeyboardService: KeyboardServiceProtocol {
 
-    var isEnabled: Bool = true {
+    var isEnabled: Bool = false {
         didSet {
             isEnabled ? setupKeyboardNotifications() : removeKeyboardNotifications()
         }
