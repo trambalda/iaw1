@@ -10,7 +10,7 @@ final class StringTextField: UIStackView {
     }
     
     private let titleContainerView = UIView()
-    
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
