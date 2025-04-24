@@ -56,6 +56,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var phoneNumberTextField: PhoneTextField = {
         let textField = PhoneTextField(parent: view.self)
+        textField.phoneNumber = .default
         textField.textFieldShouldReturn = {
             self.apiKeyTextField.becomeTextFieldFirstResponder()
         }
