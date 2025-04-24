@@ -28,8 +28,6 @@
 		21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B542D8160E30086697C /* DummyViewController.swift */; };
 		21AA4B5A2D8160E50086697C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B592D8160E50086697C /* Assets.xcassets */; };
 		21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B642D81627D0086697C /* AppCoordinator.swift */; };
-		21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B662D817C080086697C /* RootTabBarController.swift */; };
-		21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B682D817C2F0086697C /* RootTabBarItem.swift */; };
 		21AA4B702D817FC00086697C /* TWKEverett-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B6F2D817FC00086697C /* TWKEverett-Medium.otf */; };
 		21AA4B722D817FC70086697C /* TWKEverett-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21AA4B712D817FC70086697C /* TWKEverett-Regular.otf */; };
 		21AA4B742D8180A80086697C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA4B732D8180A80086697C /* Font.swift */; };
@@ -48,7 +46,10 @@
 		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
 		CE02B8532D933581000C0557 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8502D933581000C0557 /* LinkButton.swift */; };
 		CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8512D933581000C0557 /* LinkButtonStyle.swift */; };
-		CE4D24C52D95C88E00325BAE /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constans.swift */; };
+		CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constants.swift */; };
+		CEEE9CB42DA17A3E00DF1A35 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB22DA17A3E00DF1A35 /* RootTabBarController.swift */; };
+		CEEE9CB52DA17A3E00DF1A35 /* RoorTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB12DA17A3E00DF1A35 /* RoorTabBarView.swift */; };
+		CEEE9CB62DA17A3E00DF1A35 /* RootTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */; };
 		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
 		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
 		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
@@ -78,8 +79,6 @@
 		21AA4B592D8160E50086697C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21AA4B5E2D8160E50086697C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21AA4B642D81627D0086697C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		21AA4B662D817C080086697C /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
-		21AA4B682D817C2F0086697C /* RootTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarItem.swift; sourceTree = "<group>"; };
 		21AA4B6F2D817FC00086697C /* TWKEverett-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TWKEverett-Medium.otf"; sourceTree = "<group>"; };
 		21AA4B712D817FC70086697C /* TWKEverett-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TWKEverett-Regular.otf"; sourceTree = "<group>"; };
 		21AA4B732D8180A80086697C /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -99,7 +98,10 @@
 		869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTextFieldStyle.swift; sourceTree = "<group>"; };
 		CE02B8502D933581000C0557 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		CE02B8512D933581000C0557 /* LinkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonStyle.swift; sourceTree = "<group>"; };
-		CE4D24C42D95C88400325BAE /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		CE4D24C42D95C88400325BAE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CEEE9CB12DA17A3E00DF1A35 /* RoorTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoorTabBarView.swift; sourceTree = "<group>"; };
+		CEEE9CB22DA17A3E00DF1A35 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
+		CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarItem.swift; sourceTree = "<group>"; };
 		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
 		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
 		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
@@ -202,8 +204,9 @@
 		21AA4B6A2D817C410086697C /* RootTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				21AA4B662D817C080086697C /* RootTabBarController.swift */,
-				21AA4B682D817C2F0086697C /* RootTabBarItem.swift */,
+				CEEE9CB22DA17A3E00DF1A35 /* RootTabBarController.swift */,
+				CEEE9CB12DA17A3E00DF1A35 /* RoorTabBarView.swift */,
+				CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */,
 			);
 			path = RootTabBar;
 			sourceTree = "<group>";
@@ -235,7 +238,7 @@
 				21AA4B522D8160E30086697C /* SceneDelegate.swift */,
 				21AA4B642D81627D0086697C /* AppCoordinator.swift */,
 				21AA4B7B2D81880A0086697C /* Factory.swift */,
-				CE4D24C42D95C88400325BAE /* Constans.swift */,
+				CE4D24C42D95C88400325BAE /* Constants.swift */,
 				21AA4B6A2D817C410086697C /* RootTabBar */,
 			);
 			path = AppDelegate;
@@ -431,6 +434,7 @@
 				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				02B31D422D8C78AD00EC9031 /* AuthorizationTitleView.swift in Sources */,
 				02B31D442D8C793300EC9031 /* AuthorizationSegmentedControl.swift in Sources */,
+				CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */,
 				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
@@ -440,8 +444,10 @@
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
 				3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */,
 				CE02B8532D933581000C0557 /* LinkButton.swift in Sources */,
+				CEEE9CB42DA17A3E00DF1A35 /* RootTabBarController.swift in Sources */,
+				CEEE9CB52DA17A3E00DF1A35 /* RoorTabBarView.swift in Sources */,
+				CEEE9CB62DA17A3E00DF1A35 /* RootTabBarItem.swift in Sources */,
 				CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */,
-				21AA4B672D817C080086697C /* RootTabBarController.swift in Sources */,
 				3F45F97D2D8A15BF005BD993 /* PincodeInputView.swift in Sources */,
 				3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,

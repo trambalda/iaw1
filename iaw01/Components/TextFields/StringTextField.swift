@@ -3,6 +3,7 @@ import UIKit
 final class StringTextField: UIStackView {
     
     var textFieldShouldReturn: (() -> Void)?
+    var editingChanged: ((String?) -> Void)?
     
     var text: String? {
         get { textField.text }
@@ -32,6 +33,7 @@ final class StringTextField: UIStackView {
         textField.rightView = clearButton
         textField.rightViewMode = .whileEditing
         textField.delegate = self
+        textField.addTarget(self, action: #selector(didEditingChanged), for: .editingChanged)
         return textField
     }()
     
@@ -135,6 +137,10 @@ final class StringTextField: UIStackView {
         textField.isSecureTextEntry.toggle()
         let image: UIImage = textField.isSecureTextEntry ? .eye : .closedEye
         showPassword.setImage(image, for: .normal)
+    }
+    
+    @objc private func didEditingChanged() {
+        editingChanged?(textField.text)
     }
 }
 

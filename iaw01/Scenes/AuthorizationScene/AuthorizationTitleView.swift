@@ -20,8 +20,7 @@ final class AuthorizationTitleView: UIStackView {
     }
     
     required init(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configure() {

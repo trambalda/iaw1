@@ -45,9 +45,7 @@ class CornersButton: UIButton {
     private lazy var leftIconImageView = iconImageView
     private lazy var rightIconImageView = iconImageView
     
-    private var alphaWhenTouch: CGFloat {
-        isEnabled ? 1.0 : 0.6
-    }
+    private var alphaWhenTouch: CGFloat = 1.0
     
     init(style: CornersButtonStyle = .nextButton) {
         self.style = style
@@ -123,6 +121,5 @@ class CornersButton: UIButton {
     
     private func updateAppearance() {
         backgroundColor = isEnabled ? style.backgroundColor : style.disabledBackgroundColor
-        alpha = alphaWhenTouch
     }
 } 

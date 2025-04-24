@@ -5,9 +5,29 @@ final class AuthorizationLoginView: UIStackView {
     var viewChanged: ((AuthorizationModel?) -> Void)?
     
     private let socialButtons = AuthorizationSocialButtonsView()
-    private let emailTextField = StringTextField(with: .emailStyle)
-    private let passwordTextField = StringTextField(with: .passwordStyle)
     private let forgotPasswordButton = LinkButton(style: .forgotPassword)
+    
+    private lazy var emailTextField: StringTextField = {
+        let textField = StringTextField(with: .emailStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.passwordTextField.becomeTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            self?.viewChanged?(self?.model)
+        }
+        return textField
+    }()
+    
+    private lazy var passwordTextField: StringTextField = {
+        let textField = StringTextField(with: .passwordStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.passwordTextField.resignTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            self?.viewChanged?(self?.model)
+        }
+        return textField
+    }()
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -37,19 +57,12 @@ final class AuthorizationLoginView: UIStackView {
     }
     
     required init(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configure() {
         axis = .vertical
         setupLayout()
-        setupReturnActions()
-        setupTextObservers()
         viewChanged?(model)
     }
     
@@ -62,28 +75,6 @@ final class AuthorizationLoginView: UIStackView {
         
         setCustomSpacing(26, after: emailTextField)
         setCustomSpacing(15, after: passwordTextField)
-        setCustomSpacing(38, after: stackView)
-    }
-    
-    private func setupReturnActions() {
-        emailTextField.textFieldShouldReturn = { [weak self] in
-            self?.passwordTextField.becomeTextFieldFirstResponder()
-        }
-        passwordTextField.textFieldShouldReturn = { [weak self] in
-            self?.passwordTextField.resignTextFieldFirstResponder()
-        }
-    }
-    
-    private func setupTextObservers() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(textFieldDidChange),
-            name: UITextField.textDidChangeNotification,
-            object: nil
-        )
-    }
-    
-    @objc private func textFieldDidChange(notification: Notification) {
-        viewChanged?(model)
+        setCustomSpacing(30, after: stackView)
     }
 }

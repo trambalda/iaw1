@@ -22,16 +22,20 @@ final class AuthorizationSocialButtonsView: UIStackView {
         return stackView
     }()
     
-    private func createButton(imageName: String) -> UIButton {
+    private lazy var googleButton: UIButton = {
         let button = UIButton(type: .custom)
-        let image = UIImage(named: imageName)
-        button.setImage(image, for: .normal)
+        button.setImage(UIImage(named: "googleLogo"), for: .normal)
+        button.addTarget(self, action: #selector(didTapGoogleButton), for: .touchUpInside)
         return button
-    }
+    }()
     
-    private lazy var googleButton = createButton(imageName: "googleLogo")
-    private lazy var appleButton = createButton(imageName: "appleLogo")
-    
+    private lazy var appleButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "appleLogo"), for: .normal)
+        button.addTarget(self, action: #selector(didTapAppleButton), for: .touchUpInside)
+        return button
+    }()
+ 
     private lazy var socialButtonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .leading
@@ -45,8 +49,7 @@ final class AuthorizationSocialButtonsView: UIStackView {
     }
     
     required init(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configure() {
@@ -55,7 +58,6 @@ final class AuthorizationSocialButtonsView: UIStackView {
         distribution = .equalSpacing
         setupLayout()
         setupConstraints()
-        setupActions()
     }
     
     private func setupLayout() {
@@ -66,12 +68,7 @@ final class AuthorizationSocialButtonsView: UIStackView {
         socialButtonStackView.addArrangedSubview(appleButton)
         addArrangedSubview(socialButtonStackView)
         
-        setCustomSpacing(28, after: separatorStackView)
-    }
-    
-    private func setupActions() {
-        googleButton.addTarget(self, action: #selector(didTapGoogleButton), for: .touchUpInside)
-        appleButton.addTarget(self, action: #selector(didTapAppleButton), for: .touchUpInside)
+        setCustomSpacing(20, after: separatorStackView)
     }
     
     @objc private func didTapGoogleButton() {

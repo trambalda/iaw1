@@ -38,26 +38,31 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @objc private func keyboardWillShow(notification: Notification) {
-        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-        else { return }
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+        
         let keyboardHeight = keyboardFrame.height
-        let buttonHeight = self.authorizationView.bottomButton.frame.height
-        let translationY = max(0, keyboardHeight - buttonHeight - 12)
+        let extraOffset: CGFloat = 16
+        let staticOffset: CGFloat = 55
+        let shift = -keyboardHeight - extraOffset + staticOffset
         
-        authorizationView.scrollView.contentInset.bottom = keyboardHeight + 64
-        authorizationView.scrollView.verticalScrollIndicatorInsets.bottom = keyboardHeight
-        
-        UIView.animate(withDuration: 0.3) {
-            self.authorizationView.bottomButton.transform = CGAffineTransform(translationX: 0, y: -translationY)
+        authorizationView.bottomButtonBottomConstraint.constant = shift
+                
+        UIView.animate(withDuration: duration) {
+            self.view.layoutIfNeeded()
         }
+        
+        self.authorizationView.scrollView.contentInset.bottom = shift + 64
+        self.authorizationView.scrollView.verticalScrollIndicatorInsets.bottom = shift
     }
     
     @objc private func keyboardWillHide(notification: Notification) {
+        authorizationView.bottomButtonBottomConstraint.constant = -55
         authorizationView.scrollView.contentInset.bottom = 0
         authorizationView.scrollView.verticalScrollIndicatorInsets.bottom = 0
         
         UIView.animate(withDuration: 0.3) {
-            self.authorizationView.bottomButton.transform = .identity
+            self.view.layoutIfNeeded()
         }
     }
     

@@ -51,7 +51,7 @@ final class LinkButton: UIButton {
 
     @objc private func buttonTapped() {
         if let urlString = style.url {
-            let url = URL(string: urlString) ?? Constans.url404
+            let url = URL(string: urlString) ?? Constants.url404
             UIApplication.shared.open(url)
         } else {
             onTap?()

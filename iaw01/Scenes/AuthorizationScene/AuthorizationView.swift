@@ -9,25 +9,18 @@ final class AuthorizationView: UIView {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.showsHorizontalScrollIndicator = false
+        scroll.alwaysBounceVertical = true
+        scroll.showsVerticalScrollIndicator = false
         return scroll
     }()
     
-    public lazy var bottomButton: CornersButton = {
-        let button = CornersButton(style: .loginButton)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.isEnabled = false
-        button.alpha = 0.5
-        button.addTarget(self, action: #selector(bottomButtonTapped), for: .touchUpInside)
-        return button
+    public let bottomButtonContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    private lazy var segmentedControl: AuthorizationSegmentedControl = {
-        let control = AuthorizationSegmentedControl()
-        control.toggleTextField = { [weak self] selection in
-            self?.switchView(to: selection)
-        }
-        return control
-    }()
+    public var bottomButtonBottomConstraint: NSLayoutConstraint!
     
     private let titleView = AuthorizationTitleView()
     
@@ -37,10 +30,18 @@ final class AuthorizationView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
+
     private let containerView = UIView()
     
     private var currentSelection: AuthorizationSegmentedControl.Selection = .login
+    
+    private lazy var segmentedControl: AuthorizationSegmentedControl = {
+        let control = AuthorizationSegmentedControl()
+        control.toggleTextField = { [weak self] selection in
+            self?.switchView(to: selection)
+        }
+        return control
+    }()
     
     private lazy var loginView: AuthorizationLoginView = {
         let view = AuthorizationLoginView()
@@ -60,43 +61,55 @@ final class AuthorizationView: UIView {
         return view
     }()
     
+    private lazy var bottomButton: CornersButton = {
+        let button = CornersButton(style: .loginButton)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(bottomButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
+    
     
     private func configure() {
         backgroundColor = .light100
         setupLayout()
         setupConstraints()
         switchView(to: .login)
+        updateButtonState()
     }
     
     private func setupLayout() {
         addSubview(scrollView)
+        addSubview(bottomButtonContainer)
         scrollView.addSubview(contentStackView)
+        bottomButtonContainer.addSubview(bottomButton)
         contentStackView.addArrangedSubview(titleView)
         contentStackView.addArrangedSubview(segmentedControl)
         contentStackView.addArrangedSubview(containerView)
         containerView.addSubview(loginView)
         containerView.addSubview(signupView)
-        scrollView.addSubview(bottomButton)
         
         contentStackView.setCustomSpacing(21, after: titleView)
         contentStackView.setCustomSpacing(24, after: segmentedControl)
+        contentStackView.setCustomSpacing(200, after: containerView)
     }
     
     private func setupConstraints() {
+        bottomButtonBottomConstraint = bottomButtonContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -55)
+
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomButtonContainer.topAnchor),
             
             contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -113,9 +126,13 @@ final class AuthorizationView: UIView {
             signupView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             signupView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             
-            bottomButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            bottomButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            bottomButton.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+            bottomButtonContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
+            bottomButtonContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bottomButtonBottomConstraint, 
+            bottomButton.topAnchor.constraint(equalTo: bottomButtonContainer.topAnchor, constant: 1),
+            bottomButton.leadingAnchor.constraint(equalTo: bottomButtonContainer.leadingAnchor, constant: 16),
+            bottomButton.trailingAnchor.constraint(equalTo: bottomButtonContainer.trailingAnchor, constant: -16),
+            bottomButton.bottomAnchor.constraint(equalTo: bottomButtonContainer.bottomAnchor, constant: -16),
         ])
     }
     
@@ -124,20 +141,12 @@ final class AuthorizationView: UIView {
         
         switch currentSelection {
         case .login:
-            let model = loginView.model
-            isFilled = !(model.email?.isEmpty ?? true)
-            && !(model.password?.isEmpty ?? true)
+            isFilled = loginView.model.isLoginModelFilled
         case .signUp:
-            let model = signupView.model
-            isFilled = !(model.name?.isEmpty ?? true)
-            && !(model.phone?.isEmpty ?? true)
-            && !(model.password?.isEmpty ?? true)
+            isFilled = signupView.model.isSignUpModelFilled
         }
-        
         bottomButton.isEnabled = isFilled
-        bottomButton.alpha = isFilled ? 1.0 : 0.5
     }
-    
     
     @objc private func bottomButtonTapped() {
         
@@ -177,6 +186,6 @@ final class AuthorizationView: UIView {
             toView.alpha = 1
         }
         
-       updateButtonState()
+        updateButtonState()
     }
 }

@@ -4,10 +4,40 @@ final class AuthorizationSignupView: UIStackView {
     
     var viewChanged: ((AuthorizationModel?) -> Void)?
     
-    private let nameTextField = StringTextField(with: .nameStyle)
-    private let phoneNumberTextField = StringTextField(with: .phoneNumberStyle)
-    private let createPasswordTextField = StringTextField(with: .createPasswordStyle)
     private let socialButtons = AuthorizationSocialButtonsView()
+    
+    private lazy var nameTextField: StringTextField = {
+        let textField = StringTextField(with: .nameStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.phoneNumberTextField.becomeTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            self?.viewChanged?(self?.model)
+        }
+        return textField
+    }()
+    
+    private lazy var phoneNumberTextField: StringTextField = {
+        let textField = StringTextField(with: .phoneNumberStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.createPasswordTextField.becomeTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            self?.viewChanged?(self?.model)
+        }
+        return textField
+    }()
+    
+    private lazy var createPasswordTextField: StringTextField = {
+        let textField = StringTextField(with: .createPasswordStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.createPasswordTextField.resignTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            self?.viewChanged?(self?.model)
+        }
+        return textField
+    }()
     
     var model: AuthorizationModel {
         get {
@@ -31,8 +61,7 @@ final class AuthorizationSignupView: UIStackView {
     }
     
     required init(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
@@ -42,8 +71,6 @@ final class AuthorizationSignupView: UIStackView {
     private func configure() {
         axis = .vertical
         setupLayout()
-        setupReturnActions()
-        setupTextObservers()
         viewChanged?(model)
     }
     
@@ -55,32 +82,7 @@ final class AuthorizationSignupView: UIStackView {
         
         setCustomSpacing(26, after: nameTextField)
         setCustomSpacing(26, after: phoneNumberTextField)
-        setCustomSpacing(37, after: createPasswordTextField)
-    }
-    
-    private func setupReturnActions() {
-        nameTextField.textFieldShouldReturn = { [weak self] in
-            self?.phoneNumberTextField.becomeTextFieldFirstResponder()
-        }
-        phoneNumberTextField.textFieldShouldReturn = { [weak self] in
-            self?.createPasswordTextField.becomeTextFieldFirstResponder()
-        }
-        createPasswordTextField.textFieldShouldReturn = { [weak self] in
-            self?.createPasswordTextField.resignTextFieldFirstResponder()
-        }
-    }
-    
-    private func setupTextObservers() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(textFieldDidChange),
-            name: UITextField.textDidChangeNotification,
-            object: nil
-        )
-    }
-    
-    @objc private func textFieldDidChange(notification: Notification) {
-        viewChanged?(model)
+        setCustomSpacing(26, after: createPasswordTextField)
     }
 }
 
