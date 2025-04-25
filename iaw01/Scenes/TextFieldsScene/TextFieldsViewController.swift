@@ -81,13 +81,32 @@ final class TextFieldsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChange), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChange), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardChange),
+            name: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardChange),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
     
     private func setupLayout() {

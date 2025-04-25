@@ -99,6 +99,13 @@ final class PhoneTextField: UIStackView {
         setupLayout()
         setupConstraints()
         configureField(baseStyle: TextFieldBaseStyle())
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleTextFieldDidBeginEditing(_:)),
+            name: UITextField.textDidBeginEditingNotification,
+            object: nil
+        )
     }
     
     required init(coder: NSCoder) {
@@ -263,6 +270,18 @@ final class PhoneTextField: UIStackView {
         } else {
             textFieldShouldReturn?()
         }
+    }
+    
+    @objc private func handleTextFieldDidBeginEditing(_ notification: Notification) {
+        guard let editingTextField = notification.object as? UITextField else { return }
+
+        if editingTextField != textField && !phonePrefixView.isPrefixFieldFirstResponder {
+            hidePickerView()
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
