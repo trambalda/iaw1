@@ -40,6 +40,7 @@
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
 		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
 		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
+		3F9D5AD12DBB942000846D84 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D5AD02DBB942000846D84 /* ProfileView.swift */; };
 		860852232D9747BA0038A9EF /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860852222D9747BA0038A9EF /* PhoneTextField.swift */; };
 		863929E72D9D2DAA00480459 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863929E62D9D2DAA00480459 /* PhoneNumber.swift */; };
 		868044992D94765400CBE1EC /* CountryCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868044982D94765300CBE1EC /* CountryCodeModel.swift */; };
@@ -100,6 +101,7 @@
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
 		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
+		3F9D5AD02DBB942000846D84 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		860852222D9747BA0038A9EF /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		863929E62D9D2DAA00480459 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		868044982D94765300CBE1EC /* CountryCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodeModel.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */,
+				3F9D5ACF2DBB940400846D84 /* Views */,
 			);
 			path = ProfileScene;
 			sourceTree = "<group>";
@@ -351,6 +354,14 @@
 				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3F9D5ACF2DBB940400846D84 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F9D5AD02DBB942000846D84 /* ProfileView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3FEC58A62DB4162700BE8BFF /* Products */ = {
@@ -537,6 +548,7 @@
 				CEEE9CB52DA17A3E00DF1A35 /* RoorTabBarView.swift in Sources */,
 				21A606E82DB406F3007BB17C /* NetworkService.swift in Sources */,
 				CEEE9CB62DA17A3E00DF1A35 /* RootTabBarItem.swift in Sources */,
+				3F9D5AD12DBB942000846D84 /* ProfileView.swift in Sources */,
 				21A606EE2DB41CC4007BB17C /* APIResponseDto.swift in Sources */,
 				CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */,
 				3F45F97D2D8A15BF005BD993 /* PincodeInputView.swift in Sources */,
