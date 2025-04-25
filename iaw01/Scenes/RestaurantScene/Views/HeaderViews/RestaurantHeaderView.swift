@@ -2,9 +2,11 @@ import UIKit
 
 final class RestaurantHeaderView: UIStackView {
     
+    var imageService: ImageServiceProtocol?
+    
     var model: RestaurantModel = .empty {
         didSet {
-            logoImageView.image = UIImage(named: model.logo)
+            loadImage(from: model.logo)
             titleLabel.attributedText = Font.name.compose(model.name)
             locationLabel.attributedText = Font.body.compose(model.address)
         }
@@ -43,6 +45,21 @@ final class RestaurantHeaderView: UIStackView {
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func loadImage(from url: String) {
+        guard let url = URL(string: url) else { return }
+        
+        Task {
+            do {
+                let image = try await imageService?.loadImage(from: url)
+                DispatchQueue.main.async {
+                    self.logoImageView.image = image
+                }
+            } catch {
+                print("Ошибка загрузки изображения: \(error)")
+            }
+        }
     }
     
     private func configure() {

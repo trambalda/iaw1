@@ -2,15 +2,13 @@ import UIKit
 
 final class RestaurantView: UIView {
     
+    var imageService: ImageServiceProtocol?
+    
     var model: RestaurantModel = .empty {
         didSet {
             headerView.model = model
             filterView.model = model
-            menuItemListView.models = model.dishes
-            
-            let cellHeight: CGFloat = MenuItemsTableViewCell.cellHeight
-            let totalHeight = CGFloat(model.dishes.count) * cellHeight
-            menuItemListViewHeightConstraint?.constant = totalHeight
+            menuItemListView.imageService = imageService
         }
     }
     
@@ -22,7 +20,6 @@ final class RestaurantView: UIView {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        //scrollView.delegate = self
         return scrollView
     }()
     
@@ -39,11 +36,28 @@ final class RestaurantView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         scrollView.delegate = self
+        setupMenuCallback()
         configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupMenuCallback() {
+        filterView.onMenuSelected = { [weak self] selectedMenu in
+            self?.updateMenuItems(for: selectedMenu)
+        }
+    }
+    
+    private func updateMenuItems(for menu: MenuModel?) {
+        guard let menu else { return }
+        let dishes = model.dishes.filter { menu.dishesID.contains($0.id) }
+        menuItemListView.models = dishes
+
+        let cellHeight: CGFloat = MenuItemsTableViewCell.cellHeight
+        let totalHeight = CGFloat(dishes.count) * cellHeight
+        menuItemListViewHeightConstraint?.constant = totalHeight
     }
     
     private func configure() {
@@ -65,7 +79,7 @@ final class RestaurantView: UIView {
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -RootTabBarController.height),
             
             contentStack.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -73,7 +87,7 @@ final class RestaurantView: UIView {
             contentStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
-        
+       
         menuItemListViewHeightConstraint = menuItemListView.heightAnchor.constraint(equalToConstant: 0)
         menuItemListViewHeightConstraint?.isActive = true
     }

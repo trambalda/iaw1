@@ -7,13 +7,17 @@ protocol MenuTimeViewDelegate: AnyObject {
 
 final class MenuTimeView: UIView {
     
-    weak var delegate: MenuTimeViewDelegate?
+    var onMenuSelected: ((MenuModel) -> Void)?
     
     var model: RestaurantModel = .empty {
         didSet {
             configure(with: model.menu)
         }
     }
+    
+    private var menuOptions: [MenuModel] = []
+    private var buttons: [UIButton] = []
+    private var selectedButton: UIButton?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -38,9 +42,6 @@ final class MenuTimeView: UIView {
         return view
     }()
     
-    private var menuOptions: [MenuModel] = []
-    private var buttons: [UIButton] = []
-    private var selectedButton: UIButton?
     private var underlineLeadingConstraint: NSLayoutConstraint!
     private var underlineWidthConstraint: NSLayoutConstraint!
     
@@ -59,13 +60,14 @@ final class MenuTimeView: UIView {
         buttons.forEach { $0.removeFromSuperview()}
         buttons.removeAll()
         
-        for menu in menus {
+        for (index, menu) in menus.enumerated() {
             let button = createButton(title: menu.name)
+            button.tag = index
             stackView.addArrangedSubview(button)
             buttons.append(button)
         }
         
-        if let defaultButton = buttons.dropFirst().first {
+        if let defaultButton = buttons.first {
             scrollView.addSubview(underlineView)
             
             underlineView.heightAnchor.constraint(equalToConstant: 3).isActive = true
@@ -78,6 +80,7 @@ final class MenuTimeView: UIView {
             underlineWidthConstraint.isActive = true
             
             selectButton(defaultButton)
+            onMenuSelected?(menuOptions[0])
         }
     }
     
@@ -106,9 +109,11 @@ final class MenuTimeView: UIView {
     }
 
     @objc func menuTapped(_ sender: UIButton) {
-        guard let index = buttons.firstIndex(of: sender) else { return }
+        let index = sender.tag
+        guard menuOptions.indices.contains(index) else { return }
+        let menu = menuOptions[index]
         selectButton(sender)
-        delegate?.didSelectMenu(menuOptions[index])
+        onMenuSelected?(menu)
     }
     
     func selectButton(_ button: UIButton) {

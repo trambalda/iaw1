@@ -2,9 +2,12 @@ import UIKit
 
 final class HeaderView: UIStackView {
     
+    var imageService: ImageServiceProtocol?
+    
     var model: RestaurantModel = .empty {
         didSet {
-            imageView.image = UIImage(named: model.image)
+            loadImage(from: model.image)
+            restaurantHeaderView.imageService = imageService
             restaurantHeaderView.model = model
             restaurantInfoView.model = model
         }
@@ -40,6 +43,21 @@ final class HeaderView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func loadImage(from url: String) {
+        guard let url = URL(string: url) else { return }
+        
+        Task {
+            do {
+                let image = try await imageService?.loadImage(from: url)
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            } catch {
+                print("Ошибка загрузки изображения: \(error)")
+            }
+        }
+    }
     /*
      imageView
      restaurantInfoContainer
@@ -54,7 +72,7 @@ final class HeaderView: UIStackView {
         setupLayout()
         setupConstraints()
     }
-    
+   
     private func setupLayout() {
         addArrangedSubview(imageView)
         addArrangedSubview(restaurantInfoContainer)
@@ -79,27 +97,3 @@ final class HeaderView: UIStackView {
     }
 }
 
-/* РЕАЛИЗОВАТЬ ПОЗЖЕ ВО ВЬЮ
- 
- extension RestaurantViewController: UIScrollViewDelegate {
-     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-         let offset = scrollView.contentOffset.y
-         
-         let newHeaderImageViewHeightConstraint = max(164 - offset, 0)
-         let newRestaurantInfoViewHeightConstraint = max(109 - offset / 2, 0)
-         
-         restaurantView.headerView.headerImageViewHeightConstraint.constant = newHeaderImageViewHeightConstraint
-         restaurantView.headerView.restaurantInfoViewHeightConstraint.constant = newRestaurantInfoViewHeightConstraint
-         
-         if newHeaderImageViewHeightConstraint == 0 {
-             restaurantView.headerView.restaurantHeaderView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-             restaurantView.filtersView.menuTimeView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-             restaurantView.filtersView.menuCategoryView.transform = CGAffineTransform(translationX: 0, y: -offset + 164)
-         } else {
-             restaurantView.headerView.restaurantHeaderView.transform = .identity
-             restaurantView.filtersView.menuTimeView.transform = .identity
-             restaurantView.filtersView.menuCategoryView.transform = .identity
-         }
-     }
- }
- */

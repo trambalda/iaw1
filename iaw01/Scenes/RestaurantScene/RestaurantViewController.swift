@@ -7,8 +7,11 @@ final class RestaurantViewController: UIViewController {
     private var loadedRestaurant: RestaurantModel?
     
     private lazy var restaurantView: RestaurantView = {
+        let imageService = ImageService()
         let view = RestaurantView()
-        view.filterView.delegate = self
+        view.imageService = imageService
+        view.headerView.imageService = imageService
+        view.menuItemListView.imageService = imageService
         return view
     }()
     
@@ -28,15 +31,8 @@ final class RestaurantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableViewInsets()
         setupNavigationBar()
         loadRestaurant()
-    }
-    
-    private func setupTableViewInsets() {
-        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 0
-        restaurantView.menuItemListView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: tabBarHeight, right: 0)
-        restaurantView.menuItemListView.scrollIndicatorInsets = restaurantView.menuItemListView.contentInset
     }
     
     private func setupNavigationBar() {
@@ -100,6 +96,7 @@ final class RestaurantViewController: UIViewController {
                 }
                 
                 self.loadedRestaurant = restaurant
+                self.restaurantView.model = restaurant
                 print("🍽️ Загружен ресторан: \(restaurant.name)")
             } catch {
                 print("❌ Ошибка загрузки ресторана: \(error)")
@@ -121,12 +118,5 @@ final class RestaurantViewController: UIViewController {
     
     @objc private func shoppingBagButtonTapped() {
         
-    }
-}
-
-extension RestaurantViewController: MenuTimeViewDelegate {
-    
-    func didSelectMenu(_ menu: MenuModel) {
-            
     }
 }

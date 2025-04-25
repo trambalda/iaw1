@@ -1,17 +1,26 @@
 import UIKit
 
+struct RestaurantsModel: Codable {
+    let data: [RestaurantModel]
+    let isSuccess: Bool
+}
+
 struct RestaurantModel: Codable {
     
     let id: Int
     let logo: String
     let name: String
     let image: String
-    let rating: Float
+    let rating: Double
     let deliveryTime: String
     let address: String
     let cousines: [String]
     let menu: [MenuModel]
     let dishes: [MenuItemListModel]
+    
+    var cousinesString: String {
+        cousines.joined(separator: ", ")
+    }
     
     static let empty = RestaurantModel(
         id: 0,
@@ -27,18 +36,3 @@ struct RestaurantModel: Codable {
     )
 }
 
-extension RestaurantModel {
-    
-    static let mock = RestaurantModel(
-        id: 0,
-        logo: "logo",
-        name: "McDonald's",
-        image: "restaurant",
-        rating: 4.5,
-        deliveryTime: "15-20",
-        address: "Bramlea & Sandalwood",
-        cousines: ["Burgers"],
-        menu: MenuModel.mock,
-        dishes: MenuItemListModel.mockArray
-    )
-}

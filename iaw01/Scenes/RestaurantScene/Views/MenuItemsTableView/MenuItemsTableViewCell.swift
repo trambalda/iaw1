@@ -5,9 +5,11 @@ final class MenuItemsTableViewCell: UITableViewCell {
     static let identifier = "MenuItemsTableViewCell"
     static let cellHeight: CGFloat = 100
     
+    var imageService: ImageServiceProtocol?
+    
     var model: MenuItemListModel = .empty {
         didSet {
-            foodImageView.image = UIImage(named: model.image)
+            loadImage(from: model.image)
             nameLabel.attributedText = Font.body.compose(model.name)
             priceLabel.attributedText = Font.body.compose(String(format: "%.2f", model.price))
         }
@@ -38,6 +40,21 @@ final class MenuItemsTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func loadImage(from url: String) {
+        guard let url = URL(string: url) else { return }
+        
+        Task {
+            do {
+                let image = try await imageService?.loadImage(from: url)
+                DispatchQueue.main.async {
+                    self.foodImageView.image = image
+                }
+            } catch {
+                print("Ошибка загрузки изображения: \(error)")
+            }
+        }
     }
     
     private func configure() {

@@ -2,6 +2,8 @@ import UIKit
 
 final class MenuItemsTableView: UITableView {
     
+    var imageService: ImageServiceProtocol?
+    
     var models: [MenuItemListModel] = [] {
         didSet {
             reloadData()
@@ -38,6 +40,7 @@ extension MenuItemsTableView: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
+        cell.imageService = imageService
         cell.model = models[indexPath.row]
         return cell
     }
