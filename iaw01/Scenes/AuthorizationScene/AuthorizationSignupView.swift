@@ -17,16 +17,13 @@ final class AuthorizationSignupView: UIStackView {
         return textField
     }()
     
-    private lazy var phoneNumberTextField: StringTextField = {
-        let textField = StringTextField(with: .phoneNumberStyle)
-        textField.textFieldShouldReturn = { [weak self] in
-            self?.createPasswordTextField.becomeTextFieldFirstResponder()
-        }
-        textField.editingChanged = { [weak self] _ in
-            self?.viewChanged?(self?.model)
-        }
-        return textField
-    }()
+    private lazy var phoneNumberTextField: PhoneTextField = {
+            let textField = PhoneTextField(parent: self)
+            textField.textFieldShouldReturn = { [weak self] in
+                self?.createPasswordTextField.becomeTextFieldFirstResponder()
+            }
+            return textField
+        }()
     
     private lazy var createPasswordTextField: StringTextField = {
         let textField = StringTextField(with: .createPasswordStyle)
@@ -45,12 +42,12 @@ final class AuthorizationSignupView: UIStackView {
                 email: nil,
                 password: createPasswordTextField.text,
                 name: nameTextField.text,
-                phone: phoneNumberTextField.text
+                phone: phoneNumberTextField.phoneNumber.fullNumber
             )
         }
         set {
             nameTextField.text = newValue.name
-            phoneNumberTextField.text = newValue.phone
+            phoneNumberTextField.phoneNumber = PhoneNumber(fullString: newValue.phone ?? "") ?? .default
             createPasswordTextField.text = newValue.password
         }
     }
@@ -84,11 +81,4 @@ final class AuthorizationSignupView: UIStackView {
         setCustomSpacing(26, after: phoneNumberTextField)
         setCustomSpacing(26, after: createPasswordTextField)
     }
-}
-
-extension StringTextFieldStyle {
-    static let phoneNumberStyle = StringTextFieldStyle(
-        title: "Phone Number",
-        placeholder: "+1  |  000 000 0000",
-        behavior: .string)
 }
