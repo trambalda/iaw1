@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02101C0D2DA84EA600ADF6A5 /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02101C0C2DA84EA600ADF6A5 /* AuthorizationModel.swift */; };
+		0288EEF52DBBCBDC0077AA20 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constants.swift */; };
 		029039C82D999414008973F2 /* AuthorizationLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029039C72D999414008973F2 /* AuthorizationLoginView.swift */; };
 		029039CA2D999429008973F2 /* AuthorizationSignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029039C92D999429008973F2 /* AuthorizationSignupView.swift */; };
 		02B31D3F2D8C4DE800EC9031 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D3D2D8C4DE800EC9031 /* AuthorizationViewController.swift */; };
@@ -46,7 +47,6 @@
 		869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869876BA2D8C45AB00C7BA58 /* StringTextFieldStyle.swift */; };
 		CE02B8532D933581000C0557 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8502D933581000C0557 /* LinkButton.swift */; };
 		CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8512D933581000C0557 /* LinkButtonStyle.swift */; };
-		CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constants.swift */; };
 		CEEE9CB42DA17A3E00DF1A35 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB22DA17A3E00DF1A35 /* RootTabBarController.swift */; };
 		CEEE9CB52DA17A3E00DF1A35 /* RoorTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB12DA17A3E00DF1A35 /* RoorTabBarView.swift */; };
 		CEEE9CB62DA17A3E00DF1A35 /* RootTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */; };
@@ -421,6 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0288EEF52DBBCBDC0077AA20 /* Constants.swift in Sources */,
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
@@ -430,11 +431,8 @@
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
-				CE4D24C52D95C88E00325BAE /* Constans.swift in Sources */,
-				21AA4B692D817C2F0086697C /* RootTabBarItem.swift in Sources */,
 				02B31D422D8C78AD00EC9031 /* AuthorizationTitleView.swift in Sources */,
 				02B31D442D8C793300EC9031 /* AuthorizationSegmentedControl.swift in Sources */,
-				CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */,
 				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
