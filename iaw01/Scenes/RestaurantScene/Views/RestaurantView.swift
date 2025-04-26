@@ -52,7 +52,7 @@ final class RestaurantView: UIView {
     
     private func updateMenuItems(for menu: MenuModel?) {
         guard let menu else { return }
-        let dishes = model.dishes.filter { menu.dishesID.contains($0.id) }
+        let dishes = model.dishes.filter { menu.dishesId.contains($0.id) }
         menuItemListView.models = dishes
 
         let cellHeight: CGFloat = MenuItemsTableViewCell.cellHeight
