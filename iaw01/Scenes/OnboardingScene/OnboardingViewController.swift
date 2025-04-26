@@ -2,6 +2,7 @@ import UIKit
 
 final class OnboardingViewController: UIViewController {
     
+    var coordinator: HomeScenesCoordinator?
     private var onboardingView: OnboardingView?
     
     init() {
@@ -26,5 +27,6 @@ final class OnboardingViewController: UIViewController {
 
     private func finishOnboarding() {
         navigationController?.popViewController(animated: true)
+        coordinator?.hideOnboardingScene()
     }
 } 

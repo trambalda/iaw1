@@ -1,13 +1,9 @@
-final class HomeScenesFactory {
+final class HomeScenesFactory: Factory {
     
     let coordinator: HomeScenesCoordinator
-    private var factory: Factory?
     
     init(coordinator: HomeScenesCoordinator) {
         self.coordinator = coordinator
-        if let appCoordinator = coordinator.appCoordinator {
-            self.factory = Factory(appCoordinator: appCoordinator)
-        }
     }
     
     func createDummyScene() -> DummyViewController {
@@ -33,6 +29,7 @@ final class HomeScenesFactory {
     
     func createOnboardingScene() -> OnboardingViewController {
         let vc = OnboardingViewController()
+        vc.coordinator = coordinator
         return vc
     }
 }

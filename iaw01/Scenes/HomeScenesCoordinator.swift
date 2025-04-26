@@ -5,43 +5,45 @@ protocol HomeScenesCoordinatorProtocol {
     func showCornersButtonsScene()
     func showVerifyPhoneNumberScene()
     func showOnboardingScene()
+    func hideOnboardingScene()
 }
 
 final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorProtocol {
     
     private(set) var rootViewController = UINavigationController()
-    var appCoordinator: AppCoordinator?
     
     private lazy var factory: HomeScenesFactory = {
         HomeScenesFactory(coordinator: self)
     }()
     
-    init(appCoordinator: AppCoordinator? = nil) {
-        self.appCoordinator = appCoordinator
-    }
-    
     func start() {
         rootViewController.pushViewController(factory.createDummyScene(), animated: false)
     }
     
+    private func showScene<T: UIViewController>(_ viewController: T, hideTabBar: Bool = false) {
+        if hideTabBar {
+            RootTabBarController.setHidden(to: true)
+        }
+        rootViewController.pushViewController(viewController, animated: true)
+    }
+    
     func showTextFieldScene() {
-        let vc = factory.createTextFieldsScene()
-        rootViewController.pushViewController(vc, animated: true)
+        showScene(factory.createTextFieldsScene())
     }
     
     func showCornersButtonsScene() {
-        let vc = factory.createCornersButtonsScene()
-        rootViewController.pushViewController(vc, animated: true)
+        showScene(factory.createCornersButtonsScene())
     }
     
     func showVerifyPhoneNumberScene() {
-        let vc = factory.createVerifyPhoneNumberScene()
-        rootViewController.pushViewController(vc, animated: true)
+        showScene(factory.createVerifyPhoneNumberScene())
     }
     
     func showOnboardingScene() {
-        let vc = factory.createOnboardingScene()
-        RootTabBarController.setHidden(to: true)
-        rootViewController.pushViewController(vc, animated: true)
+        showScene(factory.createOnboardingScene(), hideTabBar: true)
+    }
+    
+    func hideOnboardingScene() {
+        RootTabBarController.setHidden(to: false)
     }
 }
