@@ -41,9 +41,7 @@ final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorPro
     
     func showOnboardingScene() {
         let vc = factory.createOnboardingScene()
-        if let tabBarController = rootViewController.tabBarController as? RootTabBarController {
-            tabBarController.isHidden = true
-        }
+        RootTabBarController.setHidden(to: true)
         rootViewController.pushViewController(vc, animated: true)
     }
 }

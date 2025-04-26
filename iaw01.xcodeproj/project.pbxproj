@@ -57,6 +57,7 @@
 		CEEE9CB62DA17A3E00DF1A35 /* RootTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */; };
 		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
 		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
+		D57BD96D2DBD315E005052DF /* UIApplication+RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */; };
 		D5952D8B2DAAC129003F3C90 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D872DAAC129003F3C90 /* OnboardingView.swift */; };
 		D5952D8C2DAAC129003F3C90 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D892DAAC129003F3C90 /* OnboardingViewController.swift */; };
 		D5952D8D2DAAC129003F3C90 /* OnboardingPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D842DAAC129003F3C90 /* OnboardingPageModel.swift */; };
@@ -119,6 +120,7 @@
 		CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarItem.swift; sourceTree = "<group>"; };
 		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
 		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
+		D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RootViewController.swift"; sourceTree = "<group>"; };
 		D5952D842DAAC129003F3C90 /* OnboardingPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageModel.swift; sourceTree = "<group>"; };
 		D5952D862DAAC129003F3C90 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		D5952D872DAAC129003F3C90 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		3F9CC6012D9193AE0079DA39 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */,
 				86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */,
 				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
 				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
@@ -547,6 +550,7 @@
 				3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */,
 				CE02B8532D933581000C0557 /* LinkButton.swift in Sources */,
 				21A606F92DB42FAF007BB17C /* HomeScenesFactory.swift in Sources */,
+				D57BD96D2DBD315E005052DF /* UIApplication+RootViewController.swift in Sources */,
 				CEEE9CB42DA17A3E00DF1A35 /* RootTabBarController.swift in Sources */,
 				CEEE9CB52DA17A3E00DF1A35 /* RoorTabBarView.swift in Sources */,
 				21A606E82DB406F3007BB17C /* NetworkService.swift in Sources */,

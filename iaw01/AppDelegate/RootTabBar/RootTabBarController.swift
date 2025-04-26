@@ -3,15 +3,25 @@ import UIKit
 final class RootTabBarController: UITabBarController {
 
     static var height: CGFloat {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let rootViewController = windowScene.windows.first?.rootViewController as? RootTabBarController,
-              !rootViewController.isHidden else {
+        if
+            let rootTabBarController = RootTabBarController.object,
+            rootTabBarController.isHidden
+        {
             return 0
+        } else {
+            return Constants.isSE ? 76 : 100
         }
-        return Constants.isSE ? 76 : 100
+    }
+    
+    static var object: RootTabBarController? {
+        UIApplication.rootViewController as? RootTabBarController
+    }
+    
+    static func setHidden(to isHidden: Bool) {
+        object?.isHidden = isHidden
     }
 
-    var isHidden: Bool = false {
+    private var isHidden: Bool = false {
         didSet {
             backgroundView.isHidden = isHidden
         }
