@@ -13,7 +13,8 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 
     private weak var activeTextField: UIView?
-    private let spacing: CGFloat = 25.0
+
+    private let spacing: CGFloat = 20
 
     init() {
         setupGesture()
@@ -68,29 +69,24 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 
     private func calculateOffset(currentViewController: UIViewController, keyboardHeight: CGFloat) -> CGFloat {
-        guard let containerView = currentViewController.view,
-              let activeView = findActiveResponder(in: containerView) else {
-            return 0
+        if let containerView = currentViewController.view,
+           let activeView = findActiveResponder(in: containerView) {
+
+            let activeRect = activeView.convert(activeView.frame, to: containerView)
+            let availableHeight = containerView.frame.height - keyboardHeight - spacing
+
+            return max(0, activeRect.maxY - availableHeight + spacing)
         }
 
-        let safeAreaFrame = containerView.safeAreaLayoutGuide.layoutFrame
-        let visibleBottom = safeAreaFrame.origin.y + safeAreaFrame.height
-        let activeRect = activeView.convert(activeView.bounds, to: containerView)
-
-        let visibleHeight = visibleBottom - keyboardHeight - spacing
-        let offset = max(0, activeRect.maxY - visibleHeight)
-
-        return offset
+        return .zero
     }
 
-    private func showAnimationView(
+    private func viewAnimation(
         duration: TimeInterval,
         currentViewController: UIViewController,
-        newInset: CGFloat
+        offset: CGFloat
     ) {
-        var insets = currentViewController.additionalSafeAreaInsets
-        insets.bottom = newInset
-        currentViewController.additionalSafeAreaInsets = insets
+        let transform = CGAffineTransform(translationX: 0, y: -offset)
 
         UIView.animate(
             withDuration: duration + 0.3,
@@ -99,26 +95,7 @@ final class KeyboardService: KeyboardServiceProtocol {
             initialSpringVelocity: 0.7,
             options: .curveEaseInOut
         ) {
-            currentViewController.view.layoutIfNeeded()
-        }
-    }
-
-    private func hideAnimationView(
-        duration: TimeInterval,
-        currentViewController: UIViewController
-    ) {
-        var insets = currentViewController.additionalSafeAreaInsets
-        insets.bottom = 0
-        currentViewController.additionalSafeAreaInsets = insets
-
-        UIView.animate(
-            withDuration: duration + 0.3,
-            delay: 0,
-            usingSpringWithDamping: 0.8,
-            initialSpringVelocity: 0.7,
-            options: .curveEaseInOut
-        ) {
-            currentViewController.view.layoutIfNeeded()
+            currentViewController.view.transform = transform
         }
     }
 
@@ -131,30 +108,26 @@ final class KeyboardService: KeyboardServiceProtocol {
             let rootViewController = keyWindow.rootViewController
         else { return }
 
-        let currentViewController = rootViewController.topMostViewController()
-
         if let activeField = activeTextField, activeField.isFirstResponder {
             return
         }
+
+        let currentViewController = rootViewController.topMostViewController()
 
         let offset = calculateOffset(
             currentViewController: currentViewController,
             keyboardHeight: keyboardFrameValue.height
         )
 
-        let newInset: CGFloat = offset > 0 ? offset + spacing : 0
-
-        showAnimationView(
+        viewAnimation(
             duration: animationDuration,
             currentViewController: currentViewController,
-            newInset: newInset
+            offset: offset > 0 ? offset + spacing : 0
         )
     }
 
     @objc private func keyboardWillHide(notification: Notification) {
         guard
-            let userInfo = notification.userInfo,
-            let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
             let keyWindow = UIApplication.shared.keyWindowIsConnectedScenes,
             let rootViewController = keyWindow.rootViewController
         else { return }
@@ -162,10 +135,7 @@ final class KeyboardService: KeyboardServiceProtocol {
         activeTextField = nil
         let currentViewController = rootViewController.topMostViewController()
 
-        hideAnimationView(
-            duration: animationDuration,
-            currentViewController: currentViewController
-        )
+        currentViewController.view.transform = .identity
     }
 
     @objc private func dismissKeyboard() {

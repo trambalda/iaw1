@@ -5,7 +5,7 @@ final class KeyboardServiceViewController: UIViewController {
     private let textFieldsStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.distribution = .fillEqually
+        stack.distribution = .fillProportionally
         stack.axis = .vertical
         stack.spacing = 15
         return stack
@@ -60,7 +60,7 @@ final class KeyboardServiceViewController: UIViewController {
         NSLayoutConstraint.activate([
             textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            textFieldsStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            textFieldsStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 120),
         ])
     }
 }
