@@ -12,7 +12,8 @@ final class KeyboardService: KeyboardServiceProtocol {
         }
     }
 
-    private let spacing: CGFloat = 16.0
+    private weak var activeTextField: UIView?
+    private let spacing: CGFloat = 25.0
 
     init() {
         setupGesture()
@@ -53,7 +54,10 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 
     private func findActiveResponder(in view: UIView) -> UIView? {
-        if view.isFirstResponder { return view }
+        if view.isFirstResponder {
+            activeTextField = view
+            return view
+        }
 
         for subview in view.subviews {
             if let responder = findActiveResponder(in: subview) {
@@ -64,15 +68,17 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 
     private func calculateOffset(currentViewController: UIViewController, keyboardHeight: CGFloat) -> CGFloat {
-        let containerView = currentViewController.view
-        let activeView = findActiveResponder(in: containerView ?? UIView())
+        guard let containerView = currentViewController.view,
+              let activeView = findActiveResponder(in: containerView) else {
+            return 0
+        }
 
-        let safeAreaFrame = containerView?.safeAreaLayoutGuide.layoutFrame
-        let visibleBottom = (safeAreaFrame?.origin.y ?? 0) + CGFloat(safeAreaFrame?.height ?? 0)
-        let activeRect = activeView?.convert(activeView?.bounds ?? CGRect(), to: containerView)
+        let safeAreaFrame = containerView.safeAreaLayoutGuide.layoutFrame
+        let visibleBottom = safeAreaFrame.origin.y + safeAreaFrame.height
+        let activeRect = activeView.convert(activeView.bounds, to: containerView)
 
         let visibleHeight = visibleBottom - keyboardHeight - spacing
-        let offset = max(0, (activeRect?.maxY ?? 0) - visibleHeight)
+        let offset = max(0, activeRect.maxY - visibleHeight)
 
         return offset
     }
@@ -127,6 +133,10 @@ final class KeyboardService: KeyboardServiceProtocol {
 
         let currentViewController = rootViewController.topMostViewController()
 
+        if let activeField = activeTextField, activeField.isFirstResponder {
+            return
+        }
+
         let offset = calculateOffset(
             currentViewController: currentViewController,
             keyboardHeight: keyboardFrameValue.height
@@ -149,6 +159,7 @@ final class KeyboardService: KeyboardServiceProtocol {
             let rootViewController = keyWindow.rootViewController
         else { return }
 
+        activeTextField = nil
         let currentViewController = rootViewController.topMostViewController()
 
         hideAnimationView(
