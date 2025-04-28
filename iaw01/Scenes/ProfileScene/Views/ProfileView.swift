@@ -25,25 +25,11 @@ final class ProfileView: UIView {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.image = .avatar
-        image.translatesAutoresizingMaskIntoConstraints = false
         return image
-    }()
-    
-    private let apiKeyTextField: StringTextField = {
-        let textField = StringTextField(
-            with: StringTextFieldStyle(
-                title: "API Key",
-                placeholder: "Enter your API",
-                behavior: .string))
-        textField.textFieldShouldReturn = {
-            textField.resignTextFieldFirstResponder()
-        }
-        return textField
     }()
     
     private lazy var selectPhotoButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.imageView?.contentMode = .scaleAspectFit
         button.setImage(.selectAvatarButton, for: .normal)
         button.addTarget(self, action: #selector(selectPhotoButtonDidTapped), for: .touchUpInside)
@@ -62,7 +48,7 @@ final class ProfileView: UIView {
         let textField = PhoneTextField(parent: self)
         textField.phoneNumber = .default
         textField.textFieldShouldReturn = {
-            self.apiKeyTextField.becomeTextFieldFirstResponder()
+            textField.resignTextFieldFirstResponder()
         }
         return textField
     }()
@@ -108,14 +94,20 @@ final class ProfileView: UIView {
     }
     
     private func setupLayout() {
+        let vStack = UIStackView()
+        vStack.axis = .vertical
+        vStack.alignment = .center
+        
         addSubview(scrollView)
-        scrollView.addSubview(avatarView)
-        scrollView.addSubview(selectPhotoButton)
         scrollView.addSubview(mainStackView)
+        mainStackView.addArrangedSubview(vStack)
+        vStack.addArrangedSubview(avatarView)
+        vStack.addArrangedSubview(selectPhotoButton)
         mainStackView.addArrangedSubview(fullNameTextField)
         mainStackView.addArrangedSubview(phoneNumberTextField)
-        mainStackView.addArrangedSubview(apiKeyTextField)
-        scrollView.addSubview(saveButton)
+        mainStackView.addArrangedSubview(saveButton)
+        
+        mainStackView.setCustomSpacing(Constants.isSE ? 60 : 175, after: phoneNumberTextField)
     }
     
     private func setupConstraints() {
@@ -125,24 +117,14 @@ final class ProfileView: UIView {
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            avatarView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            avatarView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            avatarView.heightAnchor.constraint(equalToConstant: Constants.isSE ? 100 : 150),
+            avatarView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.33),
+            selectPhotoButton.widthAnchor.constraint(equalTo: avatarView.widthAnchor, multiplier: 0.9),
             
-            selectPhotoButton.topAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: Constants.isSE ? 5 : 17),
-            selectPhotoButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            selectPhotoButton.widthAnchor.constraint(equalToConstant: Constants.isSE ? 100 : 140),
-            
-            mainStackView.topAnchor.constraint(equalTo: selectPhotoButton.bottomAnchor, constant: Constants.isSE ? 5 : 16),
-            mainStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 21),
-            mainStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -21),
-            mainStackView.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: Constants.isSE ? -29 : -83),
-            mainStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -42),
-            
-            saveButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 21),
-            saveButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -21),
-            saveButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            saveButton.heightAnchor.constraint(equalToConstant: 56),
+            mainStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            mainStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            mainStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32),
+            mainStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
         ])
     }
 }

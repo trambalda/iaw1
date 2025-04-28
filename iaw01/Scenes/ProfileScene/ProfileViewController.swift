@@ -13,8 +13,7 @@ final class ProfileViewController: UIViewController {
         return view
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
         view = profileView
     }
 }
