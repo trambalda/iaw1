@@ -3,7 +3,7 @@ import UIKit
 final class AuthorizationViewController: UIViewController {
     
     private lazy var authorizationView: AuthorizationView = {
-        let view = AuthorizationView(frame: UIScreen.main.bounds)
+        let view = AuthorizationView(frame: UIScreen.main.bounds, model: AuthorizationModel.empty)
         
         view.onLoginTap = { model in
             print("Login нажат и выводит \(model)")
@@ -38,8 +38,10 @@ final class AuthorizationViewController: UIViewController {
     }
     
     @objc private func keyboardWillShow(notification: Notification) {
-        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-              let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+        guard
+            let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+            let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+        else { return }
         
         let keyboardHeight = keyboardFrame.height
         let extraOffset: CGFloat = 16
@@ -47,13 +49,13 @@ final class AuthorizationViewController: UIViewController {
         let shift = -keyboardHeight - extraOffset + staticOffset
         
         authorizationView.bottomButtonBottomConstraint.constant = shift
-                
+        
         UIView.animate(withDuration: duration) {
             self.view.layoutIfNeeded()
         }
         
-        self.authorizationView.scrollView.contentInset.bottom = shift + 64
-        self.authorizationView.scrollView.verticalScrollIndicatorInsets.bottom = shift
+        authorizationView.scrollView.contentInset.bottom = shift + 64
+        authorizationView.scrollView.verticalScrollIndicatorInsets.bottom = shift
     }
     
     @objc private func keyboardWillHide(notification: Notification) {

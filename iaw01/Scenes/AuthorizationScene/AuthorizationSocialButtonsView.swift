@@ -35,7 +35,7 @@ final class AuthorizationSocialButtonsView: UIStackView {
         button.addTarget(self, action: #selector(didTapAppleButton), for: .touchUpInside)
         return button
     }()
- 
+    
     private lazy var socialButtonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .leading
@@ -72,15 +72,19 @@ final class AuthorizationSocialButtonsView: UIStackView {
     }
     
     @objc private func didTapGoogleButton() {
-        if let url = URL(string: "https://accounts.google.com/InteractiveLogin") {
-            UIApplication.shared.open(url)
+        guard let url = Constants.googleLoginURL else {
+            Swift.print("Невозможно открыть Google URL")
+            return
         }
+        UIApplication.shared.open(url)
     }
     
     @objc private func didTapAppleButton() {
-        if let url = URL(string: "https://account.apple.com") {
-            UIApplication.shared.open(url)
+        guard let url = Constants.googleLoginURL else {
+            Swift.print("Невозможно открыть Apple URL")
+            return
         }
+        UIApplication.shared.open(url)
     }
     
     private func setupConstraints() {

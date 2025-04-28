@@ -10,7 +10,7 @@ class CornersButton: UIButton {
     override var isHighlighted: Bool {
         didSet {
             UIView.animate(withDuration: 0.1) {
-                self.alpha = self.isHighlighted ? 0.7 : self.alphaWhenTouch
+                self.alpha = self.isHighlighted ? 0.7 : 1.0
             }
         }
     }
@@ -44,8 +44,6 @@ class CornersButton: UIButton {
     
     private lazy var leftIconImageView = iconImageView
     private lazy var rightIconImageView = iconImageView
-    
-    private var alphaWhenTouch: CGFloat = 1.0
     
     init(style: CornersButtonStyle = .nextButton) {
         self.style = style

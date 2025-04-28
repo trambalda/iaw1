@@ -2,39 +2,7 @@ import UIKit
 
 final class AuthorizationLoginView: UIStackView {
     
-    var viewChanged: ((AuthorizationModel?) -> Void)?
-    
-    private let socialButtons = AuthorizationSocialButtonsView()
-    private let forgotPasswordButton = LinkButton(style: .forgotPassword)
-    
-    private lazy var emailTextField: StringTextField = {
-        let textField = StringTextField(with: .emailStyle)
-        textField.textFieldShouldReturn = { [weak self] in
-            self?.passwordTextField.becomeTextFieldFirstResponder()
-        }
-        textField.editingChanged = { [weak self] _ in
-            self?.viewChanged?(self?.model)
-        }
-        return textField
-    }()
-    
-    private lazy var passwordTextField: StringTextField = {
-        let textField = StringTextField(with: .passwordStyle)
-        textField.textFieldShouldReturn = { [weak self] in
-            self?.passwordTextField.resignTextFieldFirstResponder()
-        }
-        textField.editingChanged = { [weak self] _ in
-            self?.viewChanged?(self?.model)
-        }
-        return textField
-    }()
-    
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .trailing
-        return stackView
-    }()
+    var viewChanged: ((AuthorizationModel) -> Void)?
     
     var model: AuthorizationModel {
         get {
@@ -50,6 +18,33 @@ final class AuthorizationLoginView: UIStackView {
             passwordTextField.text = newValue.password
         }
     }
+    
+    private let socialButtons = AuthorizationSocialButtonsView()
+    private let forgotPasswordButton = LinkButton(style: .forgotPassword)
+    
+    private lazy var emailTextField: StringTextField = {
+        let textField = StringTextField(with: .emailStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.passwordTextField.becomeTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            guard let self else { return }
+            viewChanged?(self.model)
+        }
+        return textField
+    }()
+    
+    private lazy var passwordTextField: StringTextField = {
+        let textField = StringTextField(with: .passwordStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.passwordTextField.resignTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            guard let self else { return }
+            viewChanged?(self.model)
+        }
+        return textField
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,8 +64,15 @@ final class AuthorizationLoginView: UIStackView {
     private func setupLayout() {
         addArrangedSubview(emailTextField)
         addArrangedSubview(passwordTextField)
+        
+        let stackView = {
+            let stackView = UIStackView(arrangedSubviews: [forgotPasswordButton])
+            stackView.axis = .vertical
+            stackView.alignment = .trailing
+            return stackView
+        }()
+        
         addArrangedSubview(stackView)
-        stackView.addArrangedSubview(forgotPasswordButton)
         addArrangedSubview(socialButtons)
         
         setCustomSpacing(26, after: emailTextField)

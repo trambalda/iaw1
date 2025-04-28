@@ -2,39 +2,7 @@ import UIKit
 
 final class AuthorizationSignupView: UIStackView {
     
-    var viewChanged: ((AuthorizationModel?) -> Void)?
-    
-    private let socialButtons = AuthorizationSocialButtonsView()
-    
-    private lazy var nameTextField: StringTextField = {
-        let textField = StringTextField(with: .nameStyle)
-        textField.textFieldShouldReturn = { [weak self] in
-            self?.phoneNumberTextField.becomeTextFieldFirstResponder()
-        }
-        textField.editingChanged = { [weak self] _ in
-            self?.viewChanged?(self?.model)
-        }
-        return textField
-    }()
-    
-    private lazy var phoneNumberTextField: PhoneTextField = {
-            let textField = PhoneTextField(parent: self)
-            textField.textFieldShouldReturn = { [weak self] in
-                self?.createPasswordTextField.becomeTextFieldFirstResponder()
-            }
-            return textField
-        }()
-    
-    private lazy var createPasswordTextField: StringTextField = {
-        let textField = StringTextField(with: .createPasswordStyle)
-        textField.textFieldShouldReturn = { [weak self] in
-            self?.createPasswordTextField.resignTextFieldFirstResponder()
-        }
-        textField.editingChanged = { [weak self] _ in
-            self?.viewChanged?(self?.model)
-        }
-        return textField
-    }()
+    var viewChanged: ((AuthorizationModel) -> Void)?
     
     var model: AuthorizationModel {
         get {
@@ -51,6 +19,40 @@ final class AuthorizationSignupView: UIStackView {
             createPasswordTextField.text = newValue.password
         }
     }
+    
+    private let socialButtons = AuthorizationSocialButtonsView()
+    
+    private lazy var nameTextField: StringTextField = {
+        let textField = StringTextField(with: .nameStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.phoneNumberTextField.becomeTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            guard let self else { return }
+            viewChanged?(self.model)
+        }
+        return textField
+    }()
+    
+    private lazy var phoneNumberTextField: PhoneTextField = {
+        let textField = PhoneTextField(parent: self)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.createPasswordTextField.becomeTextFieldFirstResponder()
+        }
+        return textField
+    }()
+    
+    private lazy var createPasswordTextField: StringTextField = {
+        let textField = StringTextField(with: .createPasswordStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.createPasswordTextField.resignTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            guard let self else { return }
+            viewChanged?(self.model)
+        }
+        return textField
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

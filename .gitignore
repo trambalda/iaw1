@@ -65,7 +65,3 @@ fastlane/test_output
 xcuserdata/
 xcshareddata/
 .DS_Store
-<<<<<<< HEAD
-=======
-.DS_Store
->>>>>>> 4ccb47d47d4a372aa74301f7ed674bea4b6e4fa0

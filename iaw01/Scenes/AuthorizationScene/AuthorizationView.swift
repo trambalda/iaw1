@@ -33,6 +33,8 @@ final class AuthorizationView: UIView {
 
     private let containerView = UIView()
     
+    private let model: AuthorizationModel
+    
     private var currentSelection: AuthorizationSegmentedControl.Selection = .login
     
     private lazy var segmentedControl: AuthorizationSegmentedControl = {
@@ -46,6 +48,7 @@ final class AuthorizationView: UIView {
     private lazy var loginView: AuthorizationLoginView = {
         let view = AuthorizationLoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.model = model
         view.viewChanged = { [weak self] model in
             self?.updateButtonState()
         }
@@ -55,6 +58,7 @@ final class AuthorizationView: UIView {
     private lazy var signupView: AuthorizationSignupView = {
         let view = AuthorizationSignupView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.model = model
         view.viewChanged = { [weak self] model in
             self?.updateButtonState()
         }
@@ -68,15 +72,15 @@ final class AuthorizationView: UIView {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(frame: CGRect, model: AuthorizationModel) {
+        self.model = model
+        super.init(frame: .zero)
         configure()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     private func configure() {
         backgroundColor = .light100
@@ -99,7 +103,7 @@ final class AuthorizationView: UIView {
         
         contentStackView.setCustomSpacing(21, after: titleView)
         contentStackView.setCustomSpacing(24, after: segmentedControl)
-        contentStackView.setCustomSpacing(200, after: containerView)
+        contentStackView.setCustomSpacing(2000, after: containerView)
     }
     
     private func setupConstraints() {
@@ -184,8 +188,7 @@ final class AuthorizationView: UIView {
         UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve) {
             fromView.alpha = 0
             toView.alpha = 1
-        }
-        
+        }        
         updateButtonState()
     }
 }
