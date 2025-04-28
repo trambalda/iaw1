@@ -3,7 +3,7 @@ import UIKit
 final class RestaurantViewController: UIViewController {
     
     private let restaurantId: Int
-    private let restaurantService: RestaurantServiceProtocol
+    private let restaurantService: RestaurantNetworkServiceProtocol
     private var loadedRestaurant: RestaurantModel?
     
     private lazy var restaurantView: RestaurantView = {
@@ -15,7 +15,7 @@ final class RestaurantViewController: UIViewController {
         return view
     }()
     
-    init(id: Int, restaurantService: RestaurantServiceProtocol) {
+    init(id: Int, restaurantService: RestaurantNetworkServiceProtocol) {
             self.restaurantId = id
             self.restaurantService = restaurantService
             super.init(nibName: nil, bundle: nil)
@@ -86,24 +86,22 @@ final class RestaurantViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(customView: rightStack)
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
-    
     private func loadRestaurant() {
         Task {
             do {
+            
                 guard let restaurant = try await restaurantService.fetchRestaurant(id: restaurantId) else {
-                    print("⚠️ Ресторан с id \(restaurantId) не найден")
                     return
                 }
-                
                 self.loadedRestaurant = restaurant
                 self.restaurantView.model = restaurant
                 print("🍽️ Загружен ресторан: \(restaurant.name)")
-            } catch {
+            } catch let error {
                 print("❌ Ошибка загрузки ресторана: \(error)")
             }
         }
     }
-   
+
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }

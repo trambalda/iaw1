@@ -9,7 +9,7 @@ final class MenuItemsTableViewCell: UITableViewCell {
     
     var model: MenuItemListModel = .empty {
         didSet {
-            loadImage(from: model.image)
+            loadImage(from: model.imageURL)
             nameLabel.attributedText = Font.body.compose(model.name)
             priceLabel.attributedText = Font.body.compose(String(format: "%.2f", model.price))
         }
@@ -42,8 +42,8 @@ final class MenuItemsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func loadImage(from url: String) {
-        guard let url = URL(string: url) else { return }
+    private func loadImage(from url: URL?) {
+        guard let url else { return }
         
         Task {
             do {

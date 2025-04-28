@@ -1,38 +1,62 @@
-import UIKit
+import Foundation
 
-struct RestaurantsModel: Codable {
+struct RestaurantsModel {
+    
     let data: [RestaurantModel]
     let isSuccess: Bool
 }
 
-struct RestaurantModel: Codable {
+struct RestaurantModel {
     
     let id: Int
-    let logo: String
+    let logoURL: URL?
     let name: String
-    let image: String
+    let imageURL: URL?
     let rating: Double
     let deliveryTime: String
     let address: String
-    let cousines: [String]
+    let cousines: String
     let menu: [MenuModel]
-    let dishes: [MenuItemListModel]
-    
-    var cousinesString: String {
-        cousines.joined(separator: ", ")
-    }
+    let dishes: [MenuItemListModel] 
     
     static let empty = RestaurantModel(
         id: 0,
-        logo: "",
+        logoURL: nil,
         name: "",
-        image: "",
+        imageURL: nil,
         rating: 0.0,
         deliveryTime: "",
         address: "",
-        cousines: [],
+        cousines: "",
         menu: [],
         dishes: []
     )
 }
 
+extension RestaurantsDto {
+    
+    func toModel() -> RestaurantsModel {
+        return RestaurantsModel(
+            data: data.map { $0.toModel() },
+            isSuccess: isSuccess
+        )
+    }
+}
+
+extension RestaurantDto {
+    
+    func toModel() -> RestaurantModel {
+        return RestaurantModel(
+            id: id,
+            logoURL: URL(string: logo),
+            name: name,
+            imageURL: URL(string: image),
+            rating: rating,
+            deliveryTime: deliveryTime,
+            address: address,
+            cousines: cousines.joined(separator: ", "),
+            menu: menu.map { $0.toModel() },
+            dishes: dishes.map { $0.toModel() }
+        )
+    }
+}

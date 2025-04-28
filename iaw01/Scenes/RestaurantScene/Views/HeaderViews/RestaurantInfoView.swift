@@ -6,7 +6,7 @@ final class RestaurantInfoView: UIView {
         didSet {
             ratingLabel.attributedText = Font.info.compose("Ratings: \(model.rating)")
             deliveryTimeLabel.attributedText = Font.info.compose("Delivers in \(model.deliveryTime) min")
-            cousinesLabel.attributedText = Font.info.compose(model.cousinesString)
+            cousinesLabel.attributedText = Font.info.compose(model.cousines)
         }
     }
     

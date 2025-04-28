@@ -4,9 +4,6 @@ final class DummyViewController: UIViewController {
     
     var coordinator: HomeScenesCoordinatorProtocol?
     
-    private let restaurantService: RestaurantServiceProtocol
-    private var loadedRestaurant: RestaurantModel?
-    
     private lazy var dummyView: DummyView = {
         let view = DummyView(frame: .zero)
         view.scenes = SceneModel.models
@@ -16,10 +13,8 @@ final class DummyViewController: UIViewController {
         return view
     }()
     
-    init(restaurantService: RestaurantServiceProtocol) {
-        self.restaurantService = restaurantService
+    init() {
         super.init(nibName: nil, bundle: nil)
-        loadRestaurant()
     }
     
     required init?(coder: NSCoder) {
@@ -39,22 +34,6 @@ final class DummyViewController: UIViewController {
         navigationItem.title = "Scenes"
     }
     
-    private func loadRestaurant() {
-        Task {
-            do {
-                guard let restaurant = try await restaurantService.fetchRestaurant(id: 1) else {
-                    print("⚠️ Ресторан с id 1 не найден")
-                    return
-                }
-                
-                self.loadedRestaurant = restaurant
-                print("✅ Загрузили ресторан: \(restaurant.name)")
-            } catch {
-                print("❌ Ошибка загрузки ресторана: \(error)")
-            }
-        }
-    }
-    
     private func route(to sceneType: SceneType) {
         switch sceneType {
         case .textFiedsScene:
@@ -64,11 +43,7 @@ final class DummyViewController: UIViewController {
         case .verifyPhoneNumberScene:
             coordinator?.showVerifyPhoneNumberScene()
         case .restaurantScene:
-            if let restaurant = loadedRestaurant {
-                coordinator?.showRestaurantScene(with: restaurant.id)
-            } else {
-                print("⚠️ Ресторан еще не загружен")
-            }
+            coordinator?.showRestaurantScene(with: 1)
         }
     }
 }

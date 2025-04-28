@@ -6,7 +6,7 @@ final class RestaurantHeaderView: UIStackView {
     
     var model: RestaurantModel = .empty {
         didSet {
-            loadImage(from: model.logo)
+            loadImage(from: model.logoURL)
             titleLabel.attributedText = Font.name.compose(model.name)
             locationLabel.attributedText = Font.body.compose(model.address)
         }
@@ -47,8 +47,8 @@ final class RestaurantHeaderView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func loadImage(from url: String) {
-        guard let url = URL(string: url) else { return }
+    private func loadImage(from url: URL?) {
+        guard let url else { return }
         
         Task {
             do {
@@ -61,7 +61,7 @@ final class RestaurantHeaderView: UIStackView {
             }
         }
     }
-    
+   
     private func configure() {
         spacing = 8
         alignment = .center

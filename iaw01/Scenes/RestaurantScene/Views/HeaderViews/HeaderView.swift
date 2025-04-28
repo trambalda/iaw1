@@ -6,7 +6,7 @@ final class HeaderView: UIStackView {
     
     var model: RestaurantModel = .empty {
         didSet {
-            loadImage(from: model.image)
+            loadImage(from: model.imageURL)
             restaurantHeaderView.imageService = imageService
             restaurantHeaderView.model = model
             restaurantInfoView.model = model
@@ -44,8 +44,8 @@ final class HeaderView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func loadImage(from url: String) {
-        guard let url = URL(string: url) else { return }
+    private func loadImage(from url: URL?) {
+        guard let url else { return }
         
         Task {
             do {
