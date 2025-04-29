@@ -16,13 +16,6 @@ final class RestaurantView: UIView {
     let filterView = MenuTimeView()
     let menuItemListView = MenuItemsTableView()
     
-    let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
     private let contentStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -33,9 +26,16 @@ final class RestaurantView: UIView {
     
     private var menuItemListViewHeightConstraint: NSLayoutConstraint?
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.delegate = self
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        scrollView.delegate = self
         setupMenuCallback()
         configure()
     }

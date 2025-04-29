@@ -4,7 +4,7 @@ final class RestaurantViewController: UIViewController {
     
     private let restaurantId: Int
     private let restaurantService: RestaurantNetworkServiceProtocol
-    private var loadedRestaurant: RestaurantModel?
+    private var loadedRestaurant: RestaurantDto?
     
     private lazy var restaurantView: RestaurantView = {
         let imageService = ImageService()
@@ -86,20 +86,29 @@ final class RestaurantViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(customView: rightStack)
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
+    
     private func loadRestaurant() {
         Task {
             do {
-            
-                guard let restaurant = try await restaurantService.fetchRestaurant(id: restaurantId) else {
+                let restaurants = try await restaurantService.fetchRestaurant(id: restaurantId)
+                
+                guard let restaurant = restaurants.first(where: { $0.id == restaurantId }) else {
+                    displayError()
                     return
                 }
+                
                 self.loadedRestaurant = restaurant
-                self.restaurantView.model = restaurant
-                print("🍽️ Загружен ресторан: \(restaurant.name)")
-            } catch let error {
-                print("❌ Ошибка загрузки ресторана: \(error)")
+                self.restaurantView.model = restaurant.toModel()
+            } catch {
+                displayError()
             }
         }
+    }
+    
+    private func displayError() {
+        let alert = UIAlertController(title: "Ошибка", message: "Не удалось загрузить экран", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ОК", style: .default))
+        present(alert, animated: true)
     }
 
     @objc private func backButtonTapped() {

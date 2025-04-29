@@ -4,8 +4,8 @@ final class RestaurantInfoView: UIView {
     
     var model: RestaurantModel = .empty {
         didSet {
-            ratingLabel.attributedText = Font.info.compose("Ratings: \(model.rating)")
-            deliveryTimeLabel.attributedText = Font.info.compose("Delivers in \(model.deliveryTime) min")
+            ratingLabel.attributedText = Font.info.compose("Рейтинг: \(model.rating)")
+            deliveryTimeLabel.attributedText = Font.info.compose("Доставят за \(model.deliveryTime)")
             cousinesLabel.attributedText = Font.info.compose(model.cousines)
         }
     }

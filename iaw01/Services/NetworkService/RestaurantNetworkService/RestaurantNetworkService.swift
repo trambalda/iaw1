@@ -1,7 +1,7 @@
 import UIKit
 
 protocol RestaurantNetworkServiceProtocol {
-    func fetchRestaurant(id: Int) async throws -> RestaurantModel?
+    func fetchRestaurant(id: Int) async throws -> [RestaurantDto]
 }
 
 final class RestaurantNetworkService: RestaurantNetworkServiceProtocol {
@@ -12,20 +12,17 @@ final class RestaurantNetworkService: RestaurantNetworkServiceProtocol {
         self.networkService = networkService
     }
     
-    func fetchRestaurant(id: Int) async throws -> RestaurantModel? {
+    func fetchRestaurant(id: Int) async throws -> [RestaurantDto] {
         let endpoint = "/restaurants"
         let params: [String: Any] = ["id": id]
         
-        print("Запрос отправлен: \(endpoint), параметры: \(params)")
-        
-        let response: RestaurantsDto = try await networkService.request(
+        let response: [RestaurantDto] = try await networkService.request(
             endpoint,
             host: Constants.host,
             httpMethod: .get,
             params: params
         )
         
-        print(response)
-        return response.data.first?.toModel()
+        return response
     }
 }

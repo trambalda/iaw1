@@ -1,11 +1,5 @@
 import Foundation
 
-struct RestaurantsModel {
-    
-    let data: [RestaurantModel]
-    let isSuccess: Bool
-}
-
 struct RestaurantModel {
     
     let id: Int
@@ -31,16 +25,6 @@ struct RestaurantModel {
         menu: [],
         dishes: []
     )
-}
-
-extension RestaurantsDto {
-    
-    func toModel() -> RestaurantsModel {
-        return RestaurantsModel(
-            data: data.map { $0.toModel() },
-            isSuccess: isSuccess
-        )
-    }
 }
 
 extension RestaurantDto {

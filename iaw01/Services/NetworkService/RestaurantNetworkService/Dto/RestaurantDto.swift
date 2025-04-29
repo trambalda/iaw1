@@ -1,11 +1,5 @@
 import Foundation
 
-struct RestaurantsDto: Decodable {
-    
-    let data: [RestaurantDto]
-    let isSuccess: Bool
-}
-
 struct RestaurantDto: Decodable {
     
     let id: Int
