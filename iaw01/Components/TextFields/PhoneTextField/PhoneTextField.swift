@@ -225,6 +225,7 @@ final class PhoneTextField: UIStackView {
     }
     
     private func showPickerView() {
+        textField.resignFirstResponder()
         isBorderShown = true
         
         let textFieldFrame = convert(bounds, to: nil)
@@ -273,9 +274,7 @@ final class PhoneTextField: UIStackView {
     }
     
     @objc private func handleTextFieldDidBeginEditing(_ notification: Notification) {
-        guard let editingTextField = notification.object as? UITextField else { return }
-
-        if editingTextField != textField && !phonePrefixView.isPrefixFieldFirstResponder {
+        if phonePrefixView.isPrefixFieldFirstResponder == false {
             hidePickerView()
         }
     }
