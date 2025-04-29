@@ -23,9 +23,9 @@ final class AppCoordinator {
     
     func start() {
         switch state {
-        case .normal: showMainViewController()
+        case .normal:     showMainViewController()
         case .onboarding: break
-        case .auth: break
+        case .auth:       break
         }
     }
     

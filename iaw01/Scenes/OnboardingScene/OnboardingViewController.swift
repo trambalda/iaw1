@@ -3,26 +3,24 @@ import UIKit
 final class OnboardingViewController: UIViewController {
     
     var coordinator: HomeScenesCoordinator?
-    private var onboardingView: OnboardingView?
+    private lazy var onboardingView: OnboardingView = {
+        guard 
+            let view = OnboardingView(pages: OnboardingPageModel.pages) 
+        else {
+            fatalError("Failed to initialize OnboardingView")
+        }
+        return view
+    }()
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        onboardingView = OnboardingView(pages: OnboardingPageModel.pages)
-        onboardingView?.onFinish = { [weak self] in
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        onboardingView.onFinish = { [weak self] in
             self?.finishOnboarding()
         }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func loadView() {
-        if let onboardingView {
-            view = onboardingView
-        } else {
-            finishOnboarding()
-        }
+        self.view = onboardingView
     }
 
     private func finishOnboarding() {

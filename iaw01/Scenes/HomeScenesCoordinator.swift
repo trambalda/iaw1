@@ -20,30 +20,27 @@ final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorPro
         rootViewController.pushViewController(factory.createDummyScene(), animated: false)
     }
     
-    private func showScene<T: UIViewController>(_ viewController: T, hideTabBar: Bool = false) {
-        if hideTabBar {
-            RootTabBarController.setHidden(to: true)
-        }
-        rootViewController.pushViewController(viewController, animated: true)
-    }
-    
     func showTextFieldScene() {
-        showScene(factory.createTextFieldsScene())
+        let vc = factory.createTextFieldsScene()
+        rootViewController.pushViewController(vc, animated: true)
     }
     
     func showCornersButtonsScene() {
-        showScene(factory.createCornersButtonsScene())
+        let vc = factory.createCornersButtonsScene()
+        rootViewController.pushViewController(vc, animated: true)
     }
     
     func showVerifyPhoneNumberScene() {
-        showScene(factory.createVerifyPhoneNumberScene())
+        let vc = factory.createVerifyPhoneNumberScene()
+        rootViewController.pushViewController(vc, animated: true)
     }
     
     func showOnboardingScene() {
-        showScene(factory.createOnboardingScene(), hideTabBar: true)
+        let vc = factory.createOnboardingScene()
+        rootViewController.pushViewController(vc, animated: true)
     }
-    
+
     func hideOnboardingScene() {
-        RootTabBarController.setHidden(to: false)
+        rootViewController.popViewController(animated: true)
     }
 }
