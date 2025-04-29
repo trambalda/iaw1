@@ -43,7 +43,7 @@ final class RestaurantInfoView: UIView {
     
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 101
+        stackView.spacing = 16
         stackView.distribution = .equalSpacing
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false

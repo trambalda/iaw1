@@ -30,7 +30,7 @@ final class MenuTimeView: UIView {
         let stack = UIStackView()
         stack.spacing = 29
         stack.alignment = .center
-        stack.distribution = .equalSpacing
+        stack.distribution = .fillProportionally
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
