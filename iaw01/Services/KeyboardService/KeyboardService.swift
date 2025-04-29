@@ -14,7 +14,7 @@ final class KeyboardService: KeyboardServiceProtocol {
 
     private weak var activeTextField: UIView?
 
-    private let spacing: CGFloat = 20
+    private let spacing: CGFloat = 10
 
     init() {
         setupGesture()
@@ -69,16 +69,14 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 
     private func calculateOffset(currentViewController: UIViewController, keyboardHeight: CGFloat) -> CGFloat {
-        if let containerView = currentViewController.view,
-           let activeView = findActiveResponder(in: containerView) {
+        guard let containerView = currentViewController.view,
+              let activeView = findActiveResponder(in: containerView)
+        else { return .zero }
 
-            let activeRect = activeView.convert(activeView.frame, to: containerView)
-            let availableHeight = containerView.frame.height - keyboardHeight - spacing
+        let activeRect = activeView.convert(activeView.frame, to: containerView)
+        let availableHeight = containerView.frame.height - keyboardHeight - spacing
 
-            return max(0, activeRect.maxY - availableHeight + spacing)
-        }
-
-        return .zero
+        return max(0, activeRect.maxY - availableHeight)
     }
 
     private func viewAnimation(
@@ -119,6 +117,8 @@ final class KeyboardService: KeyboardServiceProtocol {
             keyboardHeight: keyboardFrameValue.height
         )
 
+        print(offset)
+
         viewAnimation(
             duration: animationDuration,
             currentViewController: currentViewController,
@@ -140,5 +140,6 @@ final class KeyboardService: KeyboardServiceProtocol {
 
     @objc private func dismissKeyboard() {
         UIApplication.shared.keyWindowIsConnectedScenes?.endEditing(true)
+        activeTextField = nil
     }
 }
