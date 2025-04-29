@@ -2,6 +2,16 @@ import UIKit
 
 final class ProfileView: UIView {
     
+    var fullName: String? {
+        get { fullNameTextField.text }
+        set { fullNameTextField.text = newValue }
+    }
+    
+    var phoneNumber: PhoneNumber {
+        get { phoneNumberTextField.phoneNumber }
+        set { phoneNumberTextField.phoneNumber = newValue }
+    }
+    
     var onSelectPhotoButtonTapped: (() -> Void)?
     
     var onSaveButtonTapped: (() -> Void)?
@@ -23,7 +33,8 @@ final class ProfileView: UIView {
     
     private let avatarView: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
         image.image = .avatar
         return image
     }()
@@ -85,6 +96,15 @@ final class ProfileView: UIView {
         )
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        avatarView.layer.cornerRadius = avatarView.bounds.width / 3
+    }
+    
+    func updateAvatar(image: UIImage) {
+        avatarView.image = image
+    }
+    
     @objc private func selectPhotoButtonDidTapped() {
         onSelectPhotoButtonTapped?()
     }
@@ -107,7 +127,8 @@ final class ProfileView: UIView {
         mainStackView.addArrangedSubview(phoneNumberTextField)
         mainStackView.addArrangedSubview(saveButton)
         
-        mainStackView.setCustomSpacing(Constants.isSE ? 60 : 175, after: phoneNumberTextField)
+        vStack.setCustomSpacing(Constants.isSE ? 5 : 17, after: avatarView)
+        mainStackView.setCustomSpacing(Constants.isSE ? 75 : 185, after: phoneNumberTextField)
     }
     
     private func setupConstraints() {
@@ -118,6 +139,8 @@ final class ProfileView: UIView {
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             avatarView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.33),
+            avatarView.heightAnchor.constraint(equalTo: avatarView.widthAnchor),
+            
             selectPhotoButton.widthAnchor.constraint(equalTo: avatarView.widthAnchor, multiplier: 0.9),
             
             mainStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),

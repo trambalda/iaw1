@@ -41,6 +41,8 @@
 		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
 		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
 		3F9D5AD12DBB942000846D84 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D5AD02DBB942000846D84 /* ProfileView.swift */; };
+		3FDD671A2DC11D2F00238A67 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDD67192DC11D2F00238A67 /* ImagePickerManager.swift */; };
+		3FDD671E2DC1224000238A67 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDD671D2DC1224000238A67 /* ProfileModel.swift */; };
 		860852232D9747BA0038A9EF /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860852222D9747BA0038A9EF /* PhoneTextField.swift */; };
 		863929E72D9D2DAA00480459 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863929E62D9D2DAA00480459 /* PhoneNumber.swift */; };
 		868044992D94765400CBE1EC /* CountryCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868044982D94765300CBE1EC /* CountryCodeModel.swift */; };
@@ -102,6 +104,8 @@
 		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
 		3F9D5AD02DBB942000846D84 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3FDD67192DC11D2F00238A67 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
+		3FDD671D2DC1224000238A67 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		860852222D9747BA0038A9EF /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		863929E62D9D2DAA00480459 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		868044982D94765300CBE1EC /* CountryCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodeModel.swift; sourceTree = "<group>"; };
@@ -331,6 +335,8 @@
 			children = (
 				3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */,
 				3F9D5ACF2DBB940400846D84 /* Views */,
+				3FDD671B2DC11F9200238A67 /* Managers */,
+				3FDD671C2DC1222900238A67 /* Models */,
 			);
 			path = ProfileScene;
 			sourceTree = "<group>";
@@ -362,6 +368,22 @@
 				3F9D5AD02DBB942000846D84 /* ProfileView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3FDD671B2DC11F9200238A67 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3FDD67192DC11D2F00238A67 /* ImagePickerManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		3FDD671C2DC1222900238A67 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3FDD671D2DC1224000238A67 /* ProfileModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		3FEC58A62DB4162700BE8BFF /* Products */ = {
@@ -555,6 +577,7 @@
 				3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
+				3FDD671E2DC1224000238A67 /* ProfileModel.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
@@ -563,6 +586,7 @@
 				21A606EA2DB41C8F007BB17C /* HTTPMethod.swift in Sources */,
 				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,
 				3F8980F22DB1655E00F670A9 /* ProfileViewController.swift in Sources */,
+				3FDD671A2DC11D2F00238A67 /* ImagePickerManager.swift in Sources */,
 				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
 				8680452F2D94908D00CBE1EC /* CountryPickerView.swift in Sources */,
