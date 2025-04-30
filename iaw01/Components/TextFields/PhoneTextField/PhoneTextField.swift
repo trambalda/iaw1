@@ -274,9 +274,7 @@ final class PhoneTextField: UIStackView {
     }
     
     @objc private func handleTextFieldDidBeginEditing(_ notification: Notification) {
-        if phonePrefixView.isPrefixFieldFirstResponder == false {
-            hidePickerView()
-        }
+        hidePickerView()
     }
     
     deinit {
