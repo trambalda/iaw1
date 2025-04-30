@@ -59,9 +59,8 @@ final class KeyboardServiceViewController: UIViewController {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            textFieldsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            textFieldsStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            textFieldsStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100),
         ])
     }
 }

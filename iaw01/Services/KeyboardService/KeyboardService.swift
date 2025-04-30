@@ -14,7 +14,7 @@ final class KeyboardService: KeyboardServiceProtocol {
 
     private weak var activeTextField: UIView?
 
-    private let spacing: CGFloat = 10
+    private let spacing: CGFloat = 30
 
     init() {
         setupGesture()
