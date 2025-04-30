@@ -20,6 +20,14 @@ final class AuthorizationView: UIView {
         return view
     }()
     
+    public var model: AuthorizationModel = .empty {
+        didSet {
+            loginView.model = model
+            signupView.model = model
+            updateButtonState()
+        }
+    }
+    
     public var bottomButtonBottomConstraint: NSLayoutConstraint!
     
     private let titleView = AuthorizationTitleView()
@@ -32,9 +40,7 @@ final class AuthorizationView: UIView {
     }()
 
     private let containerView = UIView()
-    
-    private let model: AuthorizationModel
-    
+        
     private var currentSelection: AuthorizationSegmentedControl.Selection = .login
     
     private lazy var segmentedControl: AuthorizationSegmentedControl = {
@@ -72,9 +78,8 @@ final class AuthorizationView: UIView {
         return button
     }()
     
-    init(frame: CGRect, model: AuthorizationModel) {
-        self.model = model
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configure()
     }
     

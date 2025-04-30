@@ -3,7 +3,8 @@ import UIKit
 final class AuthorizationViewController: UIViewController {
     
     private lazy var authorizationView: AuthorizationView = {
-        let view = AuthorizationView(frame: UIScreen.main.bounds, model: AuthorizationModel.empty)
+        let view = AuthorizationView(frame: UIScreen.main.bounds)
+        view.model = AuthorizationModel.empty
         
         view.onLoginTap = { model in
             print("Login нажат и выводит \(model)")

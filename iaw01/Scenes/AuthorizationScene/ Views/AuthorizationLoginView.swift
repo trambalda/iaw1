@@ -62,17 +62,15 @@ final class AuthorizationLoginView: UIStackView {
     }
     
     private func setupLayout() {
+    
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .trailing
+        
         addArrangedSubview(emailTextField)
         addArrangedSubview(passwordTextField)
-        
-        let stackView = {
-            let stackView = UIStackView(arrangedSubviews: [forgotPasswordButton])
-            stackView.axis = .vertical
-            stackView.alignment = .trailing
-            return stackView
-        }()
-        
         addArrangedSubview(stackView)
+        stackView.addArrangedSubview(forgotPasswordButton)
         addArrangedSubview(socialButtons)
         
         setCustomSpacing(26, after: emailTextField)

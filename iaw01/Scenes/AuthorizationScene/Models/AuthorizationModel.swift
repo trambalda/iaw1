@@ -9,13 +9,13 @@ struct AuthorizationModel {
     static let empty = AuthorizationModel(email: nil, password: nil, name: nil, phone: nil)
     
     var isLoginModelFilled: Bool {
-        !(email?.isEmpty ?? true) &&
-        !(password?.isEmpty ?? true)
+        email.notNilNotEmpty &&
+        password.notNilNotEmpty
     }
     
     var isSignUpModelFilled: Bool {
-        !(name?.isEmpty ?? true) &&
-        !(phone?.isEmpty ?? true) &&
-        !(password?.isEmpty ?? true)
+        name.notNilNotEmpty &&
+        phone.notNilNotEmpty &&
+        password.notNilNotEmpty
     }
 }
