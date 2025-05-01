@@ -29,8 +29,8 @@ struct RestaurantModel {
 
 extension RestaurantDto {
     
-    func toModel() -> RestaurantModel {
-        return RestaurantModel(
+    var model: RestaurantModel {
+        RestaurantModel(
             id: id,
             logoURL: URL(string: logo),
             name: name,
@@ -39,8 +39,8 @@ extension RestaurantDto {
             deliveryTime: deliveryTime,
             address: address,
             cousines: cousines.joined(separator: ", "),
-            menu: menu.map { $0.toModel() },
-            dishes: dishes.map { $0.toModel() }
+            menu: menu.map { $0.model },
+            dishes: dishes.map { $0.model }
         )
     }
 }

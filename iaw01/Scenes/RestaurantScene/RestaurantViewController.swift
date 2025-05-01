@@ -77,13 +77,13 @@ final class RestaurantViewController: UIViewController {
     }
    
     private func loadRestaurant() {
-        if let restaurantService = restaurantService {
+        guard let restaurantService = restaurantService  else { return }
             Task {
                 do {
                     let restaurantsDto = try await restaurantService.fetchRestaurant(id: restaurantId)
                     
                     if let restaurantDto = restaurantsDto.first {
-                        restaurantView.model = restaurantDto.toModel()
+                        restaurantView.model = restaurantDto.model
                     } else {
                         displayError()
                     }
@@ -91,9 +91,6 @@ final class RestaurantViewController: UIViewController {
                     displayError()
                 }
             }
-        } else {
-            displayError()
-        }
     }
    
     private func displayError() {

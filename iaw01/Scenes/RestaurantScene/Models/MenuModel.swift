@@ -12,8 +12,8 @@ struct MenuModel {
 
 extension MenuDto {
     
-    func toModel() -> MenuModel {
-        return MenuModel(
+    var model: MenuModel {
+        MenuModel(
             id: id,
             name: name,
             dishesId: dishesId

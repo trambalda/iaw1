@@ -19,8 +19,8 @@ struct MenuItemListModel {
 
 extension MenuItemListDto {
     
-    func toModel() -> MenuItemListModel {
-        return MenuItemListModel(
+    var model: MenuItemListModel {
+        MenuItemListModel(
             id: id,
             imageURL: URL(string: image),
             name: name,
