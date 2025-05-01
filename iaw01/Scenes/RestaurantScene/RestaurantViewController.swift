@@ -2,9 +2,8 @@ import UIKit
 
 final class RestaurantViewController: UIViewController {
     
-    private let restaurantId: Int
-    private let restaurantService: RestaurantNetworkServiceProtocol
-    private var loadedRestaurant: RestaurantDto?
+    var restaurantId: Int = 0
+    var restaurantService: RestaurantNetworkServiceProtocol?
     
     private lazy var restaurantView: RestaurantView = {
         let imageService = ImageService()
@@ -15,20 +14,10 @@ final class RestaurantViewController: UIViewController {
         return view
     }()
     
-    init(id: Int, restaurantService: RestaurantNetworkServiceProtocol) {
-            self.restaurantId = id
-            self.restaurantService = restaurantService
-            super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func loadView() {
         view = restaurantView
     }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -86,25 +75,27 @@ final class RestaurantViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(customView: rightStack)
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
-    
+   
     private func loadRestaurant() {
-        Task {
-            do {
-                let restaurants = try await restaurantService.fetchRestaurant(id: restaurantId)
-                
-                guard let restaurant = restaurants.first(where: { $0.id == restaurantId }) else {
+        if let restaurantService = restaurantService {
+            Task {
+                do {
+                    let restaurantsDto = try await restaurantService.fetchRestaurant(id: restaurantId)
+                    
+                    if let restaurantDto = restaurantsDto.first {
+                        restaurantView.model = restaurantDto.toModel()
+                    } else {
+                        displayError()
+                    }
+                } catch {
                     displayError()
-                    return
                 }
-                
-                self.loadedRestaurant = restaurant
-                self.restaurantView.model = restaurant.toModel()
-            } catch {
-                displayError()
             }
+        } else {
+            displayError()
         }
     }
-    
+   
     private func displayError() {
         let alert = UIAlertController(title: "Ошибка", message: "Не удалось загрузить экран", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ОК", style: .default))
