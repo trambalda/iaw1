@@ -26,4 +26,9 @@ final class HomeScenesFactory: Factory {
         let vc = VerifyPhoneNumberViewController()
         return vc
     }
+    
+    func createDishScene() -> DishViewController {
+        let vc = DishViewController()
+        return vc
+    }
 }
