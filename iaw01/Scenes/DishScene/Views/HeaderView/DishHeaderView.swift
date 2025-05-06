@@ -6,7 +6,14 @@ final class DishHeaderView: UIStackView {
         didSet {
             imageView.image = model.image ?? UIImage(systemName: "photo")
             titleLabel.attributedText = Font.heading4.compose(model.name.isEmpty ? "Название блюда" : model.name)
-            caloriesLabel.attributedText = Font.caption.compose(model.calories.isEmpty ? "Количество калорий" : model.calories)     //проверить и поменять шрифт
+            
+            let attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor.dark60,
+                .font: Font.caption.font
+            ]
+            
+            caloriesLabel.attributedText = NSAttributedString(
+                string: model.calories.isEmpty ? "Количество калорий" : model.calories, attributes: attributes)     //проверить и поменять шрифт
         }
     }
     
@@ -24,14 +31,19 @@ final class DishHeaderView: UIStackView {
         return label
     }()
     
-    private let caloriesLabel = UILabel()
+    private let caloriesLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .dark60
+        return label
+    }()
     
     private let infoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(.infoCircle, for: .normal)
+        button.tintColor = .dark60
         return button
     }()
-    
+   
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -44,6 +56,7 @@ final class DishHeaderView: UIStackView {
     private func configure() {
         axis = .vertical
         spacing = 6
+        alignment = .leading
         
         setupLayout()
         setupConstraints()

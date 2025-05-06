@@ -19,6 +19,6 @@ extension DishModel {
     static let mock = DishModel(
         image: .dish,
         name: "Western BBQ Cheeseburger Meal",
-        calories: "340-400 cals"
+        calories: "340-400 Cals"
     )
 }

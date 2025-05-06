@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E868A2D8814EB002D5293 /* DishCellModel.swift */; };
+		1F4DE3472DC9FBB8000A1E9B /* ButtonsBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4DE3462DC9FBB8000A1E9B /* ButtonsBottomView.swift */; };
+		1F4DE3492DC9FFEA000A1E9B /* AddToBagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4DE3482DC9FFEA000A1E9B /* AddToBagButton.swift */; };
 		1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E868C2D881500002D5293 /* RestaurantCellModel.swift */; };
 		1F9CBE6F2DC8FF9A004CF078 /* DishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9CBE6E2DC8FF9A004CF078 /* DishView.swift */; };
 		1F9CBE722DC90032004CF078 /* DishHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9CBE712DC90032004CF078 /* DishHeaderView.swift */; };
@@ -66,6 +68,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F4DE3462DC9FBB8000A1E9B /* ButtonsBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBottomView.swift; sourceTree = "<group>"; };
+		1F4DE3482DC9FFEA000A1E9B /* AddToBagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToBagButton.swift; sourceTree = "<group>"; };
 		1F4E868A2D8814EB002D5293 /* DishCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCellModel.swift; sourceTree = "<group>"; };
 		1F4E868C2D881500002D5293 /* RestaurantCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellModel.swift; sourceTree = "<group>"; };
 		1F9CBE6E2DC8FF9A004CF078 /* DishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishView.swift; sourceTree = "<group>"; };
@@ -138,6 +142,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F4DE3432DC9FB30000A1E9B /* BottomView */ = {
+			isa = PBXGroup;
+			children = (
+				1F4DE3462DC9FBB8000A1E9B /* ButtonsBottomView.swift */,
+				1F4DE3482DC9FFEA000A1E9B /* AddToBagButton.swift */,
+			);
+			path = BottomView;
+			sourceTree = "<group>";
+		};
 		1F9CBE6B2DC8FF55004CF078 /* DishScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +166,7 @@
 			children = (
 				1F9CBE6E2DC8FF9A004CF078 /* DishView.swift */,
 				1F9CBE702DC8FFFD004CF078 /* HeaderView */,
+				1F4DE3432DC9FB30000A1E9B /* BottomView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -537,6 +551,7 @@
 				8680452D2D94906B00CBE1EC /* CountryPickerCell.swift in Sources */,
 				8698754A2D8860E600C7BA58 /* StringTextField.swift in Sources */,
 				8698754B2D8860E600C7BA58 /* TextFieldBaseStyle.swift in Sources */,
+				1F4DE3472DC9FBB8000A1E9B /* ButtonsBottomView.swift in Sources */,
 				869875452D8860DF00C7BA58 /* TextFieldsViewController.swift in Sources */,
 				21A606F22DB41E0F007BB17C /* ImageService.swift in Sources */,
 				CE4D24C52D95C88E00325BAE /* Constants.swift in Sources */,
@@ -565,6 +580,7 @@
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
+				1F4DE3492DC9FFEA000A1E9B /* AddToBagButton.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,

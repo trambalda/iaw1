@@ -10,7 +10,7 @@ final class DishView: UIView {
     
     let dishHeaderView = DishHeaderView()
     //let dishFiltersView = DishFiltersView()
-    //let dishButtonsView = DishButtonsView()
+    let buttonsBottomView = ButtonsBottomView()
     
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
@@ -42,25 +42,30 @@ final class DishView: UIView {
     }
     
     private func setupLayout() {
+        buttonsBottomView.translatesAutoresizingMaskIntoConstraints = false
+        
         addSubview(scrollView)
         scrollView.addSubview(contentStackView)
         contentStackView.addArrangedSubview(dishHeaderView)
         //contentStackView.addArrangedSubview(dishFiltersView)
-        //scrollView.addSubview(dishButtonsView)
+        addSubview(buttonsBottomView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            buttonsBottomView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            buttonsBottomView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            buttonsBottomView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -RootTabBarController.height - 20),
+            
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -RootTabBarController.height),
+            scrollView.bottomAnchor.constraint(equalTo: buttonsBottomView.topAnchor),
             
-            contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 19),
-            contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
+            contentStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: 20),
+            contentStackView.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor, constant: 16),
+            contentStackView.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor, constant: -16),
+            contentStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
         ])
     }
 }
