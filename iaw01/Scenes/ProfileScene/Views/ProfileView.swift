@@ -1,6 +1,18 @@
 import UIKit
+import PhotosUI
+
+protocol ProfileViewDelegate: AnyObject {
+    func presentImagePicker(_ picker: PHPickerViewController)
+}
 
 final class ProfileView: UIView {
+    
+    weak var delegate: ProfileViewDelegate?
+    
+    var avatar: UIImage {
+        get { avatarView.image ?? .avatar }
+        set { avatarView.image = newValue }
+    }
     
     var fullName: String? {
         get { fullNameTextField.text }
@@ -11,8 +23,6 @@ final class ProfileView: UIView {
         get { phoneNumberTextField.phoneNumber }
         set { phoneNumberTextField.phoneNumber = newValue }
     }
-    
-    var onSelectPhotoButtonTapped: (() -> Void)?
     
     var onSaveButtonTapped: (() -> Void)?
 
@@ -36,6 +46,10 @@ final class ProfileView: UIView {
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.image = .avatar
+        image.layer.borderWidth = 1
+        image.layer.borderColor = UIColor.clear.cgColor
+        image.layer.masksToBounds = false
+        image.clipsToBounds = true
         return image
     }()
     
@@ -106,7 +120,14 @@ final class ProfileView: UIView {
     }
     
     @objc private func selectPhotoButtonDidTapped() {
-        onSelectPhotoButtonTapped?()
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        
+        delegate?.presentImagePicker(picker)
+        
     }
     
     @objc private func saveButtonDidTapped() {
