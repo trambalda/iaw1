@@ -17,6 +17,15 @@ final class DishViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupSections()
+    }
+    
+    private func setupSections() {
+        let sections = SectionFactory.makeSections(from: model)
+        sections.forEach { section in
+            section.delegate = self
+            dishView.addOptionSection(section)
+        }
     }
     
     private func setupNavigationBar() {
@@ -65,5 +74,12 @@ final class DishViewController: UIViewController {
     
     @objc private func shoppingBagButtonTapped() {
         
+    }
+}
+
+extension DishViewController: DishOptionViewDelegate {
+    
+    func didSelectDrinkCategory(_ category: DrinkCategory) {
+
     }
 }

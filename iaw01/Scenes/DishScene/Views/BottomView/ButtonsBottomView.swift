@@ -14,7 +14,7 @@ final class ButtonsBottomView: UIView {
     
     private let addToBagButton = AddToBagButton()
     
-    private let stackView: UIStackView = {
+    private let contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 18
         stackView.distribution = .fill
@@ -32,15 +32,15 @@ final class ButtonsBottomView: UIView {
     }
     
     private func setupLayoutAndConstraints() {
-        addSubview(stackView)
-        stackView.addArrangedSubview(favoriteButton)
-        stackView.addArrangedSubview(addToBagButton)
+        addSubview(contentStackView)
+        contentStackView.addArrangedSubview(favoriteButton)
+        contentStackView.addArrangedSubview(addToBagButton)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            contentStackView.topAnchor.constraint(equalTo: topAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            contentStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             favoriteButton.heightAnchor.constraint(equalToConstant: favoriteButtonSize),
             favoriteButton.widthAnchor.constraint(equalToConstant: favoriteButtonSize)

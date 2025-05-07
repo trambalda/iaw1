@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F2E74352DCB828900FA7EA7 /* SectionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2E74342DCB828900FA7EA7 /* SectionFactory.swift */; };
 		1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E868A2D8814EB002D5293 /* DishCellModel.swift */; };
 		1F4DE3472DC9FBB8000A1E9B /* ButtonsBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4DE3462DC9FBB8000A1E9B /* ButtonsBottomView.swift */; };
 		1F4DE3492DC9FFEA000A1E9B /* AddToBagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4DE3482DC9FFEA000A1E9B /* AddToBagButton.swift */; };
+		1F4DE34C2DCA3954000A1E9B /* DishOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4DE34B2DCA3954000A1E9B /* DishOptionView.swift */; };
 		1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E868C2D881500002D5293 /* RestaurantCellModel.swift */; };
 		1F9CBE6F2DC8FF9A004CF078 /* DishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9CBE6E2DC8FF9A004CF078 /* DishView.swift */; };
 		1F9CBE722DC90032004CF078 /* DishHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9CBE712DC90032004CF078 /* DishHeaderView.swift */; };
@@ -68,8 +70,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F2E74342DCB828900FA7EA7 /* SectionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFactory.swift; sourceTree = "<group>"; };
 		1F4DE3462DC9FBB8000A1E9B /* ButtonsBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsBottomView.swift; sourceTree = "<group>"; };
 		1F4DE3482DC9FFEA000A1E9B /* AddToBagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToBagButton.swift; sourceTree = "<group>"; };
+		1F4DE34B2DCA3954000A1E9B /* DishOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishOptionView.swift; sourceTree = "<group>"; };
 		1F4E868A2D8814EB002D5293 /* DishCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCellModel.swift; sourceTree = "<group>"; };
 		1F4E868C2D881500002D5293 /* RestaurantCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellModel.swift; sourceTree = "<group>"; };
 		1F9CBE6E2DC8FF9A004CF078 /* DishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishView.swift; sourceTree = "<group>"; };
@@ -151,10 +155,19 @@
 			path = BottomView;
 			sourceTree = "<group>";
 		};
+		1F4DE34A2DCA3811000A1E9B /* OptionView */ = {
+			isa = PBXGroup;
+			children = (
+				1F4DE34B2DCA3954000A1E9B /* DishOptionView.swift */,
+			);
+			path = OptionView;
+			sourceTree = "<group>";
+		};
 		1F9CBE6B2DC8FF55004CF078 /* DishScene */ = {
 			isa = PBXGroup;
 			children = (
 				1F9CBE732DC90047004CF078 /* DishViewController.swift */,
+				1F2E74342DCB828900FA7EA7 /* SectionFactory.swift */,
 				1F9CBE6C2DC8FF6E004CF078 /* Views */,
 				1F9CBE6D2DC8FF78004CF078 /* Models */,
 			);
@@ -166,6 +179,7 @@
 			children = (
 				1F9CBE6E2DC8FF9A004CF078 /* DishView.swift */,
 				1F9CBE702DC8FFFD004CF078 /* HeaderView */,
+				1F4DE34A2DCA3811000A1E9B /* OptionView */,
 				1F4DE3432DC9FB30000A1E9B /* BottomView */,
 			);
 			path = Views;
@@ -541,10 +555,12 @@
 				3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */,
 				21AA4B742D8180A80086697C /* Font.swift in Sources */,
 				21A606F72DB423CD007BB17C /* HomeScenesCoordinator.swift in Sources */,
+				1F2E74352DCB828900FA7EA7 /* SectionFactory.swift in Sources */,
 				3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */,
 				860852232D9747BA0038A9EF /* PhoneTextField.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				1F9CBE722DC90032004CF078 /* DishHeaderView.swift in Sources */,
+				1F4DE34C2DCA3954000A1E9B /* DishOptionView.swift in Sources */,
 				868044992D94765400CBE1EC /* CountryCodeModel.swift in Sources */,
 				86F2456F2DAFA4F90037F33C /* UIToolBar+DoneButton.swift in Sources */,
 				869878372D918ECD00C7BA58 /* PhonePrefixView.swift in Sources */,

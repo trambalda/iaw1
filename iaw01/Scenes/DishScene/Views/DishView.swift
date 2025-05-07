@@ -9,7 +9,6 @@ final class DishView: UIView {
     }
     
     let dishHeaderView = DishHeaderView()
-    //let dishFiltersView = DishFiltersView()
     let buttonsBottomView = ButtonsBottomView()
     
     private let contentStackView: UIStackView = {
@@ -36,7 +35,13 @@ final class DishView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func addOptionSection(_ view: DishOptionView) {
+        contentStackView.addArrangedSubview(view)
+    }
+    
     private func configure() {
+        backgroundColor = .light100
+        
         setupLayout()
         setupConstraints()
     }
@@ -47,7 +52,7 @@ final class DishView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentStackView)
         contentStackView.addArrangedSubview(dishHeaderView)
-        //contentStackView.addArrangedSubview(dishFiltersView)
+        //contentStackView.addArrangedSubview(dishOptionView)
         addSubview(buttonsBottomView)
     }
     
