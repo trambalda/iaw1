@@ -31,4 +31,11 @@ final class HomeScenesFactory: Factory {
         let vc = AuthorizationViewController()
         return vc
     }
+    
+    func createRestaurantScene(with id: Int) -> RestaurantViewController {
+        let vc = RestaurantViewController()
+        vc.restaurantId = id
+        vc.restaurantService = RestaurantNetworkService(networkService: networkService)
+        return vc
+    }
 }
