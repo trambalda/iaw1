@@ -30,6 +30,17 @@ final class HomeScenesFactory: Factory {
     func createKeyboardServiceScene() -> KeyboardServiceViewController {
         let vc = KeyboardServiceViewController()
         keyboardService.isEnabled = true
+    }
+
+    func createAuthorizationScene() -> AuthorizationViewController {
+        let vc = AuthorizationViewController()
+        return vc
+    }
+    
+    func createRestaurantScene(with id: Int) -> RestaurantViewController {
+        let vc = RestaurantViewController()
+        vc.restaurantId = id
+        vc.restaurantService = RestaurantNetworkService(networkService: networkService)
         return vc
     }
 }

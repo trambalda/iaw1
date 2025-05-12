@@ -16,6 +16,6 @@ extension NotificationCenter {
     
     static func unregisterKeyboardNotifications(_ observer: Any) {
         NotificationCenter.default.removeObserver(observer, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(observer, name: UIResponder.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(observer, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
