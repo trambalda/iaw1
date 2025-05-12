@@ -8,8 +8,8 @@ struct SectionFactory {
         switch model.type {
         case .combo:
             if let sideItems = model.sideItems, !sideItems.isEmpty {
-                let sideCategory = DrinkCategory(name: "Side Item", options: sideItems)
-                let section = DishOptionView(title: sideCategory.name, isRequired: true, category: nil)
+                let sideCategory = DrinkCategory(name: "Side Item", subcategories: nil, options: sideItems)
+                let section = DishOptionView(title: sideCategory.name, isRequired: true, category: sideCategory)
                 sections.append(section)
             }
             
@@ -19,15 +19,15 @@ struct SectionFactory {
                     sections.append(section)
                 }
             }
-            
+           
             if let editableIngredients = model.editableIngredients, !editableIngredients.isEmpty {
                 let section = DishOptionView(title: "Edit Ingredients", isRequired: false, category: nil)
                 sections.append(section)
             }
         case .customizable:
-            if let editable = model.editableIngredients, !editable.isEmpty {
-                let editCategory = DrinkCategory(name: "Edit Ingredients", options: editable)
-                let section = DishOptionView(title: editCategory.name, isRequired: false, category: nil)
+            if let editableIngredients = model.editableIngredients, !editableIngredients.isEmpty {
+                let editCategory = DrinkCategory(name: "Edit Ingredients", subcategories: nil, options: editableIngredients)
+                let section = DishOptionView(title: editCategory.name, isRequired: false, category: editCategory)
                 sections.append(section)
             }
         case .fixed:

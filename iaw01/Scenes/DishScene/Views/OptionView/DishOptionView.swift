@@ -24,11 +24,11 @@ final class DishOptionView: UIView {
     private let openButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .dark60
-        button.setImage(.plus, for: .normal)
-        button.addTarget(DishOptionView.self, action: #selector(toggleOpen), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
+        button.addTarget(self, action: #selector(toggleOpen), for: .touchUpInside)
         return button
     }()
-    
+
     private let contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -39,54 +39,88 @@ final class DishOptionView: UIView {
     private var isOpened = false {
         didSet {
             contentStackView.isHidden = !isOpened
-            let buttonName = isOpened ? "minus" : "plus"
+            let buttonName = isOpened ? "minus.circle.fill" : "plus.circle.fill"
             openButton.setImage(UIImage(systemName: buttonName), for: .normal)
         }
     }
     
     private var drinkCategory: DrinkCategory?
     
-    init(title: String, isRequired: Bool, category: DrinkCategory? = nil) {
+    init(title: String, isRequired: Bool, category: DrinkCategory?) {
         super.init(frame: .zero)
+        self.drinkCategory = category
+        configure(title: title, isRequired: isRequired)
         
-        configure(title: title, isRequired: isRequired, category: category)
+        if let category = category {
+            populateOptions(for: category)
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configure(title: String, isRequired: Bool, category: DrinkCategory?) {
+    private func configure(title: String, isRequired: Bool) {
+        backgroundColor = .light80
         titleLabel.text = title
         requiredLabel.text = isRequired ? "REQUIRED" : ""
        
-        if let category = category {
-            drinkCategory = category
-            category.options.forEach { option in
-                let optionLabel = UILabel()
-                optionLabel.text = option
-                contentStackView.addArrangedSubview(optionLabel)
-            }
-        }
-        
         setupLayoutAndConstraints()
     }
     
+    private func populateOptions(for category: DrinkCategory) {
+        if let subcategories = category.subcategories {
+            for subcategory in subcategories {
+                let optionLabel = UILabel()
+                optionLabel.text = subcategory.name
+                contentStackView.addArrangedSubview(optionLabel)
+                
+                if let options = subcategory.options {
+                    for option in options {
+                        let optionLabel = UILabel()
+                        optionLabel.text = "\(option)"
+                        contentStackView.addArrangedSubview(optionLabel)
+                    
+                    }
+                }
+            }
+        } else if let options = category.options {
+            for option in options {
+                let optionLabel = UILabel()
+                optionLabel.text = "\(option)"
+                contentStackView.addArrangedSubview(optionLabel)
+            }
+        }
+    }
+    /*
+     mainStackView
+        headerStackView
+            titleLabel
+            rightStackView
+                requiredLabel
+                openButton
+        contentStackView
+     */
     private func setupLayoutAndConstraints() {
         let mainStackView = UIStackView()
         mainStackView.axis = .vertical
         mainStackView.spacing = 5       //точно ли?
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
+        let rightStackView = UIStackView()
+        rightStackView.alignment = .center
+        rightStackView.setContentHuggingPriority(.required, for: .horizontal)
+        
         let headerStackView = UIStackView()
         headerStackView.alignment = .center
-        headerStackView.distribution = .fillProportionally
         
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(headerStackView)
         headerStackView.addArrangedSubview(titleLabel)
-        headerStackView.addArrangedSubview(requiredLabel)
-        headerStackView.addArrangedSubview(openButton)
+        headerStackView.addArrangedSubview(rightStackView)
+        rightStackView.addArrangedSubview(requiredLabel)
+        rightStackView.addArrangedSubview(openButton)
+        rightStackView.setCustomSpacing(14, after: requiredLabel)
         mainStackView.addArrangedSubview(contentStackView)
         
         NSLayoutConstraint.activate([

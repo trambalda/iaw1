@@ -10,7 +10,8 @@ enum DishType {
 struct DrinkCategory {
     
     let name: String
-    let options: [String]
+    let subcategories: [DrinkCategory]?
+    let options: [String]?
 }
 
 struct DishModel {
@@ -46,8 +47,14 @@ extension DishModel {
         type: .combo,
         sideItems: ["Medium Fries", "Large Fries"],
         drinks: [
-            DrinkCategory(name: "Soft Drinks", options: ["Coke", "Pepsi", "Sprite"]),
-            DrinkCategory(name: "Juices", options: ["Fruit Punch Juice", "Orange Juice", "Ginger Shot Juice", "Sweet Guava Juice", "Tangy Tomato Juice"])
+            DrinkCategory(
+                name: "Drinks",
+                subcategories: [
+                    DrinkCategory(name: "Soft Drinks", subcategories: nil, options: ["Coke", "Pepsi", "Sprite"]),
+                    DrinkCategory(name: "Juices", subcategories: nil, options: ["Fruit Punch Juice", "Orange Juice", "Ginger Shot Juice", "Sweet Guava Juice", "Tangy Tomato Juice"])
+                ],
+                options: nil,
+            )
         ],
         editableIngredients: ["Sesame Seed Bun", "BBQ Sauce", "Beef Patty", "Cheese", "Banana Peppers", "Lettuce", "Chipotie Sauce", "Sesame Seed Bun"]
     )

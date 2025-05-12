@@ -19,6 +19,14 @@ final class DishView: UIView {
         return stackView
     }()
     
+    private let filterStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 25
+        //stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         //scrollView.delegate = self
@@ -36,7 +44,7 @@ final class DishView: UIView {
     }
     
     func addOptionSection(_ view: DishOptionView) {
-        contentStackView.addArrangedSubview(view)
+        filterStackView.addArrangedSubview(view)
     }
     
     private func configure() {
@@ -52,7 +60,7 @@ final class DishView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentStackView)
         contentStackView.addArrangedSubview(dishHeaderView)
-        //contentStackView.addArrangedSubview(dishOptionView)
+        contentStackView.addArrangedSubview(filterStackView)
         addSubview(buttonsBottomView)
     }
     
@@ -70,7 +78,7 @@ final class DishView: UIView {
             contentStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: 20),
             contentStackView.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor, constant: 16),
             contentStackView.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor, constant: -16),
-            contentStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -20),
         ])
     }
 }
