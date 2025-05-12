@@ -27,6 +27,11 @@ final class HomeScenesFactory: Factory {
         return vc
     }
     
+    func createAuthorizationScene() -> AuthorizationViewController {
+        let vc = AuthorizationViewController()
+        return vc
+    }
+    
     func createRestaurantScene(with id: Int) -> RestaurantViewController {
         let vc = RestaurantViewController()
         vc.restaurantId = id
