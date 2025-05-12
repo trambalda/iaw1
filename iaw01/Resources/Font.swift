@@ -37,7 +37,7 @@ extension Font {
 extension Font {
     static let heading4 = Font(
         font: UIFont(name: Family.everettMedium.title, size: 33)!, // original 36, -2
-        lettering: -4
+        lettering: -3
     )
     static let subtitle1 = Font(
         font: UIFont(name: Family.everettMedium.title, size: 22)!, // original 24, 0
