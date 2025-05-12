@@ -1,7 +1,6 @@
 import Foundation
 
 struct MenuItemListModel {
-    
     let id: Int
     let imageURL: URL?
     let name: String
@@ -18,7 +17,6 @@ struct MenuItemListModel {
 }
 
 extension MenuItemListDto {
-    
     var model: MenuItemListModel {
         MenuItemListModel(
             id: id,

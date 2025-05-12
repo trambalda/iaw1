@@ -1,7 +1,4 @@
-import Foundation
-
 struct RestaurantDto: Decodable {
-    
     let id: Int
     let logo: String
     let name: String

@@ -1,7 +1,6 @@
 import Foundation
 
 struct RestaurantModel {
-    
     let id: Int
     let logoURL: URL?
     let name: String
@@ -28,7 +27,6 @@ struct RestaurantModel {
 }
 
 extension RestaurantDto {
-    
     var model: RestaurantModel {
         RestaurantModel(
             id: id,

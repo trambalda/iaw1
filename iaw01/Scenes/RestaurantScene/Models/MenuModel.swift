@@ -1,7 +1,4 @@
-import Foundation
-
 struct MenuModel {
-    
     let id: Int
     let name: String
     let dishesId: [Int]
@@ -11,7 +8,6 @@ struct MenuModel {
 
 
 extension MenuDto {
-    
     var model: MenuModel {
         MenuModel(
             id: id,

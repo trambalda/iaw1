@@ -24,6 +24,7 @@ final class RestaurantViewController: UIViewController {
         loadRestaurant()
     }
     
+    // TODO: Позже вынести реализацию навигейшен бара отдельно от экрана
     private func setupNavigationBar() {
         let backButton = UIButton(type: .system)
         var backButtonConfig = UIButton.Configuration.plain()

@@ -96,4 +96,3 @@ final class HeaderView: UIStackView {
         guard Constants.isSE else { return }
     }
 }
-
