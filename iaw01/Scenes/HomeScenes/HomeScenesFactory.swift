@@ -30,6 +30,7 @@ final class HomeScenesFactory: Factory {
     func createKeyboardServiceScene() -> KeyboardServiceViewController {
         let vc = KeyboardServiceViewController()
         keyboardService.isEnabled = true
+        return vc
     }
 
     func createAuthorizationScene() -> AuthorizationViewController {
