@@ -28,9 +28,15 @@ final class HomeScenesFactory: Factory {
     }
     
     func createRestaurantScene(with id: Int) -> RestaurantViewController {
-        let vc = RestaurantViewController()
-        vc.restaurantId = id
-        vc.restaurantService = RestaurantNetworkService(networkService: networkService)
-        return vc
+        let viewController = RestaurantViewController()
+        let interactor = RestaurantInteractor(id: id)
+        let presenter = RestaurantPresenter()
+        
+        viewController.interactor = interactor
+        interactor.presenter = presenter
+        interactor.restaurantNetworkService = RestaurantNetworkService(networkService: networkService)
+        presenter.viewController = viewController
+        
+        return viewController
     }
 }
