@@ -34,6 +34,8 @@ final class DummyViewController: UIViewController {
             coordinator?.showCornersButtonsScene()
         case .verifyPhoneNumberScene:
             coordinator?.showVerifyPhoneNumberScene()
+        case .authorizationScene:
+            coordinator?.showAuthorizationScene()
         case .restaurantScene:
             coordinator?.showRestaurantScene(with: 1)
         }
