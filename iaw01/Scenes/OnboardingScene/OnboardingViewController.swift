@@ -3,15 +3,17 @@ import UIKit
 final class OnboardingViewController: UIViewController {
     
     var coordinator: HomeScenesCoordinator?
-    private var onboardingView: OnboardingView?
+    private lazy var onboardingView: OnboardingView? = {
+        let view = OnboardingView(pages: OnboardingPageModel.pages)
+        view?.onFinish = { [weak self] in
+            self?.finishOnboarding()
+        }
+        return view
+    }()
     
     override func loadView() {
-        if let view = OnboardingView(pages: OnboardingPageModel.pages) {
-            view.onFinish = { [weak self] in
-                self?.finishOnboarding()
-            }
-            self.view = view
-            self.onboardingView = view
+        if let onboardingView {
+            self.view = onboardingView
         } else {
             finishOnboarding()
         }
