@@ -15,16 +15,16 @@ final class MenuTimeView: UIView {
         }
     }
     
-    private var menuOptions: [MenuModel] = []
-    private var buttons: [UIButton] = []
-    private var selectedButton: UIButton?
-    
-    private let scrollView: UIScrollView = {
+    let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
+    
+    private var menuOptions: [MenuModel] = []
+    private var buttons: [UIButton] = []
+    private var selectedButton: UIButton?
     
     private let stackView: UIStackView = {
         let stack = UIStackView()
@@ -103,6 +103,9 @@ final class MenuTimeView: UIView {
             btn.configuration = newConfig
         }
         
+        button.setContentHuggingPriority(.required, for: .horizontal)
+        button.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         button.addTarget(self, action: #selector(menuTapped(_:)), for: .touchUpInside)
         
         return button
@@ -136,6 +139,12 @@ final class MenuTimeView: UIView {
         UIView.animate(withDuration: 0.25) {
             self.layoutIfNeeded()
         }
+    }
+    
+    func selectMenu(_ menu: MenuModel?) {
+        guard let menu, let index = menuOptions.firstIndex(where: { $0.id == menu.id }) else { return }
+        let button = buttons[index]
+        selectButton(button)
     }
     
     func setupLayoutAndConstraints() {
