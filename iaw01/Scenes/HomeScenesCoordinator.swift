@@ -37,16 +37,12 @@ final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorPro
     
     func showOnboardingScene() {
         let vc = factory.createOnboardingScene()
-        vc.hidesBottomBarWhenPushed = true
         rootViewController.pushViewController(vc, animated: true)
         RootTabBarController.setHidden(to: true)
     }
 
     func hideOnboardingScene() {
-        if let previousViewController = rootViewController.viewControllers.last {
-            previousViewController.hidesBottomBarWhenPushed = false
-            RootTabBarController.setHidden(to: false)
-        }
+        RootTabBarController.setHidden(to: false)
         rootViewController.popViewController(animated: true)
     }
 }
