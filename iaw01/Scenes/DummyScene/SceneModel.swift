@@ -10,7 +10,9 @@ extension SceneModel {
         [
             SceneModel(sceneType: .textFiedsScene, parameters: [:]),
             SceneModel(sceneType: .cornersButtonsScene, parameters: [:]),
+            SceneModel(sceneType: .authorizationScene, parameters: [:]),
             SceneModel(sceneType: .verifyPhoneNumberScene, parameters: [:]),
+            SceneModel(sceneType: .restaurantScene, parameters: [:]),
             SceneModel(sceneType: .onboardingScene, parameters: [:]),
         ]
     }

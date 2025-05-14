@@ -3,7 +3,7 @@ import UIKit
 final class DummyViewController: UIViewController {
     
     var coordinator: HomeScenesCoordinatorProtocol?
-
+    
     private lazy var dummyView: DummyView = {
         let view = DummyView(frame: .zero)
         view.scenes = SceneModel.models
@@ -34,6 +34,10 @@ final class DummyViewController: UIViewController {
             coordinator?.showCornersButtonsScene()
         case .verifyPhoneNumberScene:
             coordinator?.showVerifyPhoneNumberScene()
+        case .authorizationScene:
+            coordinator?.showAuthorizationScene()
+        case .restaurantScene:
+            coordinator?.showRestaurantScene(with: 1)
         case .onboardingScene:
             coordinator?.showOnboardingScene()
         }

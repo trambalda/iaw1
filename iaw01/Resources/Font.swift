@@ -37,7 +37,7 @@ extension Font {
 extension Font {
     static let heading4 = Font(
         font: UIFont(name: Family.everettMedium.title, size: 33)!, // original 36, -2
-        lettering: -4
+        lettering: -3
     )
     static let subtitle1 = Font(
         font: UIFont(name: Family.everettMedium.title, size: 22)!, // original 24, 0
@@ -47,13 +47,29 @@ extension Font {
         font: UIFont(name: Family.everettMedium.title, size: 19)!, // original 21, -1
         lettering: -0.5
     )
+    static let segment = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 17)!,
+        lettering: -1
+    )
+    static let name = Font(
+        font: UIFont(name: Family.everettRegular.title, size: 36)!,
+        lettering: -3
+    )
     static let body = Font(
         font: UIFont(name: Family.everettRegular.title, size: 15.4)!, // original 17, -1
-        lettering: -1
+        lettering: -0.5
+    )
+    static let info = Font(
+        font: UIFont(name: Family.everettRegular.title, size: 14)!,
+        lettering: -0.5
     )
     static let note = Font(
         font: UIFont(name: Family.everettRegular.title, size: 12)!, // original 13, -1
         lettering: -1
+    )
+    static let backButton = Font(
+        font: UIFont(name: Family.everettMedium.title, size: 14)!,
+        lettering: 0
     )
     static let caption = Font(
         font: UIFont(name: Family.everettMedium.title, size: 10.9)!, // original 12, 2
