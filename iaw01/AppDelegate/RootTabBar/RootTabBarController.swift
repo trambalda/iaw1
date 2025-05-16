@@ -13,14 +13,14 @@ final class RootTabBarController: UITabBarController {
         }
     }
     
-    static var object: RootTabBarController? {
-        UIApplication.rootViewController as? RootTabBarController
-    }
-    
     static func setHidden(to isHidden: Bool) {
         object?.isHidden = isHidden
     }
 
+    private static var object: RootTabBarController? {
+        UIApplication.rootViewController as? RootTabBarController
+    }
+    
     private var isHidden: Bool = false {
         didSet {
             backgroundView.isHidden = isHidden
