@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02101C0D2DA84EA600ADF6A5 /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02101C0C2DA84EA600ADF6A5 /* AuthorizationModel.swift */; };
-		0288EEF52DBBCBDC0077AA20 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D24C42D95C88400325BAE /* Constants.swift */; };
+		0288EEF52DBBCBDC0077AA20 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		029039C82D999414008973F2 /* AuthorizationLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029039C72D999414008973F2 /* AuthorizationLoginView.swift */; };
 		029039CA2D999429008973F2 /* AuthorizationSignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029039C92D999429008973F2 /* AuthorizationSignupView.swift */; };
 		02B31D3F2D8C4DE800EC9031 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D3D2D8C4DE800EC9031 /* AuthorizationViewController.swift */; };
@@ -219,6 +219,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		02B31D3E2D8C4DE800EC9031 /* AuthorizationScene */ = {
+			isa = PBXGroup;
+			children = (
+				02B31D3D2D8C4DE800EC9031 /* AuthorizationViewController.swift */,
+				020CE8662DC284AA00FEF9DD /*  Views */,
+				020CE8672DC284D700FEF9DD /* Models */,
+			);
+			path = AuthorizationScene;
+			sourceTree = "<group>";
+		};
 		1F16AE502DB50B350085A17D /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,16 +257,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		02B31D3E2D8C4DE800EC9031 /* AuthorizationScene */ = {
-			isa = PBXGroup;
-			children = (
-				02B31D3D2D8C4DE800EC9031 /* AuthorizationViewController.swift */,
-				020CE8662DC284AA00FEF9DD /*  Views */,
-				020CE8672DC284D700FEF9DD /* Models */,
-			);
-			path = AuthorizationScene;
-sourceTree = "<group>";
-};
 		1F16AE562DB50C210085A17D /* FilterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,10 +533,10 @@ sourceTree = "<group>";
 		3F9CC6012D9193AE0079DA39 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
+				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
 				D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */,
 				86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */,
-				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
-				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -619,9 +619,9 @@ sourceTree = "<group>";
 		D5952D8A2DAAC129003F3C90 /* OnboardingScene */ = {
 			isa = PBXGroup;
 			children = (
-				D5952D852DAAC129003F3C90 /* Models */,
-				D5952D882DAAC129003F3C90 /* Views */,
 				D5952D892DAAC129003F3C90 /* OnboardingViewController.swift */,
+				D5952D882DAAC129003F3C90 /* Views */,
+				D5952D852DAAC129003F3C90 /* Models */,
 			);
 			path = OnboardingScene;
 			sourceTree = "<group>";
@@ -709,7 +709,7 @@ sourceTree = "<group>";
 				02E4EFDD2DBBDE7500B121D8 /* StringTextField.swift in Sources */,
 				02E4EFDC2DBBDE6F00B121D8 /* TextFieldBaseStyle.swift in Sources */,
 				02E4EFDB2DBBDE6800B121D8 /* TextFieldsViewController.swift in Sources */,
-				0288EEF52DBBCBDC0077AA20 /* Constants.swift in Sources */,
+				0288EEF52DBBCBDC0077AA20 /* (null) in Sources */,
 				21AA4B7C2D81880A0086697C /* Factory.swift in Sources */,
 				1FBFC53D2DBCD91500691CCE /* MenuItemListDto.swift in Sources */,
 				3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */,

@@ -3,6 +3,7 @@ import UIKit
 final class OnboardingViewController: UIViewController {
     
     var coordinator: HomeScenesCoordinator?
+    
     private lazy var onboardingView: OnboardingView? = {
         let view = OnboardingView(pages: OnboardingPageModel.pages)
         view?.onFinish = { [weak self] in
