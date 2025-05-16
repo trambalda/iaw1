@@ -81,7 +81,13 @@
 		CEEE9CB62DA17A3E00DF1A35 /* RootTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */; };
 		D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52040502D89B502009D0D1D /* CornersButtonStyle.swift */; };
 		D52040532D89B502009D0D1D /* CornersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520404F2D89B502009D0D1D /* CornersButton.swift */; };
+		D57BD96D2DBD315E005052DF /* UIApplication+RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */; };
+		D5952D8B2DAAC129003F3C90 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D872DAAC129003F3C90 /* OnboardingView.swift */; };
+		D5952D8C2DAAC129003F3C90 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D892DAAC129003F3C90 /* OnboardingViewController.swift */; };
+		D5952D8D2DAAC129003F3C90 /* OnboardingPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D842DAAC129003F3C90 /* OnboardingPageModel.swift */; };
+		D5952D8E2DAAC129003F3C90 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5952D862DAAC129003F3C90 /* OnboardingPageView.swift */; };
 		D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */; };
+		D5DC6E9A2D9442C70063FC7A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DC6E992D9442C70063FC7A /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,13 +173,18 @@
 		86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIToolBar+DoneButton.swift"; sourceTree = "<group>"; };
 		CE02B8502D933581000C0557 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		CE02B8512D933581000C0557 /* LinkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonStyle.swift; sourceTree = "<group>"; };
-		CE4D24C42D95C88400325BAE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CEEE9CB12DA17A3E00DF1A35 /* RoorTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoorTabBarView.swift; sourceTree = "<group>"; };
 		CEEE9CB22DA17A3E00DF1A35 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarItem.swift; sourceTree = "<group>"; };
 		D520404F2D89B502009D0D1D /* CornersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButton.swift; sourceTree = "<group>"; };
 		D52040502D89B502009D0D1D /* CornersButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonStyle.swift; sourceTree = "<group>"; };
+		D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RootViewController.swift"; sourceTree = "<group>"; };
+		D5952D842DAAC129003F3C90 /* OnboardingPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageModel.swift; sourceTree = "<group>"; };
+		D5952D862DAAC129003F3C90 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
+		D5952D872DAAC129003F3C90 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		D5952D892DAAC129003F3C90 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		D59B58732D8C8D1A0049A3F9 /* CornersButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornersButtonsViewController.swift; sourceTree = "<group>"; };
+		D5DC6E992D9442C70063FC7A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -454,11 +465,11 @@ sourceTree = "<group>";
 		21AA4B772D8186400086697C /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				D5DC6E992D9442C70063FC7A /* Constants.swift */,
 				21AA4B502D8160E30086697C /* AppDelegate.swift */,
 				21AA4B522D8160E30086697C /* SceneDelegate.swift */,
 				21AA4B642D81627D0086697C /* AppCoordinator.swift */,
 				21AA4B7B2D81880A0086697C /* Factory.swift */,
-				CE4D24C42D95C88400325BAE /* Constants.swift */,
 				21AA4B6A2D817C410086697C /* RootTabBar */,
 			);
 			path = AppDelegate;
@@ -489,6 +500,7 @@ sourceTree = "<group>";
 			children = (
 				02B31D3E2D8C4DE800EC9031 /* AuthorizationScene */,
 				1F16AE612DB50C210085A17D /* RestaurantScene */,
+				D5952D8A2DAAC129003F3C90 /* OnboardingScene */,
 				21A606F52DB42397007BB17C /* HomeScenes */,
 				21AA4B782D81864F0086697C /* DummyScene */,
 				3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */,
@@ -521,6 +533,7 @@ sourceTree = "<group>";
 		3F9CC6012D9193AE0079DA39 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */,
 				86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */,
 				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
 				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
@@ -584,6 +597,33 @@ sourceTree = "<group>";
 				D52040502D89B502009D0D1D /* CornersButtonStyle.swift */,
 			);
 			path = CornersButton;
+			sourceTree = "<group>";
+		};
+		D5952D852DAAC129003F3C90 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D5952D842DAAC129003F3C90 /* OnboardingPageModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D5952D882DAAC129003F3C90 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D5952D862DAAC129003F3C90 /* OnboardingPageView.swift */,
+				D5952D872DAAC129003F3C90 /* OnboardingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D5952D8A2DAAC129003F3C90 /* OnboardingScene */ = {
+			isa = PBXGroup;
+			children = (
+				D5952D852DAAC129003F3C90 /* Models */,
+				D5952D882DAAC129003F3C90 /* Views */,
+				D5952D892DAAC129003F3C90 /* OnboardingViewController.swift */,
+			);
+			path = OnboardingScene;
 			sourceTree = "<group>";
 		};
 		D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */ = {
@@ -693,13 +733,19 @@ sourceTree = "<group>";
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
 				3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
+				D5DC6E9A2D9442C70063FC7A /* Constants.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
+				D5952D8B2DAAC129003F3C90 /* OnboardingView.swift in Sources */,
+				D5952D8C2DAAC129003F3C90 /* OnboardingViewController.swift in Sources */,
+				D5952D8D2DAAC129003F3C90 /* OnboardingPageModel.swift in Sources */,
+				D5952D8E2DAAC129003F3C90 /* OnboardingPageView.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
 				21A606EC2DB41CA4007BB17C /* NetworkError.swift in Sources */,
 				1F68F47A2DB642B00034392E /* RestaurantNetworkService.swift in Sources */,
 				3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */,
 				CE02B8532D933581000C0557 /* LinkButton.swift in Sources */,
 				21A606F92DB42FAF007BB17C /* HomeScenesFactory.swift in Sources */,
+				D57BD96D2DBD315E005052DF /* UIApplication+RootViewController.swift in Sources */,
 				CEEE9CB42DA17A3E00DF1A35 /* RootTabBarController.swift in Sources */,
 				CEEE9CB52DA17A3E00DF1A35 /* RoorTabBarView.swift in Sources */,
 				21A606E82DB406F3007BB17C /* NetworkService.swift in Sources */,
@@ -903,6 +949,7 @@ sourceTree = "<group>";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YWY49JTZKC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iaw01/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -916,7 +963,7 @@ sourceTree = "<group>";
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ru.trambalda.iaw01;
+				PRODUCT_BUNDLE_IDENTIFIER = iCleverStyle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
