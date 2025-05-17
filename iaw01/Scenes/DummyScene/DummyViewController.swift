@@ -40,6 +40,8 @@ final class DummyViewController: UIViewController {
             coordinator?.showAuthorizationScene()
         case .restaurantScene:
             coordinator?.showRestaurantScene(with: 1)
+        case .onboardingScene:
+            coordinator?.showOnboardingScene()
         }
     }
 }

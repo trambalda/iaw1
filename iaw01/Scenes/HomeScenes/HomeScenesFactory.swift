@@ -44,4 +44,10 @@ final class HomeScenesFactory: Factory {
         vc.restaurantService = RestaurantNetworkService(networkService: networkService)
         return vc
     }
+    
+    func createOnboardingScene() -> OnboardingViewController {
+        let vc = OnboardingViewController()
+        vc.coordinator = coordinator
+        return vc
+    }
 }
