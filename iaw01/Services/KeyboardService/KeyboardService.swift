@@ -48,7 +48,7 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 
     private func setupGesture() {
-        guard let window = UIApplication.shared.keyWindowIsConnectedScenes else { return }
+        guard let window = UIApplication.keyWindowIsConnectedScenes else { return }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         window.addGestureRecognizer(tapGesture)
@@ -102,8 +102,7 @@ final class KeyboardService: KeyboardServiceProtocol {
             let userInfo = notification.userInfo,
             let keyboardFrameValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
             let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
-            let keyWindow = UIApplication.shared.keyWindowIsConnectedScenes,
-            let rootViewController = keyWindow.rootViewController
+            let rootViewController = UIApplication.rootViewController
         else { return }
 
         if let activeField = activeTextField, activeField.isFirstResponder {
@@ -128,8 +127,7 @@ final class KeyboardService: KeyboardServiceProtocol {
 
     @objc private func keyboardWillHide(notification: Notification) {
         guard
-            let keyWindow = UIApplication.shared.keyWindowIsConnectedScenes,
-            let rootViewController = keyWindow.rootViewController
+            let rootViewController = UIApplication.rootViewController
         else { return }
 
         activeTextField = nil
@@ -139,7 +137,7 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 
     @objc private func dismissKeyboard() {
-        UIApplication.shared.keyWindowIsConnectedScenes?.endEditing(true)
+        UIApplication.keyWindowIsConnectedScenes?.endEditing(true)
         activeTextField = nil
     }
 }
