@@ -14,6 +14,7 @@ final class HomeScenesFactory: Factory {
     
     func createTextFieldsScene() -> TextFieldsViewController {
         let vc = TextFieldsViewController()
+        keyboardService.isEnabled = true
         return vc
     }
     
@@ -35,6 +36,7 @@ final class HomeScenesFactory: Factory {
 
     func createAuthorizationScene() -> AuthorizationViewController {
         let vc = AuthorizationViewController()
+        keyboardService.isEnabled = true
         return vc
     }
     

@@ -5,19 +5,19 @@ final class KeyboardServiceViewController: UIViewController {
     private let textFieldsStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.distribution = .fillEqually
         stack.axis = .vertical
+        stack.distribution = .fillEqually
         stack.spacing = 15
         return stack
     }()
 
-    private let nameTextField: StringTextField = {
-        let textField = StringTextField(with: .nameStyle)
+    private let emailTextField: StringTextField = {
+        let textField = StringTextField(with: .emailStyle)
         return textField
     }()
 
-    private let emailTextField: StringTextField = {
-        let textField = StringTextField(with: .emailStyle)
+    private let nameTextField: StringTextField = {
+        let textField = StringTextField(with: .nameStyle)
         return textField
     }()
 
@@ -26,41 +26,57 @@ final class KeyboardServiceViewController: UIViewController {
         return textField
     }()
 
+    private let createPasswordTextField: StringTextField = {
+        let textField = StringTextField(with: .createPasswordStyle)
+        return textField
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .light100
 
         setupLayout()
-        setupTextFieldResponders()
+        setupResponders()
         setupConstraints()
     }
 
     private func setupLayout() {
-        textFieldsStack.addArrangedSubview(nameTextField)
         textFieldsStack.addArrangedSubview(emailTextField)
+        textFieldsStack.addArrangedSubview(nameTextField)
         textFieldsStack.addArrangedSubview(passwordTextField)
+        textFieldsStack.addArrangedSubview(createPasswordTextField)
+        
         view.addSubview(textFieldsStack)
     }
 
-    private func setupTextFieldResponders() {
-        nameTextField.textFieldShouldReturn = {
-            self.emailTextField.becomeTextFieldFirstResponder()
+    private func setupResponders() {
+        emailTextField.textFieldShouldReturn = {
+            self.nameTextField.becomeTextFieldFirstResponder()
         }
 
-        emailTextField.textFieldShouldReturn = {
+        nameTextField.textFieldShouldReturn = {
             self.passwordTextField.becomeTextFieldFirstResponder()
         }
 
         passwordTextField.textFieldShouldReturn = {
-            self.passwordTextField.resignTextFieldFirstResponder()
+            self.createPasswordTextField.becomeTextFieldFirstResponder()
+        }
+
+        createPasswordTextField.textFieldShouldReturn = { [weak self] in
+            self?.createPasswordTextField.resignTextFieldFirstResponder()
         }
     }
 
     private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            textFieldsStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100),
-        ])
+        NSLayoutConstraint.activate(
+            [
+                textFieldsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                textFieldsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                textFieldsStack.bottomAnchor.constraint(
+                    equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                    constant: -RootTabBarController.height - 20
+                ),
+            ]
+        )
     }
 }
