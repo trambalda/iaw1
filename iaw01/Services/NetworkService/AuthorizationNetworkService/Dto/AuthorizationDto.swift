@@ -1,8 +1,5 @@
-//
-//  AuthorizationDto.swift
-//  iaw01
-//
-//  Created by Дария Акатова on 21.05.2025.
-//
-
-import Foundation
+struct AuthorizationDto: Decodable {
+    let userId: String
+    let token: String
+    let phone: String
+}

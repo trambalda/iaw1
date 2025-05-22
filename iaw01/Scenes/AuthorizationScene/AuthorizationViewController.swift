@@ -2,16 +2,51 @@ import UIKit
 
 final class AuthorizationViewController: UIViewController {
     
+//    private var authorizationService: AuthorizationNetworkServiceProtocol = AuthorizationNetworkService(networkService: NetworkService())
+    
+    let mockAuthorizationService: AuthorizationNetworkServiceProtocol = MockAuthorizationNetworkService()
+    
     private lazy var authorizationView: AuthorizationView = {
         let view = AuthorizationView(frame: UIScreen.main.bounds)
         view.model = AuthorizationModel.empty
         
-        view.onLoginTap = { model in
-            print("Login нажат и выводит \(model)")
+        view.onLoginTap = { [weak self] model in
+            Task {
+                do {
+                    guard
+                        let self = self,
+                        let email = model.email,
+                        let password = model.password
+                    else {
+                        return
+                    }
+//                    let user = try await self.authorizationService.login(email: email, password: password)
+                    let user = try await self.mockAuthorizationService.login(email: email, password: password)
+                    print("successfully")
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
         }
         
-        view.onSignupTap = { model in
-            print("Sign up нажат и выводит \(model) ")
+        view.onSignupTap = { [weak self] model in
+            Task {
+                do {
+                    guard
+                        let self = self,
+                        let email = model.email,
+                        let phone = model.phone,
+                        let password = model.password
+                    else {
+                        return
+                    }
+//                    let user = try await self.authorizationService.register(email: email, phone: phone, password: password)
+                    let user = try await self.mockAuthorizationService.register(email: email, phone: phone, password: password)
+                    print("successfully")
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
         }
         
         return view

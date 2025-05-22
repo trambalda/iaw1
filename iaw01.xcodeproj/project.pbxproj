@@ -16,6 +16,8 @@
 		02B31D422D8C78AD00EC9031 /* AuthorizationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D412D8C78AD00EC9031 /* AuthorizationTitleView.swift */; };
 		02B31D442D8C793300EC9031 /* AuthorizationSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D432D8C793300EC9031 /* AuthorizationSegmentedControl.swift */; };
 		02B31D482D8C797C00EC9031 /* AuthorizationSocialButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B31D472D8C797C00EC9031 /* AuthorizationSocialButtonsView.swift */; };
+		02C29EB72DDE6BEC00F5D0E6 /* AuthorizationNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C29EB62DDE6BEC00F5D0E6 /* AuthorizationNetworkService.swift */; };
+		02C29EBA2DDE6EAF00F5D0E6 /* AuthorizationDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C29EB92DDE6EAF00F5D0E6 /* AuthorizationDto.swift */; };
 		02E4EFDB2DBBDE6800B121D8 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
 		02E4EFDC2DBBDE6F00B121D8 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
 		02E4EFDD2DBBDE7500B121D8 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
@@ -99,6 +101,8 @@
 		02B31D412D8C78AD00EC9031 /* AuthorizationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTitleView.swift; sourceTree = "<group>"; };
 		02B31D432D8C793300EC9031 /* AuthorizationSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSegmentedControl.swift; sourceTree = "<group>"; };
 		02B31D472D8C797C00EC9031 /* AuthorizationSocialButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSocialButtonsView.swift; sourceTree = "<group>"; };
+		02C29EB62DDE6BEC00F5D0E6 /* AuthorizationNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationNetworkService.swift; sourceTree = "<group>"; };
+		02C29EB92DDE6EAF00F5D0E6 /* AuthorizationDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationDto.swift; sourceTree = "<group>"; };
 		1F0F43B52D93F9DE00D87BBD /* RestaurantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
 		1F16AE512DB50C210085A17D /* MenuItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemListModel.swift; sourceTree = "<group>"; };
 		1F16AE522DB50C210085A17D /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
@@ -227,6 +231,23 @@
 				020CE8672DC284D700FEF9DD /* Models */,
 			);
 			path = AuthorizationScene;
+			sourceTree = "<group>";
+		};
+		02C29EB52DDE6B9C00F5D0E6 /* AuthorizationNetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				02C29EB62DDE6BEC00F5D0E6 /* AuthorizationNetworkService.swift */,
+				02C29EB82DDE6E8E00F5D0E6 /* Dto */,
+			);
+			path = AuthorizationNetworkService;
+			sourceTree = "<group>";
+		};
+		02C29EB82DDE6E8E00F5D0E6 /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				02C29EB92DDE6EAF00F5D0E6 /* AuthorizationDto.swift */,
+			);
+			path = Dto;
 			sourceTree = "<group>";
 		};
 		1F16AE502DB50B350085A17D /* Recovered References */ = {
@@ -378,6 +399,7 @@
 				21A606E92DB41C8F007BB17C /* HTTPMethod.swift */,
 				21A606EB2DB41CA4007BB17C /* NetworkError.swift */,
 				21A606ED2DB41CC4007BB17C /* APIResponseDto.swift */,
+				02C29EB52DDE6B9C00F5D0E6 /* AuthorizationNetworkService */,
 				1F68F4782DB642920034392E /* RestaurantNetworkService */,
 			);
 			path = NetworkService;
@@ -745,6 +767,7 @@
 				3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */,
 				CE02B8532D933581000C0557 /* LinkButton.swift in Sources */,
 				21A606F92DB42FAF007BB17C /* HomeScenesFactory.swift in Sources */,
+				02C29EBA2DDE6EAF00F5D0E6 /* AuthorizationDto.swift in Sources */,
 				D57BD96D2DBD315E005052DF /* UIApplication+RootViewController.swift in Sources */,
 				CEEE9CB42DA17A3E00DF1A35 /* RootTabBarController.swift in Sources */,
 				CEEE9CB52DA17A3E00DF1A35 /* RoorTabBarView.swift in Sources */,
@@ -752,6 +775,7 @@
 				1F16AE622DB50C210085A17D /* RestaurantInfoView.swift in Sources */,
 				1FBFC53B2DBCD90A00691CCE /* MenuDto.swift in Sources */,
 				1F16AE632DB50C210085A17D /* MenuItemListModel.swift in Sources */,
+				02C29EB72DDE6BEC00F5D0E6 /* AuthorizationNetworkService.swift in Sources */,
 				1F16AE642DB50C210085A17D /* MenuModel.swift in Sources */,
 				1F16AE652DB50C210085A17D /* RestaurantViewController.swift in Sources */,
 				1F16AE662DB50C210085A17D /* MenuItemsTableViewCell.swift in Sources */,
