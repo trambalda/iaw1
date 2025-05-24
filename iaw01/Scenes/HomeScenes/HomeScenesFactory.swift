@@ -25,6 +25,7 @@ final class HomeScenesFactory: Factory {
     
     func createVerifyPhoneNumberScene() -> VerifyPhoneNumberViewController {
         let vc = VerifyPhoneNumberViewController()
+        keyboardService.isEnabled = true
         return vc
     }
 
@@ -36,7 +37,6 @@ final class HomeScenesFactory: Factory {
 
     func createAuthorizationScene() -> AuthorizationViewController {
         let vc = AuthorizationViewController()
-        keyboardService.isEnabled = true
         return vc
     }
     
