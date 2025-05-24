@@ -37,6 +37,7 @@ final class KeyboardService: KeyboardServiceProtocol {
 
         //    MARK: - Setup Notification
     private func setupKeyboardNotifications() {
+        removeKeyboardNotifications()
         NotificationCenter.registerKeyboardNotifications(
             self,
             willShowSelector: #selector(keyboardWillShow(notification:)),
@@ -149,6 +150,7 @@ final class KeyboardService: KeyboardServiceProtocol {
             )
 
             guard lastViewOffset != offset else { return }
+            lastViewOffset = offset
 
             adjustView(
                 containerView: rootViewController,
