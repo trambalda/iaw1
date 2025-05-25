@@ -27,6 +27,11 @@ final class HomeScenesFactory: Factory {
         return vc
     }
     
+    func createCartScene() -> CartViewController {
+        let vc = CartViewController()
+        return vc
+    }
+    
     func createAuthorizationScene() -> AuthorizationViewController {
         let vc = AuthorizationViewController()
         return vc
