@@ -26,4 +26,22 @@ final class HomeScenesFactory: Factory {
         let vc = VerifyPhoneNumberViewController()
         return vc
     }
+    
+    func createAuthorizationScene() -> AuthorizationViewController {
+        let vc = AuthorizationViewController()
+        return vc
+    }
+    
+    func createRestaurantScene(with id: Int) -> RestaurantViewController {
+        let vc = RestaurantViewController()
+        vc.restaurantId = id
+        vc.restaurantService = RestaurantNetworkService(networkService: networkService)
+        return vc
+    }
+    
+    func createOnboardingScene() -> OnboardingViewController {
+        let vc = OnboardingViewController()
+        vc.coordinator = coordinator
+        return vc
+    }
 }

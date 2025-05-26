@@ -3,7 +3,28 @@ import UIKit
 final class RootTabBarController: UITabBarController {
 
     static var height: CGFloat {
-        Constants.isSE ? 76 : 100
+        if
+            let rootTabBarController = RootTabBarController.object,
+            rootTabBarController.isHidden
+        {
+            return 0
+        } else {
+            return Constants.isSE ? 76 : 100
+        }
+    }
+    
+    static func setHidden(to isHidden: Bool) {
+        object?.isHidden = isHidden
+    }
+
+    private static var object: RootTabBarController? {
+        UIApplication.rootViewController as? RootTabBarController
+    }
+    
+    private var isHidden: Bool = false {
+        didSet {
+            backgroundView.isHidden = isHidden
+        }
     }
 
     private var indicatorViewCenterXConstraint: NSLayoutConstraint?
@@ -49,7 +70,7 @@ final class RootTabBarController: UITabBarController {
         setupLayout()
         setupConstraints()
     }
-
+    
     private func setupLayout() {
         backgroundView.addSubview(stackView)
         backgroundView.addSubview(indicatorView)

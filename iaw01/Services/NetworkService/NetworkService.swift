@@ -48,7 +48,6 @@ struct NetworkService: NetworkServiceProtocol {
         default:
             throw NetworkServiceError.unknown
         }
-        
     }
     
     private func makeRequest(

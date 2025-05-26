@@ -99,6 +99,13 @@ final class PhoneTextField: UIStackView {
         setupLayout()
         setupConstraints()
         configureField(baseStyle: TextFieldBaseStyle())
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleTextFieldDidBeginEditing(_:)),
+            name: UITextField.textDidBeginEditingNotification,
+            object: nil
+        )
     }
     
     required init(coder: NSCoder) {
@@ -218,6 +225,7 @@ final class PhoneTextField: UIStackView {
     }
     
     private func showPickerView() {
+        textField.resignFirstResponder()
         isBorderShown = true
         
         let textFieldFrame = convert(bounds, to: nil)
@@ -263,6 +271,14 @@ final class PhoneTextField: UIStackView {
         } else {
             textFieldShouldReturn?()
         }
+    }
+    
+    @objc private func handleTextFieldDidBeginEditing(_ notification: Notification) {
+        hidePickerView()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

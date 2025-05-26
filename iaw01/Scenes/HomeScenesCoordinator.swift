@@ -5,6 +5,10 @@ protocol HomeScenesCoordinatorProtocol {
     func showCornersButtonsScene()
     func showVerifyPhoneNumberScene()
     func showProfileScene()
+    func showAuthorizationScene()
+    func showRestaurantScene(with id: Int)
+    func showOnboardingScene()
+    func hideOnboardingScene()
 }
 
 final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorProtocol {
@@ -37,5 +41,26 @@ final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorPro
     func showProfileScene() {
         let vc = factory.createProfileScene()
         rootViewController.pushViewController(vc, animated: true)
+    }
+
+    func showAuthorizationScene() {
+        let vc = factory.createAuthorizationScene()
+        rootViewController.pushViewController(vc, animated: true)
+    }
+
+    func showRestaurantScene(with id: Int) {
+        let vc = factory.createRestaurantScene(with: id)
+        rootViewController.pushViewController(vc, animated: true)
+    }
+    
+    func showOnboardingScene() {
+        let vc = factory.createOnboardingScene()
+        rootViewController.pushViewController(vc, animated: true)
+        RootTabBarController.setHidden(to: true)
+    }
+
+    func hideOnboardingScene() {
+        RootTabBarController.setHidden(to: false)
+        rootViewController.popViewController(animated: true)
     }
 }
