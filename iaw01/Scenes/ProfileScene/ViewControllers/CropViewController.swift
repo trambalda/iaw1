@@ -52,6 +52,11 @@ final class CropViewController: UIViewController {
         return button
     }()
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateOverlay()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
