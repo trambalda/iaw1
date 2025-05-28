@@ -4,10 +4,12 @@ final class CropViewController: UIViewController {
     
     private var cropAreaLeadingConstraint: NSLayoutConstraint!
     private var cropAreaTopConstraint: NSLayoutConstraint!
+    private var cropAreaWidthConstraint: NSLayoutConstraint!
+    private var cropAreaHeightConstraint: NSLayoutConstraint!
+    private var isInitialSetupDone = false
     
     private let image: UIImage
     private let completion: (UIImage) -> Void
-    private let cropSize: CGFloat = 150
 
     private let overlayView: UIView = {
         let view = UIView()
@@ -15,6 +17,17 @@ final class CropViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = false
         return view
+    }()
+    
+    private lazy var resizeHandle: UIView = {
+        let handle = UIView()
+        handle.backgroundColor = .white
+        handle.layer.cornerRadius = 6
+        handle.translatesAutoresizingMaskIntoConstraints = false
+        handle.isUserInteractionEnabled = true
+        let resizeGesture = UIPanGestureRecognizer(target: self, action: #selector(handleResize))
+        handle.addGestureRecognizer(resizeGesture)
+        return handle
     }()
     
     private lazy var cropAreaView: UIView = {
@@ -25,6 +38,7 @@ final class CropViewController: UIViewController {
         view.isUserInteractionEnabled = true
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         view.addGestureRecognizer(panGesture)
+        view.addSubview(resizeHandle)
         return view
     }()
     
@@ -38,7 +52,8 @@ final class CropViewController: UIViewController {
     
     private lazy var cropButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Done", for: .normal)
+        button.setTitle("DONE", for: .normal)
+        button.setTitleColor(.blue100, for: .normal)
         button.addTarget(self, action: #selector(cropTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -46,7 +61,8 @@ final class CropViewController: UIViewController {
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Cancel", for: .normal)
+        button.setTitle("CANCEL", for: .normal)
+        button.setTitleColor(.systemRed100, for: .normal)
         button.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -54,12 +70,24 @@ final class CropViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateOverlay()
+        
+        if !isInitialSetupDone, let imageFrame = imageViewFrameInViewCoordinates() {
+            cropAreaLeadingConstraint.constant = imageFrame.origin.x
+            cropAreaTopConstraint.constant = imageFrame.origin.y
+            cropAreaWidthConstraint.constant = imageFrame.width
+            cropAreaHeightConstraint.constant = imageFrame.height
+            
+            updateOverlay()
+            
+            isInitialSetupDone = true
+        } else {
+            updateOverlay()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = .white
         
         setupLayout()
         setupConstraints()
@@ -104,18 +132,50 @@ final class CropViewController: UIViewController {
             overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            cropAreaView.widthAnchor.constraint(equalToConstant: cropSize),
-            cropAreaView.heightAnchor.constraint(equalToConstant: cropSize),
         ])
         
-        cropAreaLeadingConstraint = cropAreaView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (view.bounds.width - cropSize) / 2)
-        cropAreaTopConstraint = cropAreaView.topAnchor.constraint(equalTo: view.topAnchor, constant: (view.bounds.height - cropSize) / 2)
+        cropAreaLeadingConstraint = cropAreaView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
+        cropAreaTopConstraint = cropAreaView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0)
+        cropAreaWidthConstraint = cropAreaView.widthAnchor.constraint(equalToConstant: 0)
+        cropAreaHeightConstraint = cropAreaView.heightAnchor.constraint(equalToConstant: 0)
         
         NSLayoutConstraint.activate([
+            cropAreaWidthConstraint,
+            cropAreaHeightConstraint,
             cropAreaLeadingConstraint,
             cropAreaTopConstraint
         ])
+        
+        let handleSize: CGFloat = 15
+        NSLayoutConstraint.activate([
+            resizeHandle.widthAnchor.constraint(equalToConstant: handleSize),
+            resizeHandle.heightAnchor.constraint(equalToConstant: handleSize),
+            resizeHandle.centerXAnchor.constraint(equalTo: cropAreaView.trailingAnchor),
+            resizeHandle.centerYAnchor.constraint(equalTo: cropAreaView.bottomAnchor)
+        ])
+    }
+    
+    @objc private func handleResize(_ gesture: UIPanGestureRecognizer) {
+        guard let imageFrame = imageViewFrameInViewCoordinates() else { return }
+        let translation = gesture.translation(in: view)
+        gesture.setTranslation(.zero, in: view)
+        
+        let proposedWidth = cropAreaWidthConstraint.constant + translation.x
+        let proposedHeight = cropAreaHeightConstraint.constant + translation.y
+        
+        let maxWidth = imageFrame.maxX - cropAreaView.frame.minX
+        let maxHeight = imageFrame.maxY - cropAreaView.frame.minY
+        
+        let newWidth = max(50, min(proposedWidth, maxWidth))
+        let newHeight = max(50, min(proposedHeight, maxHeight))
+        
+        cropAreaWidthConstraint.constant = newWidth
+        cropAreaHeightConstraint.constant = newHeight
+        
+        UIView.animate(withDuration: 0.1) {
+            self.view.layoutIfNeeded()
+            self.updateOverlay()
+        }
     }
     
     @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
@@ -126,10 +186,13 @@ final class CropViewController: UIViewController {
         
         guard let imageFrame = imageViewFrameInViewCoordinates() else { return }
         
+        let currentWidth = cropAreaView.frame.width
+        let currentHeight = cropAreaView.frame.height
+        
         let minLeading = imageFrame.minX
-        let maxLeading = imageFrame.maxX - cropSize
+        let maxLeading = imageFrame.maxX - currentWidth
         let minTop = imageFrame.minY
-        let maxTop = imageFrame.maxY - cropSize
+        let maxTop = imageFrame.maxY - currentHeight
         
         newLeading = max(minLeading, min(newLeading, maxLeading))
         newTop = max(minTop, min(newTop, maxTop))
