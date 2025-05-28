@@ -63,9 +63,14 @@
 		3F6C1D792D8D78B7002FDCDE /* PincodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */; };
 		3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */; };
 		3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */; };
+		3F8980F22DB1655E00F670A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */; };
 		3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */; };
 		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
+		3F98921A2DCA06C500A03C65 /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9892192DCA06C500A03C65 /* CropViewController.swift */; };
+		3F98921C2DCA0AFC00A03C65 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F98921B2DCA0AFC00A03C65 /* File.swift */; };
 		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
+		3F9D5AD12DBB942000846D84 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9D5AD02DBB942000846D84 /* ProfileView.swift */; };
+		3FDD671E2DC1224000238A67 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDD671D2DC1224000238A67 /* ProfileModel.swift */; };
 		860852232D9747BA0038A9EF /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860852222D9747BA0038A9EF /* PhoneTextField.swift */; };
 		863929E72D9D2DAA00480459 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863929E62D9D2DAA00480459 /* PhoneNumber.swift */; };
 		868044992D94765400CBE1EC /* CountryCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868044982D94765300CBE1EC /* CountryCodeModel.swift */; };
@@ -157,9 +162,15 @@
 		3F6C1D782D8D78B7002FDCDE /* PincodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PincodeTextField.swift; sourceTree = "<group>"; };
 		3F6C2C112D82FC1C0097587A /* VerifyPhoneNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberViewController.swift; sourceTree = "<group>"; };
 		3F6C2C162D8333BF0097587A /* VerifyPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumberView.swift; sourceTree = "<group>"; };
+		3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3F8A0CE72DB3EDCA006EDA29 /* iaw01.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iaw01.xcodeproj; sourceTree = SOURCE_ROOT; };
 		3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Keyboard.swift"; sourceTree = "<group>"; };
 		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
+		3F9892192DCA06C500A03C65 /* CropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
+		3F98921B2DCA0AFC00A03C65 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
+		3F9D5AD02DBB942000846D84 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3FDD671D2DC1224000238A67 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		860852222D9747BA0038A9EF /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		863929E62D9D2DAA00480459 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		868044982D94765300CBE1EC /* CountryCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodeModel.swift; sourceTree = "<group>"; };
@@ -403,7 +414,7 @@
 		21AA4B442D8160E30086697C = {
 			isa = PBXGroup;
 			children = (
-				21AA4B7D2D818F380086697C /* README.md */,
+				3F8A0CE72DB3EDCA006EDA29 /* iaw01.xcodeproj */,
 				21AA4B4F2D8160E30086697C /* iaw01 */,
 				21AA4B4E2D8160E30086697C /* Products */,
 				1F16AE502DB50B350085A17D /* Recovered References */,
@@ -413,7 +424,6 @@
 		21AA4B4E2D8160E30086697C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21AA4B4D2D8160E30086697C /* iaw01.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -428,6 +438,7 @@
 				21A606E62DB406DC007BB17C /* Services */,
 				3F9CC6012D9193AE0079DA39 /* Extensions */,
 				21AA4B792D81872E0086697C /* Configuration */,
+				21AA4B7D2D818F380086697C /* README.md */,
 			);
 			path = iaw01;
 			sourceTree = "<group>";
@@ -498,6 +509,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				3F8980F02DB1653C00F670A9 /* ProfileScene */,
 				02B31D3E2D8C4DE800EC9031 /* AuthorizationScene */,
 				1F16AE612DB50C210085A17D /* RestaurantScene */,
 				D5952D8A2DAAC129003F3C90 /* OnboardingScene */,
@@ -519,6 +531,16 @@
 			path = VerifyPhoneNumberScene;
 			sourceTree = "<group>";
 		};
+		3F8980F02DB1653C00F670A9 /* ProfileScene */ = {
+			isa = PBXGroup;
+			children = (
+				3F9892182DCA06A400A03C65 /* ViewControllers */,
+				3F9D5ACF2DBB940400846D84 /* Views */,
+				3FDD671C2DC1222900238A67 /* Models */,
+			);
+			path = ProfileScene;
+			sourceTree = "<group>";
+		};
 		3F93A85A2DA565B300118948 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,15 +552,49 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		3F9892182DCA06A400A03C65 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3F8980F12DB1655E00F670A9 /* ProfileViewController.swift */,
+				3F9892192DCA06C500A03C65 /* CropViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		3F9CC6012D9193AE0079DA39 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
+				3F98921B2DCA0AFC00A03C65 /* File.swift */,
 				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
 				D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */,
 				86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3F9D5ACF2DBB940400846D84 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F9D5AD02DBB942000846D84 /* ProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3FDD671C2DC1222900238A67 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3FDD671D2DC1224000238A67 /* ProfileModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3FEC58A62DB4162700BE8BFF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21AA4B4D2D8160E30086697C /* iaw01.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		863929E42D9D262600480459 /* StringTextField */ = {
@@ -678,8 +734,16 @@
 				Base,
 			);
 			mainGroup = 21AA4B442D8160E30086697C;
+			packageReferences = (
+			);
 			productRefGroup = 21AA4B4E2D8160E30086697C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3FEC58A62DB4162700BE8BFF /* Products */;
+					ProjectRef = 3F8A0CE72DB3EDCA006EDA29 /* iaw01.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				21AA4B4C2D8160E30086697C /* iaw01 */,
@@ -762,6 +826,7 @@
 				1F16AE6B2DB50C210085A17D /* MenuItemsTableView.swift in Sources */,
 				1F16AE6C2DB50C210085A17D /* HeaderView.swift in Sources */,
 				CEEE9CB62DA17A3E00DF1A35 /* RootTabBarItem.swift in Sources */,
+				3F9D5AD12DBB942000846D84 /* ProfileView.swift in Sources */,
 				21A606EE2DB41CC4007BB17C /* APIResponseDto.swift in Sources */,
 				CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */,
 				3F45F97D2D8A15BF005BD993 /* PincodeInputView.swift in Sources */,
@@ -770,14 +835,18 @@
 				02B31D3F2D8C4DE800EC9031 /* AuthorizationViewController.swift in Sources */,
 				02B31D402D8C4DE800EC9031 /* AuthorizationView.swift in Sources */,
 				1F497FC42D8C0A460040CBF3 /* DishCellModel.swift in Sources */,
+				3FDD671E2DC1224000238A67 /* ProfileModel.swift in Sources */,
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
+				3F98921A2DCA06C500A03C65 /* CropViewController.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
 				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,
 				21A606EA2DB41C8F007BB17C /* HTTPMethod.swift in Sources */,
 				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,
+				3F8980F22DB1655E00F670A9 /* ProfileViewController.swift in Sources */,
 				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
+				3F98921C2DCA0AFC00A03C65 /* File.swift in Sources */,
 				21AA4B532D8160E30086697C /* SceneDelegate.swift in Sources */,
 				029039CA2D999429008973F2 /* AuthorizationSignupView.swift in Sources */,
 				02101C0D2DA84EA600ADF6A5 /* AuthorizationModel.swift in Sources */,

@@ -4,6 +4,7 @@ enum SceneType {
     case cornersButtonsScene
     case authorizationScene
     case verifyPhoneNumberScene
+    case profileScene
     case restaurantScene
     case onboardingScene
     
@@ -13,6 +14,7 @@ enum SceneType {
         case .cornersButtonsScene: "CornersButtons Scene"
         case .authorizationScene: "Authorization Scene"
         case .verifyPhoneNumberScene: "VerifyPhoneNumber Scene"
+        case .profileScene: "Profile Scene"
         case .restaurantScene: "Restaurant Scene"
         case .onboardingScene: "Onboarding Scene"
         }
@@ -26,6 +28,7 @@ extension SceneType: CaseIterable {
             .cornersButtonsScene,
             .authorizationScene,
             .verifyPhoneNumberScene,
+            .profileScene,
             .restaurantScene,
             .onboardingScene,
         ]

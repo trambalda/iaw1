@@ -122,8 +122,7 @@ class VerifyPhoneNumberView: UIView {
         ])
         verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(
             equalTo: bottomAnchor,
-            // TODO: подрефачить расчет высоты после создания таббара
-            constant: -(Constants.isSE ? 49 : 83 + keyboardPadding)
+            constant: -(RootTabBarController.height + keyboardPadding)
         )
         verifyButtonBottomConstraint.isActive = true
     }
