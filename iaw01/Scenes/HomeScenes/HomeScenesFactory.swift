@@ -44,4 +44,10 @@ final class HomeScenesFactory: Factory {
         
         return viewController
     }
+    
+    func createOnboardingScene() -> OnboardingViewController {
+        let vc = OnboardingViewController()
+        vc.coordinator = coordinator
+        return vc
+    }
 }
