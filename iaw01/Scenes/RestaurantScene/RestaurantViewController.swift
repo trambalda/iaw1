@@ -24,24 +24,22 @@ extension RestaurantViewController: RestaurantDisplayLogic {
 final class RestaurantViewController: UIViewController {
     
     var interactor: RestaurantBusinessLogic?
+    var imageService: ImageServiceProtocol?
     
     private lazy var restaurantView: RestaurantView = {
-        let imageService = ImageService()
         let view = RestaurantView()
         view.imageService = imageService
-        view.headerView.imageService = imageService
-        view.menuItemListView.imageService = imageService
         return view
     }()
-    
+   
     override func loadView() {
         view = restaurantView
     }
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        interactor?.loadRestaurant()
         setupNavigationBar()
+        interactor?.loadRestaurant()
     }
     
     // TODO: Позже вынести реализацию навигейшен бара отдельно от экрана

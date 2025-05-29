@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F05DF4B2DD21AEB00856F1C /* RestaurantInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05DF4A2DD21AEB00856F1C /* RestaurantInteractor.swift */; };
-		1F05DF4D2DD21B2200856F1C /* RestaurantPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05DF4C2DD21B2200856F1C /* RestaurantPresenter.swift */; };
-		1F05DF4F2DD21F5E00856F1C /* RestaurantModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05DF4E2DD21F5E00856F1C /* RestaurantModels.swift */; };
 		02101C0D2DA84EA600ADF6A5 /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02101C0C2DA84EA600ADF6A5 /* AuthorizationModel.swift */; };
 		0288EEF52DBBCBDC0077AA20 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		029039C82D999414008973F2 /* AuthorizationLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029039C72D999414008973F2 /* AuthorizationLoginView.swift */; };
@@ -22,6 +19,10 @@
 		02E4EFDB2DBBDE6800B121D8 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875432D8860DF00C7BA58 /* TextFieldsViewController.swift */; };
 		02E4EFDC2DBBDE6F00B121D8 /* TextFieldBaseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875472D8860E600C7BA58 /* TextFieldBaseStyle.swift */; };
 		02E4EFDD2DBBDE7500B121D8 /* StringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869875462D8860E600C7BA58 /* StringTextField.swift */; };
+		1F0174FD2DE8825700D095BF /* NSError+UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0174FC2DE8825700D095BF /* NSError+UserError.swift */; };
+		1F05DF4B2DD21AEB00856F1C /* RestaurantInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05DF4A2DD21AEB00856F1C /* RestaurantInteractor.swift */; };
+		1F05DF4D2DD21B2200856F1C /* RestaurantPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05DF4C2DD21B2200856F1C /* RestaurantPresenter.swift */; };
+		1F05DF4F2DD21F5E00856F1C /* RestaurantModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05DF4E2DD21F5E00856F1C /* RestaurantModels.swift */; };
 		1F16AE622DB50C210085A17D /* RestaurantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16AE592DB50C210085A17D /* RestaurantInfoView.swift */; };
 		1F16AE632DB50C210085A17D /* MenuItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16AE512DB50C210085A17D /* MenuItemListModel.swift */; };
 		1F16AE642DB50C210085A17D /* MenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16AE522DB50C210085A17D /* MenuModel.swift */; };
@@ -94,9 +95,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1F05DF4A2DD21AEB00856F1C /* RestaurantInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInteractor.swift; sourceTree = "<group>"; };
-		1F05DF4C2DD21B2200856F1C /* RestaurantPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPresenter.swift; sourceTree = "<group>"; };
-		1F05DF4E2DD21F5E00856F1C /* RestaurantModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantModels.swift; sourceTree = "<group>"; };
 		02101C0C2DA84EA600ADF6A5 /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
 		029039C72D999414008973F2 /* AuthorizationLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationLoginView.swift; sourceTree = "<group>"; };
 		029039C92D999429008973F2 /* AuthorizationSignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignupView.swift; sourceTree = "<group>"; };
@@ -105,6 +103,10 @@
 		02B31D412D8C78AD00EC9031 /* AuthorizationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationTitleView.swift; sourceTree = "<group>"; };
 		02B31D432D8C793300EC9031 /* AuthorizationSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSegmentedControl.swift; sourceTree = "<group>"; };
 		02B31D472D8C797C00EC9031 /* AuthorizationSocialButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSocialButtonsView.swift; sourceTree = "<group>"; };
+		1F0174FC2DE8825700D095BF /* NSError+UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError+UserError.swift"; sourceTree = "<group>"; };
+		1F05DF4A2DD21AEB00856F1C /* RestaurantInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInteractor.swift; sourceTree = "<group>"; };
+		1F05DF4C2DD21B2200856F1C /* RestaurantPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPresenter.swift; sourceTree = "<group>"; };
+		1F05DF4E2DD21F5E00856F1C /* RestaurantModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantModels.swift; sourceTree = "<group>"; };
 		1F0F43B52D93F9DE00D87BBD /* RestaurantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
 		1F16AE512DB50C210085A17D /* MenuItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemListModel.swift; sourceTree = "<group>"; };
 		1F16AE522DB50C210085A17D /* MenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModel.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
 				D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */,
 				86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */,
+				1F0174FC2DE8825700D095BF /* NSError+UserError.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				D5952D8B2DAAC129003F3C90 /* OnboardingView.swift in Sources */,
 				D5952D8C2DAAC129003F3C90 /* OnboardingViewController.swift in Sources */,
 				D5952D8D2DAAC129003F3C90 /* OnboardingPageModel.swift in Sources */,
+				1F0174FD2DE8825700D095BF /* NSError+UserError.swift in Sources */,
 				D5952D8E2DAAC129003F3C90 /* OnboardingPageView.swift in Sources */,
 				1FA753A02D82E13700B2324C /* RestaurantTableViewCell.swift in Sources */,
 				21A606EC2DB41CA4007BB17C /* NetworkError.swift in Sources */,

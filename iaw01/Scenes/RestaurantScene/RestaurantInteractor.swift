@@ -8,23 +8,19 @@ final class RestaurantInteractor: RestaurantBusinessLogic {
     
     var presenter: RestaurantPresentationLogic?
     var restaurantNetworkService: RestaurantNetworkService?     
-    private let id: Int
+    private let restaurantId: Int
     
-    init(id: Int) {
-        self.id = id
+    init(restaurantId: Int) {
+        self.restaurantId = restaurantId
     }
     
     func loadRestaurant() {
         guard let restaurantNetworkService else { return }
         Task {
             do {
-                let dto = try await restaurantNetworkService.fetchRestaurant(id: id)
+                let dto = try await restaurantNetworkService.fetchRestaurant(id: restaurantId)
                 if dto.isEmpty {
-                    let error = NSError(
-                        domain: "com.foodDeliveryApp.restaurant",
-                        code: 404,
-                        userInfo: [NSLocalizedDescriptionKey: "Ресторан не найден"]
-                    )
+                    let error = NSError.userError(with: "Ресторан не найден")
                     let response = RestaurantModels.ErrorModel.Response(error: error)
                     presenter?.presentError(response: response)
                 } else {

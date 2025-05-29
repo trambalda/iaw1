@@ -142,11 +142,27 @@ final class MenuTimeView: UIView {
     }
     
     func selectMenu(_ menu: MenuModel?) {
-        guard let menu, let index = menuOptions.firstIndex(where: { $0.id == menu.id }) else { return }
+        guard let menu,
+              let index = menuOptions.firstIndex(where: { $0.id == menu.id }) else { return }
+        
         let button = buttons[index]
         selectButton(button)
+        scrollToButton(button, animated: false)
     }
     
+    private func scrollToButton(_ button: UIButton, animated: Bool) {
+        let buttonFrameInScrollView = button.convert(button.bounds, to: scrollView)
+        scrollView.scrollRectToVisible(buttonFrameInScrollView.insetBy(dx: -16, dy: 0), animated: animated)
+    }
+
+    func getScrollOffset() -> CGPoint {
+        return scrollView.contentOffset
+    }
+
+    func setScrollOffset(_ offset: CGPoint, animated: Bool = false) {
+        scrollView.setContentOffset(offset, animated: animated)
+    }
+
     func setupLayoutAndConstraints() {
         scrollView.backgroundColor = .light80
         addSubview(scrollView)

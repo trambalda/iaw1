@@ -2,7 +2,12 @@ import UIKit
 
 final class RestaurantView: UIView {
     
-    var imageService: ImageServiceProtocol?
+    var imageService: ImageServiceProtocol? {
+        didSet {
+            headerView.imageService = imageService
+            menuItemListView.imageService = imageService
+        }
+    }
     
     var model: RestaurantModel = .empty {
         didSet {
@@ -28,21 +33,14 @@ final class RestaurantView: UIView {
         return stackView
     }()
     
-    private let spacerView: UIView = {
-        let view = UIView()
-        view.isHidden = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private var menuItemListViewHeightConstraint: NSLayoutConstraint?
     
     private var selectedMenu: MenuModel?
     private var filterIsSticky: Bool = false
+    private var userDidScroll: Bool = false
     
     private lazy var filterStickyView: MenuTimeView = {
         let view = MenuTimeView()
-        view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -84,18 +82,18 @@ final class RestaurantView: UIView {
     
     private func updateMenuItems(for menu: MenuModel?) {
         guard let menu else { return }
+        
         let dishes = model.dishes.filter { menu.dishesId.contains($0.id) }
-        
-        let currentOffset = scrollView.contentOffset
-        
         menuItemListView.models = dishes
-
+        
         let cellHeight: CGFloat = MenuItemsTableViewCell.cellHeight
         let totalHeight = CGFloat(dishes.count) * cellHeight
         menuItemListViewHeightConstraint?.constant = totalHeight
         
         layoutIfNeeded()
-        scrollView.setContentOffset(currentOffset, animated: false)
+        userDidScroll = false
+        
+        scrollViewDidScroll(scrollView)
     }
     
     private func configure() {
@@ -112,10 +110,9 @@ final class RestaurantView: UIView {
         
         contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(filterView)
-        contentStack.addArrangedSubview(spacerView)
         contentStack.addArrangedSubview(menuItemListView)
     }
-   
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -135,8 +132,8 @@ final class RestaurantView: UIView {
             filterStickyView.heightAnchor.constraint(equalToConstant: 59),
         ])
         
-        spacerView.heightAnchor.constraint(equalToConstant: 59).isActive = true
-       
+        filterStickyView.alpha = 0
+        
         menuItemListViewHeightConstraint = menuItemListView.heightAnchor.constraint(equalToConstant: 0)
         menuItemListViewHeightConstraint?.isActive = true
     }
@@ -145,32 +142,30 @@ final class RestaurantView: UIView {
 extension RestaurantView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
+        let filterViewFrameInSuperview = filterView.convert(filterView.bounds, to: self)
         
-        let headerHeight = headerView.frame.height
-        
-        if offsetY >= headerHeight {
-            toggleFilterStickyView(isSticky: true)
-        } else {
+        guard scrollView.contentOffset.y > 0 else {
             toggleFilterStickyView(isSticky: false)
+            return
         }
+        
+        let shouldStick = filterViewFrameInSuperview.minY <= safeAreaInsets.top
+        toggleFilterStickyView(isSticky: shouldStick)
     }
     
     private func toggleFilterStickyView(isSticky: Bool) {
         guard isSticky != filterIsSticky else { return }
         
         if isSticky {
-            let offset = filterView.scrollView.contentOffset
-            filterStickyView.scrollView.setContentOffset(offset, animated: false)
+            let offset = filterView.getScrollOffset()
+            filterStickyView.setScrollOffset(offset)
         } else {
-            let offset = filterStickyView.scrollView.contentOffset
-            filterView.scrollView.setContentOffset(offset, animated: false)
+            let offset = filterStickyView.getScrollOffset()
+            filterView.setScrollOffset(offset)
         }
         
-        filterStickyView.isHidden = !isSticky
-        filterView.isHidden = isSticky
+        filterStickyView.alpha = isSticky ? 1 : 0
+        filterStickyView.isUserInteractionEnabled = isSticky
         filterIsSticky = isSticky
-        
-        spacerView.isHidden = !isSticky
     }
 }
