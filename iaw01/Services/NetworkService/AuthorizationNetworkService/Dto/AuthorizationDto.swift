@@ -1,5 +1,6 @@
 struct AuthorizationDto: Decodable {
-    let userId: String
-    let token: String
+    let name: String
+    let email: String
     let phone: String
+    let password: String
 }

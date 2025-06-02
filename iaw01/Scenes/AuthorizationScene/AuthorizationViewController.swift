@@ -2,9 +2,7 @@ import UIKit
 
 final class AuthorizationViewController: UIViewController {
     
-//    private var authorizationService: AuthorizationNetworkServiceProtocol = AuthorizationNetworkService(networkService: NetworkService())
-    
-    let mockAuthorizationService: AuthorizationNetworkServiceProtocol = MockAuthorizationNetworkService()
+    private var authorizationService: AuthorizationNetworkServiceProtocol = AuthorizationNetworkService(networkService: NetworkService())
     
     private lazy var authorizationView: AuthorizationView = {
         let view = AuthorizationView(frame: UIScreen.main.bounds)
@@ -20,11 +18,11 @@ final class AuthorizationViewController: UIViewController {
                     else {
                         return
                     }
-//                    let user = try await self.authorizationService.login(email: email, password: password)
-                    let user = try await self.mockAuthorizationService.login(email: email, password: password)
+                    let user = try await self.authorizationService.login(email: email, password: password)
                     print("successfully")
                 } catch {
                     print(error.localizedDescription)
+                    self?.showAlertLog()
                 }
             }
         }
@@ -34,17 +32,18 @@ final class AuthorizationViewController: UIViewController {
                 do {
                     guard
                         let self = self,
-                        let email = model.email,
+                        let name = model.name,
                         let phone = model.phone,
-                        let password = model.password
+                        let password = model.password,
+                        let email = model.email
                     else {
                         return
                     }
-//                    let user = try await self.authorizationService.register(email: email, phone: phone, password: password)
-                    let user = try await self.mockAuthorizationService.register(email: email, phone: phone, password: password)
+                    let user = try await self.authorizationService.register(name: name, phone: phone, email: email, password: password)
                     print("successfully")
                 } catch {
                     print(error.localizedDescription)
+                    self?.showAlertRegister()
                 }
             }
         }
@@ -113,4 +112,17 @@ final class AuthorizationViewController: UIViewController {
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    private func showAlertLog() {
+        let alert = UIAlertController(title: "Authorization error", message: "Сouldn't create a new user", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    private func showAlertRegister() {
+        let alert = UIAlertController(title: "Register error", message: "Сouldn't log in, please, try again", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
 }

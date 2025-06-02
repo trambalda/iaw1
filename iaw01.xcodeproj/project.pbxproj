@@ -525,9 +525,9 @@
 				D5952D8A2DAAC129003F3C90 /* OnboardingScene */,
 				21A606F52DB42397007BB17C /* HomeScenes */,
 				21AA4B782D81864F0086697C /* DummyScene */,
-				3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */,
 				D59B58742D8C8D1A0049A3F9 /* CornersButtonsScene */,
 				869875442D8860DF00C7BA58 /* TextFieldsScene */,
+				3F6C2C102D82FBE70097587A /* VerifyPhoneNumberScene */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
