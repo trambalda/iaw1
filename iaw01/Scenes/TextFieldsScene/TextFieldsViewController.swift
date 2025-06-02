@@ -1,7 +1,9 @@
 import UIKit
 
 final class TextFieldsViewController: UIViewController {
-    
+
+    var keyboardService: KeyboardServiceProtocol?
+
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,8 +74,10 @@ final class TextFieldsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        keyboardService?.isEnabled = true
+
         view.backgroundColor = .light100
-        
+
         setupLayout()
         setupConstraints()
     }

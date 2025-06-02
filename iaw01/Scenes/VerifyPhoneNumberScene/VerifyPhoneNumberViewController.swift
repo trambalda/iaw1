@@ -1,7 +1,9 @@
 import UIKit
 
 class VerifyPhoneNumberViewController: UIViewController {
-    
+
+    var keyboardService: KeyboardServiceProtocol?
+
     private lazy var verifyPhoneNumberView: VerifyPhoneNumberView = {
         let view = VerifyPhoneNumberView(frame: UIScreen.main.bounds)
         view.onVerifyButtonTapped = {
@@ -20,6 +22,11 @@ class VerifyPhoneNumberViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .light100
+        
+        keyboardService?.isEnabled = true
+        keyboardService?.onKeyboardChanged = { [weak self] height, duration in
+            self?.verifyPhoneNumberView.keyboard = (height, duration)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

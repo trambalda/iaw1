@@ -2,6 +2,8 @@ import UIKit
 
 protocol KeyboardServiceProtocol: AnyObject {
     var isEnabled: Bool { get set }
+    var keyboardSetting: (height: CGFloat, duration: TimeInterval) { get set }
+    var onKeyboardChanged: ((CGFloat, TimeInterval) -> Void)? { get set }
 }
 
 final class KeyboardService: KeyboardServiceProtocol {
@@ -11,6 +13,16 @@ final class KeyboardService: KeyboardServiceProtocol {
             isEnabled ? setupKeyboardNotifications() : removeKeyboardNotifications()
         }
     }
+
+    var keyboardSetting: (height: CGFloat, duration: TimeInterval) = (0, 0) {
+        didSet {
+            if oldValue != keyboardSetting {
+                onKeyboardChanged?(keyboardSetting.height, keyboardSetting.duration)
+            }
+        }
+    }
+
+    var onKeyboardChanged: ((CGFloat, TimeInterval) -> Void)?
 
     private weak var activeTextField: UITextField?
     private weak var activeScrollView: UIScrollView?
@@ -24,10 +36,7 @@ final class KeyboardService: KeyboardServiceProtocol {
 
     init() {
         setupGesture()
-
-        if isEnabled {
-            setupKeyboardNotifications()
-        }
+        setupKeyboardNotifications()
     }
 
     deinit {
@@ -35,7 +44,7 @@ final class KeyboardService: KeyboardServiceProtocol {
         removeGesture()
     }
 
-        //    MARK: - Setup Notification
+//MARK: - Setup Notification
     private func setupKeyboardNotifications() {
         removeKeyboardNotifications()
         NotificationCenter.registerKeyboardNotifications(
@@ -53,10 +62,11 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 
     private func removeKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.unregisterKeyboardNotifications(self)
+        NotificationCenter.default.removeObserver(self, name: UITextField.textDidEndEditingNotification, object: nil)
     }
 
-        //    MARK: - Notification Actions
+//MARK: - Notification Actions
     @objc private func keyboardWillShow(notification: Notification) {
         guard
             let userInfo = notification.userInfo,
@@ -84,25 +94,33 @@ final class KeyboardService: KeyboardServiceProtocol {
                 duration: animationDuration,
                 options: option
             )
+
         }
+        keyboardSetting = (keyboardFrameValue.height, animationDuration)
     }
 
     @objc private func keyboardWillHide(notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
-              let rootViewController = UIApplication.rootViewController?.topMostViewController()
+        guard
+            let userInfo = notification.userInfo,
+            let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let animationOption = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt,
+            let rootViewController = UIApplication.rootViewController?.topMostViewController()
         else { return }
+
+        let option = UIView.AnimationOptions(rawValue: animationOption << 16)
 
         if let scrollView = activeScrollView {
             scrollView.contentInsetAdjustmentBehavior = .automatic
             restoreScrollView(
                 duration: animationDuration,
-                scrollView: scrollView
+                scrollView: scrollView,
+                option: option
             )
         } else {
             restoreView(
                 currentViewController: rootViewController,
-                duration: animationDuration
+                duration: animationDuration,
+                option: option
             )
         }
     }
@@ -112,7 +130,7 @@ final class KeyboardService: KeyboardServiceProtocol {
         activeTextField = textField
     }
 
-        //    MARK: - Adjust Layout
+//MARK: - Adjust Layout
     private func adjustLayoutForKeyboard(
         rootViewController: UIView,
         activeView: UIView,
@@ -161,7 +179,7 @@ final class KeyboardService: KeyboardServiceProtocol {
         }
     }
 
-        //    MARK: - Calculate Offset
+//MARK: - Calculate Offset
     private func calculateViewOffset(
         activeView: UIView,
         rootViewController: UIView,
@@ -213,7 +231,7 @@ final class KeyboardService: KeyboardServiceProtocol {
         return (offsets, insets)
     }
 
-        //    MARK: - Adjust Views
+//MARK: - Adjust Views
     private func adjustView(
         containerView: UIView,
         duration: TimeInterval,
@@ -241,9 +259,9 @@ final class KeyboardService: KeyboardServiceProtocol {
         options: UIView.AnimationOptions
     ) {
         UIView.animate(
-            withDuration: duration,
+            withDuration: duration + 0.25,
             delay: 0,
-            options: options
+            options: [options, .beginFromCurrentState]
         ) {
             scrollView.contentInset = inset
             scrollView.scrollIndicatorInsets = inset
@@ -253,34 +271,37 @@ final class KeyboardService: KeyboardServiceProtocol {
         }
     }
 
-        //    MARK: - Restore Views
+//MARK: - Restore Views
     private func restoreView(
         currentViewController: UIViewController,
-        duration: TimeInterval
+        duration: TimeInterval,
+        option: UIView.AnimationOptions
     ) {
         UIView.animate(
-            withDuration: duration + 0.2,
+            withDuration: duration + 0.25,
             delay: 0,
             usingSpringWithDamping: 1,
-            initialSpringVelocity: 0.9,
-            options: [.curveEaseInOut, .beginFromCurrentState]
+            initialSpringVelocity: 0.8,
+            options: [option, .beginFromCurrentState]
         ) {
             currentViewController.view.transform = .identity
 
         } completion: { [weak self] _ in
             self?.activeTextField = nil
             self?.lastViewOffset = .zero
+            self?.keyboardSetting = (.zero, .zero)
         }
     }
 
     private func restoreScrollView(
         duration: TimeInterval,
-        scrollView: UIScrollView
+        scrollView: UIScrollView,
+        option: UIView.AnimationOptions
     ) {
         UIView.animate(
-            withDuration: duration,
+            withDuration: duration + 0.25,
             delay: 0,
-            options: [.curveEaseInOut]
+            options: [option, .beginFromCurrentState]
         ) {
             scrollView.contentInset = self.originalInset
             scrollView.scrollIndicatorInsets = self.originalInset
@@ -293,7 +314,7 @@ final class KeyboardService: KeyboardServiceProtocol {
     }
 }
 
-    //    MARK: - Setup Gesture
+//MARK: - Setup Gesture
 extension KeyboardService {
     private func setupGesture() {
         guard let window = UIApplication.keyWindowIsConnectedScenes else { return }
@@ -320,7 +341,7 @@ extension KeyboardService {
     }
 }
 
-    //    MARK: - Find Responder
+//MARK: - Find Responder
 extension KeyboardService {
     private func findParentScrollView(for view: UIView) -> UIScrollView? {
         var parent = view.superview

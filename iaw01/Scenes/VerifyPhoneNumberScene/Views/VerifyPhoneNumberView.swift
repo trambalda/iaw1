@@ -5,7 +5,15 @@ class VerifyPhoneNumberView: UIView {
     var onVerifyButtonTapped: (() -> Void)?
     
     var onGetNewCodeButtonTapped: (() -> Void)?
-    
+
+    var keyboard: (height: CGFloat, duration: TimeInterval) = (0, 0) {
+        didSet {
+            keyboard.height > 0
+            ? keyboardWillShow(keyboardHeight: keyboard.height, duration: keyboard.duration)
+            : keyboardWillHide(duration: keyboard.duration)
+        }
+    }
+
     private var verifyButtonBottomConstraint: NSLayoutConstraint!
     
     private var keyboardPadding: CGFloat = 16
@@ -75,17 +83,12 @@ class VerifyPhoneNumberView: UIView {
         super.init(frame: frame)
         setupLayout()
         setupConstraints()
-        setupObservers()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    deinit {
-        NotificationCenter.unregisterKeyboardNotifications(self)
-    }
-    
+
     private func setupLayout() {
         let newCodeOuterStackView = UIStackView()
         newCodeOuterStackView.axis = .vertical
@@ -122,8 +125,7 @@ class VerifyPhoneNumberView: UIView {
         ])
         verifyButtonBottomConstraint = verifyButton.bottomAnchor.constraint(
             equalTo: bottomAnchor,
-            // TODO: подрефачить расчет высоты после создания таббара
-            constant: -(Constants.isSE ? 49 : 83 + keyboardPadding)
+            constant: -(RootTabBarController.height + keyboardPadding)
         )
         verifyButtonBottomConstraint.isActive = true
     }
@@ -140,34 +142,21 @@ extension VerifyPhoneNumberView: UITextFieldDelegate{
 }
 
 extension VerifyPhoneNumberView {
-    private func setupObservers() {
-        NotificationCenter.registerKeyboardNotifications(
-            self,
-            willShowSelector: #selector(keyboardWillShow),
-            willHideSelector: #selector(keyboardWillHide)
-        )
+    
+    private func keyboardWillShow(keyboardHeight: CGFloat, duration: TimeInterval) {
+        let bottomPadding: CGFloat = -(keyboardHeight + keyboardPadding)
+        changeVerifyButtonPosition(bottomPadding: bottomPadding, duration: duration)
     }
     
-    @objc private func keyboardWillShow(_ notification: Notification) {
-        guard
-            let userInfo = notification.userInfo,
-            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-        else { return }
-    
-        let bottomPadding: CGFloat = -(keyboardFrame.height + keyboardPadding)
-        changeVerifyButtonPosition(notification: notification, bottomPadding: bottomPadding)
+    private func keyboardWillHide(duration: TimeInterval) {
+        let bottomPadding: CGFloat = -(RootTabBarController.height + keyboardPadding)
+        changeVerifyButtonPosition(bottomPadding: bottomPadding, duration: duration + 0.2)
     }
     
-    @objc private func keyboardWillHide(_ notification: Notification) {
-        let bottomPadding: CGFloat = -(Constants.isSE ? 49 : 83 + keyboardPadding)
-        changeVerifyButtonPosition(notification: notification, bottomPadding: bottomPadding)
-    }
-    
-    private func changeVerifyButtonPosition(notification: Notification, bottomPadding: CGFloat) {
-        let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.3
+    private func changeVerifyButtonPosition(bottomPadding: CGFloat, duration: TimeInterval) {
         verifyButtonBottomConstraint.constant = bottomPadding
         
-        UIView.animate(withDuration: animationDuration) {
+        UIView.animate(withDuration: duration) {
             self.layoutIfNeeded()
         }
     }
