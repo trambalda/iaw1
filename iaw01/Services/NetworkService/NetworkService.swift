@@ -35,11 +35,10 @@ struct NetworkService: NetworkServiceProtocol {
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
             throw NetworkServiceError.invalidResponse("Не удалось прочесть ответ сервера")
         }
-
+        
         switch statusCode {
-        case 200:
+        case 200, 403:
             let result = try JSONDecoder().decode(APIResponseDto<T>.self, from: data)
-
             if result.isSuccess, let data = result.data {
                 return data
             } else {

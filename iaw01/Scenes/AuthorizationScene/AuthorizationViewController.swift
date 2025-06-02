@@ -19,10 +19,15 @@ final class AuthorizationViewController: UIViewController {
                         return
                     }
                     let user = try await self.authorizationService.login(email: email, password: password)
-                    print("successfully")
+                    print("успешно, ответ от сервера: \(user)")
+                    DispatchQueue.main.async {
+                        self.showAlert(title: "Успешно", message: user)
+                    }
                 } catch {
                     print(error.localizedDescription)
-                    self?.showAlertLog()
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Ошибка", message: "Не удалось войти в приложение")
+                    }
                 }
             }
         }
@@ -40,10 +45,15 @@ final class AuthorizationViewController: UIViewController {
                         return
                     }
                     let user = try await self.authorizationService.register(name: name, phone: phone, email: email, password: password)
-                    print("successfully")
+                    print("успешно, ответ от сервера: \(user)")
+                    DispatchQueue.main.async {
+                        self.showAlert(title: "Выполнен вход", message: "Вход в приложение")
+                    }
                 } catch {
                     print(error.localizedDescription)
-                    self?.showAlertRegister()
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Ошибка", message: "Не удалось создать пользователя")
+                    }
                 }
             }
         }
@@ -113,16 +123,9 @@ final class AuthorizationViewController: UIViewController {
         view.endEditing(true)
     }
     
-    private func showAlertLog() {
-        let alert = UIAlertController(title: "Authorization error", message: "Сouldn't create a new user", preferredStyle: .alert)
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
-    
-    private func showAlertRegister() {
-        let alert = UIAlertController(title: "Register error", message: "Сouldn't log in, please, try again", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
 }
