@@ -76,6 +76,9 @@
 		86F2456F2DAFA4F90037F33C /* UIToolBar+DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */; };
 		CE02B8532D933581000C0557 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8502D933581000C0557 /* LinkButton.swift */; };
 		CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE02B8512D933581000C0557 /* LinkButtonStyle.swift */; };
+		CE52149B2DA2C8360042D902 /* KeyboardServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52149A2DA2C8360042D902 /* KeyboardServiceViewController.swift */; };
+		CED8B1EF2DB6D969008D6D77 /* KeyboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED8B1EE2DB6D964008D6D77 /* KeyboardService.swift */; };
+		CED8B1F52DB6DA8C008D6D77 /* Extension + UiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED8B1F42DB6DA83008D6D77 /* Extension + UiViewController.swift */; };
 		CEEE9CB42DA17A3E00DF1A35 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB22DA17A3E00DF1A35 /* RootTabBarController.swift */; };
 		CEEE9CB52DA17A3E00DF1A35 /* RoorTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB12DA17A3E00DF1A35 /* RoorTabBarView.swift */; };
 		CEEE9CB62DA17A3E00DF1A35 /* RootTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */; };
@@ -173,6 +176,9 @@
 		86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIToolBar+DoneButton.swift"; sourceTree = "<group>"; };
 		CE02B8502D933581000C0557 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		CE02B8512D933581000C0557 /* LinkButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButtonStyle.swift; sourceTree = "<group>"; };
+		CE52149A2DA2C8360042D902 /* KeyboardServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardServiceViewController.swift; sourceTree = "<group>"; };
+		CED8B1EE2DB6D964008D6D77 /* KeyboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardService.swift; sourceTree = "<group>"; };
+		CED8B1F42DB6DA83008D6D77 /* Extension + UiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UiViewController.swift"; sourceTree = "<group>"; };
 		CEEE9CB12DA17A3E00DF1A35 /* RoorTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoorTabBarView.swift; sourceTree = "<group>"; };
 		CEEE9CB22DA17A3E00DF1A35 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		CEEE9CB32DA17A3E00DF1A35 /* RootTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarItem.swift; sourceTree = "<group>"; };
@@ -367,6 +373,7 @@
 			children = (
 				21A606F02DB41E03007BB17C /* ImageService */,
 				21A606EF2DB41CF8007BB17C /* NetworkService */,
+				CED8B1ED2DB6D949008D6D77 /* KeyboardService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -498,6 +505,7 @@
 		21AA4B7A2D8187800086697C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				CE5214992DA2C7FF0042D902 /* KeyboardServiceScene */,
 				02B31D3E2D8C4DE800EC9031 /* AuthorizationScene */,
 				1F16AE612DB50C210085A17D /* RestaurantScene */,
 				D5952D8A2DAAC129003F3C90 /* OnboardingScene */,
@@ -534,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
+				CED8B1F42DB6DA83008D6D77 /* Extension + UiViewController.swift */,
 				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
 				D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */,
 				86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */,
@@ -588,6 +597,22 @@
 				CE02B8512D933581000C0557 /* LinkButtonStyle.swift */,
 			);
 			path = LinkButton;
+			sourceTree = "<group>";
+		};
+		CE5214992DA2C7FF0042D902 /* KeyboardServiceScene */ = {
+			isa = PBXGroup;
+			children = (
+				CE52149A2DA2C8360042D902 /* KeyboardServiceViewController.swift */,
+			);
+			path = KeyboardServiceScene;
+			sourceTree = "<group>";
+		};
+		CED8B1ED2DB6D949008D6D77 /* KeyboardService */ = {
+			isa = PBXGroup;
+			children = (
+				CED8B1EE2DB6D964008D6D77 /* KeyboardService.swift */,
+			);
+			path = KeyboardService;
 			sourceTree = "<group>";
 		};
 		D52040512D89B502009D0D1D /* CornersButton */ = {
@@ -726,6 +751,7 @@
 				86F2456F2DAFA4F90037F33C /* UIToolBar+DoneButton.swift in Sources */,
 				869878372D918ECD00C7BA58 /* PhonePrefixView.swift in Sources */,
 				8680452D2D94906B00CBE1EC /* CountryPickerCell.swift in Sources */,
+				CED8B1EF2DB6D969008D6D77 /* KeyboardService.swift in Sources */,
 				21A606F22DB41E0F007BB17C /* ImageService.swift in Sources */,
 				863929E72D9D2DAA00480459 /* PhoneNumber.swift in Sources */,
 				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
@@ -733,6 +759,7 @@
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
 				3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
+				CE52149B2DA2C8360042D902 /* KeyboardServiceViewController.swift in Sources */,
 				D5DC6E9A2D9442C70063FC7A /* Constants.swift in Sources */,
 				21AA4B652D81627D0086697C /* AppCoordinator.swift in Sources */,
 				D5952D8B2DAAC129003F3C90 /* OnboardingView.swift in Sources */,
@@ -775,6 +802,7 @@
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
 				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,
+				CED8B1F52DB6DA8C008D6D77 /* Extension + UiViewController.swift in Sources */,
 				21A606EA2DB41C8F007BB17C /* HTTPMethod.swift in Sources */,
 				D52040522D89B502009D0D1D /* CornersButtonStyle.swift in Sources */,
 				D52040532D89B502009D0D1D /* CornersButton.swift in Sources */,
@@ -917,6 +945,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iaw01/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -949,7 +978,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YWY49JTZKC;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iaw01/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

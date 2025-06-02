@@ -2,6 +2,8 @@ enum SceneType {
     
     case textFiedsScene
     case cornersButtonsScene
+    case keyboardScene
+
     case authorizationScene
     case verifyPhoneNumberScene
     case restaurantScene
@@ -11,6 +13,7 @@ enum SceneType {
         switch self {
         case .textFiedsScene: "TextFieds Scene"
         case .cornersButtonsScene: "CornersButtons Scene"
+        case .keyboardScene: "Keyboard Scene"
         case .authorizationScene: "Authorization Scene"
         case .verifyPhoneNumberScene: "VerifyPhoneNumber Scene"
         case .restaurantScene: "Restaurant Scene"
@@ -26,6 +29,7 @@ extension SceneType: CaseIterable {
             .cornersButtonsScene,
             .authorizationScene,
             .verifyPhoneNumberScene,
+            .keyboardScene,
             .restaurantScene,
             .onboardingScene,
         ]

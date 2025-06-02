@@ -1,7 +1,7 @@
 import UIKit
 
 final class DummyViewController: UIViewController {
-    
+
     var coordinator: HomeScenesCoordinatorProtocol?
     
     private lazy var dummyView: DummyView = {
@@ -12,20 +12,20 @@ final class DummyViewController: UIViewController {
         }
         return view
     }()
-    
+
     override func loadView() {
         view = dummyView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
     }
-    
+
     private func configure() {
         navigationItem.title = "Scenes"
     }
-    
+
     private func route(to sceneType: SceneType) {
         switch sceneType {
         case .textFiedsScene:
@@ -34,6 +34,8 @@ final class DummyViewController: UIViewController {
             coordinator?.showCornersButtonsScene()
         case .verifyPhoneNumberScene:
             coordinator?.showVerifyPhoneNumberScene()
+        case .keyboardScene:
+            coordinator?.showKeyboardServiceScene()
         case .authorizationScene:
             coordinator?.showAuthorizationScene()
         case .restaurantScene:
