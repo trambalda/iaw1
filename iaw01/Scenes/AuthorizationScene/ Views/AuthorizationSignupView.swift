@@ -7,7 +7,7 @@ final class AuthorizationSignupView: UIStackView {
     var model: AuthorizationModel {
         get {
             AuthorizationModel(
-                email: nil,
+                email: emailTextField.text,
                 password: createPasswordTextField.text,
                 name: nameTextField.text,
                 phone: phoneNumberTextField.phoneNumber.fullNumber
@@ -17,6 +17,7 @@ final class AuthorizationSignupView: UIStackView {
             nameTextField.text = newValue.name
             phoneNumberTextField.phoneNumber = PhoneNumber(fullString: newValue.phone ?? "") ?? .default
             createPasswordTextField.text = newValue.password
+            emailTextField.text = newValue.email
         }
     }
     
@@ -38,6 +39,18 @@ final class AuthorizationSignupView: UIStackView {
         let textField = PhoneTextField(parent: self)
         textField.textFieldShouldReturn = { [weak self] in
             self?.createPasswordTextField.becomeTextFieldFirstResponder()
+        }
+        return textField
+    }()
+    
+    private lazy var emailTextField: StringTextField = {
+        let textField = StringTextField(with: .emailStyle)
+        textField.textFieldShouldReturn = { [weak self] in
+            self?.createPasswordTextField.becomeTextFieldFirstResponder()
+        }
+        textField.editingChanged = { [weak self] _ in
+            guard let self else { return }
+            viewChanged?(self.model)
         }
         return textField
     }()
@@ -76,11 +89,13 @@ final class AuthorizationSignupView: UIStackView {
     private func setupLayout() {
         addArrangedSubview(nameTextField)
         addArrangedSubview(phoneNumberTextField)
+        addArrangedSubview(emailTextField)
         addArrangedSubview(createPasswordTextField)
         addArrangedSubview(socialButtons)
         
-        setCustomSpacing(26, after: nameTextField)
-        setCustomSpacing(26, after: phoneNumberTextField)
-        setCustomSpacing(26, after: createPasswordTextField)
+        setCustomSpacing(20, after: nameTextField)
+        setCustomSpacing(20, after: phoneNumberTextField)
+        setCustomSpacing(20, after: emailTextField)
+        setCustomSpacing(20, after: createPasswordTextField)
     }
 }

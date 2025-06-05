@@ -16,6 +16,18 @@ struct AuthorizationModel {
     var isSignUpModelFilled: Bool {
         name.notNilNotEmpty &&
         phone.notNilNotEmpty &&
+        email.notNilNotEmpty &&
         password.notNilNotEmpty
+    }
+}
+
+extension AuthorizationDto {
+    var model: AuthorizationModel  {
+        AuthorizationModel(
+            email: email,
+            password: password,
+            name: name,
+            phone: phone
+        )
     }
 }
