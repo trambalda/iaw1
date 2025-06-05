@@ -40,14 +40,7 @@ final class AuthorizationNetworkService: AuthorizationNetworkServiceProtocol {
         ]
         
         print("register params: \(params)")
-        
-        if !JSONSerialization.isValidJSONObject(params) {
-            print("params невалидны для JSONSerialization")
-        }
-        
-        for (key, value) in params {
-            print("\(key): \(value) — \(type(of: value))")
-        }
+
         
         let response: String = try await networkService.request(
             endpoint,

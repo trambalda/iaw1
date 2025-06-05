@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02101C0D2DA84EA600ADF6A5 /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02101C0C2DA84EA600ADF6A5 /* AuthorizationModel.swift */; };
+		02351A582DF090EF00699E52 /* AuthorizationValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02351A572DF090EF00699E52 /* AuthorizationValidator.swift */; };
 		0288EEF52DBBCBDC0077AA20 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		029039C82D999414008973F2 /* AuthorizationLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029039C72D999414008973F2 /* AuthorizationLoginView.swift */; };
 		029039CA2D999429008973F2 /* AuthorizationSignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029039C92D999429008973F2 /* AuthorizationSignupView.swift */; };
@@ -94,6 +95,7 @@
 
 /* Begin PBXFileReference section */
 		02101C0C2DA84EA600ADF6A5 /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
+		02351A572DF090EF00699E52 /* AuthorizationValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationValidator.swift; sourceTree = "<group>"; };
 		029039C72D999414008973F2 /* AuthorizationLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationLoginView.swift; sourceTree = "<group>"; };
 		029039C92D999429008973F2 /* AuthorizationSignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSignupView.swift; sourceTree = "<group>"; };
 		02B31D3C2D8C4DE800EC9031 /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				02B31D3D2D8C4DE800EC9031 /* AuthorizationViewController.swift */,
+				02351A572DF090EF00699E52 /* AuthorizationValidator.swift */,
 				020CE8662DC284AA00FEF9DD /*  Views */,
 				020CE8672DC284D700FEF9DD /* Models */,
 			);
@@ -742,6 +745,7 @@
 				1FBFC5392DBCD8FF00691CCE /* RestaurantDto.swift in Sources */,
 				2182AF942D8C690300B5BF26 /* ScenesTableViewCell.swift in Sources */,
 				029039C82D999414008973F2 /* AuthorizationLoginView.swift in Sources */,
+				02351A582DF090EF00699E52 /* AuthorizationValidator.swift in Sources */,
 				02B31D422D8C78AD00EC9031 /* AuthorizationTitleView.swift in Sources */,
 				02B31D442D8C793300EC9031 /* AuthorizationSegmentedControl.swift in Sources */,
 				868044992D94765400CBE1EC /* CountryCodeModel.swift in Sources */,

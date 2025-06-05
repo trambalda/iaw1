@@ -26,13 +26,24 @@ final class AuthorizationViewController: UIViewController {
                 } catch {
                     print(error.localizedDescription)
                     DispatchQueue.main.async {
-                        self?.showAlert(title: "Ошибка", message: "Не удалось войти в приложение")
+                        self?.showAlert(title: "Ошибка", message: "Неверный логин или пароль")
                     }
                 }
             }
         }
         
         view.onSignupTap = { [weak self] model in
+            if let errorValidate = Validatior.validate(
+                name: model.name,
+                phone: model.phone,
+                email: model.email ?? "",
+                password: model.password ?? "",
+                context: .register
+            ) {
+                self?.showAlert(title: "Ошибка", message: errorValidate)
+                return
+            }
+            
             Task {
                 do {
                     guard
