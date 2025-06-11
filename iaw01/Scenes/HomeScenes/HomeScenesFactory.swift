@@ -38,7 +38,7 @@ final class HomeScenesFactory: Factory {
         let presenter = RestaurantPresenter()
         
         viewController.interactor = interactor
-        viewController.imageService = ImageService()
+        viewController.imageService = imageService
         interactor.presenter = presenter
         interactor.restaurantNetworkService = RestaurantNetworkService(networkService: networkService)
         presenter.viewController = viewController

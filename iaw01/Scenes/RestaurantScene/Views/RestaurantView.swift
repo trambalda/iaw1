@@ -38,9 +38,16 @@ final class RestaurantView: UIView {
     private var selectedMenu: MenuModel?
     private var filterIsSticky: Bool = false
     private var userDidScroll: Bool = false
+    private var bottomSpacerHeightConstraint: NSLayoutConstraint?
     
     private lazy var filterStickyView: MenuTimeView = {
         let view = MenuTimeView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let bottomSpacerView: UIView = {
+        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -65,7 +72,7 @@ final class RestaurantView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        scrollViewDidScroll(scrollView)
+        //scrollViewDidScroll(scrollView)
     }
     
     private func setupCallbacks() {
@@ -74,6 +81,11 @@ final class RestaurantView: UIView {
             self?.filterView.selectMenu(selectedMenu)
             self?.filterStickyView.selectMenu(selectedMenu)
             self?.updateMenuItems(for: selectedMenu)
+            
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.scrollViewDidScroll(self.scrollView)
+            }
         }
         
         filterView.onMenuSelected = onMenuSelected
@@ -82,20 +94,35 @@ final class RestaurantView: UIView {
     
     private func updateMenuItems(for menu: MenuModel?) {
         guard let menu else { return }
-        
+
         let dishes = model.dishes.filter { menu.dishesId.contains($0.id) }
         menuItemListView.models = dishes
-        
+
         let cellHeight: CGFloat = MenuItemsTableViewCell.cellHeight
         let totalHeight = CGFloat(dishes.count) * cellHeight
         menuItemListViewHeightConstraint?.constant = totalHeight
-        
+
         layoutIfNeeded()
+
+        let visibleHeight = scrollView.frame.height
+        let contentHeight = headerView.frame.height + filterView.frame.height + totalHeight
+        let minimumPadding = visibleHeight - contentHeight - 20
+
+        bottomSpacerHeightConstraint?.constant = max(minimumPadding, 0)
+        bottomSpacerView.isHidden = minimumPadding <= 0
+
         userDidScroll = false
-        
-        scrollViewDidScroll(scrollView)
+
+        DispatchQueue.main.async {
+            self.layoutIfNeeded()
+            self.scrollView.layoutIfNeeded()
+
+            DispatchQueue.main.async {
+                self.scrollViewDidScroll(self.scrollView)
+            }
+        }
     }
-    
+
     private func configure() {
         backgroundColor = .light100
         
@@ -111,6 +138,7 @@ final class RestaurantView: UIView {
         contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(filterView)
         contentStack.addArrangedSubview(menuItemListView)
+        contentStack.addArrangedSubview(bottomSpacerView)
     }
     
     private func setupConstraints() {
@@ -136,26 +164,43 @@ final class RestaurantView: UIView {
         
         menuItemListViewHeightConstraint = menuItemListView.heightAnchor.constraint(equalToConstant: 0)
         menuItemListViewHeightConstraint?.isActive = true
+        
+        bottomSpacerHeightConstraint = bottomSpacerView.heightAnchor.constraint(equalToConstant: 0)
+        bottomSpacerHeightConstraint?.isActive = true
     }
 }
 
 extension RestaurantView: UIScrollViewDelegate {
-    
+ 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let filterViewFrameInSuperview = filterView.convert(filterView.bounds, to: self)
+        print("scrollViewDidScroll")
+        print("contentSize.height: \(scrollView.contentSize.height)")
+        print("scrollView.frame.height: \(scrollView.frame.height)")
         
-        guard scrollView.contentOffset.y > 0 else {
-            toggleFilterStickyView(isSticky: false)
+        guard scrollView.contentSize.height > 0, scrollView.frame.height > 0 else {
+               print("⚠️ Skip scroll event — layout not ready yet")
+               return
+           }
+
+        let isContentScrollable = scrollView.contentSize.height > scrollView.frame.height
+        print("isContentScrollable: \(isContentScrollable)")
+
+        if !isContentScrollable {
+            toggleFilterStickyView(isSticky: true)
             return
         }
-        
+
+        let filterViewFrameInSuperview = filterView.convert(filterView.bounds, to: self)
         let shouldStick = filterViewFrameInSuperview.minY <= safeAreaInsets.top
+        print("filterViewFrame.minY: \(filterViewFrameInSuperview.minY)")
+        print("safeAreaInsets.top: \(safeAreaInsets.top)")
+        print("shouldStick: \(shouldStick)")
+        
         toggleFilterStickyView(isSticky: shouldStick)
     }
-    
+
     private func toggleFilterStickyView(isSticky: Bool) {
-        guard isSticky != filterIsSticky else { return }
-        
+
         if isSticky {
             let offset = filterView.getScrollOffset()
             filterStickyView.setScrollOffset(offset)
@@ -163,7 +208,7 @@ extension RestaurantView: UIScrollViewDelegate {
             let offset = filterStickyView.getScrollOffset()
             filterView.setScrollOffset(offset)
         }
-        
+
         filterStickyView.alpha = isSticky ? 1 : 0
         filterStickyView.isUserInteractionEnabled = isSticky
         filterIsSticky = isSticky
