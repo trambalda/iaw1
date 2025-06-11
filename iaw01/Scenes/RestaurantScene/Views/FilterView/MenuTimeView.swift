@@ -15,16 +15,16 @@ final class MenuTimeView: UIView {
         }
     }
     
-    private var menuOptions: [MenuModel] = []
-    private var buttons: [UIButton] = []
-    private var selectedButton: UIButton?
-    
-    private let scrollView: UIScrollView = {
+    let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
+    
+    private var menuOptions: [MenuModel] = []
+    private var buttons: [UIButton] = []
+    private var selectedButton: UIButton?
     
     private let stackView: UIStackView = {
         let stack = UIStackView()
@@ -103,6 +103,9 @@ final class MenuTimeView: UIView {
             btn.configuration = newConfig
         }
         
+        button.setContentHuggingPriority(.required, for: .horizontal)
+        button.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         button.addTarget(self, action: #selector(menuTapped(_:)), for: .touchUpInside)
         
         return button
@@ -138,6 +141,28 @@ final class MenuTimeView: UIView {
         }
     }
     
+    func selectMenu(_ menu: MenuModel?) {
+        guard let menu,
+              let index = menuOptions.firstIndex(where: { $0.id == menu.id }) else { return }
+        
+        let button = buttons[index]
+        selectButton(button)
+        scrollToButton(button, animated: false)
+    }
+    
+    private func scrollToButton(_ button: UIButton, animated: Bool) {
+        let buttonFrameInScrollView = button.convert(button.bounds, to: scrollView)
+        scrollView.scrollRectToVisible(buttonFrameInScrollView.insetBy(dx: -16, dy: 0), animated: animated)
+    }
+
+    func getScrollOffset() -> CGPoint {
+        return scrollView.contentOffset
+    }
+
+    func setScrollOffset(_ offset: CGPoint, animated: Bool = false) {
+        scrollView.setContentOffset(offset, animated: animated)
+    }
+
     func setupLayoutAndConstraints() {
         scrollView.backgroundColor = .light80
         addSubview(scrollView)

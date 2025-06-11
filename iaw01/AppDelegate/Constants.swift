@@ -6,4 +6,5 @@ struct Constants {
     static let host = "http://localhost:8080"
     static let googleLoginURL: URL? = URL(string: "https://accounts.google.com/InteractiveLogin")
     static let appleLoginURL: URL? = URL(string: "https://account.apple.com")
+    static let restaurantDomain = "com.foodDeliveryApp.restaurant"
 }

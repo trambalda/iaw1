@@ -1,19 +1,37 @@
 import UIKit
 
+protocol RestaurantDisplayLogic: AnyObject {
+    func displayRestaurant(
+        viewModel: RestaurantModels.LoadRestaurant.ViewModel
+    )
+    func displayError(
+        viewModel: RestaurantModels.ErrorModel.ViewModel
+    )
+}
+
+extension RestaurantViewController: RestaurantDisplayLogic {
+    func displayRestaurant(viewModel: RestaurantModels.LoadRestaurant.ViewModel) {
+        (view as? RestaurantView)?.model = viewModel.model
+    }
+    
+    func displayError(viewModel: RestaurantModels.ErrorModel.ViewModel) {
+        let alert = UIAlertController(title: "Ошибка", message: "Не удалось загрузить экран", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ОК", style: .default))
+        present(alert, animated: true)
+    }
+}
+
 final class RestaurantViewController: UIViewController {
     
-    var restaurantId: Int = 0
-    var restaurantService: RestaurantNetworkServiceProtocol?
+    var interactor: RestaurantBusinessLogic?
+    var imageService: ImageServiceProtocol?
     
     private lazy var restaurantView: RestaurantView = {
-        let imageService = ImageService()
         let view = RestaurantView()
         view.imageService = imageService
-        view.headerView.imageService = imageService
-        view.menuItemListView.imageService = imageService
         return view
     }()
-    
+   
     override func loadView() {
         view = restaurantView
     }
@@ -21,7 +39,7 @@ final class RestaurantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        loadRestaurant()
+        interactor?.loadRestaurant()
     }
     
     // TODO: Позже вынести реализацию навигейшен бара отдельно от экрана
@@ -75,29 +93,6 @@ final class RestaurantViewController: UIViewController {
         
         let rightBarButtonItem = UIBarButtonItem(customView: rightStack)
         navigationItem.rightBarButtonItem = rightBarButtonItem
-    }
-   
-    private func loadRestaurant() {
-        guard let restaurantService = restaurantService  else { return }
-            Task {
-                do {
-                    let restaurantsDto = try await restaurantService.fetchRestaurant(id: restaurantId)
-                    
-                    if let restaurantDto = restaurantsDto.first {
-                        restaurantView.model = restaurantDto.model
-                    } else {
-                        displayError()
-                    }
-                } catch {
-                    displayError()
-                }
-            }
-    }
-   
-    private func displayError() {
-        let alert = UIAlertController(title: "Ошибка", message: "Не удалось загрузить экран", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ОК", style: .default))
-        present(alert, animated: true)
     }
 
     @objc private func backButtonTapped() {
