@@ -20,13 +20,29 @@ final class RestaurantViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        createCustomBackButton()
         setupNavigationBar()
         loadRestaurant()
     }
     
     // TODO: Позже вынести реализацию навигейшен бара отдельно от экрана
     private func setupNavigationBar() {
+        let backButton = UIButton(type: .system)
+        var backButtonConfig = UIButton.Configuration.plain()
+        backButtonConfig.image = .arrowLeft
+        backButtonConfig.imagePadding = 7
+        backButtonConfig.baseForegroundColor = .dark100
+        
+        var attributedTitle = AttributedString("Back")
+        attributedTitle.font = Font.backButton.font
+          
+        backButtonConfig.attributedTitle = attributedTitle
+        
+        backButton.configuration = backButtonConfig
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+       
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
+        
         let moreButton = UIButton(type: .system)
         moreButton.setImage(UIImage(named: "more"), for: .normal)
         moreButton.tintColor = .dark100
@@ -82,6 +98,10 @@ final class RestaurantViewController: UIViewController {
         let alert = UIAlertController(title: "Ошибка", message: "Не удалось загрузить экран", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ОК", style: .default))
         present(alert, animated: true)
+    }
+
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func moreButtonTapped() {
