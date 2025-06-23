@@ -4,6 +4,7 @@ protocol HomeScenesCoordinatorProtocol {
     func showTextFieldScene()
     func showCornersButtonsScene()
     func showVerifyPhoneNumberScene()
+    func showCartScene()
     func showAuthorizationScene()
     func showRestaurantScene(with id: Int)
     func showOnboardingScene()
@@ -37,6 +38,12 @@ final class HomeScenesCoordinator: CoordinatorProtocol, HomeScenesCoordinatorPro
         rootViewController.pushViewController(vc, animated: true)
     }
     
+    func showCartScene() {
+        let vc = factory.createCartScene()
+		rootViewController.pushViewController(vc, animated: true)
+        RootTabBarController.setHidden(to: true)
+	}
+
     func showAuthorizationScene() {
         let vc = factory.createAuthorizationScene()
         rootViewController.pushViewController(vc, animated: true)

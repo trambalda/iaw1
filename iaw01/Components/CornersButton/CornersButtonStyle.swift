@@ -74,5 +74,12 @@ extension CornersButtonStyle {
         icon: UIImage(named: "tickCircle")
     )
     
-
-} 
+    static let addressButton = CornersButtonStyle(
+        backgroundColor: .peach60.withAlphaComponent(0.5),
+        disabledBackgroundColor: .blue60,
+        textColor: .peach100,
+        iconPosition: .left,
+        title: "32, Test Ln.",
+        icon: UIImage(named: "locationPin")
+    )
+}

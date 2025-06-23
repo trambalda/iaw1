@@ -39,6 +39,10 @@ extension Font {
         font: UIFont(name: Family.everettMedium.title, size: 33)!, // original 36, -2
         lettering: -3
     )
+    static let emptyStateTitle = Font(
+        font: UIFont(name: Family.aeonikMedium.title, size: 40)!,
+        lettering: 0
+    )
     static let subtitle1 = Font(
         font: UIFont(name: Family.everettMedium.title, size: 22)!, // original 24, 0
         lettering: -1
