@@ -67,10 +67,11 @@
 		3F971A9A2D96B1E00056334C /* PhoneNumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */; };
 		3F9CC6032D9194090079DA39 /* Optional+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */; };
 		860852232D9747BA0038A9EF /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860852222D9747BA0038A9EF /* PhoneTextField.swift */; };
+		862915292E08955400BA05B1 /* CartInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862915282E08955400BA05B1 /* CartInteractor.swift */; };
+		8629152B2E08955F00BA05B1 /* CartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629152A2E08955F00BA05B1 /* CartPresenter.swift */; };
+		8629152D2E0896A300BA05B1 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629152C2E0896A300BA05B1 /* CartView.swift */; };
 		863929E72D9D2DAA00480459 /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863929E62D9D2DAA00480459 /* PhoneNumber.swift */; };
 		865083122DD1F96E00881F3A /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865083112DD1F96E00881F3A /* CartViewController.swift */; };
-		865084392DD1FBD800881F3A /* NavigationBar+CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865084382DD1FBD800881F3A /* NavigationBar+CustomBackButton.swift */; };
-		865085602DD209FE00881F3A /* CartState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650855F2DD209FE00881F3A /* CartState.swift */; };
 		865085622DD20A2A00881F3A /* CartItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865085612DD20A2A00881F3A /* CartItemModel.swift */; };
 		8650868B2DD5E9BC00881F3A /* EmptyCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650868A2DD5E9BC00881F3A /* EmptyCartView.swift */; };
 		8650868D2DD5E9E000881F3A /* FilledCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650868C2DD5E9E000881F3A /* FilledCartView.swift */; };
@@ -172,10 +173,11 @@
 		3F971A992D96B1E00056334C /* PhoneNumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputView.swift; sourceTree = "<group>"; };
 		3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Sugar.swift"; sourceTree = "<group>"; };
 		860852222D9747BA0038A9EF /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
+		862915282E08955400BA05B1 /* CartInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartInteractor.swift; sourceTree = "<group>"; };
+		8629152A2E08955F00BA05B1 /* CartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CartPresenter.swift; path = iaw01/Scenes/CartScene/Interactor/CartPresenter.swift; sourceTree = SOURCE_ROOT; };
+		8629152C2E0896A300BA05B1 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		863929E62D9D2DAA00480459 /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		865083112DD1F96E00881F3A /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
-		865084382DD1FBD800881F3A /* NavigationBar+CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationBar+CustomBackButton.swift"; sourceTree = "<group>"; };
-		8650855F2DD209FE00881F3A /* CartState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartState.swift; sourceTree = "<group>"; };
 		865085612DD20A2A00881F3A /* CartItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemModel.swift; sourceTree = "<group>"; };
 		8650868A2DD5E9BC00881F3A /* EmptyCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCartView.swift; sourceTree = "<group>"; };
 		8650868C2DD5E9E000881F3A /* FilledCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledCartView.swift; sourceTree = "<group>"; };
@@ -559,12 +561,43 @@
 			isa = PBXGroup;
 			children = (
 				3F9174302D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift */,
-				865084382DD1FBD800881F3A /* NavigationBar+CustomBackButton.swift */,
 				3F9CC6022D9194090079DA39 /* Optional+Sugar.swift */,
 				D57BD96C2DBD315E005052DF /* UIApplication+RootViewController.swift */,
 				86F2456E2DAFA4F90037F33C /* UIToolBar+DoneButton.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		862915262E08952200BA05B1 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8629152A2E08955F00BA05B1 /* CartPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		862915272E08953600BA05B1 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				862915282E08955400BA05B1 /* CartInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8629152E2E0956CD00BA05B1 /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				8650868A2DD5E9BC00881F3A /* EmptyCartView.swift */,
+			);
+			path = EmptyView;
+			sourceTree = "<group>";
+		};
+		8629152F2E0956DE00BA05B1 /* FilledView */ = {
+			isa = PBXGroup;
+			children = (
+				8650868C2DD5E9E000881F3A /* FilledCartView.swift */,
+			);
+			path = FilledView;
 			sourceTree = "<group>";
 		};
 		863929E42D9D262600480459 /* StringTextField */ = {
@@ -593,8 +626,9 @@
 			isa = PBXGroup;
 			children = (
 				865083112DD1F96E00881F3A /* CartViewController.swift */,
-				8650855F2DD209FE00881F3A /* CartState.swift */,
 				8650868E2DD8DBA300881F3A /* Views */,
+				862915272E08953600BA05B1 /* Interactor */,
+				862915262E08952200BA05B1 /* Presenter */,
 				8650868F2DD8DBD400881F3A /* Models */,
 			);
 			path = CartScene;
@@ -603,8 +637,9 @@
 		8650868E2DD8DBA300881F3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8650868C2DD5E9E000881F3A /* FilledCartView.swift */,
-				8650868A2DD5E9BC00881F3A /* EmptyCartView.swift */,
+				8629152C2E0896A300BA05B1 /* CartView.swift */,
+				8629152F2E0956DE00BA05B1 /* FilledView */,
+				8629152E2E0956CD00BA05B1 /* EmptyView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -787,6 +822,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8629152D2E0896A300BA05B1 /* CartView.swift in Sources */,
 				02E4EFDD2DBBDE7500B121D8 /* StringTextField.swift in Sources */,
 				02E4EFDC2DBBDE6F00B121D8 /* TextFieldBaseStyle.swift in Sources */,
 				02E4EFDB2DBBDE6800B121D8 /* TextFieldsViewController.swift in Sources */,
@@ -814,8 +850,8 @@
 				8650868D2DD5E9E000881F3A /* FilledCartView.swift in Sources */,
 				3F6C2C172D8333BF0097587A /* VerifyPhoneNumberView.swift in Sources */,
 				869876BB2D8C45AB00C7BA58 /* StringTextFieldStyle.swift in Sources */,
-				865085602DD209FE00881F3A /* CartState.swift in Sources */,
 				D59B58752D8C8D1A0049A3F9 /* CornersButtonsViewController.swift in Sources */,
+				8629152B2E08955F00BA05B1 /* CartPresenter.swift in Sources */,
 				3F9174312D99EFED0091AEB9 /* NotificationCenter+Keyboard.swift in Sources */,
 				2182AF922D8C594600B5BF26 /* DummyView.swift in Sources */,
 				D5DC6E9A2D9442C70063FC7A /* Constants.swift in Sources */,
@@ -854,7 +890,6 @@
 				CEEE9CB62DA17A3E00DF1A35 /* RootTabBarItem.swift in Sources */,
 				21A606EE2DB41CC4007BB17C /* APIResponseDto.swift in Sources */,
 				CE02B8542D933581000C0557 /* LinkButtonStyle.swift in Sources */,
-				865084392DD1FBD800881F3A /* NavigationBar+CustomBackButton.swift in Sources */,
 				3F45F97D2D8A15BF005BD993 /* PincodeInputView.swift in Sources */,
 				3F6C2C122D82FC1C0097587A /* VerifyPhoneNumberViewController.swift in Sources */,
 				21AA4B552D8160E30086697C /* DummyViewController.swift in Sources */,
@@ -864,6 +899,7 @@
 				2182AF962D8C692F00B5BF26 /* SceneModel.swift in Sources */,
 				21AA4B512D8160E30086697C /* AppDelegate.swift in Sources */,
 				1FCF12A22D89686600386458 /* DishTableViewCell.swift in Sources */,
+				862915292E08955400BA05B1 /* CartInteractor.swift in Sources */,
 				8650868B2DD5E9BC00881F3A /* EmptyCartView.swift in Sources */,
 				1F4E868D2D881500002D5293 /* RestaurantCellModel.swift in Sources */,
 				2182AF982D8C694900B5BF26 /* SceneType.swift in Sources */,
